@@ -1,8 +1,10 @@
 # kestrel actors — examples
 
-**Documentation: https://mtedj.github.io/kestrel-actors-examples/** — every actor's inputs, output fields, a sample row, working code and its honest limits, plus a [comparison of every review scraper](https://mtedj.github.io/kestrel-actors-examples/comparison.html).
+**Runnable examples for 30 Apify scrapers: hotel and flight prices, guest reviews from every major OTA, Amazon and eBay listings, and app-store reviews.**
 
-Runnable examples for the [kestrel](https://apify.com/kestrel) Apify actors: hotel and flight prices, guest reviews from every major OTA, Amazon and eBay product data and app-store reviews. Every actor is **pay per delivered row** — filtered rows, empty runs and anything a spending limit refused are free — and takes relative dates (`"30 days"`) so a schedule never goes stale.
+Copy-paste calls in **Python, JavaScript and curl** · **verified n8n workflows** · an **agent skill file** for Claude Code and Cursor · **[full documentation](https://mtedj.github.io/kestrel-actors-examples/)** with every input, every output field, a sample row and each actor's honest limits, plus a [comparison of every review scraper](https://mtedj.github.io/kestrel-actors-examples/comparison.html).
+
+Every actor is **pay per delivered row** — filtered rows, empty runs and anything a spending limit refused are free — and takes relative dates (`"30 days"`) so a schedule never goes stale. Run one with the [kestrel](https://apify.com/kestrel) actors on Apify, or read the code to see exactly what each call returns before you spend anything.
 
 ### Hotel & flight prices
 
@@ -64,3 +66,5 @@ python examples/google-hotels-prices.py
 ## Rate limits, proxies, legality
 
 The actors run on Apify Proxy with paced rotating sessions, so you never see a captcha. They read public pages only, store nothing personal beyond what the page itself shows, and each README carries a legality section — read it before scraping at scale.
+
+**Which sites are readable at all?** The measurements behind these actors are published separately in [scraping-reachability-2026](https://github.com/mtedj/scraping-reachability-2026): which review and travel sites answer an ordinary HTTP client, which need a particular TLS fingerprint, which need a browser, and which are closed — with the request, the block signature and the date for each.
