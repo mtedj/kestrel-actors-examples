@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Find the Cheapest Day to Fly, as Data</title>
+<meta name="description" content="Price every departure day in a window, rank them, and keep the history. One row per day with the airline, stops and duration attached — with Python.">
+<link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Find the Cheapest Day to Fly, as Data">
+<meta property="og:description" content="Price every departure day in a window, rank them, and keep the history. One row per day with the airline, stops and duration attached — with Python.">
+<meta property="og:url" content="https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html">
+<meta property="og:site_name" content="kestrel actors documentation">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Find the Cheapest Day to Fly, as Data", "description": "Price every departure day in a window, rank them, and keep the history. One row per day with the airline, stops and duration attached — with Python.", "inLanguage": "en", "datePublished": "2026-08-29", "dateModified": "2026-08-29", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html"}, "author": {"@type": "Organization", "name": "kestrel", "url": "https://apify.com/kestrel"}, "publisher": {"@type": "Organization", "name": "kestrel actors documentation", "url": "https://mtedj.github.io/kestrel-actors-examples/"}, "about": [{"@type": "Thing", "name": "how to find the cheapest day to fly"}], "mentions": [{"@type": "SoftwareApplication", "name": "Flight Price Tracker — Cheapest Day to Fly & Airfare Alerts", "url": "https://apify.com/kestrel/flight-price-tracker"}, {"@type": "SoftwareApplication", "name": "Google Flights Scraper — Airfare Prices & Price Tracking", "url": "https://apify.com/kestrel/google-flights-prices"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Find the Cheapest Day to Fly, as Data", "description": "Price every departure day in a window, rank them, and keep the history. One row per day with the airline, stops and duration attached — with Python.", "totalTime": "PT10M", "supply": [], "tool": [{"@type": "HowToTool", "name": "Apify account and API token"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Name the route and the first departure day", "text": "Airport codes, and a departure date that can be relative — \"30 days\" keeps a scheduled run at a fixed lead time forever.", "url": "https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html#steps"}, {"@type": "HowToStep", "position": 2, "name": "Set the window length", "text": "Every day in the window is its own search. Seven days is seven searches; a month is thirty. Sixty days is the cap per run.", "url": "https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html#steps"}, {"@type": "HowToStep", "position": 3, "name": "Let it keep the cheapest fare per day", "text": "One row per day: the cheapest itinerary Google lists for that day under your cabin and stop filters, with how many itineraries it beat.", "url": "https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html#steps"}, {"@type": "HowToStep", "position": 4, "name": "Read rank_in_window", "text": "Rank 1 is the cheapest day. The ranking is computed over the whole window before any price filter, so a filtered run still tells you where the day you kept sits.", "url": "https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html#steps"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a Google Flights API?", "acceptedAnswer": {"@type": "Answer", "text": "No public one — Google retired QPX Express. The alternatives are aggregator APIs (Amadeus, Duffel, Kiwi) that sell fares from their own inventory and generally need a commercial agreement, and SERP resellers that charge per search whether or not it returned anything. Reading Google Flights directly and billing per delivered row means an empty route costs nothing."}}, {"@type": "Question", "name": "Are round-trip prices per leg or for the whole trip?", "acceptedAnswer": {"@type": "Answer", "text": "The whole trip, as Google shows them. Set a trip length and every departure day becomes a round trip returning that many days later, with the price being the total for both legs and a round_trip_total flag on the row so the two can never be mixed up in a table."}}, {"@type": "Question", "name": "Why are the results only in English?", "acceptedAnswer": {"@type": "Answer", "text": "Because the parser reads Google's own English accessibility labels, which is the most stable anchor on the page. Language does not change fares; currency and market do, and both are inputs."}}, {"@type": "Question", "name": "What happens when two days share the lowest fare?", "acceptedAnswer": {"@type": "Answer", "text": "The earlier departure takes rank 1. It is an arbitrary rule, but it is a stated one, so a tie does not silently reorder between runs."}}]}</script>
+</head>
+<body>
+<header class="site">
+<a class="brand" href="index.html">kestrel actors <span>docs</span></a>
+<nav><a href="index.html">All actors</a> <a href="index.html#guides">Guides</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a> <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>Code examples</a></nav>
+</header>
+<main>
+
+<article>
+<p class="crumb"><a href="index.html">kestrel actors</a> › <a href="index.html#guides">Guides</a></p>
+<h1>How to find the cheapest day to fly</h1>
+<p class="lede">Google Flights answers "which day is cheapest" with a calendar you read by eye and cannot export. The same answer as rows — one per departure day, ranked, with the airline and duration attached — is a single run, and once it is scheduled you also have the price history Google keeps to itself.</p>
+<h2 id="steps">The short version</h2><ol class="steps">
+<li><strong>Name the route and the first departure day.</strong> Airport codes, and a departure date that can be relative — "30 days" keeps a scheduled run at a fixed lead time forever.</li>
+<li><strong>Set the window length.</strong> Every day in the window is its own search. Seven days is seven searches; a month is thirty. Sixty days is the cap per run.</li>
+<li><strong>Let it keep the cheapest fare per day.</strong> One row per day: the cheapest itinerary Google lists for that day under your cabin and stop filters, with how many itineraries it beat.</li>
+<li><strong>Read rank_in_window.</strong> Rank 1 is the cheapest day. The ranking is computed over the whole window before any price filter, so a filtered run still tells you where the day you kept sits.</li>
+</ol>
+<h2 id="one-row-per-day-is-the-whole-idea">One row per day is the whole idea</h2>
+<p>The question is rarely "what is the fare". It is "which day should I leave", and that is a ranking over a window.</p>
+<pre class="code" data-lang="python"><code>from apify_client import ApifyClient
+
+client = ApifyClient("&lt;YOUR_APIFY_TOKEN&gt;")
+run = client.actor("kestrel/flight-price-tracker").call(run_input={
+    "routes": ["LIS-LHR"],
+    "departDate": "30 days",   # relative: always 30 days out
+    "days": 14,                # price each of the next 14 departure days
+    "currency": "EUR",
+})
+for row in client.dataset(run["defaultDatasetId"]).iterate_items():
+    if row["type"] == "fare":
+        print(row["rank_in_window"], row["depart_date"], row["price"],
+              row["airline"], f'{row["stops"]} stops', row["duration"])</code></pre>
+<p>Fourteen days is fourteen rows. The one with <code>cheapest_in_window: true</code> is the answer; <code>rank_in_window</code> orders the rest, so "the three cheapest departures in October" is a filter on one column rather than a spreadsheet exercise.</p>
+<pre class="code" data-lang="json"><code>{
+  "type": "fare", "route": "LIS-LHR", "origin": "LIS", "destination": "LHR", "trip": "one_way",
+  "depart_date": "2026-10-05", "seat": "economy", "adults": 1, "currency": "USD",
+  "price": 127, "round_trip_total": false,
+  "airline": "Tap Air Portugal", "stops": 0,
+  "depart_time": "8:00 PM", "arrive_time": "10:55 PM",
+  "duration": "2 hr 55 min", "duration_minutes": 175,
+  "co2_kg": 123,
+  "itineraries_seen": 12, "cheapest_in_window": true, "rank_in_window": 1
+}</code></pre>
+<p><code>itineraries_seen: 12</code> is the row's own audit trail: this fare was the best of twelve Google listed that day. A day with two itineraries and a day with forty are different kinds of cheap.</p>
+<h2 id="the-cheap-day-is-not-always-the-cheap-trip">The cheap day is not always the cheap trip</h2>
+<p>Two columns stop you from booking a bad answer.</p>
+<p><strong><code>stops</code></strong> — the cheapest fare on a day is often the one with a connection. Filter to nonstop before ranking if a connection is not acceptable, and the ranking re-forms over the fares you would actually buy.</p>
+<p><strong><code>duration_minutes</code></strong> — a fare that is 8% cheaper and four hours longer is a different product. Sorting by price alone hides that; having both on the row means you can sort by whatever you actually optimise.</p>
+<p>And if you want <em>every</em> itinerary on a day rather than the cheapest one — to compare airlines head to head, or to see the second-cheapest option — that is the <a href="google-flights.html">Google Flights scraper</a> instead, which bills per itinerary.</p>
+<h2 id="the-history-you-cannot-get-any-other-way">The history you cannot get any other way</h2>
+<p>Google's own price tracking emails you when a fare moves, on the routes it chooses, and keeps the series. Running this on a schedule gives you the series.</p>
+<p>Every row carries <code>fetched_at</code>, so a daily run over a 30-day window is one point per route per departure day per day — a proper surface, not a snapshot. Two things fall out of it that a single search cannot answer:</p>
+<ul><li><strong>How a specific departure day drifts as it approaches.</strong> Group by <code>depart_date</code> and plot <code>price</code> over <code>fetched_at</code>. That is a booking curve for your route.</li><li><strong>Whether today's cheap is actually cheap.</strong> Comparing today's rank-1 price with the same window a week ago is the difference between "this is the cheapest day in the window" and "this is a genuinely good fare".</li></ul>
+<p>Because the departure date is relative, the window moves with the calendar and never prices a day that has passed.</p>
+<h2 id="alerts-that-cost-nothing-when-nothing-happens">Alerts that cost nothing when nothing happens</h2>
+<p>A price ceiling filters days over the line <strong>before</strong> billing:</p>
+<pre class="code" data-lang="json"><code>{"routes": ["LIS-LHR", "OPO-LGW"], "departDate": "14 days", "days": 30,
+ "maxPrice": 90, "currency": "EUR", "maxStops": 0}</code></pre>
+<p>A run that finds no qualifying day delivers no rows and costs nothing, while the status row still reports how many days were filtered and what the window's cheapest fare was — so a quiet alert still tells you how far off the line you are. That is the whole cost model of an alert done properly: you pay when there is something to say.</p>
+<h2 id="the-honest-limitations">The honest limitations</h2>
+<ul><li><strong>Google's list is what you get.</strong> Fares that appear only after login, in corporate channels, or on airline sites Google does not index are not in it.</li><li><strong>Prices include what Google shows</strong> — taxes and carrier fees as presented. Baggage and seat fees are not in the number.</li><li><strong>A currency swap fails the run</strong> rather than delivering rows priced in something you did not ask for. Some markets ignore a requested currency, and a silently converted number is worse than an error.</li><li><strong>The window is capped at 60 days per run.</strong> Run twice for a longer horizon.</li><li><strong>Google renders every itinerary twice</strong> on its own page. Rows are deduplicated before billing, so you are never charged for the site's markup — worth checking in any flight scraper you evaluate, because the duplicate is easy to bill and hard to notice.</li></ul>
+<h2 id="run-it">Run it</h2>
+<p><a href="flight-price-tracker.html">Flight Price Tracker</a> — $0.004 per delivered fare row, one per day, with status rows, filtered days and empty routes free. For every itinerary rather than the daily cheapest, <a href="google-flights.html">Google Flights Prices</a> at $0.005 per itinerary. Related: <a href="relative-dates-scheduling.html">scheduling with relative dates</a> so the window never goes stale.</p>
+<h2 id="faq">FAQ</h2>
+<h3>Is there a Google Flights API?</h3><p>No public one — Google retired QPX Express. The alternatives are aggregator APIs (Amadeus, Duffel, Kiwi) that sell fares from their own inventory and generally need a commercial agreement, and SERP resellers that charge per search whether or not it returned anything. Reading Google Flights directly and billing per delivered row means an empty route costs nothing.</p>
+<h3>Are round-trip prices per leg or for the whole trip?</h3><p>The whole trip, as Google shows them. Set a trip length and every departure day becomes a round trip returning that many days later, with the price being the total for both legs and a round_trip_total flag on the row so the two can never be mixed up in a table.</p>
+<h3>Why are the results only in English?</h3><p>Because the parser reads Google's own English accessibility labels, which is the most stable anchor on the page. Language does not change fares; currency and market do, and both are inputs.</p>
+<h3>What happens when two days share the lowest fare?</h3><p>The earlier departure takes rank 1. It is an arbitrary rule, but it is a stated one, so a tie does not silently reorder between runs.</p>
+<p class="cta"><a class="btn" href="https://apify.com/kestrel/flight-price-tracker" rel=noopener>Run Flight Price Tracker on Apify →</a></p>
+<p class="fine">Other actors used on this page: <a href="https://apify.com/kestrel/google-flights-prices" rel=noopener>apify.com/kestrel/google-flights-prices</a>.</p>
+<h2 id="more">More guides</h2><ul class="related">
+<li><a href="track-competitor-prices-n8n.html">How to Track Competitor Prices Daily with n8n</a> — A schedule, one HTTP node, a compare-with-yesterday code node and an alert. The workflow shape that turns any price scraper into a daily drop feed.</li>
+<li><a href="relative-dates-scheduling.html">How to Schedule a Scraper So It Never Goes Stale</a> — Hard-coded dates rot the day after you set them. Relative date inputs keep a scheduled scraper meaning the same thing every morning — here is the grammar.</li>
+<li><a href="scrape-google-hotels-prices.html">How to Scrape Google Hotels Prices with Python</a> — Google Hotels prices for exact dates, every OTA per property, in one call. Plus the silent failure mode: Google never says it did not find your place.</li>
+</ul>
+</article></main>
+<footer>
+<h2>All kestrel actors</h2>
+<div class="fgroup"><h3>Hotel &amp; flight prices</h3><p><a href="google-hotels.html">Google Hotels Prices Scraper</a> · <a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a> · <a href="hotel-price-tracker.html">Hotel Price Tracker</a> · <a href="booking-prices.html">Booking.com Scraper</a> · <a href="agoda-prices.html">Agoda Prices Scraper</a> · <a href="airbnb-prices-calendar.html">Airbnb Scraper</a> · <a href="airbnb-occupancy.html">Airbnb Occupancy Rate Scraper</a> · <a href="google-flights.html">Google Flights Scraper</a> · <a href="flight-price-tracker.html">Flight Price Tracker</a></p></div><div class="fgroup"><h3>Guest &amp; customer reviews</h3><p><a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> · <a href="tripadvisor-restaurant-reviews.html">TripAdvisor Restaurant Reviews Scraper</a> · <a href="booking-reviews.html">Booking.com Reviews Scraper</a> · <a href="agoda-reviews.html">Agoda Reviews Scraper</a> · <a href="airbnb-reviews.html">Airbnb Reviews Scraper</a> · <a href="hrs-reviews.html">HRS Reviews Scraper</a> · <a href="tripcom-reviews.html">Trip.com Reviews Scraper</a> · <a href="kurzurlaub-reviews.html">Kurzurlaub Reviews Scraper</a> · <a href="hostelworld-reviews.html">Hostelworld Reviews Scraper</a> · <a href="zoover-reviews.html">Zoover Reviews Scraper</a> · <a href="despegar-ratings.html">Despegar Hotel Ratings Scraper</a> · <a href="trustpilot-reviews.html">Trustpilot Reviews Scraper</a> · <a href="indeed-reviews.html">Indeed Company Reviews Scraper</a></p></div><div class="fgroup"><h3>Ecommerce</h3><p><a href="amazon-product.html">Amazon Product Scraper</a> · <a href="amazon-search.html">Amazon Search Scraper</a> · <a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a> · <a href="amazon-reviews.html">Amazon Reviews Scraper</a> · <a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a> · <a href="ebay-search.html">eBay Scraper</a></p></div><div class="fgroup"><h3>Apps</h3><p><a href="app-store-reviews.html">Apple App Store Reviews Scraper</a> · <a href="google-play-reviews.html">Google Play Reviews Scraper</a></p></div><div class="fgroup"><h3>Guides</h3><p><a href="scrape-tripadvisor-reviews.html">How to Scrape TripAdvisor Reviews Without Getting Blocked</a> · <a href="scrape-booking-reviews.html">How to Scrape Booking.com Reviews Without a Browser</a> · <a href="scrape-amazon-reviews.html">How to Scrape Amazon Reviews: the Real Limit Is 13</a> · <a href="scrape-trustpilot-reviews.html">How to Scrape Trustpilot Past the 200-Review Wall</a> · <a href="review-sites-without-a-browser.html">Which Review Sites Can Be Scraped Without a Browser</a> · <a href="scrape-indeed-reviews.html">How to Scrape Indeed Company Reviews (All Countries)</a> · <a href="scrape-aliexpress-reviews.html">How to Scrape AliExpress Reviews Without Losing Rows</a> · <a href="scrape-ebay-listings.html">How to Scrape eBay Listings (Sold Items Are Closed)</a> · <a href="scrape-google-hotels-prices.html">How to Scrape Google Hotels Prices with Python</a> · <a href="hotel-rate-parity-check.html">How to Check Hotel Rate Parity Across OTAs</a> · <a href="cheapest-day-to-fly.html">How to Find the Cheapest Day to Fly, as Data</a> · <a href="scrape-airbnb-prices-occupancy.html">How to Scrape Airbnb Prices and Estimate Occupancy</a> · <a href="scrape-app-store-reviews.html">How to Scrape App Store and Google Play Reviews</a> · <a href="scrape-booking-prices.html">How to Scrape Booking.com Hotel Prices by Date</a> · <a href="monitor-hotel-reputation.html">How to Monitor Hotel Reputation Across OTAs</a> · <a href="voice-of-customer-dataset.html">How to Build a Voice of Customer Dataset</a> · <a href="track-competitor-prices-n8n.html">How to Track Competitor Prices Daily with n8n</a> · <a href="pay-per-event-vs-per-result.html">Pay Per Event vs Per Result: Scraper Pricing</a> · <a href="relative-dates-scheduling.html">How to Schedule a Scraper So It Never Goes Stale</a> · <a href="track-amazon-bestsellers-rank.html">How to Track Amazon Best Sellers Rank (BSR) Daily</a></p></div>
+<p class="fine">Documentation for the <a href="https://apify.com/kestrel" rel=noopener>kestrel</a> actors on the Apify Store. Every page is built from the actor's own README and its input, output and pay-per-event schemas. Runnable examples live in the <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>examples repository</a>. Last updated 2026-08-29.</p>
+</footer>
+</body>
+</html>

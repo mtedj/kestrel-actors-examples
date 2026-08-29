@@ -30,6 +30,7 @@ tbody tr:last-child td { border-bottom:none; }
 td code { white-space:nowrap; }
 table.compare td { min-width:150px; } table.compare td:nth-child(2), table.compare td:nth-child(7) { min-width:280px; }
 .limits li { margin:.45em 0; }
+ol.steps { padding-left:1.2em; } ol.steps li { margin:.5em 0; }
 ul.related li { margin:.5em 0; }
 blockquote { border-left:3px solid var(--line); margin:1em 0; padding:0 0 0 14px; color:var(--muted); }
 footer { border-top:1px solid var(--line); background:var(--code-bg); }

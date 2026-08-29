@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Scrape TripAdvisor Reviews Without Getting Blocked</title>
+<meta name="description" content="TripAdvisor blocks datacenter IPs and Chrome-shaped clients. The measured setup that works, the paging trap that loses reviews, and working Python.">
+<link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Scrape TripAdvisor Reviews Without Getting Blocked">
+<meta property="og:description" content="TripAdvisor blocks datacenter IPs and Chrome-shaped clients. The measured setup that works, the paging trap that loses reviews, and working Python.">
+<meta property="og:url" content="https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html">
+<meta property="og:site_name" content="kestrel actors documentation">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Scrape TripAdvisor Reviews Without Getting Blocked", "description": "TripAdvisor blocks datacenter IPs and Chrome-shaped clients. The measured setup that works, the paging trap that loses reviews, and working Python.", "inLanguage": "en", "datePublished": "2026-08-29", "dateModified": "2026-08-29", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html"}, "author": {"@type": "Organization", "name": "kestrel", "url": "https://apify.com/kestrel"}, "publisher": {"@type": "Organization", "name": "kestrel actors documentation", "url": "https://mtedj.github.io/kestrel-actors-examples/"}, "about": [{"@type": "Thing", "name": "how to scrape tripadvisor reviews without getting blocked"}], "mentions": [{"@type": "SoftwareApplication", "name": "TripAdvisor Reviews Scraper — Hotel Guest Reviews & Ratings", "url": "https://apify.com/kestrel/tripadvisor-reviews-scraper"}, {"@type": "SoftwareApplication", "name": "TripAdvisor Restaurant Reviews Scraper — Diner Reviews", "url": "https://apify.com/kestrel/tripadvisor-restaurant-reviews"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Scrape TripAdvisor Reviews Without Getting Blocked", "description": "TripAdvisor blocks datacenter IPs and Chrome-shaped clients. The measured setup that works, the paging trap that loses reviews, and working Python.", "totalTime": "PT10M", "supply": [], "tool": [{"@type": "HowToTool", "name": "Apify account and API token"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Use a residential IP", "text": "TripAdvisor refuses every datacenter range: three fresh datacenter sessions returned 403 on every impersonation profile tried. Residential answers 200.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html#steps"}, {"@type": "HowToStep", "position": 2, "name": "Impersonate Firefox 147, not Chrome", "text": "With curl_cffi, impersonate=\"firefox\" resolved to Firefox 147 returns 200 on residential; the Chrome profile is refused with a DataDome device check even from a clean home IP.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html#steps"}, {"@type": "HowToStep", "position": 3, "name": "Read the review offset off the page", "text": "Reviews live in the server-rendered page at -orN- offsets: 10 per page on a hotel or attraction, 15 on a restaurant. Take the step from the page's own paging links.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html#steps"}, {"@type": "HowToStep", "position": 4, "name": "Filter before you store", "text": "Rating, trip type, date, translation and text filters decide what you keep. Applied before billing they are also what makes a complaints feed cost cents.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html#steps"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does scraping TripAdvisor need a headless browser?", "acceptedAnswer": {"@type": "Answer", "text": "No. The full review record — bubbles, title, text, the six sub-ratings, trip type, reviewer profile, photos and the management response — is inlined in the server-rendered HTML and in the page's own urqlSsrData JSON. One HTTP request returns ten reviews. What you need is the right IP pool and the right TLS fingerprint, not a browser."}}, {"@type": "Question", "name": "Why does my Chrome-fingerprinted client get 403 and a browser does not?", "acceptedAnswer": {"@type": "Answer", "text": "Because the gate is DataDome, and its verdict is per-profile. Chrome profiles came back with a device check or a captcha; the Firefox 147 profile came back 200 on the same IP, in the same second. The same probe run against Despegar gave the exact opposite answer — Chrome passes, Firefox 147 is refused everywhere. Try both before calling a source closed."}}, {"@type": "Question", "name": "Is there a TripAdvisor API for reviews?", "acceptedAnswer": {"@type": "Answer", "text": "Not a public one. The Content API is a partner product and does not return review text. TripAdvisor's own GraphQL gateway accepts persisted query ids only: a POST to /data/graphql/ids with x-requested-by answers 200, but the review-list query id is not in any of the page bundles (3.3 MB scanned, zero hits). The -orN- review pages carry everything anyway."}}, {"@type": "Question", "name": "How many TripAdvisor reviews can one hotel return?", "acceptedAnswer": {"@type": "Answer", "text": "All of them, in the language site you read. In the verified example the English site listed 1,456 reviews against an all-language review_count of 1,977 — the rest live on the other language domains. Reading two domains returns a machine translation twice unless you turn translated reviews off."}}]}</script>
+</head>
+<body>
+<header class="site">
+<a class="brand" href="index.html">kestrel actors <span>docs</span></a>
+<nav><a href="index.html">All actors</a> <a href="index.html#guides">Guides</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a> <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>Code examples</a></nav>
+</header>
+<main>
+
+<article>
+<p class="crumb"><a href="index.html">kestrel actors</a> › <a href="index.html#guides">Guides</a></p>
+<h1>How to scrape TripAdvisor reviews without getting blocked</h1>
+<p class="lede">TripAdvisor is not blocked by rate limits. It is blocked by a bot gate that reads your TLS handshake before it reads your request, and the fix is two specific settings — not more retries. Here is what passes, what does not, and the paging step that silently costs you a third of a restaurant's reviews.</p>
+<h2 id="steps">The short version</h2><ol class="steps">
+<li><strong>Use a residential IP.</strong> TripAdvisor refuses every datacenter range: three fresh datacenter sessions returned 403 on every impersonation profile tried. Residential answers 200.</li>
+<li><strong>Impersonate Firefox 147, not Chrome.</strong> With curl_cffi, impersonate="firefox" resolved to Firefox 147 returns 200 on residential; the Chrome profile is refused with a DataDome device check even from a clean home IP.</li>
+<li><strong>Read the review offset off the page.</strong> Reviews live in the server-rendered page at -orN- offsets: 10 per page on a hotel or attraction, 15 on a restaurant. Take the step from the page's own paging links.</li>
+<li><strong>Filter before you store.</strong> Rating, trip type, date, translation and text filters decide what you keep. Applied before billing they are also what makes a complaints feed cost cents.</li>
+</ol>
+<h2 id="why-tripadvisor-blocks-most-scrapers-on-the-first-request">Why TripAdvisor blocks most scrapers on the first request</h2>
+<p>TripAdvisor sits behind DataDome, and DataDome decides before it looks at your headers. Two variables settle everything:</p>
+<ul><li><strong>The IP pool.</strong> Every datacenter range tried was refused: three fresh sessions, both Chrome and Firefox profiles, all 403 with a DataDome body. Residential ranges answered 200.</li><li><strong>The TLS fingerprint.</strong> On the same residential session, a Chrome-shaped client got <code>'rt':'i'</code> (DataDome's device check) and a Firefox-147-shaped client got 200 with a 720-786 KB page. The control run direct from a home IP with no proxy at all behaved the same way: Chrome 403, Firefox 147 200 four times out of four. It is a fingerprint gate, not an IP-reputation gate — except on datacenter, where both apply.</li></ul>
+<p>There is a version trap inside the fingerprint. With <code>curl_cffi</code>, the <code>firefox</code> alias resolves to a different browser version depending on which release you installed: 0.13.0 maps it to Firefox 135, which is hard-blocked on every pool; 0.16.2 maps it to Firefox 147, which passes. The same machine flipped from blocked to open by upgrading one library. Pin the profile by name so a future alias bump cannot silently change your verdict:</p>
+<pre class="code" data-lang="python"><code>from curl_cffi import requests   # requires curl_cffi &gt;= 0.16
+
+s = requests.Session(impersonate="firefox147", proxies={"https": "http://groups-RESIDENTIAL:&lt;pass&gt;@proxy.apify.com:8000"})
+r = s.get("https://www.tripadvisor.com/Hotel_Review-g189158-d4509998-Reviews-Memmo_Alfama_Hotel-Lisbon.html", timeout=45)
+print(r.status_code, len(r.content))   # 200, ~0.9 MB</code></pre>
+<p>Paced at one request per second on a single residential session, ten distinct hotel pages returned 10/10 with 200s in 0.83-1.28 seconds each. TripAdvisor is not rate-limiting you at that pace; it is deciding whether to talk to you at all.</p>
+<h2 id="where-the-review-data-actually-lives">Where the review data actually lives</h2>
+<p>The pages are server-rendered. Each one carries the review cards in HTML and the same records again as JSON in the page's hydration state (<code>ReviewsProxy_getReviewListPageForLocation</code>). Nothing is fetched over XHR, so there is nothing to reverse-engineer and no token to mint.</p>
+<p>Paging is a URL offset: <code>.../Hotel_Review-g227592-d228423-Reviews-or10-Hotel_Marina-....html</code>. The <code>orN</code> is the review offset. No cookie, no referer and no token are required — a <code>datadome</code> cookie is set on the first 200 and can be reused.</p>
+<h2 id="the-paging-step-that-silently-truncates-restaurants">The paging step that silently truncates restaurants</h2>
+<p><strong>A hotel page lists 10 reviews. A restaurant page lists 15.</strong> An attraction lists 10.</p>
+<p>This is the single most common bug in TripAdvisor scrapers, because getting it wrong does not look like an error. Walk a restaurant in steps of ten and the requests return HTTP 200 with real reviews — but the wrong offset silently re-serves page one, so you collect duplicates, deduplicate them, and conclude the restaurant has fewer reviews than it does. Read the step off the page's own paging links instead of assuming it, and a 4,000-review restaurant does not quietly become a truncated one.</p>
+<p>The <a href="tripadvisor-restaurant-reviews.html">TripAdvisor restaurant and attraction scraper</a> reads that step per family, and refuses a target of the wrong type with a free <code>wrong_type</code> status row that names what the id actually is, instead of billing you for the wrong place.</p>
+<h2 id="working-code">Working code</h2>
+<pre class="code" data-lang="python"><code>from apify_client import ApifyClient
+
+client = ApifyClient("&lt;YOUR_APIFY_TOKEN&gt;")
+run = client.actor("kestrel/tripadvisor-reviews-scraper").call(run_input={
+    "locationIds": ["4509998"],
+    "languages": ["en", "fr"],
+    "maxRating": 3,
+    "requireText": True,
+    "maxReviewsPerHotel": 500,
+})
+for row in client.dataset(run["defaultDatasetId"]).iterate_items():
+    if row["type"] == "review":
+        print(row["language"], row["rating"], row["review_date"], row["title"], "-", (row["response"] or "")[:40])</code></pre>
+<p>The same job in one curl call:</p>
+<pre class="code" data-lang="bash"><code>curl -X POST "https://api.apify.com/v2/acts/kestrel~tripadvisor-reviews-scraper/run-sync-get-dataset-items?token=&lt;YOUR_APIFY_TOKEN&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"startUrls": ["https://www.tripadvisor.com/Hotel_Review-g189158-d4509998-Reviews-Memmo_Alfama_Hotel-Lisbon.html"], "maxReviewsPerHotel": 50}'</code></pre>
+<h2 id="what-one-row-looks-like">What one row looks like</h2>
+<pre class="code" data-lang="json"><code>{
+  "type": "review",
+  "review_id": "1075128384",
+  "location_id": "4509998",
+  "hotel_name": "Memmo Alfama Hotel",
+  "language": "en",
+  "original_language": "en",
+  "translated": false,
+  "title": "A Gem in the Heart of Alfama",
+  "text": "This place is a gem! On a quiet side street just off the route of the famous tram Electrico #28...",
+  "rating": 5,
+  "sub_ratings": {"value": 4, "rooms": 4, "location": 5, "cleanliness": 5, "service": 5, "sleep_quality": 5},
+  "review_date": "2026-08-27",
+  "stay_date": "2026-08-31",
+  "trip_type": "COUPLES",
+  "reviewer_hometown": "Brooklyn, New York",
+  "response": "Dear Frank, thank you so much for your incredible review...",
+  "url": "https://www.tripadvisor.com/ShowUserReviews-g189158-d4509998-r1075128384-..."
+}</code></pre>
+<h2 id="language-domains-multiply-your-corpus-and-your-duplicates">Language domains multiply your corpus, and your duplicates</h2>
+<p>TripAdvisor is not one site. <code>tripadvisor.com</code> serves English, <code>tripadvisor.de</code> German, <code>tripadvisor.fr</code> French, and each domain shows reviews written in its language <strong>plus machine translations of the rest</strong>. In the verified example the hotel row reported <code>review_count</code> 1,977 across all languages, while the English site listed 1,456 and the German site 595.</p>
+<p>So two things follow. Reading several domains is how you get a complete corpus — and it is also how you get the same German review twice, once as the original and once as an English machine translation. Turn translated reviews off when you want each review exactly once; leave them on when you want everything an English-reading guest sees.</p>
+<h2 id="the-honest-limitations">The honest limitations</h2>
+<ul><li><strong>Newest first, always.</strong> The pages expose no rating or helpfulness sort. A rating filter therefore reads the pages and drops rows; it does not save requests. Pair a complaints feed with a date cut so a 2,000-review hotel is two or three pages a day rather than 200.</li><li><strong>Pages are heavy.</strong> About a megabyte of residential traffic per ten reviews. That is the actor's cost, not yours, but it is why the price per review is what it is.</li><li><strong>Residential is not optional.</strong> Raising concurrency on datacenter produces rotations, not throughput.</li><li><strong>Hotels and restaurants are different actors</strong> because they are different page shapes, different sub-ratings (six aspects versus four) and different page sizes.</li></ul>
+<h2 id="run-it">Run it</h2>
+<p>The <a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> does the above per hotel at $0.005 per delivered review, with the hotel context row, status rows and every filtered review free. For restaurants and attractions — with the four dining sub-ratings and the diner tips — use the <a href="tripadvisor-restaurant-reviews.html">restaurant and attraction scraper</a>. If you are choosing between review sources first, the <a href="comparison.html">review scraper comparison</a> puts the ceilings side by side, and <a href="review-sites-without-a-browser.html">which review sites can be scraped without a browser</a> has the full evidence table this page draws on.</p>
+<h2 id="faq">FAQ</h2>
+<h3>Does scraping TripAdvisor need a headless browser?</h3><p>No. The full review record — bubbles, title, text, the six sub-ratings, trip type, reviewer profile, photos and the management response — is inlined in the server-rendered HTML and in the page's own urqlSsrData JSON. One HTTP request returns ten reviews. What you need is the right IP pool and the right TLS fingerprint, not a browser.</p>
+<h3>Why does my Chrome-fingerprinted client get 403 and a browser does not?</h3><p>Because the gate is DataDome, and its verdict is per-profile. Chrome profiles came back with a device check or a captcha; the Firefox 147 profile came back 200 on the same IP, in the same second. The same probe run against Despegar gave the exact opposite answer — Chrome passes, Firefox 147 is refused everywhere. Try both before calling a source closed.</p>
+<h3>Is there a TripAdvisor API for reviews?</h3><p>Not a public one. The Content API is a partner product and does not return review text. TripAdvisor's own GraphQL gateway accepts persisted query ids only: a POST to /data/graphql/ids with x-requested-by answers 200, but the review-list query id is not in any of the page bundles (3.3 MB scanned, zero hits). The -orN- review pages carry everything anyway.</p>
+<h3>How many TripAdvisor reviews can one hotel return?</h3><p>All of them, in the language site you read. In the verified example the English site listed 1,456 reviews against an all-language review_count of 1,977 — the rest live on the other language domains. Reading two domains returns a machine translation twice unless you turn translated reviews off.</p>
+<p class="cta"><a class="btn" href="https://apify.com/kestrel/tripadvisor-reviews-scraper" rel=noopener>Run TripAdvisor Reviews Scraper on Apify →</a></p>
+<p class="fine">Other actors used on this page: <a href="https://apify.com/kestrel/tripadvisor-restaurant-reviews" rel=noopener>apify.com/kestrel/tripadvisor-restaurant-reviews</a>.</p>
+<h2 id="more">More guides</h2><ul class="related">
+<li><a href="review-sites-without-a-browser.html">Which Review Sites Can Be Scraped Without a Browser</a> — Measured evidence for 14 review sources: which answer a plain HTTP client, which need a TLS fingerprint, which need a browser, and which are closed.</li>
+<li><a href="monitor-hotel-reputation.html">How to Monitor Hotel Reputation Across OTAs</a> — A daily feed of new guest reviews from every OTA a hotel sells on, normalised to one scale, at a cost measured in cents per property per month.</li>
+<li><a href="scrape-booking-reviews.html">How to Scrape Booking.com Reviews Without a Browser</a> — Booking.com hotel pages need a browser and 60 seconds each. The review endpoint behind them does not. Here is the difference, with working Python.</li>
+</ul>
+</article></main>
+<footer>
+<h2>All kestrel actors</h2>
+<div class="fgroup"><h3>Hotel &amp; flight prices</h3><p><a href="google-hotels.html">Google Hotels Prices Scraper</a> · <a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a> · <a href="hotel-price-tracker.html">Hotel Price Tracker</a> · <a href="booking-prices.html">Booking.com Scraper</a> · <a href="agoda-prices.html">Agoda Prices Scraper</a> · <a href="airbnb-prices-calendar.html">Airbnb Scraper</a> · <a href="airbnb-occupancy.html">Airbnb Occupancy Rate Scraper</a> · <a href="google-flights.html">Google Flights Scraper</a> · <a href="flight-price-tracker.html">Flight Price Tracker</a></p></div><div class="fgroup"><h3>Guest &amp; customer reviews</h3><p><a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> · <a href="tripadvisor-restaurant-reviews.html">TripAdvisor Restaurant Reviews Scraper</a> · <a href="booking-reviews.html">Booking.com Reviews Scraper</a> · <a href="agoda-reviews.html">Agoda Reviews Scraper</a> · <a href="airbnb-reviews.html">Airbnb Reviews Scraper</a> · <a href="hrs-reviews.html">HRS Reviews Scraper</a> · <a href="tripcom-reviews.html">Trip.com Reviews Scraper</a> · <a href="kurzurlaub-reviews.html">Kurzurlaub Reviews Scraper</a> · <a href="hostelworld-reviews.html">Hostelworld Reviews Scraper</a> · <a href="zoover-reviews.html">Zoover Reviews Scraper</a> · <a href="despegar-ratings.html">Despegar Hotel Ratings Scraper</a> · <a href="trustpilot-reviews.html">Trustpilot Reviews Scraper</a> · <a href="indeed-reviews.html">Indeed Company Reviews Scraper</a></p></div><div class="fgroup"><h3>Ecommerce</h3><p><a href="amazon-product.html">Amazon Product Scraper</a> · <a href="amazon-search.html">Amazon Search Scraper</a> · <a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a> · <a href="amazon-reviews.html">Amazon Reviews Scraper</a> · <a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a> · <a href="ebay-search.html">eBay Scraper</a></p></div><div class="fgroup"><h3>Apps</h3><p><a href="app-store-reviews.html">Apple App Store Reviews Scraper</a> · <a href="google-play-reviews.html">Google Play Reviews Scraper</a></p></div><div class="fgroup"><h3>Guides</h3><p><a href="scrape-tripadvisor-reviews.html">How to Scrape TripAdvisor Reviews Without Getting Blocked</a> · <a href="scrape-booking-reviews.html">How to Scrape Booking.com Reviews Without a Browser</a> · <a href="scrape-amazon-reviews.html">How to Scrape Amazon Reviews: the Real Limit Is 13</a> · <a href="scrape-trustpilot-reviews.html">How to Scrape Trustpilot Past the 200-Review Wall</a> · <a href="review-sites-without-a-browser.html">Which Review Sites Can Be Scraped Without a Browser</a> · <a href="scrape-indeed-reviews.html">How to Scrape Indeed Company Reviews (All Countries)</a> · <a href="scrape-aliexpress-reviews.html">How to Scrape AliExpress Reviews Without Losing Rows</a> · <a href="scrape-ebay-listings.html">How to Scrape eBay Listings (Sold Items Are Closed)</a> · <a href="scrape-google-hotels-prices.html">How to Scrape Google Hotels Prices with Python</a> · <a href="hotel-rate-parity-check.html">How to Check Hotel Rate Parity Across OTAs</a> · <a href="cheapest-day-to-fly.html">How to Find the Cheapest Day to Fly, as Data</a> · <a href="scrape-airbnb-prices-occupancy.html">How to Scrape Airbnb Prices and Estimate Occupancy</a> · <a href="scrape-app-store-reviews.html">How to Scrape App Store and Google Play Reviews</a> · <a href="scrape-booking-prices.html">How to Scrape Booking.com Hotel Prices by Date</a> · <a href="monitor-hotel-reputation.html">How to Monitor Hotel Reputation Across OTAs</a> · <a href="voice-of-customer-dataset.html">How to Build a Voice of Customer Dataset</a> · <a href="track-competitor-prices-n8n.html">How to Track Competitor Prices Daily with n8n</a> · <a href="pay-per-event-vs-per-result.html">Pay Per Event vs Per Result: Scraper Pricing</a> · <a href="relative-dates-scheduling.html">How to Schedule a Scraper So It Never Goes Stale</a> · <a href="track-amazon-bestsellers-rank.html">How to Track Amazon Best Sellers Rank (BSR) Daily</a></p></div>
+<p class="fine">Documentation for the <a href="https://apify.com/kestrel" rel=noopener>kestrel</a> actors on the Apify Store. Every page is built from the actor's own README and its input, output and pay-per-event schemas. Runnable examples live in the <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>examples repository</a>. Last updated 2026-08-29.</p>
+</footer>
+</body>
+</html>

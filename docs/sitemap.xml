@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://mtedj.github.io/kestrel-actors-examples/</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://mtedj.github.io/kestrel-actors-examples/comparison.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-tripadvisor-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-amazon-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-trustpilot-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/review-sites-without-a-browser.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-indeed-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-aliexpress-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-ebay-listings.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-google-hotels-prices.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/hotel-rate-parity-check.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/cheapest-day-to-fly.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-airbnb-prices-occupancy.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-app-store-reviews.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/scrape-booking-prices.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/monitor-hotel-reputation.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/voice-of-customer-dataset.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/pay-per-event-vs-per-result.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/relative-dates-scheduling.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mtedj.github.io/kestrel-actors-examples/track-amazon-bestsellers-rank.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://mtedj.github.io/kestrel-actors-examples/google-hotels.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://mtedj.github.io/kestrel-actors-examples/hotel-rate-parity.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://mtedj.github.io/kestrel-actors-examples/hotel-price-tracker.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>

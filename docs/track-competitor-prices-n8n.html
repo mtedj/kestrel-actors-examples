@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Track Competitor Prices Daily with n8n</title>
+<meta name="description" content="A schedule, one HTTP node, a compare-with-yesterday code node and an alert. The workflow shape that turns any price scraper into a daily drop feed.">
+<link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Track Competitor Prices Daily with n8n">
+<meta property="og:description" content="A schedule, one HTTP node, a compare-with-yesterday code node and an alert. The workflow shape that turns any price scraper into a daily drop feed.">
+<meta property="og:url" content="https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html">
+<meta property="og:site_name" content="kestrel actors documentation">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Track Competitor Prices Daily with n8n", "description": "A schedule, one HTTP node, a compare-with-yesterday code node and an alert. The workflow shape that turns any price scraper into a daily drop feed.", "inLanguage": "en", "datePublished": "2026-08-29", "dateModified": "2026-08-29", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html"}, "author": {"@type": "Organization", "name": "kestrel", "url": "https://apify.com/kestrel"}, "publisher": {"@type": "Organization", "name": "kestrel actors documentation", "url": "https://mtedj.github.io/kestrel-actors-examples/"}, "about": [{"@type": "Thing", "name": "how to track competitor prices daily with n8n"}], "mentions": [{"@type": "SoftwareApplication", "name": "Booking.com Scraper — Hotel Prices & Availability by Date", "url": "https://apify.com/kestrel/booking-prices-scraper"}, {"@type": "SoftwareApplication", "name": "Google Hotels Prices Scraper — Price Tracking & Rate Parity", "url": "https://apify.com/kestrel/google-hotels-prices"}, {"@type": "SoftwareApplication", "name": "Hotel Price Tracker — Google Hotels Price History & Alerts", "url": "https://apify.com/kestrel/hotel-price-tracker"}, {"@type": "SoftwareApplication", "name": "Flight Price Tracker — Cheapest Day to Fly & Airfare Alerts", "url": "https://apify.com/kestrel/flight-price-tracker"}, {"@type": "SoftwareApplication", "name": "Amazon Search Scraper — Best Sellers, Ranks & Prices", "url": "https://apify.com/kestrel/amazon-search-scraper"}, {"@type": "SoftwareApplication", "name": "eBay Scraper — Search, Listings, Prices & Sellers", "url": "https://apify.com/kestrel/ebay-search-scraper"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Track Competitor Prices Daily with n8n", "description": "A schedule, one HTTP node, a compare-with-yesterday code node and an alert. The workflow shape that turns any price scraper into a daily drop feed.", "totalTime": "PT10M", "supply": [], "tool": [{"@type": "HowToTool", "name": "Apify account and API token"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Add a Schedule trigger", "text": "One run a day at a fixed hour. Prices move on the source's clock, not yours, so a consistent time makes the series comparable.", "url": "https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html#steps"}, {"@type": "HowToStep", "position": 2, "name": "Call the actor with an HTTP Request node", "text": "POST to the run-sync-get-dataset-items endpoint with Header Auth carrying your Apify token. The response is the rows themselves.", "url": "https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html#steps"}, {"@type": "HowToStep", "position": 3, "name": "Diff against the last run in a Code node", "text": "n8n's workflow static data holds the previous prices keyed by entity and date. Compute the change, keep the drops past a threshold.", "url": "https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html#steps"}, {"@type": "HowToStep", "position": 4, "name": "Send only when there is something to send", "text": "An IF node routes to your email or Slack node when the drop list is non-empty, and to a no-op when it is not.", "url": "https://mtedj.github.io/kestrel-actors-examples/track-competitor-prices-n8n.html#steps"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a database for price history?", "acceptedAnswer": {"@type": "Answer", "text": "Not for alerting. n8n's workflow static data holds the last value per key, which is all a \"cheaper than yesterday\" alert needs — a few thousand keys is fine. You need a database when you want the full series for analysis, and at that point write the dataset rows to it and keep the alerting logic where it is."}}, {"@type": "Question", "name": "Why call run-sync-get-dataset-items instead of starting a run?", "acceptedAnswer": {"@type": "Answer", "text": "Because it returns the rows in the HTTP response, so one node does the whole job with no polling and no webhook. Give it a generous timeout — five minutes is a sensible default for a run of a few hundred rows — and use the asynchronous run endpoint with a webhook only for jobs that legitimately take longer."}}, {"@type": "Question", "name": "How do I stop the alert being noisy?", "acceptedAnswer": {"@type": "Answer", "text": "A percentage threshold, and the right source. Booking prices a stay per session, so two runs seconds apart can differ by a few per cent with nothing having changed — a 3% threshold filters that out. Google Hotels rates are steadier. If an alert is still chatty, raise the threshold before you blame the data."}}, {"@type": "Question", "name": "Does this work in Make or Zapier?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Any tool with a scheduler, an HTTP node and somewhere to keep the last value does it. In Make it is the Apify \"Run an Actor\" module with the same JSON body; the diffing step is the only piece that has to be written by hand anywhere."}}]}</script>
+</head>
+<body>
+<header class="site">
+<a class="brand" href="index.html">kestrel actors <span>docs</span></a>
+<nav><a href="index.html">All actors</a> <a href="index.html#guides">Guides</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a> <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>Code examples</a></nav>
+</header>
+<main>
+
+<article>
+<p class="crumb"><a href="index.html">kestrel actors</a> › <a href="index.html#guides">Guides</a></p>
+<h1>How to track competitor prices daily with n8n</h1>
+<p class="lede">Price tracking is not a scraping problem, it is a diffing problem: yesterday's numbers, today's numbers, and only the differences worth an email. Four n8n nodes do it with no database, and the same shape works for hotels, flights, Amazon and eBay.</p>
+<h2 id="steps">The short version</h2><ol class="steps">
+<li><strong>Add a Schedule trigger.</strong> One run a day at a fixed hour. Prices move on the source's clock, not yours, so a consistent time makes the series comparable.</li>
+<li><strong>Call the actor with an HTTP Request node.</strong> POST to the run-sync-get-dataset-items endpoint with Header Auth carrying your Apify token. The response is the rows themselves.</li>
+<li><strong>Diff against the last run in a Code node.</strong> n8n's workflow static data holds the previous prices keyed by entity and date. Compute the change, keep the drops past a threshold.</li>
+<li><strong>Send only when there is something to send.</strong> An IF node routes to your email or Slack node when the drop list is non-empty, and to a no-op when it is not.</li>
+</ol>
+<h2 id="the-four-node-shape">The four-node shape</h2>
+<pre class="code" data-lang="text"><code>Schedule (daily 07:00)
+  -&gt; HTTP Request  POST run-sync-get-dataset-items   (Header Auth: Bearer &lt;APIFY_TOKEN&gt;)
+  -&gt; Code          compare with the last run, keep drops &gt;= 3%
+  -&gt; IF            anything to report?  -&gt; Email / Slack     : No-op</code></pre>
+<p>That is the entire workflow. The HTTP node:</p>
+<pre class="code" data-lang="text"><code>POST https://api.apify.com/v2/acts/kestrel~booking-prices-scraper/run-sync-get-dataset-items?timeout=300
+Authentication: Header Auth  (Authorization: Bearer &lt;your Apify token&gt;)
+Body (JSON):
+{
+  "hotelIds": ["536251", "2508912", "2843226", "4832752", "8306313"],
+  "checkIn": "45 days",
+  "nights": 2,
+  "adults": 2,
+  "rooms": 1,
+  "currency": "USD",
+  "includeRooms": false
+}</code></pre>
+<p>Two details in that body do a lot of work. <code>checkIn: "45 days"</code> is relative, so the schedule always prices the same lead time and never goes stale — see <a href="relative-dates-scheduling.html">scheduling with relative dates</a>. And the ids are numeric property ids rather than names, so no lookup happens and the same five properties are priced every morning with no ambiguity.</p>
+<h2 id="the-diff-node">The diff node</h2>
+<pre class="code" data-lang="javascript"><code>// One item: every hotel whose stay total fell by at least DROP_PCT since the last run.
+const DROP_PCT = 3;      // Booking prices a stay per session; 3% filters that noise
+const MAX_KEYS = 5000;
+const store = $getWorkflowStaticData('global');
+store.prices = store.prices || {};
+
+const hotels = $input.all().map(i =&gt; i.json).filter(r =&gt; r.type === 'hotel' &amp;&amp; r.hotel_id);
+const drops = [], soldOut = [];
+
+for (const h of hotels) {
+  if (h.sold_out || h.price_total == null) { soldOut.push(h.name); continue; }
+  const key = `${h.hotel_id}|${h.check_in}`;
+  const prev = store.prices[key];
+  const change = prev &amp;&amp; prev.price ? (h.price_total - prev.price) / prev.price * 100 : null;
+  if (change !== null &amp;&amp; change &lt;= -DROP_PCT) {
+    drops.push({ name: h.name, was: prev.price, now: h.price_total,
+                 pct: Math.round(change * 10) / 10, currency: h.currency });
+  }
+  store.prices[key] = { price: h.price_total, at: new Date().toISOString() };
+}
+
+const keys = Object.keys(store.prices);
+if (keys.length &gt; MAX_KEYS) for (const k of keys.slice(0, keys.length - MAX_KEYS)) delete store.prices[k];
+
+return [{ json: {
+  count: drops.length,
+  subject: drops.length ? `${drops.length} price drops` : 'No price drops today',
+  table: drops.map(d =&gt; `${d.name}: ${d.was} -&gt; ${d.now} ${d.currency} (${d.pct}%)`).join('\n'),
+  sold_out: soldOut,
+} }];</code></pre>
+<p>Three things this gets right that a first draft usually does not:</p>
+<ul><li><strong>Sold-out properties are skipped, not treated as zero.</strong> They arrive free from the actor with a sold-out flag and no price; treating a missing price as a drop to zero is the classic false alert.</li><li><strong>The key includes the date.</strong> <code>hotel_id|check_in</code> — otherwise a moving relative window compares Tuesday's stay with Wednesday's and reports nonsense.</li><li><strong>The store is bounded.</strong> Static data is not a database; cap it and drop the oldest keys.</li></ul>
+<h2 id="the-same-shape-other-sources">The same shape, other sources</h2>
+<p>Only the HTTP body and the key change:</p>
+<div class="scroll"><table><thead><tr><th>What you are watching</th><th>Actor</th><th>Key</th><th>Row to diff</th></tr></thead><tbody><tr><td>Hotel rates for a comp set</td><td><a href="booking-prices.html">Booking prices</a> or <a href="google-hotels.html">Google Hotels</a></td><td>property + check-in</td><td>the stay total</td></tr><tr><td>One property over a date window</td><td><a href="hotel-price-tracker.html">Hotel price tracker</a></td><td>property + date</td><td>the lowest rate</td></tr><tr><td>Parity breaches</td><td><a href="hotel-rate-parity.html">Rate parity</a></td><td>property + date</td><td>who is under the official rate</td></tr><tr><td>Airfares</td><td><a href="flight-price-tracker.html">Flight price tracker</a></td><td>route + departure date</td><td>the day's cheapest fare</td></tr><tr><td>Amazon competitors</td><td><a href="amazon-search.html">Amazon search</a></td><td>ASIN + marketplace</td><td>the result-page price and rank</td></tr><tr><td>eBay market</td><td><a href="ebay-search.html">eBay search</a></td><td>item id</td><td>price, and units sold since yesterday</td></tr></tbody></table></div>
+<p>For Amazon and eBay, the interesting diff is often not the price. On Amazon it is the change in ratings count between runs — the closest public proxy for sales velocity. On eBay it is the change in units sold, which tells you the asking price is being paid.</p>
+<h2 id="let-the-actor-do-the-filtering">Let the actor do the filtering</h2>
+<p>Every filter you can push into the run input is money you do not spend and rows you do not diff. A price ceiling on a hotel or flight run delivers only the rows under your target, so a quiet day costs nothing at all and the workflow simply does not fire. The status row still reports how many rows were filtered and what the cheapest was, so you can log "nothing under 90 EUR today, cheapest was 112" without paying for the 112.</p>
+<p>That is the argument for putting the threshold in two places: a hard one in the run input to control cost, and a soft one in the code node to control noise.</p>
+<h2 id="ready-made-workflows">Ready-made workflows</h2>
+<p>The examples repository carries importable n8n workflows for this exact pattern — Booking price drops, Google Hotels price-drop alerts, the Google Flights cheapest-day feed, Amazon best-seller rank tracking and several negative-review monitors. Each is a <code>workflow.json</code> you can import plus a description of what to change: <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>github.com/mtedj/kestrel-actors-examples</a>.</p>
+<h2 id="run-it">Run it</h2>
+<p>Any of the price actors slots into the shape above. Start with <a href="scrape-booking-prices.html">Booking.com prices</a> for hotels, <a href="scrape-google-hotels-prices.html">Google Hotels</a> if you want every OTA in one row, or the <a href="cheapest-day-to-fly.html">flight price tracker</a> for routes. Related: <a href="relative-dates-scheduling.html">scheduling with relative dates</a> and <a href="pay-per-event-vs-per-result.html">how not to overpay for scraped rows</a>.</p>
+<h2 id="faq">FAQ</h2>
+<h3>Do I need a database for price history?</h3><p>Not for alerting. n8n's workflow static data holds the last value per key, which is all a "cheaper than yesterday" alert needs — a few thousand keys is fine. You need a database when you want the full series for analysis, and at that point write the dataset rows to it and keep the alerting logic where it is.</p>
+<h3>Why call run-sync-get-dataset-items instead of starting a run?</h3><p>Because it returns the rows in the HTTP response, so one node does the whole job with no polling and no webhook. Give it a generous timeout — five minutes is a sensible default for a run of a few hundred rows — and use the asynchronous run endpoint with a webhook only for jobs that legitimately take longer.</p>
+<h3>How do I stop the alert being noisy?</h3><p>A percentage threshold, and the right source. Booking prices a stay per session, so two runs seconds apart can differ by a few per cent with nothing having changed — a 3% threshold filters that out. Google Hotels rates are steadier. If an alert is still chatty, raise the threshold before you blame the data.</p>
+<h3>Does this work in Make or Zapier?</h3><p>Yes. Any tool with a scheduler, an HTTP node and somewhere to keep the last value does it. In Make it is the Apify "Run an Actor" module with the same JSON body; the diffing step is the only piece that has to be written by hand anywhere.</p>
+<p class="cta"><a class="btn" href="https://apify.com/kestrel/booking-prices-scraper" rel=noopener>Run Booking.com Scraper on Apify →</a></p>
+<p class="fine">Other actors used on this page: <a href="https://apify.com/kestrel/google-hotels-prices" rel=noopener>apify.com/kestrel/google-hotels-prices</a>, <a href="https://apify.com/kestrel/hotel-price-tracker" rel=noopener>apify.com/kestrel/hotel-price-tracker</a>, <a href="https://apify.com/kestrel/flight-price-tracker" rel=noopener>apify.com/kestrel/flight-price-tracker</a>, <a href="https://apify.com/kestrel/amazon-search-scraper" rel=noopener>apify.com/kestrel/amazon-search-scraper</a>, <a href="https://apify.com/kestrel/ebay-search-scraper" rel=noopener>apify.com/kestrel/ebay-search-scraper</a>.</p>
+<h2 id="more">More guides</h2><ul class="related">
+<li><a href="scrape-booking-prices.html">How to Scrape Booking.com Hotel Prices by Date</a> — Stay totals, taxes, cancellation and room rates for a destination or a comp set — and the per-session pricing that makes naive comparisons wrong.</li>
+<li><a href="relative-dates-scheduling.html">How to Schedule a Scraper So It Never Goes Stale</a> — Hard-coded dates rot the day after you set them. Relative date inputs keep a scheduled scraper meaning the same thing every morning — here is the grammar.</li>
+<li><a href="hotel-rate-parity-check.html">How to Check Hotel Rate Parity Across OTAs</a> — Find out when an OTA undercuts your direct rate: one row per property per date with every source compared, the spread and who is cheapest.</li>
+</ul>
+</article></main>
+<footer>
+<h2>All kestrel actors</h2>
+<div class="fgroup"><h3>Hotel &amp; flight prices</h3><p><a href="google-hotels.html">Google Hotels Prices Scraper</a> · <a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a> · <a href="hotel-price-tracker.html">Hotel Price Tracker</a> · <a href="booking-prices.html">Booking.com Scraper</a> · <a href="agoda-prices.html">Agoda Prices Scraper</a> · <a href="airbnb-prices-calendar.html">Airbnb Scraper</a> · <a href="airbnb-occupancy.html">Airbnb Occupancy Rate Scraper</a> · <a href="google-flights.html">Google Flights Scraper</a> · <a href="flight-price-tracker.html">Flight Price Tracker</a></p></div><div class="fgroup"><h3>Guest &amp; customer reviews</h3><p><a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> · <a href="tripadvisor-restaurant-reviews.html">TripAdvisor Restaurant Reviews Scraper</a> · <a href="booking-reviews.html">Booking.com Reviews Scraper</a> · <a href="agoda-reviews.html">Agoda Reviews Scraper</a> · <a href="airbnb-reviews.html">Airbnb Reviews Scraper</a> · <a href="hrs-reviews.html">HRS Reviews Scraper</a> · <a href="tripcom-reviews.html">Trip.com Reviews Scraper</a> · <a href="kurzurlaub-reviews.html">Kurzurlaub Reviews Scraper</a> · <a href="hostelworld-reviews.html">Hostelworld Reviews Scraper</a> · <a href="zoover-reviews.html">Zoover Reviews Scraper</a> · <a href="despegar-ratings.html">Despegar Hotel Ratings Scraper</a> · <a href="trustpilot-reviews.html">Trustpilot Reviews Scraper</a> · <a href="indeed-reviews.html">Indeed Company Reviews Scraper</a></p></div><div class="fgroup"><h3>Ecommerce</h3><p><a href="amazon-product.html">Amazon Product Scraper</a> · <a href="amazon-search.html">Amazon Search Scraper</a> · <a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a> · <a href="amazon-reviews.html">Amazon Reviews Scraper</a> · <a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a> · <a href="ebay-search.html">eBay Scraper</a></p></div><div class="fgroup"><h3>Apps</h3><p><a href="app-store-reviews.html">Apple App Store Reviews Scraper</a> · <a href="google-play-reviews.html">Google Play Reviews Scraper</a></p></div><div class="fgroup"><h3>Guides</h3><p><a href="scrape-tripadvisor-reviews.html">How to Scrape TripAdvisor Reviews Without Getting Blocked</a> · <a href="scrape-booking-reviews.html">How to Scrape Booking.com Reviews Without a Browser</a> · <a href="scrape-amazon-reviews.html">How to Scrape Amazon Reviews: the Real Limit Is 13</a> · <a href="scrape-trustpilot-reviews.html">How to Scrape Trustpilot Past the 200-Review Wall</a> · <a href="review-sites-without-a-browser.html">Which Review Sites Can Be Scraped Without a Browser</a> · <a href="scrape-indeed-reviews.html">How to Scrape Indeed Company Reviews (All Countries)</a> · <a href="scrape-aliexpress-reviews.html">How to Scrape AliExpress Reviews Without Losing Rows</a> · <a href="scrape-ebay-listings.html">How to Scrape eBay Listings (Sold Items Are Closed)</a> · <a href="scrape-google-hotels-prices.html">How to Scrape Google Hotels Prices with Python</a> · <a href="hotel-rate-parity-check.html">How to Check Hotel Rate Parity Across OTAs</a> · <a href="cheapest-day-to-fly.html">How to Find the Cheapest Day to Fly, as Data</a> · <a href="scrape-airbnb-prices-occupancy.html">How to Scrape Airbnb Prices and Estimate Occupancy</a> · <a href="scrape-app-store-reviews.html">How to Scrape App Store and Google Play Reviews</a> · <a href="scrape-booking-prices.html">How to Scrape Booking.com Hotel Prices by Date</a> · <a href="monitor-hotel-reputation.html">How to Monitor Hotel Reputation Across OTAs</a> · <a href="voice-of-customer-dataset.html">How to Build a Voice of Customer Dataset</a> · <a href="track-competitor-prices-n8n.html">How to Track Competitor Prices Daily with n8n</a> · <a href="pay-per-event-vs-per-result.html">Pay Per Event vs Per Result: Scraper Pricing</a> · <a href="relative-dates-scheduling.html">How to Schedule a Scraper So It Never Goes Stale</a> · <a href="track-amazon-bestsellers-rank.html">How to Track Amazon Best Sellers Rank (BSR) Daily</a></p></div>
+<p class="fine">Documentation for the <a href="https://apify.com/kestrel" rel=noopener>kestrel</a> actors on the Apify Store. Every page is built from the actor's own README and its input, output and pay-per-event schemas. Runnable examples live in the <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>examples repository</a>. Last updated 2026-08-29.</p>
+</footer>
+</body>
+</html>

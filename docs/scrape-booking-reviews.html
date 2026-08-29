@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Scrape Booking.com Reviews Without a Browser</title>
+<meta name="description" content="Booking.com hotel pages need a browser and 60 seconds each. The review endpoint behind them does not. Here is the difference, with working Python.">
+<link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Scrape Booking.com Reviews Without a Browser">
+<meta property="og:description" content="Booking.com hotel pages need a browser and 60 seconds each. The review endpoint behind them does not. Here is the difference, with working Python.">
+<meta property="og:url" content="https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html">
+<meta property="og:site_name" content="kestrel actors documentation">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Scrape Booking.com Reviews Without a Browser", "description": "Booking.com hotel pages need a browser and 60 seconds each. The review endpoint behind them does not. Here is the difference, with working Python.", "inLanguage": "en", "datePublished": "2026-08-29", "dateModified": "2026-08-29", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html"}, "author": {"@type": "Organization", "name": "kestrel", "url": "https://apify.com/kestrel"}, "publisher": {"@type": "Organization", "name": "kestrel actors documentation", "url": "https://mtedj.github.io/kestrel-actors-examples/"}, "about": [{"@type": "Thing", "name": "how to scrape booking.com reviews"}], "mentions": [{"@type": "SoftwareApplication", "name": "Booking.com Reviews Scraper — Hotel Guest Reviews & Ratings", "url": "https://apify.com/kestrel/booking-reviews-scraper"}, {"@type": "SoftwareApplication", "name": "Booking.com Scraper — Hotel Prices & Availability by Date", "url": "https://apify.com/kestrel/booking-prices-scraper"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HowTo", "name": "How to Scrape Booking.com Reviews Without a Browser", "description": "Booking.com hotel pages need a browser and 60 seconds each. The review endpoint behind them does not. Here is the difference, with working Python.", "totalTime": "PT10M", "supply": [], "tool": [{"@type": "HowToTool", "name": "Apify account and API token"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Stop loading the hotel page", "text": "A first navigation to a Booking hotel page returns 202 and an AWS WAF challenge, and the real page took 54-77 seconds through a residential proxy in a measured Playwright run.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html#steps"}, {"@type": "HowToStep", "position": 2, "name": "Call the review endpoint instead", "text": "Booking's own review list is fetched by the page from a JSON endpoint that answers without the WAF token. Twenty-five reviews per call, no login, no API key.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html#steps"}, {"@type": "HowToStep", "position": 3, "name": "Push your filters into the request", "text": "Language, traveller type and keyword are Booking's own server-side filters, so the reviews you do not want are never fetched.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html#steps"}, {"@type": "HowToStep", "position": 4, "name": "Read lowest-score-first for complaints", "text": "Sorting by score ascending and stopping at the first review above your threshold turns a 36-page walk into one page.", "url": "https://mtedj.github.io/kestrel-actors-examples/scrape-booking-reviews.html#steps"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a Booking.com API key?", "acceptedAnswer": {"@type": "Answer", "text": "No, and there is no public one for reviews. Booking's Demand API is a partner product tied to a commercial agreement. The review endpoint this uses is the same one the public review list on the property page calls, with no login and no account."}}, {"@type": "Question", "name": "Why do my Booking prices differ between two runs minutes apart?", "acceptedAnswer": {"@type": "Answer", "text": "Because Booking prices a stay per session. Two runs seconds apart can differ by a few per cent to a quarter — the site rotates promotional rates, mobile-only deals and currency handling per session. It is the site's behaviour, not a parsing artefact, and every scraper of it sees the same thing. Compare like with like, give alerts a threshold, and take a median for anything that must be defensible."}}, {"@type": "Question", "name": "How many reviews does one property return?", "acceptedAnswer": {"@type": "Answer", "text": "All of them, 25 per call. One Lisbon boutique hotel returned 892 reviews across 24 languages. Roughly four in ten Booking reviews are a score with no words — a text filter drops those before you are billed."}}, {"@type": "Question", "name": "Can I get the property's reply and its category scores?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Each review row carries the property's public reply, and the free hotel row carries Booking's seven category scores (staff, facilities, cleanliness, comfort, value, location, wifi) plus the language and traveller-type breakdowns with counts."}}]}</script>
+</head>
+<body>
+<header class="site">
+<a class="brand" href="index.html">kestrel actors <span>docs</span></a>
+<nav><a href="index.html">All actors</a> <a href="index.html#guides">Guides</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a> <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>Code examples</a></nav>
+</header>
+<main>
+
+<article>
+<p class="crumb"><a href="index.html">kestrel actors</a> › <a href="index.html#guides">Guides</a></p>
+<h1>How to scrape Booking.com reviews (the page is walled, the review call is not)</h1>
+<p class="lede">Every guide to scraping Booking.com starts with a headless browser, because the hotel page really is walled. That wall is on the page route only. The call the review list itself makes answers a plain HTTP client, which is why review rows cost a fraction of a cent and price rows are harder.</p>
+<h2 id="steps">The short version</h2><ol class="steps">
+<li><strong>Stop loading the hotel page.</strong> A first navigation to a Booking hotel page returns 202 and an AWS WAF challenge, and the real page took 54-77 seconds through a residential proxy in a measured Playwright run.</li>
+<li><strong>Call the review endpoint instead.</strong> Booking's own review list is fetched by the page from a JSON endpoint that answers without the WAF token. Twenty-five reviews per call, no login, no API key.</li>
+<li><strong>Push your filters into the request.</strong> Language, traveller type and keyword are Booking's own server-side filters, so the reviews you do not want are never fetched.</li>
+<li><strong>Read lowest-score-first for complaints.</strong> Sorting by score ascending and stopping at the first review above your threshold turns a 36-page walk into one page.</li>
+</ol>
+<h2 id="the-wall-is-on-the-page-not-on-the-data">The wall is on the page, not on the data</h2>
+<p>Booking.com property pages are behind AWS WAF. A measured headless-Chromium run through a residential proxy got a 202 and the WAF interstitial on first navigation; the real page was ready <strong>54-77 seconds later</strong> and weighed 1.56 MB. A second hotel in the same browser context skipped the challenge and still took 61 seconds and 2.1 MB, because the cost is the page weight, not the challenge.</p>
+<p>That is a fine way to spend a dollar reading one hotel. It is a terrible way to build a review pipeline.</p>
+<p>The interesting finding is what the WAF actually guards. Booking's page routes fingerprint the TLS stack; the JSON endpoint its own review list calls does not. Point a plain HTTP client at the review call and you get 25 structured reviews per request, in a few hundred milliseconds, with no cookie, no token and no browser. In testing Booking answered ten calls a second from a single IP — one call per second per session is the conservative default, not a limit.</p>
+<h2 id="what-that-changes-about-cost">What that changes about cost</h2>
+<p>A review row is a few hundred bytes of JSON instead of a share of a two-megabyte residential page load. That is the whole reason <a href="booking-reviews.html">Booking review rows</a> are $0.005 while a browser-based approach cannot be priced there honestly.</p>
+<p>It also changes what a complaints feed costs. Booking's endpoint takes a sort order, so asking for reviews <strong>lowest score first</strong> and stopping at the first one above your threshold reads one page rather than thirty-six:</p>
+<pre class="code" data-lang="python"><code>from apify_client import ApifyClient
+
+client = ApifyClient("&lt;YOUR_APIFY_TOKEN&gt;")
+run = client.actor("kestrel/booking-reviews-scraper").call(run_input={
+    "hotelNames": ["Memmo Alfama Lisbon"],
+    "maxReviewsPerHotel": 0,      # every review that matches
+    "maxRating": 6,               # Booking's 1-10 scale: keep 6 and below
+    "requireText": True,          # drop score-only reviews before billing
+})
+rows = [r for r in client.dataset(run["defaultDatasetId"]).iterate_items() if r["type"] == "review"]
+print(len(rows), "complaints;", sum(1 for r in rows if r["response"]), "answered by the hotel")</code></pre>
+<p>A property with 892 reviews and 24 of them at 6 or below costs one page and 24 rows — about twelve cents — not the whole corpus.</p>
+<h2 id="three-ways-to-name-a-property-one-billing">Three ways to name a property, one billing</h2>
+<ul><li><strong>URL</strong> — <code>https://www.booking.com/hotel/pt/memmo-alfama.html</code>. Any language variant works. Booking URLs carry no numeric id, so the slug is resolved through Booking's own autocomplete and held to the country in the URL.</li><li><strong>Name</strong> — "Memmo Alfama Lisbon", as you would type it into the search box.</li><li><strong>Numeric id</strong> — <code>536251</code>, which is what an earlier run's <code>hotel_id</code> gives you. No lookup at all, so this is the fastest path for a comp set you re-read every morning.</li></ul>
+<p>A URL, its name and its id are the same property: they are resolved, deduplicated and harvested once, so mixing inputs never double-bills. One caveat worth knowing — an id resolves to reviews and scores but <strong>not</strong> to a name, because Booking's lookup runs from name to id and not back. If you need <code>hotel_name</code> filled, give a URL or a name.</p>
+<h2 id="what-one-row-carries">What one row carries</h2>
+<pre class="code" data-lang="json"><code>{
+  "type": "review",
+  "review_id": "c90f61915f999a43",
+  "rating": 10.0,
+  "rating_5": 5.0,
+  "title": "Best place to stay in Lisbon!",
+  "positives": "Great location and amazing terrace.",
+  "negatives": null,
+  "language": "en",
+  "review_date": "2026-08-28",
+  "check_in": "2026-08-24",
+  "check_out": "2026-08-27",
+  "nights": 3,
+  "room_type": "Premium Double or Twin Room",
+  "traveler_type": "Couple",
+  "reviewer_country": "Canada",
+  "response": null,
+  "hotel_id": "536251",
+  "hotel_name": "Memmo Alfama - Design Hotels"
+}</code></pre>
+<p>Two fields there do work most review datasets cannot. <code>positives</code> and <code>negatives</code> are kept apart rather than glued into one blob, which is exactly the split a topic model wants. And <code>room_type</code> on every row means "which room do the complaints cluster in" is a <code>GROUP BY</code>, not a project.</p>
+<h2 id="the-honest-limitations">The honest limitations</h2>
+<ul><li><strong>Score-only reviews are real.</strong> Booking lets guests rate without writing; in one 25-review sample, 11 had no words at all. Filter them out before billing rather than paying for empty rows.</li><li><strong>Unknown ids look like empty properties.</strong> Booking answers a wrong id with zero reviews. That is reported as <code>no_reviews</code> (free) rather than dressed up as a successful harvest; a URL or name Booking cannot find is reported as an error, also free.</li><li><strong>Language codes must be Booking's.</strong> The free hotel row lists them with counts, so check there first; a code Booking rejects fails that property with a clear message instead of silently returning everything.</li><li><strong>Prices are a different problem.</strong> The review endpoint is open; the price path still needs a residential IP and pays Booking's per-session pricing. See <a href="scrape-booking-prices.html">how to scrape Booking.com hotel prices</a>.</li></ul>
+<h2 id="run-it">Run it</h2>
+<p><a href="booking-reviews.html">Booking.com Reviews Scraper</a> — $0.005 per delivered review, with hotel rows, status rows, filtered reviews, empty properties and failed lookups all free. If you are comparing sources first, the <a href="comparison.html">review scraper comparison</a> shows what each OTA row carries, and <a href="monitor-hotel-reputation.html">monitoring hotel reputation across OTAs</a> shows how to run this daily across a portfolio.</p>
+<h2 id="faq">FAQ</h2>
+<h3>Do I need a Booking.com API key?</h3><p>No, and there is no public one for reviews. Booking's Demand API is a partner product tied to a commercial agreement. The review endpoint this uses is the same one the public review list on the property page calls, with no login and no account.</p>
+<h3>Why do my Booking prices differ between two runs minutes apart?</h3><p>Because Booking prices a stay per session. Two runs seconds apart can differ by a few per cent to a quarter — the site rotates promotional rates, mobile-only deals and currency handling per session. It is the site's behaviour, not a parsing artefact, and every scraper of it sees the same thing. Compare like with like, give alerts a threshold, and take a median for anything that must be defensible.</p>
+<h3>How many reviews does one property return?</h3><p>All of them, 25 per call. One Lisbon boutique hotel returned 892 reviews across 24 languages. Roughly four in ten Booking reviews are a score with no words — a text filter drops those before you are billed.</p>
+<h3>Can I get the property's reply and its category scores?</h3><p>Yes. Each review row carries the property's public reply, and the free hotel row carries Booking's seven category scores (staff, facilities, cleanliness, comfort, value, location, wifi) plus the language and traveller-type breakdowns with counts.</p>
+<p class="cta"><a class="btn" href="https://apify.com/kestrel/booking-reviews-scraper" rel=noopener>Run Booking.com Reviews Scraper on Apify →</a></p>
+<p class="fine">Other actors used on this page: <a href="https://apify.com/kestrel/booking-prices-scraper" rel=noopener>apify.com/kestrel/booking-prices-scraper</a>.</p>
+<h2 id="more">More guides</h2><ul class="related">
+<li><a href="review-sites-without-a-browser.html">Which Review Sites Can Be Scraped Without a Browser</a> — Measured evidence for 14 review sources: which answer a plain HTTP client, which need a TLS fingerprint, which need a browser, and which are closed.</li>
+<li><a href="monitor-hotel-reputation.html">How to Monitor Hotel Reputation Across OTAs</a> — A daily feed of new guest reviews from every OTA a hotel sells on, normalised to one scale, at a cost measured in cents per property per month.</li>
+<li><a href="scrape-booking-prices.html">How to Scrape Booking.com Hotel Prices by Date</a> — Stay totals, taxes, cancellation and room rates for a destination or a comp set — and the per-session pricing that makes naive comparisons wrong.</li>
+</ul>
+</article></main>
+<footer>
+<h2>All kestrel actors</h2>
+<div class="fgroup"><h3>Hotel &amp; flight prices</h3><p><a href="google-hotels.html">Google Hotels Prices Scraper</a> · <a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a> · <a href="hotel-price-tracker.html">Hotel Price Tracker</a> · <a href="booking-prices.html">Booking.com Scraper</a> · <a href="agoda-prices.html">Agoda Prices Scraper</a> · <a href="airbnb-prices-calendar.html">Airbnb Scraper</a> · <a href="airbnb-occupancy.html">Airbnb Occupancy Rate Scraper</a> · <a href="google-flights.html">Google Flights Scraper</a> · <a href="flight-price-tracker.html">Flight Price Tracker</a></p></div><div class="fgroup"><h3>Guest &amp; customer reviews</h3><p><a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> · <a href="tripadvisor-restaurant-reviews.html">TripAdvisor Restaurant Reviews Scraper</a> · <a href="booking-reviews.html">Booking.com Reviews Scraper</a> · <a href="agoda-reviews.html">Agoda Reviews Scraper</a> · <a href="airbnb-reviews.html">Airbnb Reviews Scraper</a> · <a href="hrs-reviews.html">HRS Reviews Scraper</a> · <a href="tripcom-reviews.html">Trip.com Reviews Scraper</a> · <a href="kurzurlaub-reviews.html">Kurzurlaub Reviews Scraper</a> · <a href="hostelworld-reviews.html">Hostelworld Reviews Scraper</a> · <a href="zoover-reviews.html">Zoover Reviews Scraper</a> · <a href="despegar-ratings.html">Despegar Hotel Ratings Scraper</a> · <a href="trustpilot-reviews.html">Trustpilot Reviews Scraper</a> · <a href="indeed-reviews.html">Indeed Company Reviews Scraper</a></p></div><div class="fgroup"><h3>Ecommerce</h3><p><a href="amazon-product.html">Amazon Product Scraper</a> · <a href="amazon-search.html">Amazon Search Scraper</a> · <a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a> · <a href="amazon-reviews.html">Amazon Reviews Scraper</a> · <a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a> · <a href="ebay-search.html">eBay Scraper</a></p></div><div class="fgroup"><h3>Apps</h3><p><a href="app-store-reviews.html">Apple App Store Reviews Scraper</a> · <a href="google-play-reviews.html">Google Play Reviews Scraper</a></p></div><div class="fgroup"><h3>Guides</h3><p><a href="scrape-tripadvisor-reviews.html">How to Scrape TripAdvisor Reviews Without Getting Blocked</a> · <a href="scrape-booking-reviews.html">How to Scrape Booking.com Reviews Without a Browser</a> · <a href="scrape-amazon-reviews.html">How to Scrape Amazon Reviews: the Real Limit Is 13</a> · <a href="scrape-trustpilot-reviews.html">How to Scrape Trustpilot Past the 200-Review Wall</a> · <a href="review-sites-without-a-browser.html">Which Review Sites Can Be Scraped Without a Browser</a> · <a href="scrape-indeed-reviews.html">How to Scrape Indeed Company Reviews (All Countries)</a> · <a href="scrape-aliexpress-reviews.html">How to Scrape AliExpress Reviews Without Losing Rows</a> · <a href="scrape-ebay-listings.html">How to Scrape eBay Listings (Sold Items Are Closed)</a> · <a href="scrape-google-hotels-prices.html">How to Scrape Google Hotels Prices with Python</a> · <a href="hotel-rate-parity-check.html">How to Check Hotel Rate Parity Across OTAs</a> · <a href="cheapest-day-to-fly.html">How to Find the Cheapest Day to Fly, as Data</a> · <a href="scrape-airbnb-prices-occupancy.html">How to Scrape Airbnb Prices and Estimate Occupancy</a> · <a href="scrape-app-store-reviews.html">How to Scrape App Store and Google Play Reviews</a> · <a href="scrape-booking-prices.html">How to Scrape Booking.com Hotel Prices by Date</a> · <a href="monitor-hotel-reputation.html">How to Monitor Hotel Reputation Across OTAs</a> · <a href="voice-of-customer-dataset.html">How to Build a Voice of Customer Dataset</a> · <a href="track-competitor-prices-n8n.html">How to Track Competitor Prices Daily with n8n</a> · <a href="pay-per-event-vs-per-result.html">Pay Per Event vs Per Result: Scraper Pricing</a> · <a href="relative-dates-scheduling.html">How to Schedule a Scraper So It Never Goes Stale</a> · <a href="track-amazon-bestsellers-rank.html">How to Track Amazon Best Sellers Rank (BSR) Daily</a></p></div>
+<p class="fine">Documentation for the <a href="https://apify.com/kestrel" rel=noopener>kestrel</a> actors on the Apify Store. Every page is built from the actor's own README and its input, output and pay-per-event schemas. Runnable examples live in the <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>examples repository</a>. Last updated 2026-08-29.</p>
+</footer>
+</body>
+</html>
