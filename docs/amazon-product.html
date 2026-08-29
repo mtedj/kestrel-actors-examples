@@ -126,6 +126,7 @@ console.table(items.filter(r =&gt; r.type === 'product').map(r =&gt; ({ asin: r.
 <h3>Can I feed it from a keyword search or a chart?</h3><p>That is the intended flow: the <strong><a href="amazon-search.html">Amazon Search Scraper</a></strong> and the Best Sellers Scraper both emit <code>asin</code> columns; paste them into <code>asins</code> here for full details, then into the Reviews Scraper for the review text.</p>
 <h3>Is there a free tier?</h3><p>Apify's free plan includes monthly platform credit; the per-row price applies on top. Filtered rows, duplicates and unknown ASINs never cost anything.</p>
 <h2 id="related">Related scrapers</h2><ul class="related">
+<li><strong><a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a></strong> — buyer feedback with photos, variant chosen and buyer country, for product research and dropshipping.</li>
 <li><strong><a href="amazon-search.html">Amazon Search Scraper</a></strong> — keyword results with sponsored placements flagged; its <code>asin</code> column is the natural input here.</li>
 <li><strong><a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a></strong> — the Top 100 of any category with every rank filled.</li>
 <li><strong><a href="amazon-reviews.html">Amazon Reviews Scraper</a></strong> — the review text behind <code>rating</code> and <code>ratings_count</code>.</li>
