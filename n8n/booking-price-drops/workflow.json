@@ -1,0 +1,209 @@
+{
+  "name": "Booking.com price drop alerts for a hotel shortlist → Email",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Booking.com price drop alerts for a hotel shortlist → Email\nEvery morning: re-price the same shortlist of Booking.com properties for the same stay, compare each total with what it cost yesterday and email you the ones that got cheaper.\n\n**Setup**\n1. Credentials → **Header Auth** named `Apify Header Auth`: name `Authorization`, value `Bearer <your Apify token>` (apify.com → Settings → API & Integrations). Select it in *Run Booking.com prices*.\n2. In *Run Booking.com prices* put your own `hotelIds` (Booking's numeric property ids — an earlier run's `hotel_id`, or use `hotelNames`/`startUrls`) and set `checkIn` (relative, `\"45 days\"`), `nights`, `adults` and `currency`.\n3. Connect Gmail in *Email the drops* and set the recipient. `DROP_PCT` at the top of *Compare with the last run* is the alert threshold in percent (3 by default).\n\nActor: https://apify.com/kestrel/booking-prices-scraper — $0.004 per priced property (+ $0.002 per room row with `includeRooms`). Properties that are sold out for your dates are delivered free, so a 5-hotel shortlist costs at most $0.02 a day, about $0.60 a month. The first run only seeds the prices; alerts start on the second.\n\nBooking serves session-dependent rates (member prices, campaign deals), so a total can move several percent between two runs of the same stay. Raise `DROP_PCT` if the mail is too chatty.",
+        "height": 400,
+        "width": 560
+      },
+      "id": "note-1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 7,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "trigger-1",
+      "name": "Run daily at 07:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/kestrel~booking-prices-scraper/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"hotelIds\": [\n    \"536251\",\n    \"2508912\",\n    \"2843226\",\n    \"4832752\",\n    \"8306313\"\n  ],\n  \"checkIn\": \"45 days\",\n  \"nights\": 2,\n  \"adults\": 2,\n  \"rooms\": 1,\n  \"currency\": \"USD\",\n  \"includeRooms\": false\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-1",
+      "name": "Run Booking.com prices",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Apify Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// One item: every hotel on the shortlist whose stay total fell by at least DROP_PCT since the last run, as a ready-to-send email body.\nconst DROP_PCT = 3;                          // report a hotel when it is this many percent cheaper than last time\nconst MAX_KEYS = 5000;                       // hotel_id|check_in keys remembered between runs (oldest dropped)\nconst store = $getWorkflowStaticData('global');\nstore.prices = store.prices || {};\nconst rows = $input.all().map(i => i.json);\nconst hotels = rows.filter(r => r.type === 'hotel' && r.hotel_id);\nconst today = new Date().toISOString().slice(0, 10);\nconst drops = [], sold_out = [];\nlet priced = 0, first_seen = 0;\nfor (const h of hotels) {\n  if (h.sold_out || h.price_total == null) { sold_out.push(h.name || String(h.hotel_id)); continue; }   // sold out = delivered free by the actor\n  priced++;\n  const key = `${h.hotel_id}|${h.check_in}`;\n  const prev = store.prices[key];\n  const change_pct = prev && prev.price ? Math.round((h.price_total - prev.price) / prev.price * 1000) / 10 : null;\n  if (change_pct === null) first_seen++;\n  else if (change_pct <= -DROP_PCT) drops.push({\n    hotel_id: h.hotel_id, name: h.name || String(h.hotel_id), url: h.url || '',\n    check_in: h.check_in, check_out: h.check_out, nights: h.nights, currency: h.currency,\n    was: prev.price, now: Math.round(h.price_total * 100) / 100,\n    was_display: prev.display || String(prev.price), now_display: h.price_display || String(h.price_total),\n    nightly: h.price_nightly, change_pct, saving: Math.round((prev.price - h.price_total) * 100) / 100,\n    free_cancellation: !!h.free_cancellation, breakfast_included: !!h.breakfast_included, room_name: h.room_name || '',\n  });\n  store.prices[key] = { price: h.price_total, display: h.price_display || '', checked_on: today };\n}\nconst keys = Object.keys(store.prices);\nif (keys.length > MAX_KEYS) for (const k of keys.slice(0, keys.length - MAX_KEYS)) delete store.prices[k];\nconst stay = hotels.length ? `${hotels[0].check_in} → ${hotels[0].check_out} (${hotels[0].nights} night${hotels[0].nights > 1 ? 's' : ''})` : '';\nconst counted = `${priced} of ${hotels.length} properties had a price; ${sold_out.length} sold out (sold-out properties are delivered free).`;\nif (!drops.length) return [{ json: { none: true, count: 0, checked: hotels.length, priced, sold_out: sold_out.length, first_seen, stay, checked_on: today, note: counted } }];\ndrops.sort((a, b) => a.change_pct - b.change_pct);\nconst pad = (s, n) => String(s).length >= n ? String(s).slice(0, n - 1) + ' ' : String(s) + ' '.repeat(n - String(s).length);\nconst table = [`${pad('Hotel', 34)}${pad('was', 12)}${pad('now', 12)}change`,\n  ...drops.map(d => `${pad(d.name, 34)}${pad(d.was_display, 12)}${pad(d.now_display, 12)}${d.change_pct}%`)].join('\\n');\nconst body = [`${drops.length} price drop${drops.length > 1 ? 's' : ''} on your shortlist for ${stay}:`, '', table, '',\n  ...drops.map(d => `${d.name} — ${d.now_display} for the stay (${d.nightly} ${d.currency}/night), was ${d.was_display}: you save ${d.saving} ${d.currency}${d.free_cancellation ? ', free cancellation' : ''}${d.breakfast_included ? ', breakfast included' : ''}\\n${d.url}`),\n  '', counted].join('\\n');\nreturn [{ json: { count: drops.length, stay, checked: hotels.length, priced, sold_out: sold_out.length, sold_out_names: sold_out, first_seen, checked_on: today,\n  subject: `Price drop: ${drops[0].name} ${drops[0].change_pct}% for ${drops[0].check_in}`, table, body, drops } }];\n"
+      },
+      "id": "code-1",
+      "name": "Compare with the last run",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "any-drop",
+              "leftValue": "={{ $json.none }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Any price drops?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "you@example.com",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "gmail-1",
+      "name": "Email the drops",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        -120
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "noop-1",
+      "name": "No drops today",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        160
+      ]
+    }
+  ],
+  "connections": {
+    "Run daily at 07:00": {
+      "main": [
+        [
+          {
+            "node": "Run Booking.com prices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Booking.com prices": {
+      "main": [
+        [
+          {
+            "node": "Compare with the last run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compare with the last run": {
+      "main": [
+        [
+          {
+            "node": "Any price drops?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any price drops?": {
+      "main": [
+        [
+          {
+            "node": "Email the drops",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No drops today",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "name": "App review monitor: new 1-2★ App Store and Play reviews → Slack",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## App review monitor: new 1-2★ App Store and Google Play reviews → Slack\nEvery morning: read the newest reviews of your app on both stores, keep only the 1- and 2-star ones with words in them, drop the ones an earlier run already reported and post the rest to Slack.\n\n**Setup**\n1. Credentials → **Header Auth** named `Apify Header Auth`: name `Authorization`, value `Bearer <your Apify token>` (apify.com → Settings → API & Integrations). Select it in *Run App Store reviews* **and** *Run Google Play reviews*.\n2. Replace the example apps: `appIds` in *Run App Store reviews* is Apple's numeric id (the digits after `/id` in an App Store URL) plus the storefronts in `countries`; `appIds` in *Run Google Play reviews* is the Android package name, with `languages` and `countries`.\n3. Connect Slack in *Post to Slack* and pick the channel.\n\nActors: https://apify.com/kestrel/app-store-reviews-scraper and https://apify.com/kestrel/google-play-reviews-scraper — $0.004 per delivered review on each side. `maxRating: 2`, `requireText` and `sinceDate` are applied before billing, so the 3-5★ and the star-only reviews cost nothing: a day with 30 complaints across both stores costs $0.12, a quiet day $0. App and status rows are free.",
+        "height": 420,
+        "width": 560
+      },
+      "id": "note-1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 8,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "trigger-1",
+      "name": "Run daily at 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/kestrel~app-store-reviews-scraper/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"appIds\": [\n    \"310633997\"\n  ],\n  \"countries\": [\n    \"us\"\n  ],\n  \"maxReviewsPerApp\": 50,\n  \"sort\": \"most_recent\",\n  \"maxRating\": 2,\n  \"requireText\": true,\n  \"sinceDate\": \"3 days\",\n  \"includeAppRow\": true\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-1",
+      "name": "Run App Store reviews",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        -120
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Apify Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/kestrel~google-play-reviews-scraper/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"appIds\": [\n    \"com.whatsapp\"\n  ],\n  \"languages\": [\n    \"en\"\n  ],\n  \"countries\": [\n    \"us\"\n  ],\n  \"maxReviewsPerApp\": 50,\n  \"sort\": \"most_recent\",\n  \"maxRating\": 2,\n  \"requireText\": true,\n  \"sinceDate\": \"3 days\",\n  \"includeAppRow\": true\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-2",
+      "name": "Run Google Play reviews",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        140
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Apify Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 2
+      },
+      "id": "merge-1",
+      "name": "Merge both stores",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        500,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Both stores in one list: the 1-2★ reviews that no previous run has seen (workflow static data).\nconst MAX_KEYS = 5000;                       // store|review_id keys remembered between runs (oldest dropped)\nconst store = $getWorkflowStaticData('global');\nstore.seen = store.seen || [];\nconst seen = new Set(store.seen);\nconst rowsOf = (node) => { try { return $(node).all().map(i => i.json); } catch (e) { return []; } };   // a disabled branch just returns nothing\nconst appStore = rowsOf('Run App Store reviews');\nconst play = rowsOf('Run Google Play reviews');\nconst names = {};\nfor (const r of [...appStore, ...play]) if (r.type === 'app' && r.app_name) names[String(r.app_id)] = r.app_name;\nconst clip = (s, n) => { s = String(s || '').replace(/\\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };\nconst all = [\n  // App Store rows: numeric app_id, a `title` above the text, the app version in `version`, storefront in `country`.\n  ...appStore.filter(r => r.type === 'review' && r.review_id).map(r => ({\n    store: 'App Store', app_id: String(r.app_id), app_name: r.app_name || names[String(r.app_id)] || String(r.app_id),\n    review_id: String(r.review_id), rating: r.rating, title: r.title || '', text: clip(r.text, 400),\n    author: r.author || '', version: r.version || 'n/a', country: String(r.country || '').toUpperCase(), language: '',\n    review_date: String(r.review_date || '').slice(0, 10), developer_reply: r.developer_response || '', url: r.url || '',\n  })),\n  // Google Play rows: package name as app_id, no title, the app version in `app_version`, a `language` beside the country.\n  ...play.filter(r => r.type === 'review' && r.review_id).map(r => ({\n    store: 'Google Play', app_id: String(r.app_id), app_name: r.app_name || names[String(r.app_id)] || String(r.app_id),\n    review_id: String(r.review_id), rating: r.rating, title: '', text: clip(r.text, 400),\n    author: r.author || '', version: r.app_version || 'n/a', country: String(r.country || '').toUpperCase(), language: r.language || '',\n    review_date: String(r.review_date || '').slice(0, 10), developer_reply: r.reply_text || '', url: r.url || '',\n  })),\n];\nconst fresh = all.filter(r => !seen.has(`${r.store}|${r.review_id}`));\nfresh.sort((a, b) => (a.rating - b.rating) || String(b.review_date).localeCompare(String(a.review_date)));\nfor (const r of fresh) store.seen.push(`${r.store}|${r.review_id}`);\nif (store.seen.length > MAX_KEYS) store.seen = store.seen.slice(-MAX_KEYS);\nif (!fresh.length) return [{ json: { none: true, reviews_received: all.length, app_store: appStore.filter(r => r.type === 'review').length, google_play: play.filter(r => r.type === 'review').length, ids_remembered: store.seen.length } }];\nreturn fresh.map(json => ({ json }));\n"
+      },
+      "id": "code-1",
+      "name": "Keep new reviews",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "any-new",
+              "leftValue": "={{ $json.none }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Any new?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1000,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#app-reviews"
+        },
+        "text": "=🔴 {{ $json.rating }}★ {{ $json.app_name }} · {{ $json.store }} {{ $json.country }} · v{{ $json.version }}\n{{ $json.title }}\n{{ $json.text }}\n_{{ $json.author }} · {{ $json.review_date }}_ · <{{ $json.url }}|open>",
+        "otherOptions": {}
+      },
+      "id": "slack-1",
+      "name": "Post to Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1260,
+        -120
+      ],
+      "credentials": {
+        "slackOAuth2Api": {
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "noop-1",
+      "name": "No new complaints",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        160
+      ]
+    }
+  ],
+  "connections": {
+    "Run daily at 08:00": {
+      "main": [
+        [
+          {
+            "node": "Run App Store reviews",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Run Google Play reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run App Store reviews": {
+      "main": [
+        [
+          {
+            "node": "Merge both stores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Google Play reviews": {
+      "main": [
+        [
+          {
+            "node": "Merge both stores",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge both stores": {
+      "main": [
+        [
+          {
+            "node": "Keep new reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep new reviews": {
+      "main": [
+        [
+          {
+            "node": "Any new?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any new?": {
+      "main": [
+        [
+          {
+            "node": "Post to Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No new complaints",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

@@ -26,6 +26,7 @@ Runnable examples for the [kestrel](https://apify.com/kestrel) Apify actors: hot
 | [trip-com-reviews-scraper](https://apify.com/kestrel/trip-com-reviews-scraper) | Hotel Guest Reviews & Ratings | review $0.004 |
 | [kurzurlaub-reviews-scraper](https://apify.com/kestrel/kurzurlaub-reviews-scraper) | Hotel- & Gästebewertungen | review $0.003 |
 | [airbnb-reviews-scraper](https://apify.com/kestrel/airbnb-reviews-scraper) | Guest Reviews, Ratings & Replies | review $0.005 |
+| [trustpilot-reviews-scraper](https://apify.com/kestrel/trustpilot-reviews-scraper) | Company Reviews & TrustScore | review $0.0007 |
 ### Ecommerce
 
 | actor | what it returns | price per row |
@@ -40,6 +41,12 @@ Runnable examples for the [kestrel](https://apify.com/kestrel) Apify actors: hot
 |---|---|---|
 | [app-store-reviews-scraper](https://apify.com/kestrel/app-store-reviews-scraper) | App Reviews & Ratings | review $0.004 |
 | [google-play-reviews-scraper](https://apify.com/kestrel/google-play-reviews-scraper) | Android App Reviews & Ratings | review $0.004 |
+### Other
+
+| actor | what it returns | price per row |
+|---|---|---|
+| [hostelworld-reviews-scraper](https://apify.com/kestrel/hostelworld-reviews-scraper) | Hostel Guest Reviews | review $0.003 |
+| [zoover-reviews-scraper](https://apify.com/kestrel/zoover-reviews-scraper) | Hotel Guest Reviews & Ratings | review $0.004 |
 
 ## Quickstart
 
