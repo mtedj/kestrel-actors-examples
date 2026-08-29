@@ -1,0 +1,259 @@
+{
+  "name": "Amazon Best Sellers rank tracker → Google Sheets (daily chart history)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Amazon Best Sellers rank tracker → Google Sheets (daily chart history)\nEvery morning: pull the Amazon Best Sellers chart for a category, compare each product's rank with yesterday's, append the full chart to a Google Sheet (a growing rank history) and post new top-10 entries to Slack.\n\n**Setup**\n1. Credentials → **Header Auth** named `Apify Header Auth`: name `Authorization`, value `Bearer <your Apify token>` (apify.com → Settings → API & Integrations). Select it in *Run Amazon charts*.\n2. Edit `categories` (the slug after /gp/bestsellers/ in a Best Sellers URL, e.g. `electronics`, `kitchen`) and `domain` in *Run Amazon charts*. `pages: 2` gives the Top 100.\n3. Connect Google Sheets in *Append to Google Sheets*. Sheet header row: date, category, chart, rank, previous_rank, change, asin, title, price, price_display, rating, ratings_count, url, first_run. Connect Slack in *Post to Slack* (or delete that node). The first run only seeds the history — Slack alerts start on day two.\n\nActor: https://apify.com/kestrel/amazon-best-sellers-scraper — $0.004 per product row, every rank filled (Amazon renders only 30 of a page's 50 entries; `fillRanks` fetches the rest). Top 50 = $0.20 per category per day, Top 100 (`pages: 2`) = $0.40. Status rows are free.",
+        "height": 380,
+        "width": 560
+      },
+      "id": "note-1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 6,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "trigger-1",
+      "name": "Run daily at 06:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/kestrel~amazon-best-sellers-scraper/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"categories\": [\n    \"electronics\"\n  ],\n  \"chart\": \"bestsellers\",\n  \"pages\": 1,\n  \"maxResultsPerCategory\": 50,\n  \"fillRanks\": true,\n  \"domain\": \"com\"\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-1",
+      "name": "Run Amazon charts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Apify Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Product rows with today's rank next to the previous run's rank (workflow static data), sorted by rank.\nconst MAX_KEYS = 5000;                       // category|chart|asin keys remembered (oldest dropped)\nconst store = $getWorkflowStaticData('global');\nstore.ranks = store.ranks || {};\nconst known = new Set(Object.keys(store.ranks).map(k => k.split('|').slice(0, 2).join('|')));   // lists seen before\nconst today = new Date().toISOString().slice(0, 10);\nconst rows = $input.all().map(i => i.json).filter(r => r.type === 'product' && r.asin);\nconst out = rows.map(r => {\n  const list = r.category || r.query || '';          // chart category, or the keyword when tracking search results\n  const kind = r.chart || 'search';\n  const rank = r.rank ?? r.position;                  // rank on a chart, position on a search page\n  const key = `${list}|${kind}|${r.asin}`;\n  const first_run = !known.has(`${list}|${kind}`);    // first time this list is seen: every product is \"new\", so no alerts\n  const prev = store.ranks[key];\n  const change = prev == null ? 'new' : prev === rank ? '0' : `${prev - rank > 0 ? '+' : ''}${prev - rank}`;\n  store.ranks[key] = rank;\n  return { json: { date: today, category: list, chart: kind, rank, previous_rank: prev ?? null, change, asin: r.asin, title: r.title || '',\n    price: r.price ?? null, price_display: r.price_display || '', rating: r.rating ?? null, ratings_count: r.ratings_count ?? null, url: r.url || '', first_run } };\n}).sort((a, b) => (a.json.rank ?? 1e9) - (b.json.rank ?? 1e9));\nconst keys = Object.keys(store.ranks);\nif (keys.length > MAX_KEYS) for (const k of keys.slice(0, keys.length - MAX_KEYS)) delete store.ranks[k];\nreturn out;\n"
+      },
+      "id": "code-1",
+      "name": "Compute rank moves",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "sheets-1",
+      "name": "Append to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        780,
+        0
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "new-top10",
+              "leftValue": "={{ $json.change === 'new' && Number($json.rank) <= 10 && !$json.first_run }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "New in top 10?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1040,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#amazon-charts"
+        },
+        "text": "=🆕 #{{ $json.rank }} in {{ $json.category }} {{ $json.chart }}: {{ $json.title }} — {{ $json.price_display }} · ⭐ {{ $json.rating }} ({{ $json.ratings_count }} ratings)\n<{{ $json.url }}|open>",
+        "otherOptions": {}
+      },
+      "id": "slack-1",
+      "name": "Post to Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1300,
+        -120
+      ],
+      "credentials": {
+        "slackOAuth2Api": {
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "noop-1",
+      "name": "Nothing new in top 10",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "Run daily at 06:00": {
+      "main": [
+        [
+          {
+            "node": "Run Amazon charts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Amazon charts": {
+      "main": [
+        [
+          {
+            "node": "Compute rank moves",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compute rank moves": {
+      "main": [
+        [
+          {
+            "node": "Append to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "New in top 10?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New in top 10?": {
+      "main": [
+        [
+          {
+            "node": "Post to Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Nothing new in top 10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

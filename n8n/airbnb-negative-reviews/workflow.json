@@ -1,0 +1,253 @@
+{
+  "name": "Airbnb review alerts: low-star guest reviews → Slack + Google Sheets",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Airbnb review alerts: low-star guest reviews → Slack + Google Sheets\nEvery morning: fetch the newest Airbnb reviews for your listings, keep only new reviews of 3 stars or less, append them to a sheet and post each one to Slack — flagged *unanswered* until the host replies.\n\n**Setup**\n1. Credentials → **Header Auth** named `Apify Header Auth`: name `Authorization`, value `Bearer <your Apify token>` (apify.com → Settings → API & Integrations). Select it in *Run Airbnb reviews*.\n2. Put your listing ids (the number in airbnb.com/rooms/…) in the JSON body of *Run Airbnb reviews* — or use `locationQueries` to watch a whole market.\n3. Connect Slack and Google Sheets in the last two nodes. Sheet header row: name, rating, text, created_at, reviewer_name, reviewer_location, host_reply, reply_status, url, fetched_on.\n\nActor: https://apify.com/kestrel/airbnb-reviews-scraper — $0.005 per delivered review. Only reviews ≤ 3★ are delivered and billed: at most 50 × $0.005 = $0.25 per listing per day, usually zero to a few cents. Listing and status rows are free.",
+        "height": 380,
+        "width": 560
+      },
+      "id": "note-1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 8,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "trigger-1",
+      "name": "Run daily at 08:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/kestrel~airbnb-reviews-scraper/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"listingIds\": [\n    \"11562247\",\n    \"45307024\"\n  ],\n  \"maxReviewsPerListing\": 50,\n  \"reviewsSort\": \"most_recent\",\n  \"minRating\": 3,\n  \"includeListingRow\": false\n}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-1",
+      "name": "Run Airbnb reviews",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Apify Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Keep review rows only, drop the ones already alerted (workflow static data), newest first.\nconst MAX_KEYS = 5000;                       // ids remembered between runs (oldest dropped)\nconst store = $getWorkflowStaticData('global');\nstore.seen = store.seen || [];\nconst seen = new Set(store.seen);\nconst rows = $input.all().map(i => i.json).filter(r => r.type === 'review' && r.review_id);\nconst fresh = rows.filter(r => !seen.has(String(r.review_id)));\nfresh.sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')));\nfor (const r of fresh) store.seen.push(String(r.review_id));\nif (store.seen.length > MAX_KEYS) store.seen = store.seen.slice(-MAX_KEYS);\nconst clip = (s, n) => { s = String(s || '').replace(/<br\\s*\\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/\\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };\nconst today = new Date().toISOString().slice(0, 10);\nconst out = fresh.map(r => ({ json: {\n  name: r.name || `Listing ${r.id}`,\n  rating: Number(r.rating),\n  text: clip(r.text, 300),\n  created_at: String(r.created_at || '').slice(0, 10),\n  reviewer_name: r.reviewer_name || '',\n  reviewer_location: r.reviewer_location || '',\n  host_reply: clip(r.host_reply, 300),\n  reply_status: r.host_reply ? 'replied' : 'unanswered',\n  url: r.url || `https://www.airbnb.com/rooms/${r.id}`,\n  fetched_on: today,\n} }));\nreturn out.length ? out : [{ json: { none: true, reviews_received: rows.length, ids_remembered: store.seen.length } }];\n"
+      },
+      "id": "code-1",
+      "name": "Keep new reviews",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "any-new",
+              "leftValue": "={{ $json.none }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "notExists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Any new?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "sheets-1",
+      "name": "Append to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1040,
+        -320
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "#guest-reviews"
+        },
+        "text": "=⭐ {{ $json.rating }}/5 · {{ $json.name }} · {{ $json.created_at }}\n{{ $json.text }}\n_{{ $json.reviewer_name }}, {{ $json.reviewer_location }}_ · <{{ $json.url }}|open> · {{ $json.reply_status }}",
+        "otherOptions": {}
+      },
+      "id": "slack-1",
+      "name": "Post to Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        1040,
+        -120
+      ],
+      "credentials": {
+        "slackOAuth2Api": {
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "noop-1",
+      "name": "No new complaints",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        160
+      ]
+    }
+  ],
+  "connections": {
+    "Run daily at 08:00": {
+      "main": [
+        [
+          {
+            "node": "Run Airbnb reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Airbnb reviews": {
+      "main": [
+        [
+          {
+            "node": "Keep new reviews",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep new reviews": {
+      "main": [
+        [
+          {
+            "node": "Any new?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any new?": {
+      "main": [
+        [
+          {
+            "node": "Append to Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Post to Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No new complaints",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "name": "Google Hotels price drop alerts (Apify) — daily tracking with email",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Google Hotels price drop alerts\nDaily: price your shortlist on Google Hotels for a stay N days out (every booking site's rate), compare with yesterday, email the drops.\n\n**Setup**\n1. Add an Apify API token as the n8n **Header Auth** credential `Apify Header Auth` (name `Authorization`, value `Bearer <token>`).\n2. Edit the search or hotel URLs in *Run Google Hotels Prices*.\n3. Set the drop threshold in *Detect price drops*.\n\nActor: https://apify.com/kestrel/google-hotels-prices ($0.004 per priced hotel row, $0.002 per offer row; 40 hotels without offers = $0.16 per run; empty runs are free).",
+        "height": 300,
+        "width": 420
+      },
+      "id": "note-1",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "trigger-1",
+      "name": "Every day",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/kestrel~google-hotels-prices/run-sync-get-dataset-items?timeout=300",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ queries: ['hotels in Lisbon'], checkIn: '30 days', checkOut: '32 days', adults: 2, currency: 'USD', maxHotels: 40, includeOffers: false }) }}",
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "http-1",
+      "name": "Run Google Hotels Prices",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Apify Header Auth"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Keep priced hotel rows, compare with the previous run (kept in workflow static data), emit drops.\nconst threshold = 0.10; // 10% cheaper than yesterday\nconst rows = $input.all().map(i => i.json).filter(r => r.type === 'hotel' && r.nightly);\nconst store = $getWorkflowStaticData('global'); store.prev = store.prev || {};\nconst drops = [];\nfor (const r of rows) {\n  const key = `${r.entity_id}|${r.check_in}|${r.check_out}`; const prev = store.prev[key];\n  if (prev && r.nightly <= prev * (1 - threshold)) drops.push({ name: r.name, from: prev, to: r.nightly, display: r.nightly_display, total: r.total_display, stay: `${r.check_in} → ${r.check_out}`, url: r.google_url });\n  store.prev[key] = r.nightly;\n}\nreturn drops.length ? drops.map(d => ({ json: d })) : [{ json: { none: true, tracked: rows.length } }];"
+      },
+      "id": "code-1",
+      "name": "Detect price drops",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.none }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-1",
+      "name": "Any drops?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "you@example.com",
+        "subject": "=Hotel price drop: {{ $json.name }} now {{ $json.display }}/night",
+        "emailType": "text",
+        "message": "={{ $json.name }} for {{ $json.stay }} dropped from {{ $json.from }} to {{ $json.to }} per night (stay total {{ $json.total }}).\n{{ $json.url }}",
+        "options": {}
+      },
+      "id": "gmail-1",
+      "name": "Email the drop",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1040,
+        -100
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "noop-1",
+      "name": "No drops today",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "Every day": {
+      "main": [
+        [
+          {
+            "node": "Run Google Hotels Prices",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Google Hotels Prices": {
+      "main": [
+        [
+          {
+            "node": "Detect price drops",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect price drops": {
+      "main": [
+        [
+          {
+            "node": "Any drops?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Any drops?": {
+      "main": [
+        [
+          {
+            "node": "Email the drop",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No drops today",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
