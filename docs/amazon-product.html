@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amazon Product Scraper — Amazon Product Data by ASIN · Docs</title>
+<meta name="description" content="Amazon product scraper docs: every input and output field, a real product row, and Python, JavaScript and curl examples.">
+<link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/amazon-product.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Amazon Product Scraper — Amazon Product Data by ASIN · Docs">
+<meta property="og:description" content="Amazon product scraper docs: every input and output field, a real product row, and Python, JavaScript and curl examples.">
+<meta property="og:url" content="https://mtedj.github.io/kestrel-actors-examples/amazon-product.html">
+<meta property="og:site_name" content="kestrel actors documentation">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Amazon Product Scraper — Details, Prices & Availability by ASIN", "description": "Amazon product data by ASIN or URL in 20 marketplaces: title, brand, buybox price and list price, currency, availability and stock flag, rating, images, bullet points, description, category, details table, seller and Best Sellers Rank when shown. Pay per product row; filtered rows are free.", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Web scraping", "operatingSystem": "Cloud (Apify platform)", "url": "https://mtedj.github.io/kestrel-actors-examples/amazon-product.html", "sameAs": "https://apify.com/kestrel/amazon-product-scraper", "softwareHelp": "https://mtedj.github.io/kestrel-actors-examples/amazon-product.html", "author": {"@type": "Organization", "name": "kestrel", "url": "https://apify.com/kestrel"}, "offers": {"@type": "Offer", "price": "0.004", "priceCurrency": "USD", "name": "Product row", "description": "One product's details from its public page: title, brand, buybox price and list price, currency, availability, stock flag, rating, rating count, images, bullet points, description, category, details table, seller and Best Sellers Rank when shown. Products dropped by inStockOnly/maxPrice, unknown ASINs and blocked pages are free."}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it need an Amazon API key or login?", "acceptedAnswer": {"@type": "Answer", "text": "No. There is no key and no account. The Product Advertising API needs an approved associate account and rate-limits by sales; this reads the page instead."}}, {"@type": "Question", "name": "Can I look up an ASIN and get the price only?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every row has price, price_display, list_price and currency; the Prices view shows nothing else. That is the amazon asin lookup most people want."}}, {"@type": "Question", "name": "How do I track prices over time?", "acceptedAnswer": {"@type": "Answer", "text": "Schedule the run (daily is typical), keep the rows, and group by asin. fetched_at timestamps every row; price versus list_price separates real cuts from list-price theatre."}}, {"@type": "Question", "name": "Does it work for marketplaces other than amazon.com?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — 20 of them, by URL or by domain. Use RESIDENTIAL proxies for marketplaces outside the US so the buybox renders; the run picks the right country for you."}}, {"@type": "Question", "name": "What happens with a product that is out of stock?", "acceptedAnswer": {"@type": "Answer", "text": "The row is delivered with availability (e.g. Currently unavailable.), in_stock: false and a null price — unless inStockOnly is on, in which case it is dropped free of charge."}}, {"@type": "Question", "name": "Can I get the product images?", "acceptedAnswer": {"@type": "Answer", "text": "Yes: image is the main image at the highest resolution the page offers, images is the full gallery."}}, {"@type": "Question", "name": "Why is Best Sellers Rank null?", "acceptedAnswer": {"@type": "Answer", "text": "Because the page did not render it for that session. It is never invented. The Best Sellers Scraper is the reliable source for ranks."}}, {"@type": "Question", "name": "Can I feed it from a keyword search or a chart?", "acceptedAnswer": {"@type": "Answer", "text": "That is the intended flow: the Amazon Search Scraper and the Best Sellers Scraper both emit asin columns; paste them into asins here for full details, then into the Reviews Scraper for the review text."}}, {"@type": "Question", "name": "Is there a free tier?", "acceptedAnswer": {"@type": "Answer", "text": "Apify's free plan includes monthly platform credit; the per-row price applies on top. Filtered rows, duplicates and unknown ASINs never cost anything."}}]}</script>
+</head>
+<body>
+<header class="site">
+<a class="brand" href="index.html">kestrel actors <span>docs</span></a>
+<nav><a href="index.html">All actors</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a> <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>Code examples</a></nav>
+</header>
+<main>
+
+<article>
+<p class="crumb"><a href="index.html">kestrel actors</a> › Ecommerce</p>
+<h1>Amazon Product Scraper — Details, Prices &amp; Availability by ASIN</h1>
+<p class="lede">An <strong>amazon product scraper</strong> that turns any ASIN or product URL into one clean row of <strong>amazon product data</strong>: title, brand, the buybox price and the struck-through list price, currency, the availability line and a stock flag, rating and rating count, the main image and the whole gallery, bullet points, description, category, the product-details tables, seller and Best Sellers Rank when the page shows it. It is an <strong>amazon price scraper</strong>, an <strong>amazon asin lookup</strong> and an <strong>amazon stock checker</strong> in one call, across 20 marketplaces — the <strong>amazon scraper</strong> the rest of the kestrel suite feeds on.</p>
+<p class="cta"><a class="btn" href="https://apify.com/kestrel/amazon-product-scraper" rel=noopener>Run Amazon Product Scraper on Apify →</a></p>
+<h2 id="cost">Amazon product scraper pricing: what one row costs</h2>
+<div class="scroll"><table><thead><tr><th>Event</th><th>What it is</th><th>Price</th><th>Charged for</th></tr></thead><tbody><tr><td><code>product</code></td><td>Product row</td><td>$0.004</td><td>One product's details from its public page: title, brand, buybox price and list price, currency, availability, stock flag, rating, rating count, images, bullet points, description, category, details table, seller and Best Sellers Rank when shown. Products dropped by inStockOnly/maxPrice, unknown ASINs and blocked pages are free.</td></tr></tbody></table></div>
+<p><strong>$0.004 per product row.</strong> Status rows, filtered products, duplicates, unknown ASINs and blocked pages are free. A daily check over 500 ASINs is $2 a day; the same check with <code>inStockOnly</code> on a catalogue where half the listings are dead is $1. Platform usage (compute and proxy) is billed separately at Apify's standard rates and is small — a product page is one request.</p>
+<h2 id="input">Amazon product scraper input reference</h2>
+<p>Every field of <code>Amazon Product Scraper</code>, straight from the actor's input schema.</p>
+<div class="scroll"><table><thead><tr><th>Field</th><th>Type</th><th>Default</th><th>What it does</th></tr></thead><tbody><tr><td><code>asins</code></td><td>array</td><td><code>[]</code></td><td>Amazon ASINs (B0CHWRXH8B) or product URLs from any marketplace (https://www.amazon.de/dp/B09B8V1LZ3). A URL's marketplace is used automatically; bare ASINs use the marketplace below. Each ASIN is fetched and billed once per run.</td></tr><tr><td><code>domain</code></td><td>string</td><td><code>"com"</code></td><td>Amazon marketplace for bare ASINs: com, co.uk, de, fr, it, es, ca, com.au, co.jp, in, com.mx, com.br, nl, se, pl, sa, ae, sg, com.tr, com.be.</td></tr><tr><td><code>inStockOnly</code></td><td>boolean</td><td><code>false</code></td><td>Keep only products whose page says they are in stock. Unavailable and unknown-stock products are dropped before billing, so a stock check across a catalogue costs nothing for the dead listings.</td></tr><tr><td><code>maxPrice</code></td><td>number</td><td><code>0</code></td><td>0 = keep every product. N = keep only products whose buybox price is at or below N in the marketplace's currency; products without a visible price are dropped too. Filtered products are never charged. Range 0-10000000.</td></tr><tr><td><code>sessions</code></td><td>integer</td><td><code>4</code></td><td>How many proxy sessions (egress IPs) run in parallel. More is faster; each is paced separately. Range 1-16.</td></tr><tr><td><code>perIp</code></td><td>number</td><td><code>0.5</code></td><td>Pace for each session. Amazon tolerates about 0.5/s per IP; faster causes captchas, not speed. Range 0.1-2.</td></tr><tr><td><code>proxyConfiguration</code></td><td>object</td><td><code>{"useApifyProxy": true}</code></td><td>Apify Proxy is required: Amazon captchas datacentre traffic that is not rotated; the run detects a captcha and rotates IP. Datacentre proxies are enough for amazon.com. For other marketplaces choose RESIDENTIAL — it is routed through the marketplace's own country automatically, which is what makes the buybox price and stock line appear.</td></tr></tbody></table></div>
+<h3>Example input</h3>
+<pre class="code" data-lang="json"><code>{
+  "asins": ["B0CHWRXH8B", "B09B8V1LZ3", "B0BSHF7WHW"],
+  "domain": "com"
+}</code></pre>
+<pre class="code" data-lang="json"><code>{
+  "asins": ["B0CHWRXH8B", "B09B8V1LZ3", "B0BSHF7WHW"],
+  "inStockOnly": true,
+  "maxPrice": 100
+}</code></pre>
+<h2 id="output">Amazon product scraper output fields</h2>
+<p>Two row types share one dataset: product (one product's details from its public page, charged) and status (per ASIN or URL given, free).</p>
+<p>Dataset views in the Apify Console: <strong>Overview</strong>, <strong>Products</strong>, <strong>Prices</strong>, <strong>Content</strong>, <strong>Run status</strong>.</p>
+<div class="scroll"><table><thead><tr><th>Field</th><th>Type</th><th>What it holds</th></tr></thead><tbody><tr><td><code>type</code></td><td>string</td><td>Row type: product or status.</td></tr><tr><td><code>asin</code></td><td>string</td><td>Amazon's product id.</td></tr><tr><td><code>domain</code></td><td>string</td><td>Marketplace domain suffix, e.g. com, co.uk, de.</td></tr><tr><td><code>marketplace</code></td><td>string</td><td>Marketplace country name.</td></tr><tr><td><code>url</code></td><td>string</td><td>Canonical product URL on that marketplace.</td></tr><tr><td><code>title</code></td><td>string</td><td>Product title as printed.</td></tr><tr><td><code>brand</code></td><td>string</td><td>Brand from the byline ('Visit the … Store' and 'Brand:' prefixes removed).</td></tr><tr><td><code>price</code></td><td>number</td><td>Buybox price as a number. Null when the page shows no buying option (unavailable products, or a marketplace that hides the offer from the caller's location).</td></tr><tr><td><code>price_display</code></td><td>string</td><td>The buybox price exactly as printed, e.g. '$54.99'.</td></tr><tr><td><code>currency</code></td><td>string</td><td>Currency read from the printed price, falling back to the marketplace's currency. Amazon prices in the caller's location's currency, so this can differ from the marketplace.</td></tr><tr><td><code>list_price</code></td><td>number</td><td>The struck-through list price when Amazon shows one.</td></tr><tr><td><code>list_price_display</code></td><td>string</td><td>List price exactly as printed.</td></tr><tr><td><code>availability</code></td><td>string</td><td>The availability line: 'In Stock', 'Only 3 left in stock', 'Currently unavailable.' and so on, in the marketplace's language.</td></tr><tr><td><code>in_stock</code></td><td>boolean</td><td>true/false from the availability wording, else true when a buybox price exists, else null (unknown).</td></tr><tr><td><code>prime</code></td><td>boolean</td><td>Whether the Prime badge is shown on the offer.</td></tr><tr><td><code>rating</code></td><td>number</td><td>Overall star rating (1-5).</td></tr><tr><td><code>ratings_count</code></td><td>integer</td><td>How many ratings the product has in total.</td></tr><tr><td><code>image</code></td><td>string</td><td>Main image URL (highest resolution the page offers).</td></tr><tr><td><code>images</code></td><td>array</td><td>Every gallery image URL, main image first.</td></tr><tr><td><code>features</code></td><td>array</td><td>The bullet points under the title.</td></tr><tr><td><code>description</code></td><td>string</td><td>The product description block as plain text (up to 2,000 characters), null when Amazon renders none.</td></tr><tr><td><code>breadcrumbs</code></td><td>array</td><td>Category path from the breadcrumb bar, top level first. Null on pages without a breadcrumb bar (most amazon.com pages).</td></tr><tr><td><code>category</code></td><td>string</td><td>The last breadcrumb, i.e. the product's own category.</td></tr><tr><td><code>details</code></td><td>object</td><td>The Product information / Technical details / Product overview tables as {label: value}: dimensions, weight, manufacturer, model number, colour, date first available and whatever else the page lists.</td></tr><tr><td><code>bsr</code></td><td>array</td><td>Best Sellers Rank entries [{rank, category}] when the page renders them. Amazon serves the rank to some sessions only, so this is null on many pages.</td></tr><tr><td><code>bsr_top</code></td><td>integer</td><td>The first Best Sellers Rank number (the top-level category), null when not shown.</td></tr><tr><td><code>date_first_available</code></td><td>string</td><td>'Date First Available' from the details table, as printed.</td></tr><tr><td><code>sold_by</code></td><td>string</td><td>The seller line from the buybox, e.g. 'Amazon.com' or 'Amazon Resale and Fulfilled by Amazon'.</td></tr><tr><td><code>variations_count</code></td><td>integer</td><td>How many variations (colours, sizes, models) the listing carries, null when the page has no variation picker.</td></tr><tr><td><code>5_star_pct</code></td><td>integer</td><td>Share of ratings that are 5 stars, when the histogram is shown.</td></tr><tr><td><code>4_star_pct</code></td><td>integer</td><td>Share of 4-star ratings.</td></tr><tr><td><code>3_star_pct</code></td><td>integer</td><td>Share of 3-star ratings.</td></tr><tr><td><code>2_star_pct</code></td><td>integer</td><td>Share of 2-star ratings.</td></tr><tr><td><code>1_star_pct</code></td><td>integer</td><td>Share of 1-star ratings.</td></tr><tr><td><code>status</code></td><td>string</td><td>Status rows: ok, filtered, not_found, blocked, limit or error.</td></tr><tr><td><code>target</code></td><td>string</td><td>Status rows: the ASIN or URL this job was given.</td></tr><tr><td><code>products</code></td><td>integer</td><td>Status rows: 1 when the product row was delivered, else 0.</td></tr><tr><td><code>filtered</code></td><td>integer</td><td>Status rows: 1 when inStockOnly or maxPrice dropped the product, never charged.</td></tr><tr><td><code>duplicates</code></td><td>integer</td><td>Status rows: 1 when another input already covered this product.</td></tr><tr><td><code>error</code></td><td>string</td><td>Status rows: why the product was not delivered, null when it was.</td></tr><tr><td><code>fetched_at</code></td><td>string</td><td>UTC timestamp when the row was fetched.</td></tr></tbody></table></div>
+<h2 id="row">Example row from a real run</h2>
+<p>Taken from the actor's README — this is the shape your dataset holds.</p>
+<pre class="code" data-lang="json"><code>{
+  "type": "product",
+  "asin": "B09B8V1LZ3",
+  "domain": "com",
+  "marketplace": "US",
+  "url": "https://www.amazon.com/dp/B09B8V1LZ3?th=1&amp;psc=1",
+  "title": "Amazon Echo Dot (newest model), Vibrant sounding Alexa speaker, Great for bedrooms, dining rooms and offices, Charcoal",
+  "brand": "Amazon",
+  "price": 54.99,
+  "price_display": "$54.99",
+  "currency": "USD",
+  "list_price": 79.99,
+  "list_price_display": "$79.99",
+  "availability": "In Stock",
+  "in_stock": true,
+  "prime": false,
+  "rating": 4.7,
+  "ratings_count": 198808,
+  "image": "https://m.media-amazon.com/images/I/61J2sQtBYDL._AC_SL1000_.jpg",
+  "images": ["https://m.media-amazon.com/images/I/61J2sQtBYDL._AC_SL1000_.jpg", "https://m.media-amazon.com/images/I/71xoR4A6q-L._AC_SL1500_.jpg"],
+  "features": ["Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small spaces."],
+  "description": null,
+  "breadcrumbs": null,
+  "category": null,
+  "details": null,
+  "bsr": null,
+  "bsr_top": null,
+  "date_first_available": null,
+  "sold_by": null,
+  "variations_count": 3,
+  "5_star_pct": 82,
+  "4_star_pct": 11,
+  "3_star_pct": 4,
+  "2_star_pct": 1,
+  "1_star_pct": 2,
+  "fetched_at": "2026-08-29T10:31:04+00:00"
+}</code></pre>
+<pre class="code" data-lang="json"><code>{ "type": "status", "target": "B0BSHF7WHW", "asin": "B0BSHF7WHW", "domain": "com", "status": "filtered", "products": 0, "filtered": 1, "duplicates": 0, "error": null, "fetched_at": "2026-08-29T10:31:05+00:00" }</code></pre>
+<h2 id="code">Amazon product scraper in Python, JavaScript and curl</h2>
+<h3>Python</h3><pre class="code" data-lang="python"><code>from apify_client import ApifyClient
+
+client = ApifyClient("&lt;YOUR_APIFY_TOKEN&gt;")
+run = client.actor("kestrel/amazon-product-scraper").call(run_input={
+    "asins": ["B0CHWRXH8B", "B09B8V1LZ3"],
+    "domain": "com",
+    "inStockOnly": True,
+})
+rows = [r for r in client.dataset(run["defaultDatasetId"]).iterate_items() if r["type"] == "product"]
+for r in rows:
+    print(r["asin"], r["price_display"], r["availability"], r["rating"], r["ratings_count"])</code></pre>
+<h3>JavaScript (Node)</h3><pre class="code" data-lang="javascript"><code>import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: '&lt;YOUR_APIFY_TOKEN&gt;' });
+const run = await client.actor('kestrel/amazon-product-scraper').call({
+    asins: ['B09B8V1LZ3', 'https://www.amazon.co.uk/dp/B09B8V1LZ3'],
+    proxyConfiguration: { useApifyProxy: true, apifyProxyGroups: ['RESIDENTIAL'] },
+});
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.table(items.filter(r =&gt; r.type === 'product').map(r =&gt; ({ asin: r.asin, marketplace: r.marketplace, price: r.price_display, inStock: r.in_stock })));</code></pre>
+<h3>curl</h3><pre class="code" data-lang="bash"><code>curl -X POST "https://api.apify.com/v2/acts/kestrel~amazon-product-scraper/run-sync-get-dataset-items?token=&lt;YOUR_APIFY_TOKEN&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"asins": ["B0CHWRXH8B"], "domain": "com"}'</code></pre>
+<p>The same three calls are runnable files in the examples repository: <a href="https://github.com/mtedj/kestrel-actors-examples/tree/main/examples" rel=noopener>examples/amazon-product-scraper.py|.js|.sh</a>.</p>
+<h2 id="limits">Limits and honest notes</h2>
+<div class="limits"><ul><li><strong>One request per product.</strong> Ten ASINs is ten page fetches; a thousand is a thousand, paced at about one every two seconds per session, so four sessions do a thousand products in roughly eight minutes.</li><li><strong>Captchas happen.</strong> The site challenges repeat visitors from the same IP. The client detects the captcha page, rotates to a fresh IP and retries up to eight times; a product that is still blocked after that is reported <code>blocked</code> in its status row and never billed.</li><li><strong>Cheap proxies first, residential only when the site pushes back.</strong> A run starts on the proxies you chose — datacentre is the cheapest — and rotates to a fresh IP on a captcha or a 503. When the same page is refused twice in a row that is the IP range being blocked, not the page, so the run stops trusting that pool: its sessions re-open on a residential proxy and stay there for the rest of the run. Nothing to configure, no run has to fail to teach it, and a run that is never refused never leaves the cheap pool — so a run costs the least that still succeeds. The run's SUMMARY reports it as <code>http.escalated</code>. Residential sessions keep the marketplace routing, so the buybox stays the one a local shopper sees.</li><li><strong>A 404 is an answer.</strong> An unknown ASIN is reported <code>not_found</code> after one attempt, not after five rotations.</li><li><strong>The buybox can hide.</strong> For marketplaces outside the US, a datacentre egress sometimes gets a page with no offer. Choose RESIDENTIAL in <code>proxyConfiguration</code> and the run routes through the marketplace's own country, which is what the verified <code>co.uk</code> run used.</li><li><strong>Language follows the marketplace.</strong> <code>availability</code> and <code>details</code> labels come back in the site's language; <code>in_stock</code> normalises the common wordings, <code>details</code> keys do not.</li></ul></div>
+<h2 id="faq">FAQ</h2>
+<h3>Does it need an Amazon API key or login?</h3><p>No. There is no key and no account. The Product Advertising API needs an approved associate account and rate-limits by sales; this reads the page instead.</p>
+<h3>Can I look up an ASIN and get the price only?</h3><p>Yes. Every row has <code>price</code>, <code>price_display</code>, <code>list_price</code> and <code>currency</code>; the <strong>Prices</strong> view shows nothing else. That is the <strong>amazon asin lookup</strong> most people want.</p>
+<h3>How do I track prices over time?</h3><p>Schedule the run (daily is typical), keep the rows, and group by <code>asin</code>. <code>fetched_at</code> timestamps every row; <code>price</code> versus <code>list_price</code> separates real cuts from list-price theatre.</p>
+<h3>Does it work for marketplaces other than amazon.com?</h3><p>Yes — 20 of them, by URL or by <code>domain</code>. Use RESIDENTIAL proxies for marketplaces outside the US so the buybox renders; the run picks the right country for you.</p>
+<h3>What happens with a product that is out of stock?</h3><p>The row is delivered with <code>availability</code> (e.g. <code>Currently unavailable.</code>), <code>in_stock: false</code> and a null <code>price</code> — unless <code>inStockOnly</code> is on, in which case it is dropped free of charge.</p>
+<h3>Can I get the product images?</h3><p>Yes: <code>image</code> is the main image at the highest resolution the page offers, <code>images</code> is the full gallery.</p>
+<h3>Why is Best Sellers Rank null?</h3><p>Because the page did not render it for that session. It is never invented. The Best Sellers Scraper is the reliable source for ranks.</p>
+<h3>Can I feed it from a keyword search or a chart?</h3><p>That is the intended flow: the <strong><a href="amazon-search.html">Amazon Search Scraper</a></strong> and the Best Sellers Scraper both emit <code>asin</code> columns; paste them into <code>asins</code> here for full details, then into the Reviews Scraper for the review text.</p>
+<h3>Is there a free tier?</h3><p>Apify's free plan includes monthly platform credit; the per-row price applies on top. Filtered rows, duplicates and unknown ASINs never cost anything.</p>
+<h2 id="related">Related scrapers</h2><ul class="related">
+<li><strong><a href="amazon-search.html">Amazon Search Scraper</a></strong> — keyword results with sponsored placements flagged; its <code>asin</code> column is the natural input here.</li>
+<li><strong><a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a></strong> — the Top 100 of any category with every rank filled.</li>
+<li><strong><a href="amazon-reviews.html">Amazon Reviews Scraper</a></strong> — the review text behind <code>rating</code> and <code>ratings_count</code>.</li>
+</ul>
+<h2 id="run">Run Amazon Product Scraper</h2>
+<p>The actor lives on the Apify Store, where the pricing tab carries the live per-row price and the input form has every field above: <a class="btn" href="https://apify.com/kestrel/amazon-product-scraper" rel=noopener>apify.com/kestrel/amazon-product-scraper</a></p>
+</article></main>
+<footer>
+<h2>All kestrel actors</h2>
+<div class="fgroup"><h3>Hotel &amp; flight prices</h3><p><a href="google-hotels.html">Google Hotels Prices Scraper</a> · <a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a> · <a href="hotel-price-tracker.html">Hotel Price Tracker</a> · <a href="booking-prices.html">Booking.com Scraper</a> · <a href="agoda-prices.html">Agoda Prices Scraper</a> · <a href="airbnb-prices-calendar.html">Airbnb Scraper</a> · <a href="airbnb-occupancy.html">Airbnb Occupancy Rate Scraper</a> · <a href="google-flights.html">Google Flights Scraper</a> · <a href="flight-price-tracker.html">Flight Price Tracker</a></p></div><div class="fgroup"><h3>Guest &amp; customer reviews</h3><p><a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> · <a href="tripadvisor-restaurant-reviews.html">TripAdvisor Restaurant Reviews Scraper</a> · <a href="booking-reviews.html">Booking.com Reviews Scraper</a> · <a href="agoda-reviews.html">Agoda Reviews Scraper</a> · <a href="airbnb-reviews.html">Airbnb Reviews Scraper</a> · <a href="hrs-reviews.html">HRS Reviews Scraper</a> · <a href="tripcom-reviews.html">Trip.com Reviews Scraper</a> · <a href="kurzurlaub-reviews.html">Kurzurlaub Reviews Scraper</a> · <a href="hostelworld-reviews.html">Hostelworld Reviews Scraper</a> · <a href="zoover-reviews.html">Zoover Reviews Scraper</a> · <a href="despegar-ratings.html">Despegar Hotel Ratings Scraper</a> · <a href="trustpilot-reviews.html">Trustpilot Reviews Scraper</a> · <a href="indeed-reviews.html">Indeed Company Reviews Scraper</a></p></div><div class="fgroup"><h3>Ecommerce</h3><p><strong>Amazon Product Scraper</strong> · <a href="amazon-search.html">Amazon Search Scraper</a> · <a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a> · <a href="amazon-reviews.html">Amazon Reviews Scraper</a> · <a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a> · <a href="ebay-search.html">eBay Scraper</a></p></div><div class="fgroup"><h3>Apps</h3><p><a href="app-store-reviews.html">Apple App Store Reviews Scraper</a> · <a href="google-play-reviews.html">Google Play Reviews Scraper</a></p></div>
+<p class="fine">Documentation for the <a href="https://apify.com/kestrel" rel=noopener>kestrel</a> actors on the Apify Store. Every page is built from the actor's own README and its input, output and pay-per-event schemas. Runnable examples live in the <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>examples repository</a>. Last updated 2026-08-29.</p>
+</footer>
+</body>
+</html>

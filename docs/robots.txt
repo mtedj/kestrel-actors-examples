@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mtedj.github.io/kestrel-actors-examples/sitemap.xml

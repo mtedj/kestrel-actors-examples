@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kurzurlaub Reviews Scraper — Hotelbewertungen · Docs</title>
+<meta name="description" content="Kurzurlaub reviews scraper docs: every input and output field, a real review row, and Python, JavaScript and curl examples.">
+<link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/kurzurlaub-reviews.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kurzurlaub Reviews Scraper — Hotelbewertungen · Docs">
+<meta property="og:description" content="Kurzurlaub reviews scraper docs: every input and output field, a real review row, and Python, JavaScript and curl examples.">
+<meta property="og:url" content="https://mtedj.github.io/kestrel-actors-examples/kurzurlaub-reviews.html">
+<meta property="og:site_name" content="kestrel actors documentation">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Kurzurlaub Reviews Scraper — Hotel- & Gästebewertungen", "description": "Every guest rating of any Kurzurlaub.de hotel: score on the 1-6 scale (6 is best), the per-area scores for rooms, service, food, leisure, location and value, title, comment when the guest wrote one, reviewer and date. Give Kurzurlaub hotel URLs or ids. Pay per rating row; filtered rows are free.", "applicationCategory": "BusinessApplication", "applicationSubCategory": "Web scraping", "operatingSystem": "Cloud (Apify platform)", "url": "https://mtedj.github.io/kestrel-actors-examples/kurzurlaub-reviews.html", "sameAs": "https://apify.com/kestrel/kurzurlaub-reviews-scraper", "softwareHelp": "https://mtedj.github.io/kestrel-actors-examples/kurzurlaub-reviews.html", "author": {"@type": "Organization", "name": "kestrel", "url": "https://apify.com/kestrel"}, "offers": {"@type": "Offer", "price": "0.003", "priceCurrency": "USD", "name": "Rating row", "description": "One guest rating: overall score on Kurzurlaub's 1-6 scale, the per-area scores the guest gave, title, comment when there is one, reviewer and date. Hotels with no ratings are free."}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it need a Kurzurlaub API key or login?", "acceptedAnswer": {"@type": "Answer", "text": "No. It loads the same ratings fragment the site's own \"Alle Bewertungen\" button loads. There is no public API for kurzurlaub bewertungen, and this is how to get kurzurlaub reviews without api access."}}, {"@type": "Question", "name": "Can I download Kurzurlaub reviews as CSV or Excel?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every run writes an Apify dataset; open the Ratings view and export it as CSV, Excel, JSON or XML, or fetch it from the API with ?format=csv."}}, {"@type": "Question", "name": "How do I get only Kurzurlaub negative reviews?", "acceptedAnswer": {"@type": "Answer", "text": "Set maxScore to 4 (or whatever your threshold is). Only the low ratings are delivered and billed; the site orders ratings newest first, so pair it with sinceDate for a rolling feed."}}, {"@type": "Question", "name": "What does the 1–6 score mean?", "acceptedAnswer": {"@type": "Answer", "text": "The site scores on a six-point scale where 6 is the best (\"Exzellent\" starts around 5.5, \"Sehr gut\" around 5) and 1 is the worst. It is points, not German school grades — do not invert it. rating_word on the hotel row is the site's own label for the property's average."}}, {"@type": "Question", "name": "Do I need the hotel id, or can I use the URL?", "acceptedAnswer": {"@type": "Answer", "text": "Either. A URL is read once for the id and the hotel's details; the id skips that read. The id is also hotel_id on every row, so a first run by URL gives you the ids for every run after."}}, {"@type": "Question", "name": "How many ratings can one hotel return?", "acceptedAnswer": {"@type": "Answer", "text": "All of them — set maxReviewsPerHotel to 0. The actor walks the site's pages, newest first, until the last one and dedupes by review_id."}}, {"@type": "Question", "name": "Are the reviews in German?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as written: titles, comments and the site's own labels are German. The row structure, the area keys and the status words are English, so the dataset slots into an English pipeline without translation."}}, {"@type": "Question", "name": "Does it include the hotel's replies?", "acceptedAnswer": {"@type": "Answer", "text": "No — the site does not publish hotel replies on the ratings it lists, so there is nothing to scrape. Trip.com and Agoda do; see the related actors below."}}, {"@type": "Question", "name": "Can I use it as a general hotel review aggregator?", "acceptedAnswer": {"@type": "Answer", "text": "For the German short-break market, yes. For a true hotel review aggregator across OTAs, pair it with the Agoda, Trip.com and Airbnb review scrapers below — the rows share the same shape, so one table holds all four."}}, {"@type": "Question", "name": "What does bulk work cost?", "acceptedAnswer": {"@type": "Answer", "text": "$0.003 per rating, nothing else from the actor. 10,000 ratings is $30. See the cost section above for the platform-usage note."}}, {"@type": "Question", "name": "Why does a run report fewer ratings than the site's total?", "acceptedAnswer": {"@type": "Answer", "text": "total is what the site states for the property; reviews is what you asked for and kept. maxReviewsPerHotel, maxScore, minScore and sinceDate all reduce the delivered count, and filtered on the status row says how many rows the filters removed."}}]}</script>
+</head>
+<body>
+<header class="site">
+<a class="brand" href="index.html">kestrel actors <span>docs</span></a>
+<nav><a href="index.html">All actors</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a> <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>Code examples</a></nav>
+</header>
+<main>
+
+<article>
+<p class="crumb"><a href="index.html">kestrel actors</a> › Guest &amp; customer reviews</p>
+<h1>Kurzurlaub Reviews Scraper — Hotel- &amp; Gästebewertungen</h1>
+<p class="lede">A <strong>kurzurlaub reviews scraper</strong> that returns every guest rating a hotel has on Kurzurlaub.de, as structured rows: the overall score on the site's 1–6 scale (6 is the best), the per-area scores the guest gave for the hotel, rooms, service, food, leisure, location and value, the title, the comment when the guest wrote one, the reviewer's first name and the date. <strong>Hotelbewertungen</strong> and <strong>gästebewertungen</strong> are what the site calls them; this turns <strong>kurzurlaub hotel reviews</strong> into <strong>hotel review data</strong> you can sort, filter and export — a <strong>hotel review scraper</strong> for the German short-break market, built for bulk work rather than one page at a time. If you have been searching for <strong>kurzurlaub bewertungen</strong> as a dataset instead of a web page, this is it.</p>
+<p class="cta"><a class="btn" href="https://apify.com/kestrel/kurzurlaub-reviews-scraper" rel=noopener>Run Kurzurlaub Reviews Scraper on Apify →</a></p>
+<h2 id="cost">Kurzurlaub reviews scraper pricing: what one row costs</h2>
+<div class="scroll"><table><thead><tr><th>Event</th><th>What it is</th><th>Price</th><th>Charged for</th></tr></thead><tbody><tr><td><code>review</code></td><td>Rating row</td><td>$0.003</td><td>One guest rating: overall score on Kurzurlaub's 1-6 scale, the per-area scores the guest gave, title, comment when there is one, reviewer and date. Hotels with no ratings are free.</td></tr></tbody></table></div>
+<p><strong>$0.003 per rating row.</strong> Hotel rows, status rows, filtered ratings, hotels with no ratings, unknown ids and failed hotels are free. A 205-rating property costs $0.62 in full; the same property as a daily complaints feed costs a fraction of a cent per day. Apify's platform usage (a second or two of compute per hotel) is separate and small: the verified runs below used well under a cent each.</p>
+<p><strong>Bulk hotel reviews</strong> at scale: 3,000 hotels × 100 newest ratings = 300,000 rows = $900, delivered in an afternoon with 16 sessions. The pocket's other actor charges about the same per row; the difference is the per-area scores, the date stop and what you never pay for.</p>
+<h2 id="input">Kurzurlaub reviews scraper input reference</h2>
+<p>Every field of <code>Kurzurlaub Reviews</code>, straight from the actor's input schema.</p>
+<div class="scroll"><table><thead><tr><th>Field</th><th>Type</th><th>Default</th><th>What it does</th></tr></thead><tbody><tr><td><code>startUrls</code></td><td>array</td><td><code>[]</code></td><td>Kurzurlaub.de hotel pages, e.g. https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html — the page is read once for the hotel's id, name, stars and address.</td></tr><tr><td><code>hotelIds</code></td><td>array</td><td><code>[]</code></td><td>Kurzurlaub's numeric hotel ids (the <code>o_id</code> of the ratings modal), e.g. 15699 — what an earlier run's hotel_id gives you. Skips the page read.</td></tr><tr><td><code>maxReviewsPerHotel</code></td><td>integer</td><td><code>200</code></td><td>0 = every rating the hotel has (Kurzurlaub pages them 10-20 at a time, newest first). N = the newest N. The main cost control. Range 0-20000.</td></tr><tr><td><code>maxScore</code></td><td>number</td><td><code>0</code></td><td>0 = keep every rating. 1-6 = keep only ratings at or below it — the complaints feed (a 4 is a middling stay on Kurzurlaub's scale; 6 is the best). Filtered ratings are never charged. Range 0-6.</td></tr><tr><td><code>minScore</code></td><td>number</td><td><code>0</code></td><td>0 = keep every rating. 1-6 = keep only ratings at or above it — the praise feed. Combine with maxScore for a band. Filtered ratings are never charged. Range 0-6.</td></tr><tr><td><code>sinceDate</code></td><td>string</td><td><code>""</code></td><td>Empty = no date limit. YYYY-MM-DD, or relative so schedules never go stale: "30 days", "6 weeks", "3 months". Ratings come newest first, so paging stops as soon as the date is passed and older ratings are never fetched or charged.</td></tr><tr><td><code>includeHotelRow</code></td><td>boolean</td><td><code>true</code></td><td>Also emit one row per hotel with its id, name, stars, address, overall score and word, review count and the per-area averages. Never charged.</td></tr><tr><td><code>sessions</code></td><td>integer</td><td><code>2</code></td><td>How many proxy sessions (egress IPs) run in parallel. More is faster; each is paced separately. Range 1-16.</td></tr><tr><td><code>perIp</code></td><td>number</td><td><code>1</code></td><td>Pace for each session. Kurzurlaub answered 10 of 10 requests at 1/s from one IP in testing; 1/s per IP is the default. Range 0.1-3.</td></tr><tr><td><code>proxyConfiguration</code></td><td>object</td><td><code>{"useApifyProxy": true}</code></td><td>Apify Proxy so runs rotate IPs. The default datacenter group is enough for Kurzurlaub.</td></tr></tbody></table></div>
+<h3>Example input</h3>
+<pre class="code" data-lang="json"><code>{
+  "startUrls": ["https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html"],
+  "maxReviewsPerHotel": 0,
+  "maxScore": 4,
+  "sinceDate": "30 days"
+}</code></pre>
+<pre class="code" data-lang="json"><code>{
+  "hotelIds": ["15699", "5382", "9813"],
+  "maxReviewsPerHotel": 0
+}</code></pre>
+<h2 id="output">Kurzurlaub reviews scraper output fields</h2>
+<p>One row per guest rating (charged), plus a free hotel context row and a free status row per property.</p>
+<p>Dataset views in the Apify Console: <strong>Overview</strong>, <strong>Ratings</strong>, <strong>Low scores</strong>, <strong>Hotels</strong>, <strong>Run status</strong>.</p>
+<div class="scroll"><table><thead><tr><th>Field</th><th>Type</th><th>What it holds</th></tr></thead><tbody><tr><td><code>type</code></td><td>string</td><td>Row type: review, hotel or status.</td></tr><tr><td><code>hotel_id</code></td><td>string</td><td>Kurzurlaub's numeric hotel id (its o_id).</td></tr><tr><td><code>hotel_name</code></td><td>string</td><td>Hotel name.</td></tr><tr><td><code>url</code></td><td>string</td><td>The Kurzurlaub hotel page, when the run was given one.</td></tr><tr><td><code>stars</code></td><td>integer</td><td>Hotel rows: star class (Hotelstars Union).</td></tr><tr><td><code>street</code></td><td>string</td><td>Hotel rows: street address (when the hotel page was read).</td></tr><tr><td><code>postal_code</code></td><td>string</td><td>Hotel rows: postal code.</td></tr><tr><td><code>city</code></td><td>string</td><td>Hotel rows: town.</td></tr><tr><td><code>region</code></td><td>string</td><td>Hotel rows: Kurzurlaub's holiday region, e.g. Rhein / Lahn / Taunus.</td></tr><tr><td><code>country</code></td><td>string</td><td>Hotel rows: country, in German (Deutschland, Österreich, Italien…).</td></tr><tr><td><code>rating</code></td><td>number</td><td>Hotel rows: the property's overall score, 1-6 (6 is best).</td></tr><tr><td><code>rating_word</code></td><td>string</td><td>Hotel rows: Kurzurlaub's word for the overall score (Exzellent, Sehr gut, Gut…).</td></tr><tr><td><code>review_count</code></td><td>integer</td><td>Hotel rows: how many ratings the property has.</td></tr><tr><td><code>category_averages</code></td><td>object</td><td>Hotel rows: the property's per-area averages — hotel, room, service, food, leisure, location, value — each 1-6.</td></tr><tr><td><code>price_range</code></td><td>string</td><td>Hotel rows: the price range of the hotel's current offers, as the page states it.</td></tr><tr><td><code>reviews_fetched</code></td><td>integer</td><td>Hotel rows: how many ratings were taken for the property.</td></tr><tr><td><code>review_id</code></td><td>string</td><td>A stable id for the rating (Kurzurlaub gives ratings none; this is a hash of hotel, date, score, title, reviewer and comment — use it to dedupe scheduled runs).</td></tr><tr><td><code>score</code></td><td>number</td><td>The guest's overall score, 1-6 (6 is best).</td></tr><tr><td><code>category_scores</code></td><td>object</td><td>The per-area scores the guest gave — overall, hotel, room, service, food, leisure, location, value — only the areas rated appear.</td></tr><tr><td><code>title</code></td><td>string</td><td>The rating's title, as the guest wrote it (German).</td></tr><tr><td><code>text</code></td><td>string</td><td>The guest's comment, when there is one. Many Kurzurlaub ratings are a title and scores only.</td></tr><tr><td><code>reviewer</code></td><td>string</td><td>The guest's first name, or Gast when the guest stayed anonymous.</td></tr><tr><td><code>review_date</code></td><td>string</td><td>Date of the rating (YYYY-MM-DD).</td></tr><tr><td><code>target</code></td><td>string</td><td>Status rows: the input this row is about.</td></tr><tr><td><code>status</code></td><td>string</td><td>Status rows: ok, no_reviews or error.</td></tr><tr><td><code>reviews</code></td><td>integer</td><td>Status rows: rating rows delivered for the property.</td></tr><tr><td><code>filtered</code></td><td>integer</td><td>Status rows: ratings dropped by maxScore / minScore / sinceDate (never charged).</td></tr><tr><td><code>pages</code></td><td>integer</td><td>Status rows: rating pages read.</td></tr><tr><td><code>total</code></td><td>integer</td><td>Status rows: how many ratings Kurzurlaub shows for the property.</td></tr><tr><td><code>duplicates</code></td><td>integer</td><td>Status rows: 1 when this input pointed at a property already harvested in the run.</td></tr><tr><td><code>error</code></td><td>string</td><td>Status rows: why the property failed, if it did.</td></tr><tr><td><code>fetched_at</code></td><td>string</td><td>When the row was fetched (UTC, ISO 8601).</td></tr></tbody></table></div>
+<h2 id="row">Example row from a real run</h2>
+<p>Taken from the actor's README — this is the shape your dataset holds.</p>
+<pre class="code" data-lang="json"><code>{
+  "type": "review",
+  "review_id": "0c7efb112a9c5d7d",
+  "hotel_id": "5382",
+  "hotel_name": "Astralis Hotel Domizil",
+  "url": "https://www.kurzurlaub.de/hotel/unterer_neckar/walldorf_neckar/astralis-hotel-domizil-walldorf.html",
+  "score": 5.7,
+  "category_scores": {"hotel": 6.0, "room": 6.0, "service": 6.0, "food": 5.3, "leisure": 6.0, "location": 5.0},
+  "title": "Heidelberg - Ich hab mein Herz verloren... - 2 Tage",
+  "text": "Es war alles super 👍",
+  "reviewer": "Elke",
+  "review_date": "2026-08-24",
+  "fetched_at": "2026-08-29T10:20:00+00:00"
+}</code></pre>
+<pre class="code" data-lang="json"><code>{
+  "type": "hotel",
+  "hotel_id": "5382",
+  "hotel_name": "Astralis Hotel Domizil",
+  "url": "https://www.kurzurlaub.de/hotel/unterer_neckar/walldorf_neckar/astralis-hotel-domizil-walldorf.html",
+  "stars": 4,
+  "street": "Schwetzinger Str. 50",
+  "postal_code": "69190",
+  "city": "Walldorf",
+  "region": "Unterer Neckar",
+  "country": "Deutschland",
+  "rating": 5.2,
+  "rating_word": "Sehr gut",
+  "review_count": 289,
+  "category_averages": {"hotel": 5.3, "room": 5.2, "service": 5.4, "food": 5.2, "leisure": 4.8, "location": 5.4},
+  "price_range": "79,00 EUR - 578,00 EUR",
+  "reviews_fetched": 289,
+  "fetched_at": "2026-08-29T10:20:00+00:00"
+}</code></pre>
+<h2 id="code">Kurzurlaub reviews scraper in Python, JavaScript and curl</h2>
+<h3>Python</h3><pre class="code" data-lang="python"><code>from apify_client import ApifyClient
+
+client = ApifyClient("&lt;YOUR_APIFY_TOKEN&gt;")
+run = client.actor("kestrel/kurzurlaub-reviews-scraper").call(run_input={
+    "hotelIds": ["15699"],
+    "maxReviewsPerHotel": 0,
+    "maxScore": 4,
+})
+for row in client.dataset(run["defaultDatasetId"]).iterate_items():
+    if row["type"] == "review":
+        print(row["score"], row["review_date"], row["title"], row["category_scores"])</code></pre>
+<h3>JavaScript (Node)</h3><pre class="code" data-lang="javascript"><code>import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: '&lt;YOUR_APIFY_TOKEN&gt;' });
+const run = await client.actor('kestrel/kurzurlaub-reviews-scraper').call({
+    startUrls: ['https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html'],
+    maxReviewsPerHotel: 200,
+    sinceDate: '90 days',
+});
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+const ratings = items.filter((r) =&gt; r.type === 'review');
+console.log(ratings.length, 'ratings; with a comment:', ratings.filter((r) =&gt; r.text).length);</code></pre>
+<h3>curl</h3><pre class="code" data-lang="bash"><code>curl -X POST "https://api.apify.com/v2/acts/kestrel~kurzurlaub-reviews-scraper/run-sync-get-dataset-items?token=&lt;YOUR_APIFY_TOKEN&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"hotelIds": ["15699"], "maxReviewsPerHotel": 50}'</code></pre>
+<p>The same three calls are runnable files in the examples repository: <a href="https://github.com/mtedj/kestrel-actors-examples/tree/main/examples" rel=noopener>examples/kurzurlaub-reviews-scraper.py|.js|.sh</a>.</p>
+<h2 id="limits">Limits and honest notes</h2>
+<div class="limits"><ul><li>Many ratings on the site are a title and scores only. <code>text</code> is filled when the guest wrote a comment and <code>null</code> when not; the actor does not invent prose. Do not expect every row to carry a paragraph.</li><li>The site gives ratings no id. <code>review_id</code> is a stable hash of hotel, date, score, title, reviewer and comment, so the same rating hashes the same on every run; two identical anonymous ratings on the same day would collapse into one row.</li><li>Pages carry 10 to 20 ratings depending on the property. The actor follows the site's own "next" link until it runs out, so it never guesses page counts.</li><li>A page that is not a ratings fragment (an error page, an empty answer) is retried on a fresh IP with backoff, and the hotel is reported as <code>error</code> if every attempt fails. It is never reported as <code>no_reviews</code>, because a false "no reviews" corrupts your dataset silently while a false error costs one retry.</li><li>An unknown id is reported as an error on its status row, free, without retrying. A hotel page with no ratings block is a hotel with no ratings: <code>no_reviews</code>, <code>total: 0</code>, free.</li><li>The site is German. Titles, comments, rating words and region names come back in German; the column names and the area keys in <code>category_scores</code> are English.</li><li>The star class is the Hotelstars Union rating the site displays; a few properties carry none.</li></ul></div>
+<h2 id="faq">FAQ</h2>
+<h3>Does it need a Kurzurlaub API key or login?</h3><p>No. It loads the same ratings fragment the site's own "Alle Bewertungen" button loads. There is no public API for <strong>kurzurlaub bewertungen</strong>, and this is how to get <strong>kurzurlaub reviews without api</strong> access.</p>
+<h3>Can I download Kurzurlaub reviews as CSV or Excel?</h3><p>Yes. Every run writes an Apify dataset; open the <strong>Ratings</strong> view and export it as CSV, Excel, JSON or XML, or fetch it from the API with <code>?format=csv</code>.</p>
+<h3>How do I get only Kurzurlaub negative reviews?</h3><p>Set <code>maxScore</code> to <code>4</code> (or whatever your threshold is). Only the low ratings are delivered and billed; the site orders ratings newest first, so pair it with <code>sinceDate</code> for a rolling feed.</p>
+<h3>What does the 1–6 score mean?</h3><p>The site scores on a six-point scale where <strong>6 is the best</strong> ("Exzellent" starts around 5.5, "Sehr gut" around 5) and 1 is the worst. It is points, not German school grades — do not invert it. <code>rating_word</code> on the hotel row is the site's own label for the property's average.</p>
+<h3>Do I need the hotel id, or can I use the URL?</h3><p>Either. A URL is read once for the id and the hotel's details; the id skips that read. The id is also <code>hotel_id</code> on every row, so a first run by URL gives you the ids for every run after.</p>
+<h3>How many ratings can one hotel return?</h3><p>All of them — set <code>maxReviewsPerHotel</code> to <code>0</code>. The actor walks the site's pages, newest first, until the last one and dedupes by <code>review_id</code>.</p>
+<h3>Are the reviews in German?</h3><p>Yes, as written: titles, comments and the site's own labels are German. The row structure, the area keys and the status words are English, so the dataset slots into an English pipeline without translation.</p>
+<h3>Does it include the hotel's replies?</h3><p>No — the site does not publish hotel replies on the ratings it lists, so there is nothing to scrape. Trip.com and Agoda do; see the related actors below.</p>
+<h3>Can I use it as a general hotel review aggregator?</h3><p>For the German short-break market, yes. For a true <strong>hotel review aggregator</strong> across OTAs, pair it with the Agoda, Trip.com and Airbnb review scrapers below — the rows share the same shape, so one table holds all four.</p>
+<h3>What does bulk work cost?</h3><p>$0.003 per rating, nothing else from the actor. 10,000 ratings is $30. See the cost section above for the platform-usage note.</p>
+<h3>Why does a run report fewer ratings than the site's total?</h3><p><code>total</code> is what the site states for the property; <code>reviews</code> is what you asked for and kept. <code>maxReviewsPerHotel</code>, <code>maxScore</code>, <code>minScore</code> and <code>sinceDate</code> all reduce the delivered count, and <code>filtered</code> on the status row says how many rows the filters removed.</p>
+<h2 id="related">Related scrapers</h2><ul class="related">
+<li><strong><a href="zoover-reviews.html">Zoover Reviews Scraper</a></strong> — Dutch and German holiday reviews from Zoover, with per-aspect scores and the owner's reply.</li>
+<li><strong><a href="agoda-reviews.html">Agoda Reviews Scraper</a></strong> — Agoda hotel reviews with separate positives and negatives, by hotel name, URL or id.</li>
+<li><strong><a href="tripcom-reviews.html">Trip.com Reviews Scraper</a></strong> — Trip.com and Ctrip hotel reviews with four sub-scores and the hotel's replies.</li>
+<li><strong><a href="airbnb-reviews.html">Airbnb Reviews Scraper</a></strong> — every guest review of an Airbnb listing.</li>
+<li><strong><a href="google-hotels.html">Google Hotels Prices Scraper</a></strong> — hotel prices and every booking site's rate for a stay.</li>
+<li><strong><a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a></strong> — one row per hotel with every OTA's rate side by side and the parity math done.</li>
+</ul>
+<h2 id="run">Run Kurzurlaub Reviews Scraper</h2>
+<p>The actor lives on the Apify Store, where the pricing tab carries the live per-row price and the input form has every field above: <a class="btn" href="https://apify.com/kestrel/kurzurlaub-reviews-scraper" rel=noopener>apify.com/kestrel/kurzurlaub-reviews-scraper</a></p>
+</article></main>
+<footer>
+<h2>All kestrel actors</h2>
+<div class="fgroup"><h3>Hotel &amp; flight prices</h3><p><a href="google-hotels.html">Google Hotels Prices Scraper</a> · <a href="hotel-rate-parity.html">Hotel Rate Parity Checker</a> · <a href="hotel-price-tracker.html">Hotel Price Tracker</a> · <a href="booking-prices.html">Booking.com Scraper</a> · <a href="agoda-prices.html">Agoda Prices Scraper</a> · <a href="airbnb-prices-calendar.html">Airbnb Scraper</a> · <a href="airbnb-occupancy.html">Airbnb Occupancy Rate Scraper</a> · <a href="google-flights.html">Google Flights Scraper</a> · <a href="flight-price-tracker.html">Flight Price Tracker</a></p></div><div class="fgroup"><h3>Guest &amp; customer reviews</h3><p><a href="tripadvisor-reviews.html">TripAdvisor Reviews Scraper</a> · <a href="tripadvisor-restaurant-reviews.html">TripAdvisor Restaurant Reviews Scraper</a> · <a href="booking-reviews.html">Booking.com Reviews Scraper</a> · <a href="agoda-reviews.html">Agoda Reviews Scraper</a> · <a href="airbnb-reviews.html">Airbnb Reviews Scraper</a> · <a href="hrs-reviews.html">HRS Reviews Scraper</a> · <a href="tripcom-reviews.html">Trip.com Reviews Scraper</a> · <strong>Kurzurlaub Reviews Scraper</strong> · <a href="hostelworld-reviews.html">Hostelworld Reviews Scraper</a> · <a href="zoover-reviews.html">Zoover Reviews Scraper</a> · <a href="despegar-ratings.html">Despegar Hotel Ratings Scraper</a> · <a href="trustpilot-reviews.html">Trustpilot Reviews Scraper</a> · <a href="indeed-reviews.html">Indeed Company Reviews Scraper</a></p></div><div class="fgroup"><h3>Ecommerce</h3><p><a href="amazon-product.html">Amazon Product Scraper</a> · <a href="amazon-search.html">Amazon Search Scraper</a> · <a href="amazon-best-sellers.html">Amazon Best Sellers Scraper</a> · <a href="amazon-reviews.html">Amazon Reviews Scraper</a> · <a href="aliexpress-reviews.html">AliExpress Reviews Scraper</a> · <a href="ebay-search.html">eBay Scraper</a></p></div><div class="fgroup"><h3>Apps</h3><p><a href="app-store-reviews.html">Apple App Store Reviews Scraper</a> · <a href="google-play-reviews.html">Google Play Reviews Scraper</a></p></div>
+<p class="fine">Documentation for the <a href="https://apify.com/kestrel" rel=noopener>kestrel</a> actors on the Apify Store. Every page is built from the actor's own README and its input, output and pay-per-event schemas. Runnable examples live in the <a href="https://github.com/mtedj/kestrel-actors-examples" rel=noopener>examples repository</a>. Last updated 2026-08-29.</p>
+</footer>
+</body>
+</html>
