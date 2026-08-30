@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,464,Super.com,360.05,22.4,Super.com; Hotels In America; Michelin Guide Hotels; Traveluro; klook; KAYAK.com,27,Hotel prive,655.75
+2026-09-07,379.88,Michelin Guide Hotels,311.02,18.1,Michelin Guide Hotels; Etrip.net; Vio.com; Evendo,16,Booking.com,438.39
+2026-09-08,379,Michelin Guide Hotels,330.69,12.7,Michelin Guide Hotels; Super.com; Traveluro; Etrip.net; Vio.com; dealbase.com; Hotels In America; trivago DEALS,32,Hotel prive,526.09
+2026-09-09,489,Super.com,389.06,20.4,Super.com; Hotels In America; Michelin Guide Hotels; Etrip.net; Vio.com; Traveluro; klook; Pilot,29,Hotel prive,694.66
+2026-09-10,566,Super.com,416.48,26.4,Super.com; Hotels In America; Michelin Guide Hotels; Vio.com; Pilot; Traveluro; trivago DEALS,30,BusinessHotels.com,714.72
+2026-09-11,908.88,Michelin Guide Hotels,655.25,27.9,Michelin Guide Hotels; Traveluro; Evendo; Traveloka.com; Wego; Expedia.co.in; Hotels.com; Qantas Hotels; BusinessHotels.com; müv AI,12,Booking.com,908.88
+2026-09-12,869,Michelin Guide Hotels,637.88,26.6,Michelin Guide Hotels; Super.com; Evendo; klook; Hotels In America; Traveloka.com; Booking.com; KAYAK.com; Priceline; TravelUP; Tripadvisor.com,27,Traveluro,1192
+2026-09-13,353,Michelin Guide Hotels,305.89,13.3,Michelin Guide Hotels; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; trivago DEALS; Hotels In America; Traveluro; Wego,33,Qantas Hotels,423.2
+2026-09-14,583,Super.com,439.75,24.6,Super.com; Vio.com; Michelin Guide Hotels; Traveluro; trivago DEALS; Evendo; Hotels In America,30,Hotel prive,837.28
+2026-09-15,770.03,Michelin Guide Hotels,651.59,15.4,Michelin Guide Hotels; Etrip.net; Vio.com; Evendo; Wego; BusinessHotels.com,15,Traveluro,825.45
+2026-09-16,540,Super.com,443.81,17.8,Super.com; Michelin Guide Hotels; Etrip.net; Vio.com; Traveluro; trivago DEALS; Hotels In America; Evendo,31,Hotel prive,772.47
+2026-09-17,506,Super.com,335.41,33.7,Super.com; Hotels In America; Vio.com; Michelin Guide Hotels; dealbase.com; Traveluro; trivago DEALS; Kiwi.com; Pilot; Stayforlong.com; Evendo,31,Hotel prive,720.59
+2026-09-18,753,Michelin Guide Hotels,637.09,15.4,Michelin Guide Hotels; Hotels In America; trivago DEALS; klook; Evendo,27,Hotel prive,1096.56
+2026-09-19,857.24,Michelin Guide Hotels,721.38,15.8,Michelin Guide Hotels; Evendo; Etrip.net; Vio.com; Wego; BusinessHotels.com,14,Traveluro,919.89

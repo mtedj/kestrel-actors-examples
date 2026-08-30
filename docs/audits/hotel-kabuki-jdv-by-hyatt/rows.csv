@@ -1,0 +1,12 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,260,Vio.com,190.25,26.8,Vio.com; dealbase.com; goseek.com; Super.com; Hotels In America; KAYAK.com; momondo.com; Trip.com; Wego; Agoda; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com,29,Qantas Hotels,303.45
+2026-09-07,254,Vio.com,186.91,26.4,Vio.com; dealbase.com; goseek.com; Super.com; Hotels In America; Trip.com; KAYAK.com; momondo.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com; Agoda,29,Qantas Hotels,296.44
+2026-09-08,294,Super.com,209.47,28.8,Super.com; dealbase.com; Vio.com; goseek.com; Hotels In America; Bluepillow.com; trivago DEALS; KAYAK.com; momondo.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com; Agoda; Trip.com,33,Qantas Hotels,343.13
+2026-09-09,386.72,Traveloka.com,385.54,0.3,Traveloka.com,14,Traveluro,449.82
+2026-09-10,297,Vio.com,216.2,27.2,Vio.com; dealbase.com; goseek.com; Super.com; Hotels In America; KAYAK.com; momondo.com; Agoda; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com,31,Qantas Hotels,346.63
+2026-09-11,317,Vio.com,230.01,27.4,Vio.com; dealbase.com; goseek.com; Super.com; Traveluro; Hotels In America; trivago DEALS; KAYAK.com; Trip.com; Agoda; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com,30,Qantas Hotels,369.99
+2026-09-12,330,Vio.com,238.58,27.7,Vio.com; dealbase.com; goseek.com; Super.com; Traveluro; trivago DEALS; Hotels In America; KAYAK.com; Bluepillow.com; Trip.com; Long Stay Discounts; Agoda; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com,27,Qantas Hotels,385.15
+2026-09-13,732.72,Traveluro,717.88,2,Traveluro; Traveloka.com,13,Trip.com,855.1
+2026-09-17,554.47,Traveluro,539.52,2.7,Traveluro,12,Trip.com,641.89
+2026-09-18,316,Super.com,254.37,19.5,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Traveluro; trivago DEALS; Hotels In America; KAYAK.com; Bluepillow.com; Agoda; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Priceline; Travelocity.com,32,Qantas Hotels,368.82
+2026-09-19,307,Super.com,242.23,21.1,Super.com; dealbase.com; Etrip.net; Vio.com; goseek.com; Hotels In America; KAYAK.com; Bluepillow.com; Traveluro; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; trivago DEALS; Agoda; Priceline,29,Qantas Hotels,353.63
