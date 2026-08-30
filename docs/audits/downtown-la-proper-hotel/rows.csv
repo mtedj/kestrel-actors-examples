@@ -1,0 +1,14 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,339,Super.com,225.29,33.5,Super.com; Traveluro; Hotels In America; Wego; Hotel prive; Trip.com; pricetravel.com; Clicktrip.com,30,Qantas Hotels,406.44
+2026-09-07,349,Super.com,229.75,34.2,Super.com; Traveluro; Hotels In America; Pilot; Hotel prive; Trip.com; pricetravel.com,29,Qantas Hotels,418.09
+2026-09-08,347.42,Downtown LA Proper Hotel,347.42,0,,12,Qantas Hotels,359.85
+2026-09-09,355,Traveluro,236.66,33.3,Traveluro; trivago DEALS; Super.com; Hotels In America; Pilot; Hotel prive; pricetravel.com; Trip.com; Clicktrip.com,31,Qantas Hotels,425.06
+2026-09-10,369,Super.com,257.02,30.3,Super.com; Hotels In America; Pilot; Hotel prive,25,Qantas Hotels,441.37
+2026-09-11,379,Super.com,248.2,34.5,Super.com; Traveluro; Hotels In America; Pilot; Hotel prive; pricetravel.com; Trip.com,27,Qantas Hotels,453.02
+2026-09-12,482.21,Downtown LA Proper Hotel,482.21,0,,10,Qantas Hotels,494.95
+2026-09-13,386,Super.com,296.83,23.1,Super.com; Traveluro; Hotels In America; Pilot,30,Kiwi.com,465
+2026-09-14,607,Super.com,455.48,25,Super.com; Traveluro; Hotels In America; Evendo; Trip.com; pricetravel.com,26,Hotel prive,751.38
+2026-09-15,569,Super.com,442.83,22.2,Super.com; Hotels In America; Traveluro; trivago DEALS; Trip.com; pricetravel.com,28,Hotel prive,705.06
+2026-09-16,553.09,Downtown LA Proper Hotel,553.09,0,,7,Qantas Hotels,566
+2026-09-17,423,Traveluro,328.73,22.3,Traveluro; Super.com; Hotels In America; Pilot; pricetravel.com,30,momondo.com,509
+2026-09-18,569,Super.com,429.86,24.5,Super.com; Hotels In America; Traveluro; pricetravel.com; Pilot,30,Hotel prive,705.06

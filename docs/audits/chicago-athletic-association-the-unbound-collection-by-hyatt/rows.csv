@@ -1,0 +1,12 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,384.95,Etrip.net,365.27,5.1,Etrip.net; Vio.com; dealbase.com; Evendo; Skyscanner; pricetravel.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Reserving,24,Qantas Hotels,458.56
+2026-09-07,381.95,Super.com,348.28,8.8,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Evendo; Traveluro; pricetravel.com; Skyscanner; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Reserving,34,Qantas Hotels,454.99
+2026-09-08,351.95,Hotelscombined.com,319.91,9.1,Hotelscombined.com; KAYAK.com; momondo.com; Super.com; Etrip.net; Vio.com; dealbase.com; Evendo; Skyscanner; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,37,Traveluro,424.38
+2026-09-09,,Traveloka.com,719.18,,,12,Billabook.com,739
+2026-09-10,,Kiwi.com,1042,,,1,Kiwi.com,1042
+2026-09-11,951.94,Super.com,872.78,8.3,Super.com; BusinessHotels.com; Wego; trivago DEALS; pricetravel.com,20,Traveluro,1513.81
+2026-09-12,731.94,Hotels In America,587.5,19.7,Hotels In America; Hotelscombined.com; KAYAK.com; momondo.com; Super.com; Etrip.net; Vio.com; dealbase.com; pricetravel.com; Skyscanner; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,32,Qantas Hotels,871.93
+2026-09-13,751.38,Traveloka.com,748.79,0.3,Traveloka.com; Evendo; Hotels.com; CheapTickets.com; Expedia.com; Luxury Escapes; eDreams; Agoda; HomeToGo,14,Billabook.com,770
+2026-09-14,981.94,Super.com,915.19,6.8,Super.com; BusinessHotels.com; Skyscanner; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,29,Qantas Hotels,1169.82
+2026-09-18,,Kiwi.com,1042,,,1,Kiwi.com,1042
+2026-09-19,731.94,Super.com,658.84,10,Super.com; Hotelscombined.com; KAYAK.com; momondo.com; Vio.com; dealbase.com; pricetravel.com; Skyscanner; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,36,trivago DEALS,939.22

@@ -1,13 +1,13 @@
 check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
-2026-09-06,217.69,Super.com,189.44,13,Super.com; Traveluro; Hotels In America; trivago DEALS; Agoda; Priceline,31,Traveloka.com,274.03
-2026-09-07,,Traveluro,218.2,,,12,Qantas Hotels,245.71
+2026-09-06,217.69,Super.com,189.44,13,Super.com; Traveluro; Hotels In America; trivago DEALS; Agoda; Priceline,29,Traveloka.com,274.03
+2026-09-07,245.08,Graduate by Hilton Nashville,245.08,0,,8,Qantas Hotels,245.71
 2026-09-08,220.9,Super.com,190.54,13.7,Super.com; Traveluro; Hotels In America; trivago DEALS; Agoda; Priceline,30,Traveloka.com,283.69
-2026-09-09,220.9,Super.com,190.54,13.7,Super.com; Hotels In America; trivago DEALS; Agoda; Priceline,27,Traveloka.com,283.69
-2026-09-10,245.5,Super.com,207.86,15.3,Super.com; Traveluro; Hotels In America; trivago DEALS; Agoda; Priceline,30,Traveloka.com,309.39
-2026-09-11,312.09,Traveluro,273.88,12.2,Traveluro; Agoda; HomeToGo,13,Traveloka.com,386.45
-2026-09-12,,Super.com,278.47,,,25,Traveloka.com,423.49
+2026-09-09,220.9,Super.com,197.41,10.6,Super.com; Hotels In America; trivago DEALS; Agoda; Priceline,26,Traveloka.com,283.69
+2026-09-10,245.5,Super.com,211.7,13.8,Super.com; Hotels In America; Traveluro; trivago DEALS; Agoda; Priceline,30,Traveloka.com,309.39
+2026-09-11,312.09,Graduate by Hilton Nashville,312.09,0,,7,Traveloka.com,386.45
+2026-09-12,,Super.com,278.47,,,28,Traveloka.com,423.49
 2026-09-13,224.02,Super.com,183.58,18.1,Super.com; Traveluro; Hotels In America; trivago DEALS; Agoda; Priceline,30,Pilot,365.36
-2026-09-14,273.94,Super.com,226.72,17.2,Super.com; Traveluro; trivago DEALS; Hotels In America; Agoda; Priceline; HomeToGo,29,Traveloka.com,352.48
-2026-09-15,363.75,Traveluro,299.87,17.6,Traveluro; Agoda; HomeToGo; Hotelscombined.in,13,Traveloka.com,458.17
+2026-09-14,273.94,Super.com,220.48,19.5,Super.com; Hotelscombined.com; momondo.com; Traveluro; trivago DEALS; Hotels In America; Agoda; Priceline; HomeToGo,30,Traveloka.com,352.48
+2026-09-15,363.75,Graduate by Hilton Nashville,363.75,0,,8,Traveloka.com,458.17
 2026-09-16,310.27,Super.com,268.86,13.3,Super.com; Traveluro; trivago DEALS; Hotels In America; Agoda; Priceline,26,Traveloka.com,399.7
 2026-09-17,330.77,Super.com,286.42,13.4,Super.com; Traveluro; trivago DEALS; Hotels In America; Agoda; Priceline,29,Traveloka.com,417.72

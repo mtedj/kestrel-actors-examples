@@ -1,11 +1,11 @@
 check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
-2026-09-06,945,Hotels.com,925.94,2,Hotels.com,25,Evendo,1201.86
+2026-09-06,1087.88,Hotels.com,1066,2,Hotels.com,10,Evendo,1382.64
 2026-09-07,784,klook,731.09,6.7,klook; Hotels.com; Traveluro,26,Evendo,1136.93
-2026-09-08,1021,Hotels.com,1000.38,2,Hotels.com; Traveluro,27,Evendo,1322.28
-2026-09-10,1259,klook,1221.5,3,klook,24,Qantas Hotels,1584.49
-2026-09-13,1196.88,Nine Orchard,1196.88,0,,10,Evendo,1648.17
-2026-09-14,784,klook,759.47,3.1,klook; Hotels.com; Etrip.net; Vio.com; dealbase.com; goseek.com,26,Evendo,1230.2
-2026-09-16,,klook,996.59,,,22,Evendo,1322.28
-2026-09-17,1175.06,Nine Orchard,1175.06,0,,12,Evendo,1520.82
-2026-09-18,1002,klook,967.41,3.5,klook; Hotels.com,23,Evendo,1303.39
-2026-09-19,803,klook,778.38,3.1,klook; Hotels.com,27,Evendo,1247.9
+2026-09-08,1175.06,Hotels.com,1151.44,2,Hotels.com,10,Evendo,1520.82
+2026-09-10,1448.19,Nine Orchard,1448.19,0,,11,Evendo,1626.49
+2026-09-13,1040,klook,1006.94,3.2,klook; Hotels.com,22,Evendo,1433.26
+2026-09-14,903.12,Hotels.com,884.47,2.1,Hotels.com,12,Evendo,1415.15
+2026-09-16,,Hotels.com,1151.44,,,9,Evendo,1520.82
+2026-09-17,1021,klook,988.88,3.1,klook; Hotels.com,21,Evendo,1322.28
+2026-09-18,1153.25,Hotels.com,1130.06,2,Hotels.com,11,Evendo,1499.14
+2026-09-19,803,klook,778.38,3.1,klook; Hotels.com,26,Evendo,1247.9

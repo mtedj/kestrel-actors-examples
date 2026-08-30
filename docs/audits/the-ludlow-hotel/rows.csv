@@ -1,15 +1,15 @@
 check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
-2026-09-06,749,Michelin Guide Hotels,529,29.4,Michelin Guide Hotels; Super.com; Vio.com; Traveluro; Hotels In America; Hotels.com; Reserving; Traveloka.com; Skyscanner,29,Qantas Hotels,847.48
-2026-09-07,862.97,Michelin Guide Hotels,610.5,29.3,Michelin Guide Hotels; Vio.com; Expedia.co.in; Traveloka.com; Qantas Hotels,14,müv AI,920.31
-2026-09-08,899,Michelin Guide Hotels,829,7.8,Michelin Guide Hotels,2,The Ludlow Hotel,899
+2026-09-06,862.97,Michelin Guide Hotels,610.5,29.3,Michelin Guide Hotels; Hotels.com; Qantas Hotels; Wego; Traveloka.com,11,Billabook.com,903
+2026-09-07,749,Michelin Guide Hotels,529,29.4,Michelin Guide Hotels; Super.com; Vio.com; Hotels In America; goseek.com; Hotels.com; Traveloka.com,28,Qantas Hotels,847.48
+2026-09-08,1035.06,Michelin Guide Hotels,954.75,7.8,Michelin Guide Hotels,2,The Ludlow Hotel,1035.06
 2026-09-09,979,Michelin Guide Hotels,779,20.4,Michelin Guide Hotels,2,The Ludlow Hotel,979
-2026-09-10,979,Michelin Guide Hotels,779,20.4,Michelin Guide Hotels; Super.com; Vio.com; goseek.com; Hotels In America; Hotels.com; Luxury Escapes; Billabook.com; Reserving; Traveloka.com; Skyscanner,29,Qantas Hotels,1106.64
-2026-09-11,1035.06,Vio.com,894.47,13.6,Vio.com; goseek.com; Michelin Guide Hotels; Bookhotel.direct; Billabook.com; Wego; Traveloka.com,14,Qantas Hotels,1037.19
-2026-09-12,879,Super.com,716.97,18.4,Super.com; Vio.com; Hotels In America; Michelin Guide Hotels; Luxury Escapes; Traveloka.com; Skyscanner,29,Qantas Hotels,1005.37
-2026-09-13,779,Super.com,645.5,17.1,Super.com; Vio.com; goseek.com; Hotels In America; Michelin Guide Hotels; Kiwi.com; Hotels.com; Luxury Escapes; Billabook.com; Traveloka.com; Skyscanner,29,Qantas Hotels,881.27
-2026-09-14,989,Michelin Guide Hotels,749,24.3,Michelin Guide Hotels; Super.com; Vio.com; Kiwi.com; Hotels In America; Hotels.com; Luxury Escapes; Reserving; Traveloka.com; Skyscanner,29,Qantas Hotels,1117.95
-2026-09-15,1172.75,Michelin Guide Hotels,920.34,21.5,Michelin Guide Hotels,2,The Ludlow Hotel,1172.75
-2026-09-16,989,Michelin Guide Hotels,749,24.3,Michelin Guide Hotels; Super.com; Vio.com; Kiwi.com; Hotels In America; Hotels.com; Luxury Escapes; Billabook.com; Traveloka.com; Skyscanner; Reserving,28,Qantas Hotels,1117.95
+2026-09-10,1126.88,Michelin Guide Hotels,897.38,20.4,Michelin Guide Hotels; Hotels.com; Qantas Hotels; Billabook.com; Wego; Traveloka.com,14,Priceline,1127.38
+2026-09-11,899,Super.com,724.69,19.4,Super.com; Vio.com; Hotels In America; Michelin Guide Hotels; Hotels.com; Luxury Escapes; Tripadvisor.com; Billabook.com; Traveloka.com,28,Qantas Hotels,1037.19
+2026-09-12,1012.12,Michelin Guide Hotels,954.75,5.7,Michelin Guide Hotels; Wego; Qantas Hotels; Traveloka.com; Hotels.com,12,Billabook.com,1059
+2026-09-13,779,Super.com,645.5,17.1,Super.com; Vio.com; Hotels In America; Michelin Guide Hotels; Kiwi.com; Hotels.com; Luxury Escapes; Billabook.com; Traveloka.com; Skyscanner,28,Qantas Hotels,881.27
+2026-09-14,1138.31,Michelin Guide Hotels,862.97,24.2,Michelin Guide Hotels; Hotels.com; Qantas Hotels; Wego; Traveloka.com,13,Bookhotel.direct,1149.81
+2026-09-15,1019,Michelin Guide Hotels,799,21.6,Michelin Guide Hotels,2,The Ludlow Hotel,1019
+2026-09-16,1138.31,Michelin Guide Hotels,862.97,24.2,Michelin Guide Hotels; Hotels.com; Qantas Hotels; Traveloka.com,12,Priceline,1138.88
 2026-09-17,989,Michelin Guide Hotels,619,37.4,Michelin Guide Hotels; Super.com; Vio.com; Hotels In America; goseek.com; Hotels.com; Luxury Escapes; Billabook.com; Tripadvisor.com; Kiwi.com; Reserving; Traveloka.com; Skyscanner,30,Qantas Hotels,1117.95
-2026-09-18,859,Michelin Guide Hotels,619,27.9,Michelin Guide Hotels; Super.com; Vio.com; Hotels In America; Kiwi.com; Hotels.com; Luxury Escapes; Tripadvisor.com; Traveloka.com,27,Qantas Hotels,971.45
-2026-09-19,989.19,Michelin Guide Hotels,713.78,27.8,Michelin Guide Hotels; Vio.com; goseek.com; Bookhotel.direct; Expedia.co.in; Traveloka.com; Qantas Hotels; Wego,14,Billabook.com,1031
+2026-09-18,989.19,Michelin Guide Hotels,713.78,27.8,Michelin Guide Hotels; Hotels.com; Qantas Hotels; Wego; Traveloka.com,12,Billabook.com,1035
+2026-09-19,859,Michelin Guide Hotels,619,27.9,Michelin Guide Hotels; Super.com; Vio.com; goseek.com; Kiwi.com; Hotels In America; Hotels.com; Luxury Escapes; Wego; Traveloka.com; Skyscanner,29,Qantas Hotels,971.45

@@ -1,14 +1,15 @@
 check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
-2026-09-06,,Super.com,159.2,,,27,BusinessHotels.com,266.69
-2026-09-07,,Super.com,143.77,,,28,BusinessHotels.com,243.48
-2026-09-08,,Traveloka.com,299.45,,,11,BusinessHotels.com,353.64
-2026-09-09,,Super.com,213.84,,,31,BusinessHotels.com,353.64
-2026-09-10,259,Super.com,205.54,20.6,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Kiwi.com; Billabook.com,30,Clicktrip.com,891.49
-2026-09-11,,Super.com,183.66,,,27,Clicktrip.com,891.49
-2026-09-12,,Traveloka.com,265.94,,,9,BusinessHotels.com,313.05
-2026-09-13,,Super.com,202.66,,,26,BusinessHotels.com,330.45
-2026-09-14,535,Super.com,403.2,24.6,Super.com; dealbase.com; Hotels In America; Billabook.com; Kiwi.com,27,Clicktrip.com,891.49
-2026-09-15,937,Super.com,769.28,17.9,Super.com; Vio.com; goseek.com; Hotels In America; dealbase.com; Billabook.com; BusinessHotels.com,28,Qantas Hotels,1088.65
-2026-09-17,,Super.com,404.77,,,24,Clicktrip.com,891.49
+2026-09-06,,Super.com,159.2,,,26,BusinessHotels.com,266.69
+2026-09-07,,Traveloka.com,208.19,,,8,Qantas Hotels,209.12
+2026-09-08,259,Super.com,208.65,19.4,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Kiwi.com; Billabook.com,31,BusinessHotels.com,353.64
+2026-09-09,,Traveloka.com,299.45,,,8,Qantas Hotels,300.91
+2026-09-10,259,Super.com,205.54,20.6,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Kiwi.com; Billabook.com,29,BusinessHotels.com,353.64
+2026-09-11,,Traveloka.com,265.94,,,8,Qantas Hotels,267.23
+2026-09-12,230,Super.com,183.22,20.3,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Kiwi.com; Billabook.com,28,BusinessHotels.com,313.05
+2026-09-13,,Traveloka.com,319.1,,,9,Qantas Hotels,320.67
+2026-09-14,535,Super.com,403.2,24.6,Super.com; Hotels In America; Billabook.com; Kiwi.com,25,Clicktrip.com,891.49
+2026-09-15,,Traveloka.com,1082.74,,,11,Qantas Hotels,1088.65
+2026-09-16,,Kiwi.com,919.19,,,1,Kiwi.com,919.19
+2026-09-17,,Priceline,613.38,,,8,Qantas Hotels,625.09
 2026-09-18,276,Super.com,220.23,20.2,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Billabook.com; Kiwi.com,29,BusinessHotels.com,376.83
-2026-09-19,,Super.com,208.65,,,29,Clicktrip.com,891.49
+2026-09-19,,Traveloka.com,299.45,,,7,Qantas Hotels,300.91

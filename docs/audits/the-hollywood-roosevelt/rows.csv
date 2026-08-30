@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,269,Super.com,208.16,22.6,Super.com; Vio.com; goseek.com; Kiwi.com; trivago DEALS; Hotels In America; Billabook.com; TravelUP; klook; Traveluro; Evendo; Hotels.com; Clicktrip.com,36,Tripening Hotels,384.11
+2026-09-07,338.22,Hotels.com,294.47,12.9,Hotels.com; CheapTickets.com; Expedia.com; Qantas Hotels; Wego; Traveloka.com; Agoda,10,Priceline,338.25
+2026-09-08,259,Super.com,197.84,23.6,Super.com; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Hotels In America; Billabook.com; TravelUP; Traveluro; Reserving; Evendo; klook; Hotels.com,38,Tripening Hotels,374.52
+2026-09-09,259,Super.com,198.09,23.5,Super.com; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Hotels In America; Billabook.com; TravelUP; Reserving; klook; Evendo; Hotels.com; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com; Skyscanner,38,Tripening Hotels,374.52
+2026-09-10,259,Super.com,194.65,24.8,Super.com; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Hotels In America; Billabook.com; TravelUP; Evendo; klook; Hotels.com,37,Tripening Hotels,374.52
+2026-09-11,361.47,Hotels.com,311.31,13.9,Hotels.com; CheapTickets.com; Expedia.com; Qantas Hotels; Wego; Luxury Escapes; Traveloka.com; Agoda,11,Priceline,361.52
+2026-09-12,309,Super.com,225.09,27.2,Super.com; Etrip.net; Vio.com; goseek.com; Billabook.com; trivago DEALS; Hotels In America; Traveluro; TravelUP; klook; Evendo; Hotels.com; Reserving; Wego; Clicktrip.com; müv AI; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com,35,Qantas Hotels,378.92
+2026-09-13,269,Super.com,222.69,17.2,Super.com; trivago DEALS; Kiwi.com; Billabook.com; Hotels In America; Evendo; Hotels.com; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com; Skyscanner,32,Tripening Hotels,412.84
+2026-09-14,269,Super.com,226.66,15.7,Super.com; Billabook.com; Kiwi.com; TravelUP; Hotels In America; Evendo,32,Tripening Hotels,412.84
+2026-09-15,349.84,Hotels.com,307.47,12.1,Hotels.com; CheapTickets.com; Expedia.com; eDreams; Luxury Escapes; Traveloka.com; Agoda; HomeToGo; Trip.com,13,Priceline,350
+2026-09-16,296,trivago DEALS,245.05,17.2,trivago DEALS; Super.com; Billabook.com; Kiwi.com; Hotels In America; TravelUP; Evendo; Hotels.com; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com; Skyscanner,35,Tripening Hotels,452.91
+2026-09-17,278,trivago DEALS,233.01,16.2,trivago DEALS; Super.com; Billabook.com; Kiwi.com; TravelUP; Hotels In America; Evendo; Hotels.com; Clicktrip.com,33,Qantas Hotels,328.55
+2026-09-18,278,Super.com,224.3,19.3,Super.com; trivago DEALS; Etrip.net; Vio.com; goseek.com; Billabook.com; Kiwi.com; TravelUP; Hotels In America; Evendo; Traveluro; Hotels.com; Skyscanner; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com,39,Tripening Hotels,422.44
+2026-09-19,391.72,Hotels.com,340.31,13.1,Hotels.com; CheapTickets.com; Expedia.com; eDreams; Qantas Hotels; Wego; Luxury Escapes; Traveloka.com; Agoda; Trip.com,14,Priceline,391.86

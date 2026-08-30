@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,380,Vio.com,353.61,6.9,Vio.com; goseek.com; Super.com; Traveloka.com,30,Qantas Hotels,442.54
+2026-09-07,342.78,Traveloka.com,341.6,0.3,Traveloka.com,10,Qantas Hotels,343.55
+2026-09-08,300,Etrip.net,277.47,7.5,Etrip.net; Vio.com; goseek.com; Super.com; Traveloka.com,30,Qantas Hotels,349.37
+2026-09-09,295,Etrip.net,276.98,6.1,Etrip.net; Vio.com; Traveloka.com,30,Qantas Hotels,343.55
+2026-09-10,285,Etrip.net,265.22,6.9,Etrip.net; Vio.com; goseek.com; Super.com; Traveloka.com; Reserving,32,Qantas Hotels,331.91
+2026-09-11,360.06,Traveloka.com,358.97,0.3,Traveloka.com,11,Qantas Hotels,361.01
+2026-09-12,315,Etrip.net,293.03,7,Etrip.net; Vio.com; goseek.com; Traveloka.com; Super.com,28,Qantas Hotels,366.85
+2026-09-13,280,Etrip.net,259.39,7.4,Etrip.net; Vio.com; goseek.com; Kiwi.com; Traveloka.com; Reserving,30,Qantas Hotels,326.08
+2026-09-14,445,Etrip.net,413.28,7.1,Etrip.net; Vio.com; dealbase.com; goseek.com; Super.com; Traveloka.com; Reserving,29,Qantas Hotels,518.23
+2026-09-15,627.19,CheapTickets.com,615.03,1.9,CheapTickets.com; Expedia.com; eDreams; Qantas Hotels; Traveloka.com,8,Hotels.com,627.59
+2026-09-16,355,Etrip.net,329.55,7.2,Etrip.net; Vio.com; dealbase.com; goseek.com; Super.com; Traveloka.com; Reserving,30,trivago DEALS,447.22
+2026-09-17,425.55,Super.com,330.88,22.2,Super.com,3,Wego,484.47
+2026-09-18,430,Etrip.net,399.91,7,Etrip.net; Vio.com; dealbase.com; Super.com; Traveloka.com; Reserving,28,Qantas Hotels,500.76
+2026-09-19,371.82,Traveloka.com,370.56,0.3,Traveloka.com,9,Qantas Hotels,372.66

@@ -1,15 +1,15 @@
 check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
-2026-09-06,375.19,Super.com,252.44,32.7,Super.com; goseek.com; Traveluro; Kiwi.com; Trip.com; Evendo; Hotels In America; Traveloka.com; trivago DEALS; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; Qantas Hotels; Closest Hotel; TravelUP; Tripening Hotels,26,BusinessHotels.com,455.83
-2026-09-07,,Trip.com,262.46,,,15,BusinessHotels.com,417.52
-2026-09-08,521,Super.com,261.02,49.9,Super.com; Traveluro; Kiwi.com; Hotels In America; trivago DEALS; Trip.com; Traveloka.com; Evendo; Wego; Luxury Escapes; Qantas Hotels; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; TravelUP; Tripening Hotels,28,momondo.com,521
-2026-09-09,628.09,Super.com,262.22,58.3,Super.com; Trip.com; Evendo; Kiwi.com; trivago DEALS; Traveluro,28,momondo.com,746.88
-2026-09-10,611,Super.com,427.36,30.1,Super.com; Traveluro; trivago DEALS; Evendo; Reserving; Hotels In America; Trip.com; Wego; Kiwi.com; Traveloka.com; Tripening Hotels,29,BusinessHotels.com,796.62
-2026-09-11,,Trip.com,487.46,,,14,Booking.com,672.59
-2026-09-12,561.5,Super.com,373.2,33.5,Super.com; Trip.com; Etrip.net; Vio.com; Hotels In America; trivago DEALS; Traveluro; Kiwi.com; Evendo; Reserving; Traveloka.com; Wego; Luxury Escapes; Tripening Hotels; Qantas Hotels,29,BusinessHotels.com,610.09
-2026-09-13,389.59,Super.com,262.83,32.5,Super.com; Trip.com; Etrip.net; Vio.com; goseek.com; Traveluro; Hotels In America; trivago DEALS; Traveloka.com; Evendo; Kiwi.com; Luxury Escapes; Reserving,33,Wego,401.36
-2026-09-14,575,Super.com,399.03,30.6,Super.com; Trip.com; Etrip.net; Vio.com; goseek.com; Traveluro; Hotels In America; trivago DEALS; Kiwi.com; Evendo; klook; Traveloka.com; Reserving; Luxury Escapes; Wego; Qantas Hotels; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; TravelUP; müv AI,33,Tripening Hotels,580.94
-2026-09-15,,Evendo,531.09,,,9,Booking.com,908.06
-2026-09-16,682.09,Super.com,415.53,39.1,Super.com; trivago DEALS; Vio.com; Kiwi.com; Hotels In America; Evendo; Traveloka.com; Trip.com; Reserving; Luxury Escapes; Qantas Hotels; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; TravelUP; Long Stay Discounts,27,Wego,687.94
+2026-09-06,,Evendo,317.87,,,6,eDreams,405.72
+2026-09-07,320.3,Trip.com,221.56,30.8,Trip.com; Super.com; goseek.com; dealbase.com; Etrip.net; Vio.com; Hotels In America; Traveluro; trivago DEALS; Kiwi.com; Traveloka.com; klook; Evendo; Reserving; Wego; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; Qantas Hotels; TravelUP,31,Priceline,365.3
+2026-09-08,,Traveloka.com,480.79,,,8,eDreams,559.72
+2026-09-09,628.09,Super.com,259.95,58.6,Super.com; Trip.com; Evendo; Kiwi.com; Traveluro; trivago DEALS,28,momondo.com,746.88
+2026-09-10,,Evendo,520.86,,,9,eDreams,770.72
+2026-09-11,583.09,Super.com,396.3,32,Super.com; Trip.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveluro; Kiwi.com; trivago DEALS; Evendo; Traveloka.com; Luxury Escapes; Reserving; Tripening Hotels; Qantas Hotels,32,TravelUP,588.25
+2026-09-12,,Evendo,520.86,,,7,eDreams,647.81
+2026-09-13,389.59,Super.com,262.83,32.5,Super.com; Trip.com; Etrip.net; Vio.com; goseek.com; Traveluro; Hotels In America; trivago DEALS; Traveloka.com; Evendo; Kiwi.com; Luxury Escapes; Reserving,32,Wego,401.36
+2026-09-14,,Evendo,516.47,,,7,müv AI,629.09
+2026-09-15,788.28,Super.com,438.58,44.4,Super.com; Evendo; Hotels In America; Trip.com; trivago DEALS; Kiwi.com; Traveloka.com; Qantas Hotels; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com; TravelUP; Luxury Escapes; Tripening Hotels,26,Long Stay Discounts,907.09
+2026-09-16,,Evendo,611.3,,,7,eDreams,722.78
 2026-09-17,553.38,Super.com,372.5,32.7,Super.com; Trip.com; Etrip.net; Vio.com; Traveluro; trivago DEALS; Hotels In America; Kiwi.com; Evendo; Reserving; Traveloka.com; Wego; Luxury Escapes; Qantas Hotels,30,TravelUP,558.56
-2026-09-18,549.78,Super.com,382.23,30.5,Super.com; Traveluro; trivago DEALS; Hotels In America; Etrip.net; Vio.com; goseek.com; Kiwi.com; Traveloka.com; Evendo; Luxury Escapes; Qantas Hotels; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; TravelUP; Closest Hotel; Tripening Hotels,31,Wego,555.31
-2026-09-19,,Trip.com,447.89,,,13,BusinessHotels.com,704.62
+2026-09-18,,Traveloka.com,501.87,,,7,eDreams,584.59
+2026-09-19,562.38,Super.com,394.16,29.9,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveluro; trivago DEALS; Traveloka.com; Evendo; Luxury Escapes; Qantas Hotels; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; TravelUP; Closest Hotel; Kiwi.com; Wego; Tripening Hotels,30,Long Stay Discounts,615.5

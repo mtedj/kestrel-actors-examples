@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,129.6,Super.com,101.88,21.4,Super.com; Hotels In America; Traveluro; Kiwi.com; trivago DEALS,23,Qantas Hotels,175.52
+2026-09-07,147.43,Agoda,143.63,2.6,Agoda; CheapTickets.com; Expedia.com; Hotels.com; eDreams,7,Michelin Guide Hotels,161.05
+2026-09-08,116.1,Super.com,92.95,19.9,Super.com; Hotels In America; Traveluro; trivago DEALS; Vio.com,27,TravelUP,292.25
+2026-09-09,116.1,Super.com,93.49,19.5,Super.com; Traveluro; trivago DEALS; Hotels In America,25,Tripening Hotels,172.63
+2026-09-10,116.1,Super.com,92.95,19.9,Super.com; Hotels In America; Traveluro; trivago DEALS; Kiwi.com,23,Tripening Hotels,172.63
+2026-09-11,194.42,Agoda,189.05,2.8,Agoda; CheapTickets.com; Expedia.com; Hotels.com; eDreams,7,Michelin Guide Hotels,201.66
+2026-09-12,147.6,Super.com,110.36,25.2,Super.com; Hotels In America; Traveluro; trivago DEALS; Kiwi.com,23,Qantas Hotels,194.8
+2026-09-13,107.1,Super.com,87.3,18.5,Super.com; Hotels In America,23,Tripening Hotels,161.94
+2026-09-14,120.6,Super.com,97.45,19.2,Super.com; Hotels In America; Kiwi.com,23,Qantas Hotels,169.53
+2026-09-15,168.31,Agoda,163.83,2.7,Agoda; Qantas Hotels,8,Michelin Guide Hotels,172.66
+2026-09-16,138.6,Super.com,104.61,24.5,Super.com; Hotels In America; Traveluro; trivago DEALS; Etrip.net; Vio.com,26,Qantas Hotels,189.76
+2026-09-17,156.6,Super.com,116.01,25.9,Super.com; Hotels In America; Traveluro; Etrip.net; Vio.com; trivago DEALS; Kiwi.com,25,Qantas Hotels,210
+2026-09-18,143.1,Super.com,107.07,25.2,Super.com; Hotels In America; Traveluro; trivago DEALS,22,Tripening Hotels,204.73
+2026-09-19,199.63,Agoda,194.09,2.8,Agoda; müv AI,9,Michelin Guide Hotels,242.26

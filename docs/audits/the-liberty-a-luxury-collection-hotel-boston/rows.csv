@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,338.64,Super.com,291.92,13.8,Super.com; KAYAK.com; momondo.com; Hotels In America,33,Traveluro,573.72
+2026-09-07,384.41,Traveloka.com,383.18,0.3,Traveloka.com; Hotels.com; CheapTickets.com; Closest Hotel; Expedia.com; eDreams,9,Evendo,431.47
+2026-09-08,695.5,Super.com,529.81,23.8,Super.com; Hotels In America; Billabook.com; Traveluro; pricetravel.com; Agoda; Priceline,28,Qantas Hotels,811.54
+2026-09-09,911.5,Super.com,779.81,14.4,Super.com; Hotels In America; Traveloka.com; müv AI; Billabook.com; Evendo; Agoda; Priceline,29,Qantas Hotels,1015.16
+2026-09-10,596.5,Super.com,510.33,14.4,Super.com; Hotels In America; pricetravel.com; Agoda; Priceline; Reserving,30,Traveluro,934.38
+2026-09-11,657.62,Traveloka.com,655.43,0.3,Traveloka.com; Hotels.com,9,Evendo,703.78
+2026-09-12,556.25,KAYAK.com,489.72,12,KAYAK.com; Super.com; Priceline; Reserving; Booking.com,23,Kiwi.com,654.09
+2026-09-13,321.64,Super.com,296.94,7.7,Super.com; Hotels In America,31,Kiwi.com,378.11
+2026-09-14,821.5,Super.com,689.84,16,Super.com; trivago DEALS; Hotels In America; pricetravel.com; Traveloka.com; Billabook.com; Evendo; Agoda; Priceline; Tripadvisor.com,28,Traveluro,1270.12
+2026-09-15,1537.12,"The Liberty, a Luxury Collection Hotel, Boston",1537.12,0,,8,Qantas Hotels,2142.93
+2026-09-16,1266.06,Super.com,742.91,41.3,Super.com; pricetravel.com; Hotels In America; Traveloka.com; Billabook.com; Evendo; Qantas Hotels; Agoda,25,Kiwi.com,1408.06
+2026-09-17,1046.5,Super.com,560.16,46.5,Super.com; trivago DEALS; Hotels In America; pricetravel.com; Traveloka.com; Billabook.com; Evendo; Qantas Hotels; Agoda; Priceline,26,Traveluro,1617.94
+2026-09-18,598.75,Booking.com,530.75,11.4,Booking.com; Super.com; trivago DEALS,20,Kiwi.com,704.09
+2026-09-19,618.03,Traveloka.com,615.96,0.3,Traveloka.com; Hotels.com,11,Evendo,660.43

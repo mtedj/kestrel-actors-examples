@@ -1,0 +1,11 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,186.75,Super.com,164.38,12,Super.com; trivago DEALS; Traveloka.com; Hotels In America; Etrip.net; Vio.com; dealbase.com; goseek.com; Reserving,32,Evendo,277.95
+2026-09-07,,Traveloka.com,169.33,,,9,Evendo,270.87
+2026-09-08,186.75,Super.com,156.38,16.3,Super.com; Preferred Hotels & Resorts; Kiwi.com; Hotels In America; Traveloka.com; Reserving,34,Evendo,277.95
+2026-09-09,209.25,Super.com,180.45,13.8,Super.com; Preferred Hotels & Resorts; Kiwi.com; Traveloka.com; Hotels In America; Etrip.net; Vio.com; goseek.com,32,Evendo,307.96
+2026-09-10,186.75,Traveloka.com,176.7,5.4,Traveloka.com; Super.com; Reserving,31,Evendo,277.95
+2026-09-13,194.25,Super.com,165.34,14.9,Super.com; Preferred Hotels & Resorts; Hotels In America; Traveloka.com; Kiwi.com,34,Evendo,287.96
+2026-09-14,374.25,Super.com,313.78,16.2,Super.com; Preferred Hotels & Resorts; Hotels In America; Traveloka.com; Michelin Guide Hotels; Kiwi.com; Traveluro,33,Evendo,527.97
+2026-09-15,441.88,Traveloka.com,400.89,9.3,Traveloka.com,11,Evendo,618.15
+2026-09-18,254.25,Super.com,213.7,15.9,Super.com; Preferred Hotels & Resorts; Kiwi.com; Traveloka.com; Hotels In America,36,Evendo,367.96
+2026-09-19,,Michelin Guide Hotels,388.05,,,1,Michelin Guide Hotels,388.05

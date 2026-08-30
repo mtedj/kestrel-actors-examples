@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,152.5,Etrip.net,129.54,15.1,Etrip.net; Vio.com; dealbase.com; goseek.com; Super.com; Kiwi.com; Evendo; trivago DEALS; TravelUP; Traveloka.com; Hotels In America; klook; Trip.com; Traveluro; Luxury Escapes,38,Qantas Hotels,167.07
+2026-09-07,115.6,Etrip.net,101.93,11.8,Etrip.net; Vio.com; goseek.com; Super.com; trivago DEALS; Kiwi.com; Evendo; Trip.com; Hotels In America; TravelUP; dealbase.com; Traveloka.com; klook,36,Qantas Hotels,127.25
+2026-09-08,115.6,trivago DEALS,102.28,11.5,trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Super.com; Trip.com; Traveluro; Evendo; Kiwi.com; TravelUP; Traveloka.com; Hotels In America; klook,37,Qantas Hotels,127.25
+2026-09-09,136.91,Evendo,118.76,13.3,Evendo; Traveloka.com; Hotels.com; müv AI; Agoda,11,eDreams,136.91
+2026-09-10,129.09,trivago DEALS,108.42,16,trivago DEALS; Etrip.net; Vio.com; goseek.com; Trip.com; Super.com; Kiwi.com; Evendo; Hotels In America; Traveloka.com; TravelUP; dealbase.com; Reserving; klook; Traveluro,39,Qantas Hotels,141.81
+2026-09-11,183.09,Traveluro,149.65,18.3,Traveluro; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Trip.com; Super.com; Kiwi.com; Evendo; Hotels In America; Traveloka.com; TravelUP; Reserving; klook,37,Qantas Hotels,200.07
+2026-09-12,167.2,Etrip.net,142.41,14.8,Etrip.net; Vio.com; Super.com; dealbase.com; goseek.com; Kiwi.com; trivago DEALS; Evendo; Hotels In America; Traveluro; Traveloka.com; TravelUP; BusinessHotels.com; Long Stay Discounts,34,Qantas Hotels,200.07
+2026-09-13,126.77,Evendo,111.98,11.7,Evendo; Traveloka.com; Hotels.com; CheapTickets.com; Closest Hotel; Expedia.com; Luxury Escapes; eDreams,12,Priceline,126.77
+2026-09-14,124,Traveluro,104.04,16.1,Traveluro; trivago DEALS; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Trip.com; Tripadvisor.com; Evendo; Hotels In America; klook; Traveloka.com; TravelUP; Clicktrip.com; Stayforlong.com,41,Tripening Hotels,132.25
+2026-09-15,124,Traveluro,104.04,16.1,Traveluro; trivago DEALS; Etrip.net; Vio.com; goseek.com; Kiwi.com; Super.com; Trip.com; Hotels In America; Evendo; TravelUP; klook; Traveloka.com,36,Tripening Hotels,132.25
+2026-09-16,124,Traveluro,104.04,16.1,Traveluro; trivago DEALS; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Trip.com; Hotels In America; Evendo; TravelUP; klook; Traveloka.com,38,Clicktrip.com,135.38
+2026-09-17,131.33,Evendo,117.4,10.6,Evendo; Traveloka.com; Hotels.com,12,eDreams,131.34
+2026-09-18,183.2,Traveluro,148.77,18.8,Traveluro; Etrip.net; Vio.com; dealbase.com; goseek.com; Super.com; trivago DEALS; Kiwi.com; Trip.com; Hotels In America; Evendo; klook; Traveloka.com; TravelUP; Luxury Escapes; BusinessHotels.com; Long Stay Discounts; pricetravel.com,36,Tripening Hotels,193.2
+2026-09-19,183.2,Traveluro,149.65,18.3,Traveluro; trivago DEALS; Kiwi.com; Super.com; Trip.com; Hotels In America; Evendo; TravelUP; klook; Traveloka.com; Luxury Escapes; pricetravel.com; BusinessHotels.com; Long Stay Discounts,32,Tripening Hotels,193.2

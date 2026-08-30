@@ -1,0 +1,12 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,214.55,Super.com,141.83,33.9,Super.com; Hotels In America; Billabook.com; Evendo; TravelUP; Long Stay Discounts; Wego; BusinessHotels.com; Hotelscombined.com; KAYAK.com; momondo.com; Hotel prive; trivago DEALS; Traveloka.com,27,Qantas Hotels,253.03
+2026-09-07,229.37,Super.com,163.3,28.8,Super.com; Hotels In America; Evendo; Billabook.com; Long Stay Discounts; BusinessHotels.com; KAYAK.com; Pilot; Traveloka.com; Hotel prive,26,Qantas Hotels,270.49
+2026-09-08,229.37,Super.com,165.13,28,Super.com; Hotels In America; Evendo; Billabook.com; Long Stay Discounts; Reserving; trivago DEALS; Hotelscombined.com; KAYAK.com; momondo.com; Traveloka.com; Hotel prive; Trip.com,28,Qantas Hotels,270.49
+2026-09-09,269.94,Evendo,201.64,25.3,Evendo; Traveloka.com; Hotels.com,12,Qantas Hotels,270.49
+2026-09-10,244.25,Super.com,174.51,28.6,Super.com; Traveluro; Evendo; Hotels In America; Tripadvisor.com; TravelUP; Billabook.com; Long Stay Discounts; Reserving; BusinessHotels.com; Hotelscombined.com; KAYAK.com; momondo.com; trivago DEALS; Bluepillow.com; Traveloka.com; trivago.com; Trip.com,34,Qantas Hotels,288.06
+2026-09-11,220.06,Super.com,148.58,32.5,Super.com; Hotels In America; Evendo; Billabook.com; TravelUP; Long Stay Discounts; BusinessHotels.com; Hotelscombined.com; KAYAK.com; momondo.com; trivago DEALS; Reserving; Pilot; Hotel prive; Traveloka.com; Trip.com,31,Qantas Hotels,259.52
+2026-09-12,220.06,Super.com,145.29,34,Super.com; Billabook.com; Evendo; Hotels In America; Long Stay Discounts; Reserving; BusinessHotels.com; Hotelscombined.com; KAYAK.com; momondo.com; Traveloka.com; Tripening Hotels,29,Hotel prive,272.52
+2026-09-13,320.3,Evendo,220.66,31.1,Evendo; Traveloka.com; Luxury Escapes; Qantas Hotels; Hotels.com,12,Priceline,320.31
+2026-09-17,428.66,Evendo,357.18,16.7,Evendo; Traveloka.com; Hotels.com,12,Qantas Hotels,429.53
+2026-09-18,210.77,Super.com,139.73,33.7,Super.com; Hotels In America; Billabook.com; Evendo; TravelUP; Long Stay Discounts; Reserving; Hotelscombined.com; KAYAK.com; Hotel prive; Pilot; Traveloka.com; Luxury Escapes; Tripening Hotels,27,Qantas Hotels,226.81
+2026-09-19,216.34,Super.com,144.15,33.4,Super.com; Billabook.com; Hotels In America; Evendo; Long Stay Discounts; BusinessHotels.com; Hotelscombined.com; KAYAK.com; Clicktrip.com; Hotel prive; Pilot; Traveloka.com; Closest Hotel; TravelUP; Luxury Escapes,29,Tripening Hotels,259.95

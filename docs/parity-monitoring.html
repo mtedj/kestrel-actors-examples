@@ -1,0 +1,35 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Rate parity monitoring for independent hotels — $49 a month</title>
+<meta name=description content="Every morning: which booking sites undercut your direct rate on Google Hotels, by how much, with the booking link. $49 a month per property, no contract."><link rel=stylesheet href="style.css">
+<style>.kpi{display:flex;gap:16px;margin:20px 0;flex-wrap:wrap}.kpi div{flex:1;min-width:140px;border:1px solid var(--line);border-radius:8px;padding:12px}.kpi b{font-size:26px;display:block}.bad{color:#c62828;font-weight:600}.price{border:2px solid var(--accent);border-radius:10px;padding:18px 22px;margin:24px 0}.price b.big{font-size:32px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}th{background:var(--code-bg)}</style></head><body>
+<div class=site><nav><a href="index.html">All actors</a> <a href="index.html#guides">Guides</a> <a href="comparison.html">Review scrapers compared</a> <a href="https://apify.com/kestrel" rel=noopener>Apify Store</a></nav>
+<h1>Rate parity monitoring for independent hotels</h1>
+<p class=lede>Every morning, before the revenue meeting: which booking sites are selling your rooms below your own website on Google Hotels, on which nights, by how much — with the booking link so you can trace the rate. One email. No dashboard to log into, no seat licence, no annual contract.</p>
+<h2>What it found at 44 independent US hotels this week</h2>
+<p>We ran the check on 44 well-known independents in New York, DC, Austin, Miami, LA, SF, Portland, Boston, Denver, New Orleans and Chicago — 14 consecutive check-in dates each, 1 night, 2 adults, exactly as a traveller comparing prices on Google sees it.</p>
+<div class=kpi><div><b>40 of 44</b>undercut on most nights where Google showed a direct rate</div><div><b>18</b>undercut by 20% or more on average</div><div><b>−60%</b>the worst single night (direct $521, cheapest site $208)</div><div><b>27</b>booking sites listed per property on average</div></div>
+<p>The undercutting sites are rarely Booking.com or Expedia. They are wholesale resellers — Super.com, Vio.com, Etrip, Traveluro, Evendo, Billabook and a few dozen others — selling inventory that leaked through a bed bank, and on several nights the major OTAs were under the direct rate too. A traveller on Google does not know the difference: they see your site at $239 and a site they have never heard of at $135.</p>
+<h2>What the daily email looks like</h2>
+<p>One table per property (yours and up to five competitors). This is a real night-by-night result for a 220-room independent hotel, name withheld:</p>
+<table><tr><th>Check-in</th><th>Direct rate</th><th>Cheapest site</th><th>Cheapest rate</th><th>vs direct</th><th>Sites below direct</th></tr>
+<tr><td>2026-09-06</td><td>$267</td><td>Evendo</td><td>$174</td><td class=bad>−35%</td><td>19 of 28</td></tr>
+<tr><td>2026-09-07</td><td>$229</td><td>Traveluro</td><td>$143</td><td class=bad>−38%</td><td>17 of 27</td></tr>
+<tr><td>2026-09-08</td><td>$229</td><td>Billabook.com</td><td>$140</td><td class=bad>−39%</td><td>18 of 27</td></tr>
+<tr><td>2026-09-09</td><td>$249</td><td>Super.com</td><td>$158</td><td class=bad>−37%</td><td>21 of 29</td></tr>
+<tr><td>2026-09-13</td><td>$239</td><td>Bluepillow.in</td><td>$135</td><td class=bad>−44%</td><td>22 of 30</td></tr>
+<tr><td>…</td><td></td><td></td><td></td><td></td><td></td></tr></table>
+<p>Each undercutting rate carries its booking link, so you can see which rate plan and which wholesaler is behind it. The subject line is the summary: <i>"undercut on 12 of 12 nights (worst −44% on 2026-09-13 via Bluepillow.in)"</i> — or <i>"direct rate in parity on all 14 nights"</i>, which is the email you actually want.</p>
+<div class=price><b class=big>$49 a month</b> per property, competitors included (up to five). Cancel any time.<br>
+Rate-shopping tools charge $119 to $400 a month for the same view, on an annual contract. This is one email a day that costs less than one night's undercut.<br><br>
+<b>How to start:</b> reply to the audit email you received, or <a href="https://apify.com/kestrel/hotel-rate-parity">run the check yourself on Apify</a> — the same engine, pay-per-property, about a cent a night, no subscription. We set the daily run up within a day of your reply; the first email arrives the next morning.</div>
+<h2>How it works</h2>
+<ul><li>Every morning we read the price comparison Google Hotels shows for your property and each competitor, for the next 14 check-in dates (or the window you choose), in your currency and market.</li>
+<li>Rates are the lowest each site shows for the stay — the number the traveller compares. Rate plans and room types differ between sites; the point is what the traveller is shown, not what you loaded.</li>
+<li>Nothing is booked, no rooms are held, no login to your systems is needed. It is public data, read the way a browser reads it.</li>
+<li>Your history accumulates: every run appends dated rows, so "how often were we undercut in September" is a filter, not a project.</li></ul>
+<h2>Questions</h2>
+<p><b>Can I add properties or change the comp set?</b> Reply to any digest email. Extra properties are $49 each; comp-set changes are free.<br>
+<b>Do you cover markets outside the US?</b> Yes — any market Google Hotels serves, in any currency it quotes.<br>
+<b>Can I get it in Slack or a spreadsheet instead of email?</b> Yes; the same run can post to Slack, Google Sheets or a webhook.<br>
+<b>Who runs this?</b> The team behind the <a href="index.html">kestrel actors</a> on Apify — hotel, flight and rental data tools priced per row. The parity check is <a href="https://apify.com/kestrel/hotel-rate-parity">public and open to run yourself</a>; the monitoring service is for hotels that would rather receive the answer than run the tool.</p>
+<p class=fine>No affiliation with Google or any booking site. We never sell or share your data; the digest is sent only to the addresses you give us.</p>
+</div></body></html>

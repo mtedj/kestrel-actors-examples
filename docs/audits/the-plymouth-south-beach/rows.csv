@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,159.02,Evendo,150.2,5.5,Evendo; müv AI; Traveloka.com; Hotels.com,14,Qantas Hotels,159.34
+2026-09-07,134.09,Traveluro,116.93,12.8,Traveluro; Super.com; trivago DEALS; Etrip.net; Vio.com; goseek.com; Kiwi.com; dealbase.com; Hotels In America; TravelUP; Evendo,37,Tripening Hotels,159.19
+2026-09-08,134.09,trivago DEALS,120.44,10.2,trivago DEALS; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Traveluro; Kiwi.com; Hotels In America; Evendo,38,Tripening Hotels,159.19
+2026-09-09,134.09,Traveluro,116.93,12.8,Traveluro; trivago DEALS; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Kiwi.com; Evendo,37,Tripening Hotels,159.19
+2026-09-10,141.59,The Plymouth South Beach,141.59,0,,11,Qantas Hotels,153.18
+2026-09-11,172.2,Traveluro,162.54,5.6,Traveluro; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Super.com,39,Tripening Hotels,224.44
+2026-09-12,180.2,Super.com,163.47,9.3,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Traveluro; Kiwi.com; Hotels In America,33,Qantas Hotels,225.14
+2026-09-13,177,Super.com,148.2,16.3,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; trivago DEALS; Traveluro; Evendo; Reserving; Booking.com; CheapTickets.com; Expedia.com; Hotelscombined.com; KAYAK.com; Orbitz.com; Priceline; Travelocity.com; Trip.com; Tripadvisor.com; momondo.com; TravelUP; Agoda; Long Stay Discounts; Traveloka.com; BusinessHotels.com; Closest Hotel; Michelin Guide Hotels; Wego,34,Kiwi.com,234.62
+2026-09-14,214.55,Evendo,200.32,6.6,Evendo; Traveloka.com; Hotels.com; CheapTickets.com; Expedia.com; eDreams,11,Qantas Hotels,214.99
+2026-09-15,284.19,Etrip.net,183.8,35.3,Etrip.net; Vio.com; goseek.com; Super.com; Traveluro; trivago DEALS; Hotels In America; Kiwi.com; TravelUP; Evendo; Tripadvisor.com; Booking.com; CheapTickets.com; Expedia.com; Hotels.com; Hotelscombined.com; KAYAK.com; Orbitz.com; Priceline; Travelocity.com; momondo.com; Trip.com; Agoda; Long Stay Discounts; Traveloka.com; eDreams; BusinessHotels.com; Closest Hotel; Wego; HomeToGo; Michelin Guide Hotels; Bluepillow.com; Qantas Hotels,34,The Plymouth South Beach,284.19
+2026-09-16,177,Super.com,144.41,18.4,Super.com; trivago DEALS; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveluro; Kiwi.com; Booking.com; CheapTickets.com; Expedia.com; Hotels.com; Hotelscombined.com; KAYAK.com; Orbitz.com; Priceline; Travelocity.com; Tripadvisor.com; momondo.com; TravelUP; Agoda; Trip.com; eDreams; Long Stay Discounts; Traveloka.com; BusinessHotels.com; Michelin Guide Hotels; Wego; trivago.com,34,Tripening Hotels,201.34
+2026-09-17,129,Traveluro,112.54,12.8,Traveluro; trivago DEALS; Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Evendo,33,Qantas Hotels,147.36
+2026-09-18,187.19,Traveloka.com,186.81,0.2,Traveloka.com; Hotels.com,11,Qantas Hotels,187.56
+2026-09-19,180.2,Super.com,155.43,13.7,Super.com; Hotels In America; Etrip.net; Vio.com; goseek.com; Traveluro; Kiwi.com; trivago DEALS; TravelUP,35,Evendo,223.61
