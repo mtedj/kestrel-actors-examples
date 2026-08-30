@@ -1,0 +1,7 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,,freecancellations.com,298.28,,,1,freecancellations.com,298.28
+2026-09-09,,Expedia.com,204.66,,,4,freecancellations.com,219.45
+2026-09-10,,Expedia.com,285.27,,,4,freecancellations.com,296.5
+2026-09-13,,Expedia.com,285.27,,,4,freecancellations.com,310.66
+2026-09-18,,Expedia.com,296.84,,,4,freecancellations.com,338
+2026-09-19,,Expedia.com,296.84,,,4,freecancellations.com,321.83

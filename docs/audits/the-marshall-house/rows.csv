@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,,Super.com,203.41,,,29,Qantas Hotels,298.7
+2026-09-07,,Super.com,192.3,,,28,Qantas Hotels,269.89
+2026-09-08,,Super.com,196.12,,,28,Qantas Hotels,281.42
+2026-09-09,,Traveloka.com,257.29,,,9,Qantas Hotels,281.42
+2026-09-10,,Super.com,196.12,,,26,Qantas Hotels,281.42
+2026-09-11,,Super.com,296.77,,,28,Qantas Hotels,424.3
+2026-09-12,,Super.com,305.69,,,28,Qantas Hotels,443.89
+2026-09-13,,Traveloka.com,366.61,,,9,Wego,439.55
+2026-09-14,,Super.com,310.59,,,28,Qantas Hotels,455.42
+2026-09-15,,Super.com,347.62,,,29,Qantas Hotels,513.03
+2026-09-16,,Super.com,360.77,,,28,Qantas Hotels,524.56
+2026-09-17,,Traveloka.com,459.41,,,9,Wego,517.75
+2026-09-18,,Super.com,330.02,,,23,Qantas Hotels,488.85
+2026-09-19,,Super.com,344.77,,,27,Qantas Hotels,499.21

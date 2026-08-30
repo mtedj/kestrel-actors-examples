@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,366.3,Traveloka.com,329.72,10,Traveloka.com,7,Agoda,433.61
+2026-09-07,164,Super.com,139.19,15.1,Super.com; Hotels In America; Etrip.net; Vio.com; goseek.com; Traveloka.com; Kiwi.com,21,Priceline,198.72
+2026-09-08,158,Super.com,137.3,13.1,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveloka.com,19,Agoda,200.77
+2026-09-09,185,Super.com,153.87,16.8,Super.com; Hotels In America; Etrip.net; Vio.com; goseek.com; Traveloka.com; Kiwi.com; dealbase.com; Luxury Escapes,24,Priceline,223.09
+2026-09-10,236.13,Traveloka.com,214.77,9,Traveloka.com,5,Agoda,282.44
+2026-09-11,257,Super.com,215.38,16.2,Super.com; Hotels In America; Etrip.net; Vio.com; dealbase.com; Traveloka.com,22,Priceline,318.55
+2026-09-12,287,Super.com,225.4,21.5,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveloka.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; trivago.com,20,Priceline,330.05
+2026-09-13,231,Super.com,183.23,20.7,Super.com; Hotels In America; Traveloka.com; Etrip.net; Vio.com; goseek.com; KAYAK.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,19,Priceline,265.64
+2026-09-14,270.69,Traveloka.com,257.12,5,Traveloka.com,6,eDreams,293.23
+2026-09-15,254,Super.com,192.91,24.1,Super.com; Etrip.net; Vio.com; Traveloka.com; Hotels In America; goseek.com; Hotelscombined.com; KAYAK.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,20,Agoda,293.92
+2026-09-16,299,Super.com,237.15,20.7,Super.com; Hotels In America; Traveloka.com; Hotelscombined.com; KAYAK.com; momondo.com; CheapTickets.com; Etrip.net; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Vio.com; goseek.com,20,Priceline,343.84
+2026-09-17,273,Super.com,211.58,22.5,Super.com; Hotels In America; Traveloka.com; Etrip.net; Vio.com; goseek.com; KAYAK.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com,19,Priceline,313.94
+2026-09-18,467.66,Traveloka.com,409.37,12.5,Traveloka.com; CheapTickets.com; Expedia.com; Hotels.com; eDreams,7,Agoda,543
+2026-09-19,454,Super.com,349.47,23,Super.com; Etrip.net; Vio.com; Hotels In America; Traveloka.com; goseek.com; Hotelscombined.com; KAYAK.com; momondo.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Trip.com,21,Priceline,522.09

@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,275.39,Billabook.com,225.44,18.1,Billabook.com; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotelscombined.com; KAYAK.com; momondo.com; Hotels In America; Kiwi.com; Priceline,32,Qantas Hotels,361.59
+2026-09-07,220.15,Etrip.net,194.47,11.7,Etrip.net; Vio.com; goseek.com; Hotelscombined.com; KAYAK.com; momondo.com; Super.com; trivago DEALS; Kiwi.com; Hotels In America; Priceline,33,Qantas Hotels,305.16
+2026-09-08,194.65,Super.com,169.43,13,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotelscombined.com; KAYAK.com; momondo.com; Hotels In America; Kiwi.com; Priceline; trivago DEALS,35,Qantas Hotels,272.63
+2026-09-09,271.14,Billabook.com,234.2,13.6,Billabook.com; Super.com; Hotelscombined.com; KAYAK.com; momondo.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Traveluro; Kiwi.com; trivago DEALS; Hotels In America; Priceline,36,Qantas Hotels,333.86
+2026-09-10,296.64,Super.com,251.98,15.1,Super.com; Vio.com; goseek.com; Billabook.com; Hotelscombined.com; KAYAK.com; momondo.com; Traveluro; Hotels In America; trivago DEALS; Priceline,31,Qantas Hotels,363.01
+2026-09-11,462.39,Hotelscombined.com,393.84,14.8,Hotelscombined.com; KAYAK.com; Super.com; Priceline; Vio.com; goseek.com; Traveluro; trivago DEALS; Luxury Escapes; Billabook.com; Hotels In America; Kiwi.com,32,Qantas Hotels,552.33
+2026-09-12,,Michelin Guide Hotels,462.39,,,1,Michelin Guide Hotels,462.39
+2026-09-13,215.9,Super.com,191.04,11.5,Super.com; Hotelscombined.com; KAYAK.com; momondo.com; goseek.com; dealbase.com; Hotels In America; Priceline; Traveloka.com; Traveluro,31,Booking.com,278.08
+2026-09-14,326.39,Super.com,301.11,7.7,Super.com; Billabook.com; Etrip.net; Vio.com; dealbase.com; goseek.com,32,BusinessHotels.com,465.2
+2026-09-15,313.64,Super.com,293.56,6.4,Super.com; Vio.com; dealbase.com; goseek.com; Billabook.com,36,Qantas Hotels,402.29
+2026-09-16,,Michelin Guide Hotels,441.14,,,1,Michelin Guide Hotels,441.14
+2026-09-17,317.89,Hotelscombined.com,291.89,8.2,Hotelscombined.com; KAYAK.com; dealbase.com; goseek.com; momondo.com; Super.com; Etrip.net; Vio.com; Billabook.com; Priceline; Traveluro,35,Qantas Hotels,408.64
+2026-09-18,,Michelin Guide Hotels,509.14,,,1,Michelin Guide Hotels,509.14
+2026-09-19,594,Michelin Guide Hotels,504.89,15,Michelin Guide Hotels,2,"The Vendue, Charleston's Art Hotel",594

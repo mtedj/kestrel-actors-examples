@@ -1,0 +1,13 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,223.34,Etrip.net,185.47,17,Etrip.net; Vio.com; goseek.com; Evendo; Traveluro; Trip.com; Stash Hotel Rewards; Expedia.co.in; Hotels.com,12,BusinessHotels.com,223.34
+2026-09-07,129,Super.com,93.51,27.5,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Traveluro; trivago DEALS; Hotels In America; Trip.com; Kiwi.com; Skyscanner; Evendo; Stash Hotel Rewards; Luxury Escapes; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; trivago.com,29,müv AI,129
+2026-09-08,159,Super.com,112.48,29.3,Super.com; Etrip.net; Vio.com; goseek.com; Traveluro; trivago DEALS; Hotels In America; Kiwi.com; Trip.com; Luxury Escapes; Evendo; Stash Hotel Rewards; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams,27,müv AI,159
+2026-09-09,169,Super.com,122.96,27.2,Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; trivago DEALS; Hotels In America; Stash Hotel Rewards; Reserving,23,müv AI,169
+2026-09-10,223.34,Etrip.net,164.05,26.5,Etrip.net; Vio.com; goseek.com; Trip.com; Traveluro; Stash Hotel Rewards; Expedia.co.in; Hotels.com,11,BusinessHotels.com,223.34
+2026-09-11,309,Super.com,235.95,23.6,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Trip.com; Evendo; Traveluro; trivago DEALS; Kiwi.com; Luxury Escapes,26,trivago.com,309
+2026-09-13,249,Super.com,185.26,25.6,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Evendo; trivago DEALS; Stash Hotel Rewards; Luxury Escapes; Trip.com; Kiwi.com,24,momondo.com,249
+2026-09-14,292.34,Etrip.net,238.86,18.3,Etrip.net; Vio.com; Traveluro; Evendo; Expedia.co.in; Hotels.com; Trip.com; Stash Hotel Rewards,11,BusinessHotels.com,292.34
+2026-09-15,249,Super.com,171.77,31,Super.com; goseek.com; Hotels In America; Etrip.net; Vio.com; Evendo; Stash Hotel Rewards; Luxury Escapes; Trip.com,23,momondo.com,249
+2026-09-16,249,Super.com,195.18,21.6,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveluro; trivago DEALS; Evendo; Kiwi.com; Stash Hotel Rewards; Luxury Escapes,28,Bluepillow.com,292.34
+2026-09-17,239,Super.com,161.09,32.6,Super.com; Etrip.net; Vio.com; goseek.com; Traveluro; Hotels In America; trivago DEALS; Kiwi.com; Evendo; Stash Hotel Rewards; Luxury Escapes,24,momondo.com,239
+2026-09-18,349.84,Etrip.net,258.75,26,Etrip.net; Vio.com; Traveluro; Evendo; Hotelscombined.in; Trip.com; Expedia.co.in; Hotels.com; Stash Hotel Rewards; Booking.com; BusinessHotels.com,12,Planters Inn,349.84

@@ -1,0 +1,11 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,,Expedia.co.in,406.14,,,7,Booking.com,498.8
+2026-09-07,337.3,Hotels.com,283.22,16,Hotels.com; Luxury Escapes; Skyscanner; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com; eDreams; Etrip.net; Vio.com; goseek.com,24,momondo.com,362.78
+2026-09-08,337.3,Hotels.com,283.22,16,Hotels.com; Luxury Escapes; Skyscanner; Expedia.com; eDreams; Etrip.net; Vio.com; goseek.com,20,Traveluro,385.36
+2026-09-09,347.3,Expedia.com,307.5,11.5,Expedia.com; Hotels.com; eDreams; Skyscanner; Super.com; Etrip.net; Vio.com; goseek.com; dealbase.com,22,Traveluro,388.89
+2026-09-10,347.3,Hotels.com,291.58,16,Hotels.com; Luxury Escapes; CheapTickets.com; Expedia.com; Orbitz.com; Travelocity.com; eDreams; Skyscanner; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com,25,trivago DEALS,391.55
+2026-09-12,577.28,Hotels.com,483.55,16.2,Hotels.com; Luxury Escapes; Expedia.com; Travelocity.com; eDreams; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Traveluro; trivago DEALS; Hotels In America,22,momondo.com,629.19
+2026-09-13,420.14,Expedia.co.in,375.82,10.5,Expedia.co.in; Wego; Hotels.com; Vio.com; goseek.com,8,Traveluro,461.16
+2026-09-14,467.3,Hotels.com,461.69,1.2,Hotels.com,25,Wego,588.12
+2026-09-15,397.3,Hotels.com,391.58,1.4,Hotels.com,23,Wego,498.8
+2026-09-17,477.64,Wego,471.97,1.2,Wego; Expedia.co.in; Hotels.com,8,Booking.com,524.31

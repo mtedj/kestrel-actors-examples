@@ -1,0 +1,14 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,259,Traveluro,216.8,16.3,Traveluro; trivago DEALS; Traveloka.com; Evendo,30,müv AI,286.28
+2026-09-07,259,Traveloka.com,229.49,11.4,Traveloka.com; Super.com; Kiwi.com,25,Michelin Guide Hotels,290
+2026-09-08,259,Traveloka.com,229.49,11.4,Traveloka.com; Super.com; Evendo,26,müv AI,286.28
+2026-09-09,269,Traveloka.com,237.45,11.7,Traveloka.com; Traveluro; trivago DEALS; Evendo,29,müv AI,296.28
+2026-09-10,259,Traveloka.com,229.49,11.4,Traveloka.com; Evendo; Traveluro; Kiwi.com; trivago DEALS,29,momondo.com,286.28
+2026-09-11,449,Hotels In America,391.72,12.8,Hotels In America; Super.com; Traveloka.com,29,momondo.com,506.28
+2026-09-12,469,Hotels In America,415.55,11.4,Hotels In America; Traveloka.com; Super.com,27,momondo.com,536.28
+2026-09-13,259,Traveloka.com,229.49,11.4,Traveloka.com; Evendo; goseek.com; Etrip.net; Vio.com,29,Bluepillow.com,314.27
+2026-09-15,259,Super.com,196.91,24,Super.com; Traveloka.com; Evendo,26,Michelin Guide Hotels,290
+2026-09-16,309,Super.com,223.51,27.7,Super.com; Traveloka.com; Traveluro; Evendo; trivago DEALS,28,müv AI,336.28
+2026-09-17,279,Super.com,204.13,26.8,Super.com; Traveloka.com; Traveluro; Evendo; trivago DEALS,29,Vio.com,344.56
+2026-09-18,579,Super.com,471.47,18.6,Super.com; Hotels In America; Traveloka.com; Kiwi.com,28,momondo.com,686.28
+2026-09-19,579,Hotels In America,494.88,14.5,Hotels In America; Super.com; Traveloka.com,28,momondo.com,686.28

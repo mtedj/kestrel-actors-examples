@@ -1,0 +1,13 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,160.2,Kasa the Altmayer Savannah,160.2,0,,18,Bluepillow.com,212.75
+2026-09-07,124.6,Kasa the Altmayer Savannah,124.6,0,,15,Bluepillow.com,166.75
+2026-09-08,178.98,Kasa the Altmayer Savannah,178.98,0,,9,Booking.com,201.25
+2026-09-09,262.55,Kasa the Altmayer Savannah,262.55,0,,15,Bluepillow.com,345
+2026-09-10,226.95,goseek.com,224.38,1.1,goseek.com; Etrip.net; Vio.com,13,Wego,255
+2026-09-12,184.11,goseek.com,183.23,0.5,goseek.com,6,Booking.com,207
+2026-09-13,262.55,Vio.com,247.5,5.7,Vio.com,9,trivago.com,295
+2026-09-14,262.55,Etrip.net,257.38,2,Etrip.net; Vio.com; goseek.com,14,eDreams,295
+2026-09-15,258.09,Kasa the Altmayer Savannah,258.09,0,,11,trivago.com,290
+2026-09-17,253.65,Etrip.net,237.68,6.3,Etrip.net; Vio.com,13,eDreams,285
+2026-09-18,191.34,Kasa the Altmayer Savannah,191.34,0,,12,Tripadvisor.com,215
+2026-09-19,262.55,Kasa the Altmayer Savannah,262.55,0,,10,trivago.com,295

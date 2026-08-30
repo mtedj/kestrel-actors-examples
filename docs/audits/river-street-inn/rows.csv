@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,228.88,Kiwi.com,187.3,18.2,Kiwi.com; KAYAK.com; momondo.com; Trip.com; Traveloka.com; Billabook.com; Wego; TravelUP; Evendo; Luxury Escapes; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; Closest Hotel; müv AI,26,Tripening Hotels,334.25
+2026-09-07,186.38,Hotelscombined.com,158.05,15.2,Hotelscombined.com; KAYAK.com; momondo.com; Long Stay Discounts; Traveloka.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; Luxury Escapes; Closest Hotel; TravelUP,20,BusinessHotels.com,231.5
+2026-09-08,217.2,Traveloka.com,200.44,7.7,Traveloka.com; Expedia.co.in; Hotels.com; Qantas Hotels; müv AI; Evendo,7,River Street Inn,217.2
+2026-09-09,186.38,Hotelscombined.com,158.05,15.2,Hotelscombined.com; KAYAK.com; momondo.com; Long Stay Discounts; Trip.com; Traveloka.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Tripadvisor.com; eDreams; Luxury Escapes; Closest Hotel; müv AI; TravelUP,24,BusinessHotels.com,231.5
+2026-09-10,186.38,Kiwi.com,146.04,21.6,Kiwi.com; Hotelscombined.com; KAYAK.com; momondo.com; Trip.com; Traveloka.com; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams; Luxury Escapes; Tripadvisor.com; Billabook.com; Closest Hotel; TravelUP; Wego,27,Tripening Hotels,272.08
+2026-09-11,279.88,Etrip.net,211.41,24.5,Etrip.net; Vio.com; goseek.com; Hotelscombined.com; KAYAK.com; trivago DEALS; Traveluro; dealbase.com; Trip.com; Billabook.com; Booking.com; Luxury Escapes; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; eDreams,30,BusinessHotels.com,350.41
+2026-09-12,314.95,Evendo,291.33,7.5,Evendo; Traveloka.com; Trip.com; Expedia.co.in; Hotels.com; Qantas Hotels,9,Tripening Hotels,381.27
+2026-09-13,347.88,Traveluro,265.64,23.6,Traveluro; trivago DEALS; KAYAK.com; Etrip.net; Vio.com; goseek.com; Billabook.com; Traveloka.com; Trip.com; Luxury Escapes,27,Tripening Hotels,498.17
+2026-09-14,458.38,Super.com,218.02,52.4,Super.com; Traveluro; trivago DEALS; Billabook.com; Traveloka.com; Evendo; TravelUP; Kiwi.com; Luxury Escapes,10,River Street Inn,458.38
+2026-09-15,,Super.com,427.55,,,7,müv AI,565.78
+2026-09-16,,Traveloka.com,316.93,,,6,müv AI,386.64
+2026-09-17,356.38,Traveluro,267.38,25,Traveluro; Kiwi.com; Etrip.net; Vio.com; dealbase.com; Trip.com; goseek.com; Billabook.com; Hotelscombined.com; KAYAK.com; momondo.com; Traveloka.com; Evendo; TravelUP; Luxury Escapes,29,BusinessHotels.com,447.69
+2026-09-18,339.38,Traveluro,256.08,24.5,Traveluro; trivago DEALS; Etrip.net; Trip.com; Vio.com; goseek.com; Billabook.com; KAYAK.com; Traveloka.com; Evendo; Luxury Escapes,26,BusinessHotels.com,426.08
+2026-09-19,356.38,Traveluro,276.08,22.5,Traveluro; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; KAYAK.com; Evendo; Billabook.com; Traveloka.com; Trip.com; Luxury Escapes,28,Tripening Hotels,500.27

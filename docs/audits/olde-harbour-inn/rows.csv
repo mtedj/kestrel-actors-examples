@@ -1,0 +1,12 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,,Skyscanner,267.8,,,10,BusinessHotels.com,313.19
+2026-09-07,,Hotels.com,202.44,,,25,BusinessHotels.com,269.5
+2026-09-08,,Hotels.com,202.44,,,28,BusinessHotels.com,269.5
+2026-09-09,,Expedia.co.in,260.2,,,9,goseek.com,277.36
+2026-09-10,,Hotels.com,202.44,,,26,BusinessHotels.com,269.5
+2026-09-11,,Agoda,334.5,,,14,BusinessHotels.com,389.66
+2026-09-12,,Agoda,334.5,,,10,Skyscanner,334.83
+2026-09-13,,Wego,236.73,,,12,goseek.com,273.09
+2026-09-15,,Hotels.com,227.86,,,25,BusinessHotels.com,324.11
+2026-09-18,,CheapTickets.com,290.31,,,26,BusinessHotels.com,389.66
+2026-09-19,,Hotels.com,272.94,,,27,BusinessHotels.com,389.66

@@ -1,0 +1,13 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-07,271.8,Super.com,171.44,36.9,Super.com; Etrip.net; Vio.com; goseek.com; trivago DEALS; Hotels In America; Traveloka.com; Evendo; Hotelscombined.com; KAYAK.com; Luxury Escapes; Qantas Hotels; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Reserving; Trip.com; eDreams; TravelUP; Agoda; Booking.com; HomeToGo; Priceline; Traveluro; müv AI,29,Tripening Hotels,305.08
+2026-09-08,,Super.com,173.51,,,25,Tripening Hotels,317.48
+2026-09-09,,Evendo,226.94,,,7,Agoda,295.05
+2026-09-10,,Super.com,200.76,,,27,Bluepillow.com,330.45
+2026-09-11,,Etrip.net,222.05,,,28,Tripening Hotels,426.66
+2026-09-12,387.23,Super.com,230.34,40.5,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Traveluro; Kiwi.com; trivago DEALS; Traveloka.com; Agoda; HomeToGo; Priceline; Reserving; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; TravelUP; Trip.com; eDreams; trivago.com; Qantas Hotels,24,Las Palomas,387.23
+2026-09-13,421.86,Etrip.net,249.19,40.9,Etrip.net; Vio.com; goseek.com; Super.com; Hotels In America; Traveluro; Kiwi.com; trivago DEALS; Evendo; Agoda; Booking.com; HomeToGo; Hotelscombined.com; KAYAK.com; Priceline; momondo.com; Traveloka.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; TravelUP; Trip.com; eDreams; Qantas Hotels,27,Las Palomas,421.86
+2026-09-14,329.52,Evendo,252.68,23.3,Evendo; Traveloka.com; Agoda; Priceline; CheapTickets.com; Expedia.com; Hotels.com; eDreams,9,Las Palomas,329.52
+2026-09-15,317.97,Etrip.net,194.56,38.8,Etrip.net; Vio.com; goseek.com; Super.com; Hotels In America; KAYAK.com; Traveloka.com; Traveluro; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; TravelUP; Reserving; Trip.com; eDreams; Qantas Hotels; trivago DEALS; Agoda; Booking.com; HomeToGo; Priceline,24,Las Palomas,317.97
+2026-09-16,433.41,Etrip.net,255.65,41,Etrip.net; Vio.com; goseek.com; Super.com; Hotels In America; trivago DEALS; Luxury Escapes; Kiwi.com; Evendo; Agoda; Booking.com; HomeToGo; Hotelscombined.com; KAYAK.com; Priceline; momondo.com; Traveloka.com; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; TravelUP; Trip.com; Traveluro; Tripadvisor.com; Qantas Hotels,28,Las Palomas,433.41
+2026-09-17,479,Super.com,339.47,29.1,Super.com; goseek.com; Vio.com; Hotels In America; Traveluro; trivago DEALS; Agoda; Booking.com; HomeToGo; Hotelscombined.com; KAYAK.com; Priceline; Reserving; momondo.com; Traveloka.com,25,Tripening Hotels,546.75
+2026-09-18,,Traveloka.com,397.55,,,6,eDreams,444.81

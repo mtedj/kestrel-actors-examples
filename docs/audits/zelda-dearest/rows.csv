@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,379,Super.com,343.97,9.2,Super.com; Vio.com,15,Qantas Hotels,485.75
+2026-09-07,349,Etrip.net,288.38,17.4,Etrip.net; Vio.com; goseek.com; Kiwi.com; Traveloka.com; Luxury Escapes,21,Qantas Hotels,395.16
+2026-09-08,349,Super.com,306.5,12.2,Super.com; Traveloka.com; Luxury Escapes; Etrip.net; Vio.com; Hotels In America,23,Qantas Hotels,395.16
+2026-09-09,299,Super.com,206.02,31.1,Super.com; Etrip.net; Vio.com; goseek.com; Kiwi.com; Traveloka.com; Hotels In America; CheapTickets.com; Expedia.com; Hotels.com; Orbitz.com; Travelocity.com; Trip.com; Wego; eDreams; Booking.com; Priceline; müv AI; Qantas Hotels,20,Zelda Dearest,299
+2026-09-10,279,Super.com,227.12,18.6,Super.com; Etrip.net; Vio.com; goseek.com; Traveloka.com; Hotels In America; Luxury Escapes,22,Qantas Hotels,315.91
+2026-09-11,489,Etrip.net,404.27,17.3,Etrip.net; Vio.com; goseek.com; Super.com; Kiwi.com; Traveloka.com; Hotels In America; Luxury Escapes,22,Qantas Hotels,553.68
+2026-09-12,479,Etrip.net,401.5,16.2,Etrip.net; Vio.com; goseek.com; Super.com; Traveloka.com; Hotels In America,22,Qantas Hotels,542.37
+2026-09-13,263.19,Zelda Dearest,263.19,0,,21,Qantas Hotels,372.52
+2026-09-14,279.19,Zelda Dearest,279.19,0,,20,Qantas Hotels,395.16
+2026-09-15,215.2,Super.com,208.73,3,Super.com,20,Qantas Hotels,304.58
+2026-09-16,335.19,Zelda Dearest,335.19,0,,20,Qantas Hotels,474.42
+2026-09-17,479.19,Zelda Dearest,479.19,0,,19,Qantas Hotels,678.26
+2026-09-18,479.19,Super.com,471.69,1.6,Super.com,18,Qantas Hotels,678.26
+2026-09-19,479.19,Zelda Dearest,479.19,0,,20,Qantas Hotels,678.26

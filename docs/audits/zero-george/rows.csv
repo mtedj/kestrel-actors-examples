@@ -1,0 +1,10 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-07,361,Super.com,292.05,19.1,Super.com; Etrip.net; Vio.com; goseek.com; Traveloka.com; Hotels In America; Kiwi.com; Luxury Escapes; Hotels.com; BusinessHotels.com; Skyscanner,26,Bluepillow.com,411.53
+2026-09-08,401,Etrip.net,326.11,18.7,Etrip.net; Vio.com; dealbase.com; Super.com; Hotels In America; Traveloka.com; Kiwi.com; Luxury Escapes; Hotels.com; BusinessHotels.com,27,Bookhotel.direct,999
+2026-09-09,501,Super.com,405.47,19.1,Super.com; Etrip.net; Vio.com; goseek.com; Kiwi.com; Hotels In America; Traveloka.com; Luxury Escapes; Hotels.com; BusinessHotels.com; Skyscanner,26,Bookhotel.direct,999
+2026-09-10,,Bookhotel.direct,999,,,1,Bookhotel.direct,999
+2026-09-13,,Wego,604.56,,,10,Bookhotel.direct,1138.81
+2026-09-14,651,Super.com,521.34,19.9,Super.com; Etrip.net; Vio.com; Traveloka.com; Hotels In America; Luxury Escapes; Hotels.com; BusinessHotels.com; Skyscanner,22,Wego,651.25
+2026-09-15,751,Super.com,605.44,19.4,Super.com; Etrip.net; Vio.com; Hotels In America; Traveloka.com; Luxury Escapes; Hotels.com; BusinessHotels.com; Skyscanner,22,Wego,751.25
+2026-09-16,751,Super.com,606.81,19.2,Super.com; Etrip.net; Vio.com; dealbase.com; Hotels In America; Traveloka.com; Luxury Escapes; Hotels.com; BusinessHotels.com; Skyscanner,23,Wego,751.25
+2026-09-17,,Bookhotel.direct,1138.81,,,1,Bookhotel.direct,1138.81

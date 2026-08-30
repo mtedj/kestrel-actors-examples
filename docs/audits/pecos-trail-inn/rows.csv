@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,189,Etrip.net,183.55,2.9,Etrip.net; Vio.com; dealbase.com; goseek.com; Evendo,17,Tripening Hotels,244.95
+2026-09-07,149,Evendo,144.66,2.9,Evendo; Vio.com; goseek.com,13,eDreams,178.65
+2026-09-08,,Evendo,188.31,,,5,eDreams,229.7
+2026-09-09,,Vio.com,162.79,,,12,eDreams,202.62
+2026-09-10,179,Super.com,145.27,18.8,Super.com,12,eDreams,213.88
+2026-09-11,189,Super.com,179.23,5.2,Super.com,16,Tripening Hotels,250.7
+2026-09-12,,Evendo,222.18,,,5,eDreams,256.88
+2026-09-13,169,goseek.com,166.93,1.2,goseek.com; Etrip.net; Vio.com,14,Tripening Hotels,217.34
+2026-09-14,,Evendo,163.48,,,13,eDreams,202.62
+2026-09-15,169,Super.com,157.06,7.1,Super.com; Evendo,12,eDreams,202.62
+2026-09-16,,Hotels.com,215.91,,,4,eDreams,229.7
+2026-09-17,179,Pecos Trail Inn,179,0,,13,eDreams,213.88
+2026-09-18,189,Super.com,184.41,2.4,Super.com,15,eDreams,225.83
+2026-09-19,209,Super.com,203.2,2.8,Super.com,14,eDreams,249.73

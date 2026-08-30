@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,219,Etrip.net,203.47,7.1,Etrip.net; Vio.com; dealbase.com; goseek.com,26,trivago.com,249.23
+2026-09-07,239.34,Hotels.com,224.65,6.1,Hotels.com; CheapTickets.com; Expedia.com; Luxury Escapes; eDreams,7,Priceline,240.73
+2026-09-08,239,Hotels.com,225.86,5.5,Hotels.com; Super.com,22,trivago.com,272.23
+2026-09-09,239,Etrip.net,221.7,7.2,Etrip.net; Vio.com; goseek.com; Hotels.com; Super.com,27,müv AI,272.23
+2026-09-10,245,Hotels.com,231.5,5.5,Hotels.com; Etrip.net; Vio.com; goseek.com; Super.com,22,Closest Hotel,279.16
+2026-09-11,331.49,Hotels.com,311.25,6.1,Hotels.com; CheapTickets.com; Closest Hotel; Expedia.com; Luxury Escapes; eDreams,8,Priceline,332.88
+2026-09-12,619,Etrip.net,535.75,13.4,Etrip.net; Vio.com; goseek.com; Super.com; dealbase.com; Hotels.com; Closest Hotel; trivago.com; Hotels In America,25,Bluepillow.com,709.97
+2026-09-13,239,goseek.com,204.34,14.5,goseek.com; Super.com; Hotels.com; Hotels In America; Luxury Escapes,22,Closest Hotel,272.23
+2026-09-14,209,Super.com,187.27,10.4,Super.com; Etrip.net; Vio.com; goseek.com; Hotels.com; Luxury Escapes; Hotels In America; Kiwi.com,24,Closest Hotel,237.7
+2026-09-15,273.9,CheapTickets.com,272.23,0.6,CheapTickets.com; Expedia.com; Hotels.com; Trip.com; eDreams,7,Priceline,275.3
+2026-09-16,249,Super.com,211.37,15.1,Super.com; Etrip.net; Vio.com; goseek.com; Hotels.com; Luxury Escapes; Hotels In America; Qantas Hotels,25,Closest Hotel,283.77
+2026-09-17,539,Super.com,415,23,Super.com; Hotels In America; Etrip.net; Vio.com; Hotels.com; Closest Hotel,22,Traveluro,549.53
+2026-09-18,269,Super.com,238.33,11.4,Super.com; Etrip.net; Vio.com; goseek.com; Hotels In America; Hotels.com; Kiwi.com,25,Closest Hotel,306.8
+2026-09-19,711.61,Hotels.com,668.56,6,Hotels.com; CheapTickets.com; Closest Hotel; Expedia.com; eDreams,7,Priceline,713

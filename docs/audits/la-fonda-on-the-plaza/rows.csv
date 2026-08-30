@@ -1,0 +1,13 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,389,Super.com,249.38,35.9,Super.com; dealbase.com; goseek.com; Hotels In America; Etrip.net; Vio.com; Evendo; trivago DEALS; Traveloka.com; TravelUP; Trip.com; Luxury Escapes,25,Qantas Hotels,404.09
+2026-09-07,269,Super.com,175.38,34.8,Super.com; trivago DEALS; Etrip.net; Vio.com; goseek.com; Hotels In America; Evendo; dealbase.com; Kiwi.com; Trip.com; Traveloka.com; TravelUP; Luxury Escapes,26,Qantas Hotels,279.42
+2026-09-09,413.97,Evendo,313,24.4,Evendo; Traveloka.com; Bookhotel.direct; CheapTickets.com; Expedia.com; Hotels.com; Luxury Escapes; Priceline; eDreams,11,müv AI,425.05
+2026-09-10,519,Super.com,342,34.1,Super.com; Traveluro; Etrip.net; Vio.com; dealbase.com; trivago DEALS; Trip.com; Hotels In America; Evendo; Traveloka.com; Luxury Escapes,27,Qantas Hotels,549.51
+2026-09-11,554,Super.com,338.56,38.9,Super.com; trivago DEALS; dealbase.com; Skyscanner; Hotels In America; Evendo; Vio.com; Trip.com; Traveloka.com; Kiwi.com; TravelUP; Wego; BusinessHotels.com; CheapTickets.com; Expedia.com; HomeToGo; Hotels.com; Orbitz.com; Travelocity.com; eDreams; Luxury Escapes; Qantas Hotels,25,Priceline,554
+2026-09-13,,Bookhotel.direct,489,,,1,Bookhotel.direct,489
+2026-09-14,369,Super.com,238.27,35.4,Super.com; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Trip.com; Skyscanner; Kiwi.com; Evendo; Traveloka.com; TravelUP; Hotelscombined.com; KAYAK.com; Luxury Escapes,31,Qantas Hotels,393.7
+2026-09-15,409,Super.com,265.36,35.1,Super.com; Traveluro; trivago DEALS; Etrip.net; Vio.com; goseek.com; dealbase.com; Hotels In America; Evendo; Trip.com; Traveloka.com; Luxury Escapes,28,Qantas Hotels,424.86
+2026-09-16,517.75,Amimir.com,345.17,33.3,Amimir.com; Evendo; Traveloka.com; CheapTickets.com; Expedia.com; Luxury Escapes; eDreams; müv AI,9,La Fonda on the Plaza,517.75
+2026-09-17,549,Super.com,346.86,36.8,Super.com; Traveluro; trivago DEALS; goseek.com; Etrip.net; Vio.com; dealbase.com; Hotels In America; Evendo; Trip.com; Kiwi.com; TravelUP; Traveloka.com; Luxury Escapes; müv AI; Wego,28,Qantas Hotels,570.3
+2026-09-18,539,Super.com,352.28,34.6,Super.com; Traveluro; trivago DEALS; Etrip.net; Vio.com; Hotels In America; Evendo; Kiwi.com; Trip.com; Traveloka.com; TravelUP; Luxury Escapes; Stayforlong.com; TRAVELKO,28,Qantas Hotels,559.92
+2026-09-19,559,Super.com,359.47,35.7,Super.com; Traveluro; trivago DEALS; Etrip.net; Vio.com; dealbase.com; goseek.com; Hotels In America; Evendo; Trip.com; Traveloka.com; TravelUP; Luxury Escapes,27,Qantas Hotels,580.69

@@ -1,0 +1,13 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,613.19,Traveloka.com,611.29,0.3,Traveloka.com,13,Tripening Hotels,646.59
+2026-09-07,408,Reserving,407.88,0,Reserving,23,Tripening Hotels,500.33
+2026-09-08,408,Reserving,407.88,0,Reserving,22,Qantas Hotels,476.15
+2026-09-09,408,Hotel Bardo Savannah,408,0,,23,Tripening Hotels,500.33
+2026-09-10,498.19,Traveloka.com,496.71,0.3,Traveloka.com,10,Tripening Hotels,524.69
+2026-09-11,758,Reserving,757.78,0,Reserving,22,Qantas Hotels,879.47
+2026-09-12,768,Priceline,728,5.2,Priceline; Wego; Kiwi.com; Reserving,19,Qantas Hotels,891
+2026-09-13,388,Reserving,387.89,0,Reserving,23,Evendo,481.46
+2026-09-14,682.19,Traveloka.com,680.06,0.3,Traveloka.com,9,Evendo,758.23
+2026-09-15,648,Hotel Bardo Savannah,648,0,,20,Qantas Hotels,752.72
+2026-09-16,738,Hotel Bardo Savannah,738,0,,22,Qantas Hotels,856.45
+2026-09-19,578,Hotel Bardo Savannah,578,0,,23,Evendo,721.48

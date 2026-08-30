@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,329,Hotels In America,267.09,18.8,Hotels In America; Etrip.net; Vio.com; goseek.com; Kiwi.com; Super.com; Traveloka.com,26,Qantas Hotels,368.13
+2026-09-07,269,Traveluro,212.27,21.1,Traveluro; trivago DEALS; dealbase.com; goseek.com; Etrip.net; Vio.com; Hotels In America; Super.com; Traveloka.com,28,eDreams,288.28
+2026-09-08,269,Hotels In America,218.88,18.6,Hotels In America; dealbase.com; Super.com; Etrip.net; Vio.com; goseek.com; Traveloka.com; Hotelscombined.com; KAYAK.com; momondo.com,34,Kiwi.com,692.16
+2026-09-09,299,Hotels In America,242.37,18.9,Hotels In America; Etrip.net; Vio.com; dealbase.com; goseek.com; Kiwi.com; Super.com,29,Qantas Hotels,327.01
+2026-09-10,799,Hotels In America,656.72,17.8,Hotels In America; Vio.com; goseek.com; Kiwi.com; Super.com; Traveloka.com,26,eDreams,848.28
+2026-09-11,539,Hotels In America,461.27,14.4,Hotels In America; Etrip.net; Vio.com; goseek.com; Super.com; KAYAK.com; Traveloka.com,28,Qantas Hotels,614.88
+2026-09-12,615,Hotels In America,531.59,13.6,Hotels In America; Etrip.net; Vio.com; goseek.com; Super.com,26,eDreams,688.28
+2026-09-13,299,Hotelscombined.com,285.86,4.4,Hotelscombined.com; KAYAK.com; Traveloka.com; Evendo; Kiwi.com,24,Qantas Hotels,327.01
+2026-09-14,505,Super.com,496.98,1.6,Super.com,27,Traveluro,621.03
+2026-09-15,505,The Restoration Charleston,505,0,,29,Qantas Hotels,594.31
+2026-09-16,459,The Restoration Charleston,459,0,,28,Traveluro,621.03
+2026-09-17,385,Hotels In America,383.09,0.5,Hotels In America,27,Qantas Hotels,512.06
+2026-09-18,579,The Restoration Charleston,579,0,,29,Qantas Hotels,789.65
+2026-09-19,699,The Restoration Charleston,699,0,,23,Traveluro,915.78

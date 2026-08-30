@@ -1,0 +1,15 @@
+check_in,official_price,min_source,min_price,undercut_pct,undercut_by,n_sources,max_source,max_price
+2026-09-06,237.15,Super.com,228.2,3.8,Super.com,26,Qantas Hotels,320.72
+2026-09-07,152.15,Super.com,149.48,1.8,Super.com,26,Qantas Hotels,202.4
+2026-09-08,152.15,Super.com,150.05,1.4,Super.com,27,Qantas Hotels,202.4
+2026-09-09,160.65,Super.com,154.62,3.8,Super.com,27,Qantas Hotels,215.76
+2026-09-10,203.15,Hotelscombined.com,185.54,8.7,Hotelscombined.com; KAYAK.com; momondo.com; Super.com; Etrip.net; Vio.com; goseek.com,26,Qantas Hotels,275.02
+2026-09-11,339.15,Super.com,337.3,0.5,Super.com,25,Qantas Hotels,448.67
+2026-09-12,356.15,Hotelscombined.com,326.28,8.4,Hotelscombined.com; KAYAK.com; momondo.com,23,Qantas Hotels,476.33
+2026-09-13,194.65,Hotelscombined.com,177.7,8.7,Hotelscombined.com; KAYAK.com; momondo.com; Super.com,24,Qantas Hotels,245.28
+2026-09-14,194.65,Hotelscombined.com,169.9,12.7,Hotelscombined.com; KAYAK.com; momondo.com; HomeToGo; Super.com; Etrip.net; Vio.com; dealbase.com; goseek.com,29,Qantas Hotels,249.66
+2026-09-15,194.65,Hotelscombined.com,169.9,12.7,Hotelscombined.com; KAYAK.com; momondo.com; Super.com; Etrip.net; Vio.com; goseek.com,26,Qantas Hotels,249.66
+2026-09-16,194.65,Super.com,191.52,1.6,Super.com,29,Qantas Hotels,258.35
+2026-09-17,319,Super.com,281.31,11.8,Super.com; Priceline; Hotels In America; Hotels.com; Luxury Escapes,20,Qantas Hotels,381.5
+2026-09-18,449,KAYAK.com,367.02,18.3,KAYAK.com; Super.com; Priceline; Traveluro; Hotels.com; Hotels In America,18,Qantas Hotels,527.03
+2026-09-19,449,Super.com,384.56,14.4,Super.com; Priceline; Traveluro; Hotels.com; Hotels In America,22,Qantas Hotels,537.77
