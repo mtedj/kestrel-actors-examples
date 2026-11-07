@@ -1,0 +1,99 @@
+{
+  "title": "SEC Filings - EDGAR Forms, Dates & 公司公告",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal working input: {\"ciks\": [\"320193\"], \"forms\": [], \"sinceDate\": \"\", \"untilDate\": \"\"}. Default maximum 20 paid filing rows; only delivered rows billed.",
+  "properties": {
+    "ciks": {
+      "title": "ciks",
+      "type": "array",
+      "description": "SEC company CIK numbers as strings, e.g. [\"320193\"] for Apple. Leading zeroes accepted. Ticker symbols are not supported. One page budget per company.",
+      "default": [
+        "320193"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "sectionCaption": "Source targets / 数据来源"
+    },
+    "forms": {
+      "title": "forms",
+      "type": "array",
+      "description": "Optional exact SEC form names, e.g. [\"10-K\", \"10-Q\"]. Empty [] includes all forms. Filtered filings are not billed.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20
+    },
+    "sinceDate": {
+      "title": "sinceDate",
+      "type": "string",
+      "description": "Inclusive start date, e.g. \"2026-01-01\", for filing_date, not report_date. Empty means no lower bound. Free filter within maxPages.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "untilDate": {
+      "title": "untilDate",
+      "type": "string",
+      "description": "Inclusive end date, e.g. \"2026-12-31\", for filing_date, not report_date. Empty means no upper bound. Free filter within maxPages.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the entire run, after filters and exclusions. Example: 20. May return fewer when source pages end or maxPages is reached.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "maxPages": {
+      "title": "maxPages",
+      "type": "integer",
+      "description": "Maximum source pages per target, 1–20; default 3. One current submissions file plus older archive files per CIK; a file often contains around 1,000 filings. Filters are free; maxResults can be lower than this scan budget.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "includeKeywords": {
+      "title": "includeKeywords",
+      "type": "array",
+      "description": "Case-insensitive OR substring filter on id (normalized CIK:accession_number), e.g. [\"320193\"] for the CIK part of Apple filing IDs. Empty [] disables it. Does not search company names, document descriptions or filing body text. Applied before billing within the page budget; not a source search or semantic classifier.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "sectionCaption": "Filters and repeat runs / 筛选与去重"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Copy prior output id values here to skip before billing. id is normalized CIK:accession_number. Empty [] disables it. This also suppresses changes to existing IDs.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "SHA-256 content_hash values from previous output to skip unchanged snapshots before billing. Example: copy returned hashes. Empty [] disables it. Changed counters or content can produce a new paid snapshot.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

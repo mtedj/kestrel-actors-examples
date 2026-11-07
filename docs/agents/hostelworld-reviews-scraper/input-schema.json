@@ -1,0 +1,137 @@
+{
+  "title": "Hostelworld Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Hostelworld property URLs",
+      "type": "array",
+      "description": "Hostelworld property pages, e.g. [\"https://www.hostelworld.com/hostels/p/15529/home-lisbon-hostel/\"] (the older hosteldetails.php form works too). Every URL form carries the numeric property id, so no page is loaded first. Use for \"reviews of this hostel\". A URL from another site ends the run with the reason on the run card and nothing charged. One of startUrls or propertyIds is required.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.hostelworld.com/hostels/p/15529/home-lisbon-hostel/"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hostels",
+      "sectionDescription": "Hostelworld property URLs and/or Hostelworld's numeric property ids; one of the two is required. A URL and its id are the same hostel, harvested once."
+    },
+    "propertyIds": {
+      "title": "Hostelworld property ids",
+      "type": "array",
+      "description": "Hostelworld's numeric property ids, e.g. [\"15529\", \"1150\"]: the number in /hostels/p/<id>/ and the property_id on an earlier run's rows. The fastest input for scheduled runs over a known list. An id Hostelworld no longer serves costs nothing and is reported as a status row with status \"not_found\". One of startUrls or propertyIds is required.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerProperty": {
+      "title": "Max reviews per hostel",
+      "type": "integer",
+      "description": "Reviews fetched per hostel in reviewsSort order, e.g. 50 (default 100). 0 = every review the hostel has (Hostelworld pages them 50 at a time; a busy hostel has a few thousand, i.e. several dollars). The main cost control: at most N x $0.004 per hostel. minRating, maxRating, groupTypes, sinceDate and requireText apply to these N fetched rows, so set 0 to scan a whole history; for \"the 20 worst reviews\" set 20 with reviewsSort \"rating\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 100,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per hostel, in which order, and which are worth paying for. Every filter here runs before billing: a filtered review is never charged."
+    },
+    "reviewsSort": {
+      "title": "Review order",
+      "type": "string",
+      "description": "The order Hostelworld returns reviews in: \"-date\" (default, newest first; the only order in which sinceDate stops paging early), \"date\" (oldest first), \"rating\" (lowest rated first: use with a small maxReviewsPerProperty for \"the worst reviews\" or a complaints feed), \"-rating\" (highest rated first). These four are the only values the API honours.",
+      "editor": "select",
+      "enum": [
+        "-date",
+        "date",
+        "rating",
+        "-rating"
+      ],
+      "enumTitles": [
+        "Newest first",
+        "Oldest first",
+        "Lowest rated first",
+        "Highest rated first"
+      ],
+      "default": "-date"
+    },
+    "sinceDate": {
+      "title": "Only reviews published on or after",
+      "type": "string",
+      "description": "Empty (default) = no date limit. \"2026-09-01\" (YYYY-MM-DD) or relative to the day the run starts: \"30 days\", \"2 weeks\", \"6 months\". Use for \"only new reviews\" on a schedule: with the default newest-first order the run stops reading once a whole page predates the date, so a daily run reads one page per hostel. Older reviews are never billed.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this score",
+      "type": "integer",
+      "description": "0 (default) = no ceiling. 1-100 = keep only reviews whose 0-100 overall score is at or below it, e.g. 70 for \"negative reviews\", \"complaints\", \"what guests disliked\" (rating_5 = score / 20, so 70 is 3.5 stars). Combine with reviewsSort \"rating\" so the worst arrive first. Applied to the rows fetched, before billing; filtered reviews are never billed.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0
+    },
+    "minRating": {
+      "title": "Only reviews at or above this score",
+      "type": "integer",
+      "description": "0 (default) = no floor. 1-100 = keep only reviews scored at or above it, e.g. 90 for \"praise\", \"the raves\", quotes for marketing. Combine with maxRating for a band (minRating must not be above maxRating). Applied before billing; filtered reviews are never billed.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0
+    },
+    "groupTypes": {
+      "title": "Who was travelling",
+      "type": "array",
+      "description": "Empty (default) = every guest. Otherwise keep only these group types, e.g. [\"FEMALE\"] for \"what solo female travellers say\": MALE and FEMALE (solo travellers), COUPLE, ALLFEMALEGROUP, ALLMALEGROUP, MIXEDGROUP, FAMILY; friendly spellings work (solo_female, female_group, mixed_group, couples, family). Hostelworld has no server-side filter, so the pages are still read; filtered reviews are never billed.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "requireText": {
+      "title": "Only reviews with a written text",
+      "type": "boolean",
+      "description": "false (default) = every review. true = drop score-only reviews (empty text) before billing. Hostelworld reviews nearly always carry a sentence or two, so this rarely removes much; set it when every billed row must carry text.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includePropertyRow": {
+      "title": "Include a hostel row",
+      "type": "boolean",
+      "description": "true (DEFAULT) = one free row per hostel (type \"property\") with name, type, city, country, address, coordinates, star rating, aggregate 0-100 score and sub-ratings, total ratings, facilities, what it is best for, lowest nightly price and the solo/couples/groups split of reviewers. No charge; the record is read either way (it names the review rows). false = review and status rows only.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Hostel row"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) run in parallel, 1-16, e.g. 2 (default 2). More is faster; each session is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.1-5, e.g. 1 (default 1). Hostelworld's API answered 10 of 10 at 1/s from one datacenter IP; 1-2 is comfortable.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 5,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy datacenter group is enough and is the default: Hostelworld's public JSON API answers plain requests with no key, no login and no bot gate. Residential works too and costs more.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Hostelworld hostel reviews. Minimal input: {\"propertyIds\": [\"15529\"]} or {\"startUrls\": [\"https://www.hostelworld.com/hostels/p/15529/home-lisbon-hostel/\"]}; one of the two is required. maxReviewsPerProperty defaults to 100 at $0.004 per review delivered; includePropertyRow defaults to true and is free. minRating, maxRating, groupTypes, sinceDate and requireText filter BEFORE billing. Review text is Hostelworld's single machine-translated English set."
+}

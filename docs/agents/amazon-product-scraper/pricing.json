@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "product": {
+      "eventTitle": "Product row",
+      "eventDescription": "One product's details from its public page (row keys asin, title, brand, price = buybox price, list_price, currency, availability, in_stock, prime, rating, ratings_count, 5_star_pct to 1_star_pct = histogram, images, features = bullets, description, category, details = details table, bsr = Best Sellers Rank, sold_by, variations_count): $4 per 1,000 products, one page fetch each. No buybox price or no rank still delivers the row (price or bsr null); inStockOnly or maxPrice skip paying for those. Not charged: products dropped by inStockOnly or maxPrice, unknown ASINs (404), pages Amazon blocked, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:37.791Z"
+}

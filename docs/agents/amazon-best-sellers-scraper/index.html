@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Amazon Best Sellers Scraper: Top 100 by Category, New Releases | kestrel</title><meta name="description" content="Amazon Best Sellers and New Releases charts by category in 20 marketplaces, every rank: 2 pages = the Top 100. One row per chart entry: best seller rank (BSR), ASIN, title, price, rating, ratings count, image. Free: minimum rating filter, top-N cap. Track sales rank daily, spot trending products."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/amazon-best-sellers-scraper</p><h1>Amazon Best Sellers Scraper: Top 100 by Category, New Releases</h1><p class="intro">Amazon Best Sellers and New Releases charts by category in 20 marketplaces, every rank: 2 pages = the Top 100. One row per chart entry: best seller rank (BSR), ASIN, title, price, rating, ratings count, image. Free: minimum rating filter, top-N cap. Track sales rank daily, spot trending products.</p>
+<p><a class="button" href="https://apify.com/kestrel/amazon-best-sellers-scraper">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-best-sellers-scraper</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-amazon-best-sellers-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-best-sellers-scraper&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.2.2; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/amazon-best-sellers-scraper&quot;,
+  &quot;input&quot;: {
+    &quot;categories&quot;: [
+      &quot;electronics&quot;
+    ],
+    &quot;chart&quot;: &quot;bestsellers&quot;,
+    &quot;pages&quot;: 1,
+    &quot;maxResultsPerCategory&quot;: 3
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>product</code></td><td>$0.004</td><td>One entry of a Best Sellers or New Releases chart (row keys rank, asin, title, url, chart, category, page, price, currency, rating, ratings_count, image, domain): $4 per 1,000 entries. A chart page is 50 ranks, so one category&#x27;s Top 100 (pages 2, the default) is 100 rows, $0.40. Price is null where the chart prints none; an entry whose tile Amazon withholds still comes with rank, ASIN and URL. Not charged: entries removed by minRating or maxResultsPerCategory, an ASIN already delivered from another category, categories that return nothing, failed categories, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/amazon-best-sellers-scraper/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.2.2. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

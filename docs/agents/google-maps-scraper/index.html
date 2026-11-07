@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Google Maps Scraper — Leads, Emails, Phone Numbers &amp; Contacts | kestrel</title><meta name="description" content="Google Maps places and business leads by keyword and location: phone, website, rating, hours, place ID. Optional website emails and social links. Email-only mode bills only delivered places with emails. Count after free filters: no website, low rated, unclaimed. Newly seen place monitoring."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/google-maps-scraper</p><h1>Google Maps Scraper — Leads, Emails, Phone Numbers &amp; Contacts</h1><p class="intro">Google Maps places and business leads by keyword and location: phone, website, rating, hours, place ID. Optional website emails and social links. Email-only mode bills only delivered places with emails. Count after free filters: no website, low rated, unclaimed. Newly seen place monitoring.</p>
+<p><a class="button" href="https://apify.com/kestrel/google-maps-scraper">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-scraper</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-google-maps-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-scraper&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.3.3; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/google-maps-scraper&quot;,
+  &quot;input&quot;: {
+    &quot;searches&quot;: [
+      &quot;coffee shop&quot;
+    ],
+    &quot;locations&quot;: [
+      &quot;Austin, TX&quot;
+    ],
+    &quot;maxPlacesPerSearch&quot;: 3
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>place</code></td><td>$0.004</td><td>One Google Maps place delivered as a full row, every detail included: phone, website, rating, review count, hours, address parts, coordinates (row keys place_id, cid, google_maps_url, name, category, phone, website, rating, review_count, opening_hours, address, street, city, postal_code, country_code, lat, lng, is_closed_permanently). $4 per 1,000 places. All filters are free and run BEFORE this charge: places your filters reject, duplicates, places an earlier monitored run delivered, empty or failed searches and unknown locations cost $0. No start fee, proxy and compute included in the event price; charged count always equals delivered rows. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.</td></tr><tr><td><code>contact-found</code></td><td>$0.003</td><td>When enrichContacts (or onlyWithEmail) is on: $3 per 1,000 places where an email or social/WhatsApp link is found on the place&#x27;s own website, in addition to the $4 per 1,000 base place fee (row keys emails, email_primary, phones_from_site, contact_page_url, facebook, instagram, linkedin, x, youtube, tiktok, whatsapp, enrichment_status). No website, unreachable website, phone-only findings or no contact found = no contact fee. At the historical 50% contact yield, 1,000 enriched places cost about $5.50 total ($4 base + $1.50 contacts); yield is not guaranteed. With onlyWithEmail, each delivered place has an email and costs $0.007 total: 50 delivered places cost $0.35; places without an email are omitted and free. Proxy and compute are included in these event prices.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/google-maps-scraper/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.3.3. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

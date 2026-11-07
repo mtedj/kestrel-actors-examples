@@ -1,0 +1,16 @@
+{
+  "actor": "kestrel/airbnb-reviews-scraper",
+  "input": {
+    "locationQueries": [
+      "Lisbon, Portugal"
+    ],
+    "maxListingsPerQuery": 3,
+    "maxReviewsPerListing": 3,
+    "reviewsSort": "most_recent"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

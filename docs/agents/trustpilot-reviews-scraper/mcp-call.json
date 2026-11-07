@@ -1,0 +1,16 @@
+{
+  "actor": "kestrel/trustpilot-reviews-scraper",
+  "input": {
+    "companyDomains": [
+      "www.booking.com"
+    ],
+    "maxReviewsPerCompany": 3,
+    "sort": "most_recent",
+    "languages": "all"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

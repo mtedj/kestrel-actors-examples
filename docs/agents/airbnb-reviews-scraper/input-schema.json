@@ -1,0 +1,133 @@
+{
+  "title": "Airbnb Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Airbnb URLs",
+      "type": "array",
+      "description": "Airbnb listing URLs (https://www.airbnb.com/rooms/12345678) or search URLs (https://www.airbnb.com/s/Lisbon--Portugal/homes?room_types[]=Entire home/apt): a search URL harvests the reviews of every listing it returns, up to maxListingsPerQuery, with its filters kept. Use for \"reviews of this listing\". A URL from another site is rejected before anything is charged. Default empty.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which listings",
+      "sectionDescription": "Point at listings directly, or at a place and let the run find them. At least one of the three."
+    },
+    "listingIds": {
+      "title": "Listing ids",
+      "type": "array",
+      "description": "Numeric Airbnb listing ids, e.g. [\"11562247\", \"45307024\"] (the number in /rooms/<id>): the fastest input when the listings are known — your portfolio, a comp set. A listing named twice (id and URL, or id and place) is harvested and billed once. Default empty.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "locationQueries": {
+      "title": "Places",
+      "type": "array",
+      "description": "Places as typed on Airbnb, e.g. [\"Lisbon, Portugal\"], [\"Algarve\"]: the reviews of every listing Airbnb returns for the place, up to maxListingsPerQuery. A place Airbnb does not recognise is reported as an unknown_area status row and costs nothing. Use for \"Airbnb reviews for a city\", competitor and market research.",
+      "editor": "stringList",
+      "prefill": [
+        "Lisbon, Portugal"
+      ],
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxListingsPerQuery": {
+      "title": "Max listings per place",
+      "type": "integer",
+      "description": "Listings to take from each place or search URL before harvesting their reviews, 1 to 280, e.g. 50 (default 20). The bill for a place is at most maxListingsPerQuery × maxReviewsPerListing reviews. Ignored for listingIds and listing URLs.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 280,
+      "prefill": 5,
+      "default": 20
+    },
+    "maxReviewsPerListing": {
+      "title": "Max reviews per listing",
+      "type": "integer",
+      "description": "0 = every review the listing has (Airbnb pages them 50 at a time; 300 from one listing verified). N = the first N in reviewsSort order, e.g. 20 (default 100). The main cost control: $0.005 per review delivered. The free listing row's reviews_total says how many exist.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5000,
+      "prefill": 20,
+      "default": 100,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per listing, in what order, and which ratings to keep: this is where the bill is decided."
+    },
+    "reviewsSort": {
+      "title": "Order",
+      "type": "string",
+      "description": "Which reviews come first: \"most_recent\" (default, the one to schedule), \"highest_rated\", \"lowest_rated\" (complaints first), \"most_relevant\" (Airbnb's own order). Use \"lowest_rated\" with minRating for a complaints feed.",
+      "enum": [
+        "most_recent",
+        "highest_rated",
+        "lowest_rated",
+        "most_relevant"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Highest rated",
+        "Lowest rated",
+        "Most relevant"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "minRating": {
+      "title": "Only reviews at or below this rating",
+      "type": "integer",
+      "description": "0 (default) = keep every review. 1 to 5 = keep only reviews rated AT OR BELOW this star rating, e.g. 3 for \"negative reviews\" (1, 2 and 3 stars). Reviews above it are dropped before billing: a 441-review listing returned 4 rows under minRating 3. Use with reviewsSort \"lowest_rated\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "locale": {
+      "title": "Language",
+      "type": "string",
+      "description": "Language for Airbnb's translations (text_localized), e.g. \"en\" (default), \"es\", \"fr\", \"de\", \"pt\", \"it\", \"ja\". Every row also carries the original text and the language it was written in. Use for \"reviews translated into Spanish\".",
+      "editor": "textfield",
+      "default": "en",
+      "sectionCaption": "Language and context",
+      "sectionDescription": "Translations and the free per-listing row."
+    },
+    "includeListingRow": {
+      "title": "Include a listing row",
+      "type": "boolean",
+      "description": "true (default) = also emit one free listing row per listing with name, URL, reviews_total and reviews_fetched, so you can see how many reviews exist. false = review and status rows only. Never charged.",
+      "editor": "checkbox",
+      "default": true
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy settings; required, Airbnb blocks datacentre traffic that is not rotated. Keep the default {\"useApifyProxy\": true}.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, e.g. 4 (default 4). Each is paced at perIp requests per second; more sessions = a faster run at the same cost.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3, e.g. 1 (default 1). Airbnb tolerates about 1 per second per IP; raise it only when a run is slow and not being throttled.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    }
+  },
+  "required": [],
+  "description": "Airbnb reviews. Minimal input: {\"listingIds\": [\"11562247\"], \"maxReviewsPerListing\": 50}. One of listingIds / startUrls / locationQueries is required. The bill is listings × maxReviewsPerListing at $0.005 per review (default 100 per listing; 0 = every review); minRating 3 keeps only reviews rated 3 or below and bills only those."
+}

@@ -1,0 +1,353 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "id"
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "type"
+      },
+      "ticker": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ticker"
+      },
+      "date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "date"
+      },
+      "timestamp": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "timestamp"
+      },
+      "exchange_timezone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "exchange timezone"
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "currency"
+      },
+      "exchange": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "exchange"
+      },
+      "instrument_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "instrument type"
+      },
+      "open": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "open"
+      },
+      "high": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "high"
+      },
+      "low": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "low"
+      },
+      "close": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "close"
+      },
+      "volume": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "volume"
+      },
+      "adjusted_close": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "adjusted close"
+      },
+      "dividend": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "dividend"
+      },
+      "split_ratio": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "split ratio"
+      },
+      "split_numerator": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "split numerator"
+      },
+      "split_denominator": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "split denominator"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "url"
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "change"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "fetched at"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "ticker",
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "adjusted_close",
+          "dividend",
+          "split_ratio",
+          "currency"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "ticker": {
+            "label": "Ticker",
+            "format": "text"
+          },
+          "date": {
+            "label": "Date",
+            "format": "text"
+          },
+          "open": {
+            "label": "Open",
+            "format": "text"
+          },
+          "high": {
+            "label": "High",
+            "format": "text"
+          },
+          "low": {
+            "label": "Low",
+            "format": "text"
+          },
+          "close": {
+            "label": "Close",
+            "format": "text"
+          },
+          "volume": {
+            "label": "Volume",
+            "format": "text"
+          },
+          "adjusted_close": {
+            "label": "Adjusted Close",
+            "format": "text"
+          },
+          "dividend": {
+            "label": "Dividend",
+            "format": "text"
+          },
+          "split_ratio": {
+            "label": "Split Ratio",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "all": {
+      "title": "All fields",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "ticker",
+          "date",
+          "timestamp",
+          "exchange_timezone",
+          "currency",
+          "exchange",
+          "instrument_type",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "adjusted_close",
+          "dividend",
+          "split_ratio",
+          "split_numerator",
+          "split_denominator",
+          "url",
+          "change",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "ticker": {
+            "label": "Ticker",
+            "format": "text"
+          },
+          "date": {
+            "label": "Date",
+            "format": "text"
+          },
+          "timestamp": {
+            "label": "Timestamp",
+            "format": "text"
+          },
+          "exchange_timezone": {
+            "label": "Exchange Timezone",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "exchange": {
+            "label": "Exchange",
+            "format": "text"
+          },
+          "instrument_type": {
+            "label": "Instrument Type",
+            "format": "text"
+          },
+          "open": {
+            "label": "Open",
+            "format": "text"
+          },
+          "high": {
+            "label": "High",
+            "format": "text"
+          },
+          "low": {
+            "label": "Low",
+            "format": "text"
+          },
+          "close": {
+            "label": "Close",
+            "format": "text"
+          },
+          "volume": {
+            "label": "Volume",
+            "format": "text"
+          },
+          "adjusted_close": {
+            "label": "Adjusted Close",
+            "format": "text"
+          },
+          "dividend": {
+            "label": "Dividend",
+            "format": "text"
+          },
+          "split_ratio": {
+            "label": "Split Ratio",
+            "format": "text"
+          },
+          "split_numerator": {
+            "label": "Split Numerator",
+            "format": "text"
+          },
+          "split_denominator": {
+            "label": "Split Denominator",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

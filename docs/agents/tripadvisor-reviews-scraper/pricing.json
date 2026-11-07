@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One TripAdvisor hotel review: 1-5 bubbles, six sub-ratings, management response (row keys review_id, rating, title, text, sub_ratings, language, original_language, stay_date, trip_type, reviewer_name, photos, helpful_votes, response): $5 per 1,000 reviews, once per language site; maxReviewsPerHotel 100 (default) caps a hotel at $0.50 per language. Not charged: the hotel row (rating, review count, city ranking, address, amenities), reviews removed by maxRating, tripTypes, sinceDate, requireText or includeTranslated, hotels with no reviews, unknown ids, duplicate targets, failed pages and status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:12.013Z"
+}

@@ -1,0 +1,8 @@
+{
+  "locationQueries": [
+    "Lisbon, Portugal"
+  ],
+  "maxListingsPerQuery": 3,
+  "maxReviewsPerListing": 3,
+  "reviewsSort": "most_recent"
+}

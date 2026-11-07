@@ -1,0 +1,9 @@
+{
+  "startUrls": [
+    "https://example.com"
+  ],
+  "width": 1440,
+  "height": 900,
+  "fullPage": true,
+  "maxResults": 3
+}

@@ -1,0 +1,130 @@
+{
+  "title": "Trip.com Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Trip.com hotel URLs",
+      "type": "array",
+      "description": "Trip.com hotel pages, e.g. [\"https://www.trip.com/hotels/lisbon-hotel-detail-2561632/valverde-hotel/\"]; any trip.com country subdomain (us., uk., …) works. The numeric id sits after hotel-detail- in the URL, so no page is read; a URL without it is read once for its hotelId. Hotel names are not accepted: find the hotel on trip.com and pass its URL or id. Give at least one of startUrls or hotelIds.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.trip.com/hotels/lisbon-hotel-detail-2561632/valverde-hotel/"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels (URL or id, at least one)",
+      "sectionDescription": "Trip.com hotel URLs and/or Trip.com's numeric hotel ids. A URL and the id of the same hotel are read once. Hotel names are not accepted."
+    },
+    "hotelIds": {
+      "title": "Trip.com hotel ids",
+      "type": "array",
+      "description": "Trip.com's numeric hotel ids, e.g. [\"2561632\"] — the number after hotel-detail- in any hotel URL, and the hotel_id on an earlier run's rows. Use to re-read the same hotels every day. An id Trip.com does not know is reported in a status row as an error and costs nothing.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerHotel": {
+      "title": "Max reviews per hotel",
+      "type": "integer",
+      "description": "The main cost control: reviews delivered per hotel, e.g. 50; default 200 (up to $0.80 per hotel at $0.004 a review). 0 = every review the hotel has (at most 20,000 per hotel per run; large hotels run to thousands, so 0 can cost $10+). Reviews come in reviewsSort order: 50 with \"most_recent\" = the 50 newest. languages applies BEFORE this cap (filtered by Trip.com); maxRating and requireText AFTER it — pair maxRating with reviewsSort \"lowest_rated\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 200,
+      "sectionCaption": "How many reviews, in what order, which languages"
+    },
+    "reviewsSort": {
+      "title": "Order",
+      "type": "string",
+      "description": "\"most_recent\" (default), \"highest_rated\", \"lowest_rated\" or \"most_relevant\" — Trip.com's own orders. Use \"lowest_rated\" with maxReviewsPerHotel 50 for \"the 50 worst reviews\" or with maxRating for complaints; \"most_recent\" for a scheduled feed (each run re-reads the newest N — dedupe on review_id).",
+      "enum": [
+        "most_recent",
+        "highest_rated",
+        "lowest_rated",
+        "most_relevant"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Highest rated",
+        "Lowest rated",
+        "Most relevant"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "languages": {
+      "title": "Review languages",
+      "type": "array",
+      "description": "Review languages to keep, by name, e.g. [\"English\"] or [\"English\", \"Chinese\"]; empty (default) = every language. Known names: English, Chinese, Japanese, Korean, German, French, Spanish, Russian, Thai, Turkish, any name the free hotel row lists for that hotel, or a Trip.com language id. Filtered by Trip.com before fetching, so skipped reviews cost nothing. Trip.com carries many Chinese reviews from Ctrip (携程): this is how to keep or drop them. An unknown name ends the run, nothing charged.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this score",
+      "type": "number",
+      "description": "Only reviews at or below this score on Trip.com's 0-10 scale, e.g. 6 for complaints; 0 (default) = every score. Use for \"negative reviews\", \"complaints\", \"what guests dislike\". Reviews above the score are never delivered or charged, but they count against maxReviewsPerHotel: set reviewsSort \"lowest_rated\" so the cap is spent on low scores.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0,
+      "sectionCaption": "Filters — applied before billing",
+      "sectionDescription": "Reviews these remove are never delivered or charged. Both are applied after maxReviewsPerHotel, so pair maxRating with reviewsSort \"lowest_rated\"; languages is applied by Trip.com itself, before the cap."
+    },
+    "requireText": {
+      "title": "Only reviews with a written comment",
+      "type": "boolean",
+      "description": "true = deliver and pay only for reviews with written text (Trip.com reviews almost always have some; this guards the rest). Default false. Applied after maxReviewsPerHotel.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeHotelRow": {
+      "title": "Include a hotel row",
+      "type": "boolean",
+      "description": "true (default) = also one free row per hotel (type \"hotel\"): name, stars, address, city, country (from one extra request to the hotel page), overall rating and rating word, the four sub-scores, review_count, and the languages and travel types its reviews come in, with counts. Never charged. For \"hotel ratings without the reviews\" keep this true and set maxReviewsPerHotel 1 (one review, $0.004).",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Free extras"
+    },
+    "locale": {
+      "title": "Site locale",
+      "type": "string",
+      "description": "Trip.com locale for labels, e.g. \"en-US\" (default), \"en-GB\", \"ja-JP\", \"ko-KR\", \"zh-HK\", \"de-DE\". Sets the language of rating words and travel types only; review text is delivered as written, never translated, with language on every row. Not a filter: use languages to choose review languages.",
+      "editor": "textfield",
+      "default": "en-US",
+      "sectionCaption": "Language of labels"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, default 4. More is faster; each is paced separately by perIp. Leave the default unless runs are throttled.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3, default 1 (Trip.com tolerated bursts of 20 from one IP in testing). Lower it only if a run is throttled.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true}; the default datacenter group works for Trip.com. A refused call answers 200 with no review block — the actor detects that shape and retries on a fresh IP, so a throttled hotel is never reported as having no reviews. No browser, no login, no client-side token.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Trip.com (Ctrip) hotel reviews. Minimal input: {\"startUrls\": [\"https://www.trip.com/hotels/lisbon-hotel-detail-2561632/valverde-hotel/\"]} or {\"hotelIds\": [\"2561632\"]} — one of the two; hotel names are not accepted. maxReviewsPerHotel defaults to 200 (up to $0.80 per hotel at $0.004 a review): set it lower for a scheduled feed, 0 for every review."
+}

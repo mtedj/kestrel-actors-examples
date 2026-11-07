@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Google Play reviews",
+  "description": "Three row types share one dataset: review (one user review, charged), app (context for an app in a language and country, free) and status (per app, language and country, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Google Play reviews",
+      "description": "One row per review, plus per-app rows and per-job status rows. Charged rows are billed as delivered; app and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its filtered/duplicate/error tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

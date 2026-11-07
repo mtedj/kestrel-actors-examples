@@ -1,0 +1,7 @@
+{
+  "imageUrls": [
+    "https://raw.githubusercontent.com/tesseract-ocr/test/main/testing/phototest.tif"
+  ],
+  "language": "eng",
+  "maxResults": 3
+}

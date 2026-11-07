@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/google-autocomplete-keywords",
+  "input": {
+    "queries": [
+      "keyword research"
+    ],
+    "maxSuggestionsPerSeed": 3,
+    "maxRequests": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

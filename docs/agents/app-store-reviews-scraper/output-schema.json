@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "App Store reviews",
+  "description": "Three row types share one dataset: review (one customer review, charged), app (context for an app on a storefront, free) and status (per app and country, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "App Store reviews",
+      "description": "One row per customer review, plus per-app rows and per-app-and-country status rows. Charged rows are billed as delivered; app and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its filtered/duplicate/error tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

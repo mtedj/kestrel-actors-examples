@@ -1,0 +1,540 @@
+{
+  "actorSpecification": 1,
+  "title": "Agoda prices",
+  "description": "Three row types share one dataset: hotel (one property with its cheapest rate for the stay, charged when priced), calendar (one check-in date of a property's price calendar, charged when priced) and status (per destination or property, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "hotel",
+          "calendar",
+          "status"
+        ],
+        "description": "Row type: hotel, calendar or status."
+      },
+      "mode": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "destination (from a location search) or property (a named hotel)."
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input this row came from: the destination, URL, id or name."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the input the row reports on."
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda locale the request used."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda's numeric property id."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Property name in the requested locale."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Agoda property page."
+      },
+      "property_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel, Apartment, Hostel, Resort…"
+      },
+      "stars": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Star rating, 1-5; null when Agoda shows none."
+      },
+      "review_score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Combined guest score across every review source Agoda aggregates, 0-10."
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews behind review_score."
+      },
+      "agoda_score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Guest score from Agoda's own reviews only, 0-10."
+      },
+      "agoda_review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Agoda's own review count."
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City name."
+      },
+      "city_id": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Agoda city id (reusable in locationQueries)."
+      },
+      "area": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Neighbourhood or area."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country name."
+      },
+      "country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO 3166-1 alpha-2 country code."
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Property latitude."
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Property longitude."
+      },
+      "check_in": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-in date the price is quoted for (YYYY-MM-DD)."
+      },
+      "check_out": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-out date."
+      },
+      "nights": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Length of stay."
+      },
+      "adults": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Adults the price is quoted for."
+      },
+      "children": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Children the price is quoted for."
+      },
+      "rooms": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Rooms the price is quoted for."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO currency of every price in the row."
+      },
+      "price_nightly": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Cheapest rate per room per night before taxes and fees — Agoda's default display price."
+      },
+      "price_nightly_with_taxes": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same nightly rate with taxes and fees included."
+      },
+      "price_total": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total for the whole booking (all rooms, all nights) before taxes and fees. Calendar rows: nightly price × nights."
+      },
+      "price_total_with_taxes": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total for the whole booking with taxes and fees included."
+      },
+      "crossed_out_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The struck-through nightly price when Agoda shows a discount; null otherwise."
+      },
+      "available_rooms": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Rooms left at the cheapest rate, as Agoda reports it."
+      },
+      "cancellation": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda's cancellation term for the cheapest rate: FreeCancellation, NonRefundable or SpecialConditions."
+      },
+      "free_cancellation": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the cheapest rate is free to cancel."
+      },
+      "free_cancellation_until": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Deadline for free cancellation when Agoda states one."
+      },
+      "breakfast_included": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when Agoda flags breakfast in the cheapest rate's benefits."
+      },
+      "benefit_ids": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "integer"
+        },
+        "description": "Agoda's benefit ids attached to the cheapest rate (breakfast, free WiFi, parking…), raw."
+      },
+      "supplier_id": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Agoda's id for the supplier of the cheapest rate."
+      },
+      "payment_model": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "How the cheapest rate is paid, e.g. MerchantCommission."
+      },
+      "sold_out": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when Agoda lists the property but has no rate for the stay (row is free)."
+      },
+      "rank": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Position in the destination's results under `sort` (1 = first). Null for named properties."
+      },
+      "sort": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The sort the destination search used."
+      },
+      "price_source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "search — the price came from Agoda's search results for the stay."
+      },
+      "trend": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Calendar rows: Agoda's Low, Normal or High flag for the date."
+      },
+      "rank_in_window": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Calendar rows: 1 = the cheapest check-in date in the window."
+      },
+      "cheapest_in_window": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Calendar rows: true on the cheapest date of the window."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_results, sold_out, not_found or error."
+      },
+      "hotels": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: priced hotel rows delivered for this input."
+      },
+      "sold_out_hotels": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: properties listed but unpriced for the stay (free, written only with includeSoldOut)."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: priced hotels a filter removed (never billed)."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: result pages read for a destination."
+      },
+      "calendar_days": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: calendar rows delivered for a property."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: properties already delivered by an earlier input in this run."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why an input failed."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC time the row was collected."
+      }
+    }
+  },
+  "views": {
+    "hotels": {
+      "title": "Hotels",
+      "description": "Every priced hotel row for the stay, in result order.",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "stars",
+          "review_score",
+          "price_nightly",
+          "price_total_with_taxes",
+          "currency",
+          "free_cancellation",
+          "city",
+          "area",
+          "check_in",
+          "nights",
+          "rank",
+          "url"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {
+            "label": "Page",
+            "format": "link"
+          },
+          "price_nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "price_total_with_taxes": {
+            "label": "Total incl. taxes",
+            "format": "number"
+          }
+        }
+      }
+    },
+    "cheapest": {
+      "title": "Cheapest first",
+      "description": "Priced hotels with the lowest nightly rate at the top.",
+      "transformation": {
+        "fields": [
+          "price_nightly",
+          "hotel_name",
+          "stars",
+          "review_score",
+          "cancellation",
+          "available_rooms",
+          "currency",
+          "city",
+          "url"
+        ],
+        "filter": {
+          "type": "hotel",
+          "sold_out": false
+        },
+        "orderBy": [
+          {
+            "field": "price_nightly",
+            "direction": "asc"
+          }
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "url": {
+            "label": "Page",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "title": "Price calendar",
+      "description": "Per-date prices for named properties, cheapest date ranked first.",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "check_in",
+          "nights",
+          "price_nightly",
+          "price_total",
+          "currency",
+          "trend",
+          "rank_in_window",
+          "cheapest_in_window"
+        ],
+        "filter": {
+          "type": "calendar"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "description": "One row per destination or property: what was delivered, filtered, sold out or failed.",
+      "transformation": {
+        "fields": [
+          "target",
+          "mode",
+          "status",
+          "hotels",
+          "sold_out_hotels",
+          "filtered",
+          "pages",
+          "calendar_days",
+          "duplicates",
+          "error"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

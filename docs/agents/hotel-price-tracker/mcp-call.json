@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/hotel-price-tracker",
+  "input": {
+    "hotels": [
+      "https://www.google.com/travel/hotels/entity/ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE"
+    ],
+    "checkIn": "30 days",
+    "days": 1,
+    "nights": 1,
+    "currency": "USD"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

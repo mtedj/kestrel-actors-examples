@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/hostelworld-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.hostelworld.com/hostels/p/15529/home-lisbon-hostel/"
+    ],
+    "maxReviewsPerProperty": 3,
+    "reviewsSort": "-date"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

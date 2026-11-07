@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Booking.com prices",
+  "description": "Three row types share one dataset: hotel (one property with its price for the stay, charged when priced), room (one room and rate combination, charged, only with includeRooms) and status (per destination or property, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Booking.com prices",
+      "description": "One row per property with the stay total and nightly rate, optional room-rate rows, and status rows. Charged rows are billed as delivered; unpriced properties and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its filtered and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

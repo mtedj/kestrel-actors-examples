@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-google-maps-reviews-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-reviews-scraper"
+    }
+  }
+}

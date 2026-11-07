@@ -1,0 +1,326 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "id"
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "type"
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "query"
+      },
+      "pin_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "pin id"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "title"
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "description"
+      },
+      "alt_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "alt text"
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "image url"
+      },
+      "image_width": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "image width"
+      },
+      "image_height": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "image height"
+      },
+      "image_orientation": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "image orientation"
+      },
+      "image_signature": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "image signature"
+      },
+      "destination_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "destination url"
+      },
+      "destination_domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "destination domain"
+      },
+      "source_domain_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "source domain label"
+      },
+      "board_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "board name"
+      },
+      "created_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "created at"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "url"
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "source url"
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "change"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "fetched at"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "query",
+          "title",
+          "image_url",
+          "image_orientation",
+          "destination_domain",
+          "destination_url",
+          "board_name",
+          "created_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "query": {
+            "label": "Query",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "image_url": {
+            "label": "Image Url",
+            "format": "text"
+          },
+          "image_orientation": {
+            "label": "Image Orientation",
+            "format": "text"
+          },
+          "destination_domain": {
+            "label": "Destination Domain",
+            "format": "text"
+          },
+          "destination_url": {
+            "label": "Destination Url",
+            "format": "text"
+          },
+          "board_name": {
+            "label": "Board Name",
+            "format": "text"
+          },
+          "created_at": {
+            "label": "Created At",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "all": {
+      "title": "All fields",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "query",
+          "pin_id",
+          "title",
+          "description",
+          "alt_text",
+          "image_url",
+          "image_width",
+          "image_height",
+          "image_orientation",
+          "image_signature",
+          "destination_url",
+          "destination_domain",
+          "source_domain_label",
+          "board_name",
+          "created_at",
+          "url",
+          "source_url",
+          "change",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "query": {
+            "label": "Query",
+            "format": "text"
+          },
+          "pin_id": {
+            "label": "Pin Id",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "description": {
+            "label": "Description",
+            "format": "text"
+          },
+          "alt_text": {
+            "label": "Alt Text",
+            "format": "text"
+          },
+          "image_url": {
+            "label": "Image Url",
+            "format": "text"
+          },
+          "image_width": {
+            "label": "Image Width",
+            "format": "text"
+          },
+          "image_height": {
+            "label": "Image Height",
+            "format": "text"
+          },
+          "image_orientation": {
+            "label": "Image Orientation",
+            "format": "text"
+          },
+          "image_signature": {
+            "label": "Image Signature",
+            "format": "text"
+          },
+          "destination_url": {
+            "label": "Destination Url",
+            "format": "text"
+          },
+          "destination_domain": {
+            "label": "Destination Domain",
+            "format": "text"
+          },
+          "source_domain_label": {
+            "label": "Source Domain Label",
+            "format": "text"
+          },
+          "board_name": {
+            "label": "Board Name",
+            "format": "text"
+          },
+          "created_at": {
+            "label": "Created At",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "Source Url",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

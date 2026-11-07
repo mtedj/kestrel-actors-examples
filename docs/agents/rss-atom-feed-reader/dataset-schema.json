@@ -1,0 +1,202 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "source_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "feed_url": {
+        "type": "string"
+      },
+      "feed_title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "author": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "published_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "updated_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "categories": {
+        "type": "array"
+      },
+      "fetched_at": {
+        "type": "string"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "id",
+          "source_id",
+          "feed_url",
+          "feed_title",
+          "title",
+          "url",
+          "text"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "source_id": {
+            "label": "Source Id",
+            "format": "text"
+          },
+          "feed_url": {
+            "label": "Feed Url",
+            "format": "text"
+          },
+          "feed_title": {
+            "label": "Feed Title",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "text": {
+            "label": "Text",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "all_fields": {
+      "title": "All Fields",
+      "transformation": {
+        "fields": [
+          "type",
+          "id",
+          "source_id",
+          "feed_url",
+          "feed_title",
+          "title",
+          "url",
+          "text",
+          "author",
+          "published_at",
+          "updated_at",
+          "categories",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "source_id": {
+            "label": "Source Id",
+            "format": "text"
+          },
+          "feed_url": {
+            "label": "Feed Url",
+            "format": "text"
+          },
+          "feed_title": {
+            "label": "Feed Title",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "text": {
+            "label": "Text",
+            "format": "text"
+          },
+          "author": {
+            "label": "Author",
+            "format": "text"
+          },
+          "published_at": {
+            "label": "Published At",
+            "format": "text"
+          },
+          "updated_at": {
+            "label": "Updated At",
+            "format": "text"
+          },
+          "categories": {
+            "label": "Categories",
+            "format": "array"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "boards": [
+    "anthropic"
+  ],
+  "maxJobsPerBoard": 3,
+  "maxResults": 3
+}

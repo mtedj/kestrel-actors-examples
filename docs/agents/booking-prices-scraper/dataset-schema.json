@@ -1,0 +1,644 @@
+{
+  "actorSpecification": 1,
+  "title": "Booking.com prices",
+  "description": "One row per property with its price for the stay, optional room-rate rows, and one status row per target.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "title": "Row type",
+        "description": "hotel (a property with its price for the stay), room (one room and rate combination, only with includeRooms) or status (one per destination or property)",
+        "nullable": true
+      },
+      "hotel_id": {
+        "type": "string",
+        "title": "Hotel id",
+        "description": "Booking's numeric property id",
+        "nullable": true
+      },
+      "ufi": {
+        "type": "integer",
+        "title": "City id",
+        "description": "Booking's city/area id (negative numbers are cities)",
+        "nullable": true
+      },
+      "name": {
+        "type": "string",
+        "title": "Property name",
+        "nullable": true
+      },
+      "url": {
+        "type": "string",
+        "title": "Property URL",
+        "description": "The Booking.com property page",
+        "nullable": true
+      },
+      "property_type": {
+        "type": "string",
+        "title": "Property type",
+        "description": "hotel, apartment, hostel, bed_and_breakfast, guest_house, holiday_home, villa, resort, homestay, motel, aparthotel, campsite, lodge, capsule_hotel, inn — or null for rarer types (see property_type_id)",
+        "nullable": true
+      },
+      "property_type_id": {
+        "type": "integer",
+        "title": "Property type id",
+        "description": "Booking's accommodation type id",
+        "nullable": true
+      },
+      "stars": {
+        "type": "number",
+        "title": "Stars",
+        "description": "Star rating as shown by Booking (null when the property has none)",
+        "nullable": true
+      },
+      "review_score": {
+        "type": "number",
+        "title": "Review score",
+        "description": "Booking guest score, 1-10",
+        "nullable": true
+      },
+      "review_count": {
+        "type": "integer",
+        "title": "Review count",
+        "nullable": true
+      },
+      "address": {
+        "type": "string",
+        "title": "Address",
+        "nullable": true
+      },
+      "city": {
+        "type": "string",
+        "title": "City",
+        "nullable": true
+      },
+      "country_code": {
+        "type": "string",
+        "title": "Country code",
+        "description": "ISO 3166-1 alpha-2, lower case",
+        "nullable": true
+      },
+      "latitude": {
+        "type": "number",
+        "title": "Latitude",
+        "nullable": true
+      },
+      "longitude": {
+        "type": "number",
+        "title": "Longitude",
+        "nullable": true
+      },
+      "display_location": {
+        "type": "string",
+        "title": "Neighbourhood",
+        "description": "Booking's location line, e.g. 'Alfama, Lisbon'",
+        "nullable": true
+      },
+      "distance_from_center": {
+        "type": "string",
+        "title": "Distance from centre",
+        "description": "e.g. '0.8 km from downtown'",
+        "nullable": true
+      },
+      "transport": {
+        "type": "string",
+        "title": "Public transport",
+        "description": "e.g. 'Terreiro do Paço station is within 500 meters'",
+        "nullable": true
+      },
+      "check_in": {
+        "type": "string",
+        "title": "Check-in",
+        "description": "YYYY-MM-DD",
+        "nullable": true
+      },
+      "check_out": {
+        "type": "string",
+        "title": "Check-out",
+        "description": "YYYY-MM-DD",
+        "nullable": true
+      },
+      "nights": {
+        "type": "integer",
+        "title": "Nights",
+        "nullable": true
+      },
+      "adults": {
+        "type": "integer",
+        "title": "Adults",
+        "nullable": true
+      },
+      "children": {
+        "type": "integer",
+        "title": "Children",
+        "nullable": true
+      },
+      "rooms": {
+        "type": "integer",
+        "title": "Rooms",
+        "description": "Rooms requested",
+        "nullable": true
+      },
+      "currency": {
+        "type": "string",
+        "title": "Currency",
+        "description": "The currency of price_total and price_nightly (your `currency` input)",
+        "nullable": true
+      },
+      "price_total": {
+        "type": "number",
+        "title": "Stay total",
+        "description": "The lowest price Booking shows for the whole stay and party, in `currency` (null = sold out / unpriced)",
+        "nullable": true
+      },
+      "price_nightly": {
+        "type": "number",
+        "title": "Nightly rate",
+        "description": "price_total ÷ nights",
+        "nullable": true
+      },
+      "price_display": {
+        "type": "string",
+        "title": "Price as displayed",
+        "description": "Booking's formatted total, e.g. 'US$482.38'",
+        "nullable": true
+      },
+      "price_hotel_currency_total": {
+        "type": "number",
+        "title": "Total in hotel currency",
+        "description": "The same stay total in the property's own currency",
+        "nullable": true
+      },
+      "hotel_currency": {
+        "type": "string",
+        "title": "Hotel currency",
+        "nullable": true
+      },
+      "price_before_discount": {
+        "type": "number",
+        "title": "Price before discount",
+        "description": "The crossed-out total when a deal applies (0 or null when none)",
+        "nullable": true
+      },
+      "taxes_fees_excluded": {
+        "type": "number",
+        "title": "Taxes and fees not included",
+        "description": "Charges Booking lists as excluded from price_total, in `currency` (null when everything is included)",
+        "nullable": true
+      },
+      "taxes_included": {
+        "type": "boolean",
+        "title": "Taxes included",
+        "description": "True when Booking lists no excluded charges for the stay",
+        "nullable": true
+      },
+      "charges_note": {
+        "type": "string",
+        "title": "Charges note",
+        "description": "Booking's own wording, e.g. '+US$9 taxes and fees' or 'Includes taxes and fees'",
+        "nullable": true
+      },
+      "free_cancellation": {
+        "type": "boolean",
+        "title": "Free cancellation",
+        "description": "Booking's free-cancellation badge for the cheapest option",
+        "nullable": true
+      },
+      "no_prepayment": {
+        "type": "boolean",
+        "title": "No prepayment",
+        "nullable": true
+      },
+      "meal_plan": {
+        "type": "string",
+        "title": "Meal plan",
+        "description": "e.g. 'Breakfast included'",
+        "nullable": true
+      },
+      "breakfast_included": {
+        "type": "boolean",
+        "title": "Breakfast included",
+        "nullable": true
+      },
+      "room_name": {
+        "type": "string",
+        "title": "Cheapest room",
+        "description": "The room behind the headline price",
+        "nullable": true
+      },
+      "rooms_listed": {
+        "type": "integer",
+        "title": "Room options",
+        "description": "How many room and rate combinations Booking matched to the stay",
+        "nullable": true
+      },
+      "sold_out": {
+        "type": "boolean",
+        "title": "Sold out",
+        "description": "True when Booking shows no price for these dates",
+        "nullable": true
+      },
+      "sold_out_message": {
+        "type": "string",
+        "title": "Sold-out message",
+        "nullable": true
+      },
+      "alternative_check_in": {
+        "type": "string",
+        "title": "Alternative check-in",
+        "description": "Booking's suggested dates when the stay is unavailable",
+        "nullable": true
+      },
+      "alternative_check_out": {
+        "type": "string",
+        "title": "Alternative check-out",
+        "nullable": true
+      },
+      "sponsored": {
+        "type": "boolean",
+        "title": "Sponsored",
+        "description": "A paid placement in the results",
+        "nullable": true
+      },
+      "newly_opened": {
+        "type": "boolean",
+        "title": "Newly opened",
+        "nullable": true
+      },
+      "sustainable": {
+        "type": "boolean",
+        "title": "Sustainability badge",
+        "nullable": true
+      },
+      "host_type": {
+        "type": "string",
+        "title": "Host type",
+        "description": "PROFESSIONAL or PRIVATE, when Booking states it",
+        "nullable": true
+      },
+      "image": {
+        "type": "string",
+        "title": "Main photo",
+        "nullable": true
+      },
+      "query": {
+        "type": "string",
+        "title": "Search target",
+        "description": "The destination or hotel target this row came from",
+        "nullable": true
+      },
+      "rank": {
+        "type": "integer",
+        "title": "Rank",
+        "description": "Position in the destination results under sortBy (1 = first)",
+        "nullable": true
+      },
+      "hotel_name": {
+        "type": "string",
+        "title": "Hotel name",
+        "description": "On room and status rows",
+        "nullable": true
+      },
+      "room_id": {
+        "type": "string",
+        "title": "Room id",
+        "nullable": true
+      },
+      "occupancy": {
+        "type": "integer",
+        "title": "Occupancy",
+        "description": "Guests the block is priced for",
+        "nullable": true
+      },
+      "meal_plan_id": {
+        "type": "integer",
+        "title": "Meal plan id",
+        "nullable": true
+      },
+      "policy_group_id": {
+        "type": "string",
+        "title": "Policy group id",
+        "nullable": true
+      },
+      "price_original": {
+        "type": "number",
+        "title": "Price in hotel currency",
+        "description": "The block price in the hotel currency",
+        "nullable": true
+      },
+      "original_currency": {
+        "type": "string",
+        "title": "Hotel currency",
+        "nullable": true
+      },
+      "free_cancellation_until": {
+        "type": "string",
+        "title": "Free cancellation until",
+        "description": "ISO timestamp",
+        "nullable": true
+      },
+      "only_x_left": {
+        "type": "string",
+        "title": "Scarcity message",
+        "description": "e.g. 'Only 2 left at this price on our site'",
+        "nullable": true
+      },
+      "has_crib": {
+        "type": "boolean",
+        "title": "Crib available",
+        "nullable": true
+      },
+      "third_party": {
+        "type": "boolean",
+        "title": "Third-party inventory",
+        "nullable": true
+      },
+      "target": {
+        "type": "string",
+        "title": "Target",
+        "description": "The destination or hotel target as given",
+        "nullable": true
+      },
+      "kind": {
+        "type": "string",
+        "title": "Target kind",
+        "description": "destination or hotel",
+        "nullable": true
+      },
+      "dest_id": {
+        "type": "integer",
+        "title": "Destination id",
+        "nullable": true
+      },
+      "dest_type": {
+        "type": "string",
+        "title": "Destination type",
+        "description": "CITY, REGION, DISTRICT, LANDMARK, AIRPORT, COUNTRY or HOTEL",
+        "nullable": true
+      },
+      "status": {
+        "type": "string",
+        "title": "Status",
+        "description": "ok, no_results, not_found, duplicate or error",
+        "nullable": true
+      },
+      "hotels": {
+        "type": "integer",
+        "title": "Hotels delivered",
+        "nullable": true
+      },
+      "priced": {
+        "type": "integer",
+        "title": "Priced hotels",
+        "description": "Charged rows",
+        "nullable": true
+      },
+      "unpriced": {
+        "type": "integer",
+        "title": "Unpriced hotels",
+        "description": "Delivered free",
+        "nullable": true
+      },
+      "filtered": {
+        "type": "integer",
+        "title": "Filtered",
+        "description": "Dropped by maxPrice before billing",
+        "nullable": true
+      },
+      "duplicates": {
+        "type": "integer",
+        "title": "Duplicates",
+        "description": "Properties already delivered by another target",
+        "nullable": true
+      },
+      "pages": {
+        "type": "integer",
+        "title": "Pages read",
+        "nullable": true
+      },
+      "total": {
+        "type": "integer",
+        "title": "Total available",
+        "description": "Booking's result count for the destination",
+        "nullable": true
+      },
+      "error": {
+        "type": "string",
+        "title": "Error",
+        "nullable": true
+      },
+      "fetched_at": {
+        "type": "string",
+        "title": "Fetched at",
+        "description": "ISO timestamp",
+        "nullable": true
+      }
+    },
+    "required": [
+      "type"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "Every row",
+      "transformation": {
+        "fields": [
+          "type",
+          "name",
+          "stars",
+          "review_score",
+          "price_nightly",
+          "price_total",
+          "currency",
+          "taxes_included",
+          "free_cancellation",
+          "breakfast_included",
+          "room_name",
+          "sold_out",
+          "city",
+          "check_in",
+          "nights",
+          "url",
+          "hotel_id"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Property"
+          },
+          "price_nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "price_total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "url": {
+            "label": "URL",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "description": "One row per property with its price for the stay",
+      "transformation": {
+        "fields": [
+          "name",
+          "stars",
+          "review_score",
+          "price_nightly",
+          "price_total",
+          "currency",
+          "taxes_included",
+          "free_cancellation",
+          "breakfast_included",
+          "room_name",
+          "sold_out",
+          "city",
+          "check_in",
+          "nights",
+          "url",
+          "hotel_id",
+          "price_display",
+          "taxes_fees_excluded",
+          "review_count",
+          "property_type",
+          "display_location",
+          "distance_from_center",
+          "rank",
+          "query"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Property"
+          },
+          "price_nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "price_total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "url": {
+            "label": "URL",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "cheapest": {
+      "title": "Cheapest first",
+      "description": "Priced properties by nightly rate",
+      "transformation": {
+        "fields": [
+          "name",
+          "price_nightly",
+          "price_total",
+          "currency",
+          "stars",
+          "review_score",
+          "room_name",
+          "free_cancellation",
+          "breakfast_included",
+          "display_location",
+          "url"
+        ],
+        "filter": {
+          "type": "hotel",
+          "sold_out": false
+        }
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "price_nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "url": {
+            "label": "URL",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "rooms": {
+      "title": "Room rates",
+      "description": "One row per room and rate combination (includeRooms)",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "room_name",
+          "occupancy",
+          "meal_plan",
+          "price_nightly",
+          "price_total",
+          "currency",
+          "free_cancellation_until",
+          "only_x_left",
+          "check_in",
+          "nights",
+          "hotel_id"
+        ],
+        "filter": {
+          "type": "room"
+        }
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "price_nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "price_total": {
+            "label": "Stay total",
+            "format": "number"
+          }
+        }
+      }
+    },
+    "status": {
+      "title": "Status",
+      "description": "One row per destination or hotel target",
+      "transformation": {
+        "fields": [
+          "target",
+          "kind",
+          "status",
+          "hotels",
+          "priced",
+          "unpriced",
+          "filtered",
+          "duplicates",
+          "rooms",
+          "pages",
+          "total",
+          "dest_type",
+          "hotel_name",
+          "error"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

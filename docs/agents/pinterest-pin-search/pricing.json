@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "page-parsed": {
+      "eventTitle": "Parsed search page",
+      "eventDescription": "One successfully parsed Pinterest search page: $8 per 1,000 checks. Charged even when filters, exclusions, duplicates or monitoring leave zero rows. Failed/unrecognized responses and invalid input are not charged. A separate delivered-row fee applies. No start fee; compute included. No extra source account or API key. Work stops before a new check when the Apify run option maxTotalChargeUsd cannot cover that check plus one row.",
+      "eventPriceUsd": 0.008
+    },
+    "pin": {
+      "eventTitle": "Pin",
+      "eventDescription": "One delivered pin row: $1 per 1,000 rows. Row keys: query, title, image_url, image_orientation, destination_domain, destination_url, board_name, created_at. Filtered, duplicate, excluded and unchanged rows are not charged. Successful source checks are separately billed at $0.008 each, including empty checks. No start fee; compute included. maxTotalChargeUsd is an Apify run option, not input.",
+      "eventPriceUsd": 0.001,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-05T06:47:02.889Z"
+}

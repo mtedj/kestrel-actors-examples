@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One AliExpress buyer review (row keys review_id, rating = 1-5, text, text_translated = language you pick, buyer_name, buyer_country, sku_info = variant, images = photos, logistics = shipping method, follow_up_text, helpful_votes, attributes = attributes rated, review_date): $3 per 1,000 reviews. Not charged: the product row (average rating, star histogram, review topics), insights rows, status rows, reviews your filters remove (stars, date, keyword, country, photos, text), reviews an earlier onlyNewReviews run already delivered, duplicate targets, products with no reviews, unknown item ids, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.003,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:36.065Z"
+}

@@ -1,0 +1,67 @@
+{
+  "title": "Image to Text - OCR, Word Coordinates & 图片文字识别",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input: {\"imageUrls\": [\"https://raw.githubusercontent.com/tesseract-ocr/test/main/testing/phototest.tif\"], \"language\": \"eng\"}. One paid row per nonempty image.",
+  "properties": {
+    "imageUrls": {
+      "title": "imageUrls",
+      "type": "array",
+      "description": "Public image URLs, e.g. the prefilled Tesseract sample. Up to 100; 12 MB and 20 million pixels each. One billed row per nonempty OCR image.",
+      "default": [
+        "https://raw.githubusercontent.com/tesseract-ocr/test/main/testing/phototest.tif"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "sectionCaption": "Targets / 目标"
+    },
+    "language": {
+      "title": "language",
+      "type": "string",
+      "description": "\"eng\" (default), \"chi_sim\" for simplified Chinese or \"eng+chi_sim\" for mixed text. Not automatic detection. Language selection has no extra fee.",
+      "default": "eng",
+      "editor": "select",
+      "enum": [
+        "eng",
+        "chi_sim",
+        "eng+chi_sim"
+      ]
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the run, 1–1000, default 20. Example: 3 for a sample. Exclusions and empty results apply before the cap.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Prior output id values to skip before billing, up to 5,000. Empty [] disables. Suppresses that identity even if content changed.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000,
+      "sectionCaption": "Repeat runs / 去重"
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "Prior output content_hash values (64 lowercase hex characters), up to 5,000. Empty [] disables. Matching snapshots are skipped before billing.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

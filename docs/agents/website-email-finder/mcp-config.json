@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-website-email-finder": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/website-email-finder"
+    }
+  }
+}

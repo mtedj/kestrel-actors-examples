@@ -1,0 +1,10 @@
+{
+  "startUrls": [
+    "https://www.tripadvisor.com/Restaurant_Review-g189158-d2703366-Reviews-Cervejaria_Ramiro-Lisbon_Lisbon_District_Central_Portugal.html"
+  ],
+  "locationType": "any",
+  "languages": [
+    "en"
+  ],
+  "maxReviewsPerLocation": 3
+}

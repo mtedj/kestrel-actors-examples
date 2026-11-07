@@ -1,0 +1,156 @@
+{
+  "title": "Indeed Company Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "companies": {
+      "title": "Indeed companies",
+      "type": "array",
+      "description": "Companies: plain names, Indeed slugs or company URLs, e.g. [\"Home Depot\", \"Google\", \"https://www.indeed.com/cmp/Starbucks/reviews\"]. A plain name is enough: Indeed resolves it itself (\"Home Depot\" -> The-Home-Depot, \"Facebook\" -> Meta, \"EY\" -> Ey) and every row shows the match in `company` and `company_name`. An unknown name costs nothing: its status row lists the closest names Indeed knows in `suggestions`. A URL on a country domain (uk.indeed.com/cmp/...) is read for that country only.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.indeed.com/cmp/Google/reviews"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which companies, how many reviews",
+      "sectionDescription": "Companies by name, slug or URL, how many reviews of each, and on which Indeed country domains."
+    },
+    "maxReviewsPerCompany": {
+      "title": "Max reviews per company",
+      "type": "integer",
+      "description": "Reviews to deliver per company, e.g. 200. Default 100. 0 = every review the chosen countries list. Counted AFTER the filters: 50 with jobTitleContains \"nurse\" = 50 nurse reviews, fewer only when fewer exist. The cost cap: at most N x $0.003 per company. Set a number unless the user asks for all: large employers hold 10,000 to 280,000 reviews (Amazon 56,000, Walmart 283,000). For company ratings without the reviews pass 1. Maximum 100000 ($300).",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 100000,
+      "default": 100
+    },
+    "countries": {
+      "title": "Indeed country domains",
+      "type": "array",
+      "description": "Default [\"us\"] (kept so saved inputs keep working) = only reviews filed under the United States. Pass [\"all\"] for every country in one walk: for \"all reviews\", non-US employers, and whenever the user names no country. Another code = only that country, in its language, e.g. [\"uk\"] for UK employees: ca, uk, ie, au, nz, in, sg, ph, za, ae, hk, id, th, vn, lu, ch, be, de, at, fr, nl, es, it, pt, br, mx, ar, cl, co, pe, pl, se, dk, no, fi, tr, gr, hu, cz, ro, ua, jp, tw. A review is charged once.",
+      "editor": "stringList",
+      "default": [
+        "us"
+      ],
+      "prefill": [
+        "us"
+      ],
+      "uniqueItems": true
+    },
+    "sort": {
+      "title": "Review order",
+      "type": "string",
+      "description": "Order of the reviews: \"newest\" (default), \"helpfulness\" (most helpful first), \"rating_asc\" (lowest rated first), \"rating_desc\" (highest rated first). With maxReviewsPerCompany N it decides which N you get. Use \"rating_asc\" + maxRating 2 for complaints or the worst reviews, \"rating_desc\" + minRating 4 for the best. Any other value is rejected before anything is charged.",
+      "editor": "select",
+      "enum": [
+        "newest",
+        "helpfulness",
+        "rating_desc",
+        "rating_asc"
+      ],
+      "enumTitles": [
+        "Newest first",
+        "Most helpful first",
+        "Highest rated first",
+        "Lowest rated first"
+      ],
+      "default": "newest",
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "Order and filters. Every filter runs before billing and before the cap: a filtered review is never charged, and maxReviewsPerCompany counts the reviews that passed."
+    },
+    "onlyNewReviews": {
+      "title": "Only new reviews (monitoring mode)",
+      "type": "boolean",
+      "description": "true = monitoring mode for a schedule: each run delivers and bills only the reviews that appeared since the previous run; a day with nothing new costs $0. The first run is the baseline: the newest maxReviewsPerCompany reviews (default 100), so keep a number there — 0 would bill the whole history once. The memory is kept in your Apify account per company, country and filter set, so the input never needs editing. Use it for \"new reviews every day/week\". Needs sort \"newest\". Default false.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "sinceDate": {
+      "title": "Only reviews published on or after",
+      "type": "string",
+      "description": "Only reviews published on or after this date: \"2026-01-01\" (YYYY-MM-DD), or relative to the day the run starts: any number of days, weeks, months or years, e.g. \"30 days\", \"12 months\". Empty (default) = no date limit. Use it for \"reviews from the last 12 months\". With sort \"newest\" the run stops at the first page that is entirely older. For \"new reviews every day\" on a schedule use onlyNewReviews instead: \"1 day\" means yesterday and today, so a daily run would deliver some reviews twice.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "minRating": {
+      "title": "Only reviews at or above this rating",
+      "type": "integer",
+      "description": "Lowest star rating to keep, 1 to 5, e.g. 4 = only 4- and 5-star reviews. 0 (default) = no minimum. Applied before maxReviewsPerCompany and before billing. Pair with sort \"rating_desc\" so the run stops as soon as the reviews fall below it.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this rating",
+      "type": "integer",
+      "description": "Highest star rating to keep, 1 to 5, e.g. 2 = only 1- and 2-star reviews (complaints). 0 (default) = no maximum. Applied before maxReviewsPerCompany and before billing. Pair with sort \"rating_asc\" so the run stops as soon as the reviews rise above it.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "jobTitleContains": {
+      "title": "Only reviews from job titles containing",
+      "type": "string",
+      "description": "Only reviews whose job title contains this text, case-insensitive, e.g. \"nurse\", \"engineer\", \"driver\". Several alternatives with |: \"nurse|RN|LVN\" keeps a review that has any of them. Empty (default) = every job. Applied before the cap and before billing: the run reads on until maxReviewsPerCompany matching reviews are found or the company runs out, so a rare title at a huge employer takes longer but costs no more.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "locationContains": {
+      "title": "Only reviews from locations containing",
+      "type": "string",
+      "description": "Only reviews whose location contains this text, case-insensitive, e.g. \"Austin\", \"London\", or a US state as Indeed writes it: \", CA\", \", TX\" (locations read \"Mountain View, CA\"). Several alternatives with |: \"Austin|Dallas\". Empty (default) = everywhere. Applied before the cap and before billing, like jobTitleContains; both can be combined.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "requireText": {
+      "title": "Only reviews with a written text",
+      "type": "boolean",
+      "description": "true = drop reviews that have no written text before billing. Default false. Nearly every Indeed review has text, so this rarely removes anything.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeCompanyRow": {
+      "title": "Include a company row",
+      "type": "boolean",
+      "description": "true (default) = one extra FREE row per company (type \"company\"): overall rating, review count, 1-5 star histogram and average ratings for work-life balance, pay and benefits, job security, management and culture — company-wide figures, the same whatever `countries` says — plus top pros and cons, industry, company size, headquarters, website, founded year, revenue, CEO. Use it for \"compare employers\" or \"company ratings\". false = review rows only.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Company row",
+      "sectionDescription": "The free row of company ratings and profile data."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Leave the default {\"useApifyProxy\": true}. The actor tests the account's datacenter IPs, keeps the ones Indeed serves and switches to residential IPs by itself when none does.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone: the actor finds the proxy IPs Indeed serves by itself."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions, 1 to 16. Default 2 = typically about 1,200 reviews a minute for one company (20 reviews a page, one page a second per session). Raise to 4-8 for an employer with more than 50,000 reviews or for many companies at once. Does not change the price.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 5. Default 1. Leave it.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 5,
+      "default": 1
+    }
+  },
+  "required": [],
+  "description": "Indeed employee reviews of companies. Minimal input: {\"companies\": [\"Home Depot\"]} = the 100 newest US reviews of The Home Depot plus one free company row; every other field is optional. Cost = reviews delivered x $0.003, at most maxReviewsPerCompany (default 100) per company. Output rows carry `type`: \"review\" (review_id, company, company_name, rating, work_life_balance, compensation_benefits, job_security_advancement, management, culture_values, title, text, pros, cons, job_title, location, review_country, employment_status, review_date, helpful_count, employer_reply, url), \"company\" (rating, review_count, histogram, ratings_breakdown {work_life_balance, compensation_benefits, job_security_advancement, management, culture_values}, top_pros, top_cons, industry, company_size, headquarters, website, founded, revenue, ceo) and \"status\" (one per company and `countries` value: status ok / no_reviews / not_found / partial / error, reviews, error, suggestions)."
+}

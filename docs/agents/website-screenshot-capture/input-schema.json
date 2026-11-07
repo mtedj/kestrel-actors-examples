@@ -1,0 +1,77 @@
+{
+  "title": "Website Screenshot - PNG, Mobile Viewports & 网页截图",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input: {\"startUrls\": [\"https://example.com\"], \"width\": 1440, \"height\": 900, \"fullPage\": true}. One paid row per screenshot.",
+  "properties": {
+    "startUrls": {
+      "title": "startUrls",
+      "type": "array",
+      "description": "Public HTTP(S) website URLs, e.g. [\"https://example.com\"]. Up to 100. No credentials or private-network URLs. One target may yield multiple contacts only in Email Finder.",
+      "default": [
+        "https://example.com"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "sectionCaption": "Targets / 目标"
+    },
+    "width": {
+      "title": "width",
+      "type": "integer",
+      "description": "Viewport width in CSS pixels, 320–1920. Default 1440. Example: 390 for a mobile-sized page, without mobile device emulation.",
+      "default": 1440,
+      "minimum": 320,
+      "maximum": 1920
+    },
+    "height": {
+      "title": "height",
+      "type": "integer",
+      "description": "Viewport height in CSS pixels, 320–1080. Default 900. Used for viewport screenshots; full-page screenshots can be taller.",
+      "default": 900,
+      "minimum": 320,
+      "maximum": 1080
+    },
+    "fullPage": {
+      "title": "fullPage",
+      "type": "boolean",
+      "description": "true (default) captures the full page up to 12,000 pixels tall; false captures the viewport. One screenshot price either way; height_capped reports clipping.",
+      "default": true
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the run, 1–1000, default 20. Example: 3 for a sample. Exclusions and empty results apply before the cap.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Prior output id values to skip before billing, up to 5,000. Empty [] disables. Suppresses that identity even if content changed.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000,
+      "sectionCaption": "Repeat runs / 去重"
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "Prior output content_hash values (64 lowercase hex characters), up to 5,000. Empty [] disables. Matching snapshots are skipped before billing.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

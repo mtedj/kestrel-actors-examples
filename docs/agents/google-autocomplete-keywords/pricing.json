@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "query-parsed": {
+      "eventTitle": "Parsed query",
+      "eventDescription": "One successfully parsed seed or expanded query: $2 per 1,000 checks. Charged even when filters, exclusions, duplicates or monitoring leave zero rows. Failed/unrecognized responses and invalid input are not charged. A separate delivered-row fee applies. No start fee; compute included. No extra source account or API key. Work stops before a new check when the Apify run option maxTotalChargeUsd cannot cover that check plus one row.",
+      "eventPriceUsd": 0.002
+    },
+    "suggestion": {
+      "eventTitle": "Suggestion",
+      "eventDescription": "One delivered suggestion row: $0.1 per 1,000 rows. Row keys: seed, expanded_query, suggestion, position, country, language. Filtered, duplicate, excluded and unchanged rows are not charged. Successful source checks are separately billed at $0.002 each, including empty checks. No start fee; compute included. maxTotalChargeUsd is an Apify run option, not input.",
+      "eventPriceUsd": 0.0001,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-05T06:47:31.680Z"
+}

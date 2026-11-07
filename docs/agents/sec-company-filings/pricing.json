@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "filing": {
+      "eventTitle": "Filing snapshot",
+      "eventDescription": "One delivered filing snapshot ($3 per 1,000 rows; row keys id, cik, company, accession_number, form, filing_date, report_date, accepted_at, items, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+      "eventPriceUsd": 0.003,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:07.892Z"
+}

@@ -1,0 +1,18 @@
+{
+  "actor": "kestrel/sec-company-filings",
+  "input": {
+    "ciks": [
+      "320193"
+    ],
+    "forms": [],
+    "sinceDate": "",
+    "untilDate": "",
+    "maxResults": 3,
+    "maxPages": 1
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

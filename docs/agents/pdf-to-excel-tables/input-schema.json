@@ -1,0 +1,82 @@
+{
+  "title": "PDF to Excel - Tables, XLSX Downloads & PDF转Excel",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input: {\"documentUrls\": [\"https://raw.githubusercontent.com/jsvine/pdfplumber/stable/examples/pdfs/background-checks.pdf\"], \"startPage\": 1, \"maxPagesPerDocument\": 5, \"tableStrategy\": \"lines\"}. One paid row per PDF page with tables.",
+  "properties": {
+    "documentUrls": {
+      "title": "documentUrls",
+      "type": "array",
+      "description": "Public PDF URLs, e.g. the prefilled pdfplumber sample. Up to 100; 12 MB each. One billed row per qualifying page; digital text only, no scanned-page OCR.",
+      "default": [
+        "https://raw.githubusercontent.com/jsvine/pdfplumber/stable/examples/pdfs/background-checks.pdf"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "sectionCaption": "Targets / 目标"
+    },
+    "startPage": {
+      "title": "startPage",
+      "type": "integer",
+      "description": "First PDF page to inspect, one-based, e.g. 2. Default 1. Pages before this are not inspected or billed.",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "maxPagesPerDocument": {
+      "title": "maxPagesPerDocument",
+      "type": "integer",
+      "description": "Maximum PDF pages inspected per document, 1–20. Default 5. Blank pages or pages with no tables still consume this scan limit but are free.",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "tableStrategy": {
+      "title": "tableStrategy",
+      "type": "string",
+      "description": "\"lines\" (default) detects ruled tables; \"text\" uses text alignment for borderless tables. Review a sample. No OCR; one billed page includes every detected table.",
+      "default": "lines",
+      "editor": "select",
+      "enum": [
+        "lines",
+        "text"
+      ]
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the run, 1–1000, default 20. Example: 3 for a sample. Exclusions and empty results apply before the cap.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Prior output id values to skip before billing, up to 5,000. Empty [] disables. Suppresses that identity even if content changed.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000,
+      "sectionCaption": "Repeat runs / 去重"
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "Prior output content_hash values (64 lowercase hex characters), up to 5,000. Empty [] disables. Matching snapshots are skipped before billing.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

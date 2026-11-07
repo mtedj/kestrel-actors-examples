@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-google-hotels-prices": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-hotels-prices"
+    }
+  }
+}

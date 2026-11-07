@@ -1,0 +1,155 @@
+{
+  "title": "Google Play Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "appIds": {
+      "title": "Package names",
+      "type": "array",
+      "description": "Android package names, e.g. [\"com.whatsapp\", \"com.spotify.music\"] — the id= part of any Google Play URL, and what an earlier run's app_id gives you. Use for \"reviews of com.whatsapp\". App names are not accepted (Play has no open search API): open the app's Play page and copy the id. A package that is not on Play in a country costs nothing: its status row says not_found. Each package is read for every language × country pair.",
+      "editor": "stringList",
+      "prefill": [
+        "com.whatsapp"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which apps",
+      "sectionDescription": "Package names and/or Google Play URLs — at least one. Every app is read for every language in languages and every country in countries."
+    },
+    "appUrls": {
+      "title": "Google Play URLs",
+      "type": "array",
+      "description": "Google Play app pages, e.g. [\"https://play.google.com/store/apps/details?id=com.whatsapp\"]. Only the package name is read from the URL; its hl and gl are NOT used — languages and countries decide which locales are read. A URL from another site ends the run before anything is charged. A URL and its package name are the same app and are read once.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "languages": {
+      "title": "Languages",
+      "type": "array",
+      "description": "Play language codes (hl), e.g. [\"en\", \"de\", \"pt-BR\", \"ja\", \"zh-TW\"]; default [\"en\"]. Use [\"zh-TW\"] with countries=[\"tw\"] for the tested Taiwan example. Each app is read for every language × country pair; rows carry the request language. Reviews retain source text (no actor translation). A review listed under two languages is delivered and billed once. Cost scales with apps × languages × countries × maxReviewsPerApp.",
+      "editor": "stringList",
+      "prefill": [
+        "en"
+      ],
+      "default": [
+        "en"
+      ],
+      "uniqueItems": true
+    },
+    "countries": {
+      "title": "Countries",
+      "type": "array",
+      "description": "Play country codes (gl), e.g. [\"us\", \"gb\", \"in\", \"br\"]; default [\"us\"]. Any two-letter code; every row carries country. Google decides what it shows under each language × country pair, so the same review can appear under several (delivered and billed once; the status row counts duplicates). Name the markets the app has users in; one language and one country is the cheapest run.",
+      "editor": "stringList",
+      "prefill": [
+        "us"
+      ],
+      "default": [
+        "us"
+      ],
+      "uniqueItems": true
+    },
+    "maxReviewsPerApp": {
+      "title": "Max reviews per app, language and country",
+      "type": "integer",
+      "description": "Reviews to read per app, language AND country, e.g. 200; default 100; 0 = every review Google pages out (hundreds of thousands for big apps: cap the run with maxTotalChargeUsd). The main cost control: at most N × $0.004 per pair. The filters apply to these N reads, so 300 with maxRating 2 delivers the 1-2 star reviews among the 300 read — except when minRating = maxRating: that star value is filtered by Google itself and N reviews of that star are delivered. Google answers up to 100 per request.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 100000,
+      "default": 100,
+      "prefill": 50,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per app and locale, in what order, and which ones are worth paying for. The filters run before billing."
+    },
+    "sort": {
+      "title": "Order",
+      "type": "string",
+      "description": "\"most_recent\" (default; schedule this), \"most_relevant\" (Google Play's own order), \"rating\" (5-star first). Applied by Google before maxReviewsPerApp: \"most_recent\" with 100 reads the 100 newest reviews of each language × country pair. There is no lowest-rating-first order: for complaints use maxRating, or minRating = maxRating = 1.",
+      "enum": [
+        "most_recent",
+        "most_relevant",
+        "rating"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Most relevant",
+        "Highest rating first"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "minRating": {
+      "title": "Only reviews rated at least",
+      "type": "integer",
+      "description": "0 (default) = no lower bound. 1-5 = keep only reviews with at least this many stars, e.g. 4 for praise only. Set minRating and maxRating to the SAME value (both 1 for one-star reviews) and Google filters server-side: the other reviews are never fetched and the N read are all that star. Otherwise applied after the read and before billing; filtered reviews are never charged (the status row counts them in filtered).",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "maxRating": {
+      "title": "Only reviews rated at most",
+      "type": "integer",
+      "description": "0 (default) = no upper bound. 1-5 = keep only reviews with at most this many stars, e.g. 2 for a complaints feed that pays nothing for the happy ones. Applied before billing; must be at least minRating. Use for \"negative reviews\", \"complaints\"; for exactly one star value set minRating = maxRating (filtered by Google, nothing is fetched to be discarded).",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "sinceDate": {
+      "title": "Only reviews on or after",
+      "type": "string",
+      "description": "Empty (default) = all dates. Keep only reviews on or after this day: \"2026-09-01\", or relative to the run day so a schedule never goes stale: \"7 days\", \"2 weeks\", \"3 months\", \"yesterday\". For a daily new-reviews feed pass \"1 day\" with sort \"most_recent\". Applied before billing; older reviews that were read are not charged. There is no end date and no \"since last run\" memory: dedupe on review_id downstream.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "requireText": {
+      "title": "Only reviews with written text",
+      "type": "boolean",
+      "description": "false (default) = keep every review. true = drop reviews that are a star rating with no words before billing, so you pay only for reviews that say something. Use for \"reviews with text\", sentiment analysis, complaint triage.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeAppRow": {
+      "title": "Include an app row",
+      "type": "boolean",
+      "description": "true (default) = one free app row per app, language and country: app_name, developer, category, content_rating, rating_avg, rating_count, price, currency, icon, description. Never charged. Use for \"Google Play rating of app X\" or a daily rating history; false = review rows only.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Output",
+      "sectionDescription": "What else goes into the dataset besides the review rows."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1-16; default 4. Google allows about one request a second per IP and answers up to 100 reviews per request, so 4 sessions read a few hundred reviews a second. Raise it for large runs; it changes speed, not cost.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Performance",
+      "sectionDescription": "Leave these alone unless a run is being throttled; they change speed, not cost."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1-3; default 1. Google refuses bursts above about 1 per second per IP and the fetcher then rotates and backs off, so a higher value earns retries, not speed.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Default: Apify Proxy, datacentre group. Google Play's review call needs no login, but each IP is throttled at about one request a second, so a run of more than a few thousand reviews needs several IPs. Small runs work without a proxy.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Google Play reviews. Minimal input: {\"appIds\": [\"com.whatsapp\"]} or {\"appUrls\": [\"https://play.google.com/store/apps/details?id=com.whatsapp\"]} — at least one. App names are not accepted (Play has no open search): take the id= part of the Play URL. languages defaults to [\"en\"] and countries to [\"us\"]: every language × country pair is read separately. maxReviewsPerApp defaults to 100 per app, language and country (up to $0.40 per pair at $0.004 a review); 0 = every review Google pages out."
+}

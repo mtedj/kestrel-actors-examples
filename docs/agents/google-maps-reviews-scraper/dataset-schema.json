@@ -1,0 +1,503 @@
+{
+  "actorSpecification": 1,
+  "title": "Google Maps reviews",
+  "description": "review rows (charged), place rows and status rows (free) in one dataset",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | place | status"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input line this row came from"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's id of the review — the same id Google Maps uses, stable across runs"
+      },
+      "place_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google place id (ChIJ…)"
+      },
+      "place_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Name of the place"
+      },
+      "place_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Maps link to the place"
+      },
+      "review_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Direct Google Maps link to this review"
+      },
+      "report_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's \"report this review\" link"
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1-5"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review text (original, or the translation when Text = translation); null for a star-only rating"
+      },
+      "text_translated": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's translation into Language (only with Text = both)"
+      },
+      "original_language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the review was written in, e.g. en, fr"
+      },
+      "published_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the review was first posted — exact ISO 8601 UTC, not derived from \"3 weeks ago\""
+      },
+      "updated_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When it was last edited; equals published_at unless edited"
+      },
+      "published_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's own relative date, e.g. \"3 weeks ago\" or \"Edited a month ago\""
+      },
+      "edited": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the author edited the review after posting"
+      },
+      "likes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Helpful votes"
+      },
+      "photos": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "URLs of the photos attached to the review"
+      },
+      "owner_reply_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The owner's reply"
+      },
+      "owner_reply_text_translated": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's translation of the reply (only with Text = both)"
+      },
+      "owner_reply_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the owner replied — exact ISO 8601 UTC"
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer display name"
+      },
+      "reviewer_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's Google contributor id"
+      },
+      "reviewer_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's Maps profile"
+      },
+      "reviewer_review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews the reviewer has written"
+      },
+      "reviewer_photo_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many photos the reviewer has posted"
+      },
+      "reviewer_is_local_guide": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Local Guide badge"
+      },
+      "reviewer_photo_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer avatar"
+      },
+      "sub_ratings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Aspect ratings when the reviewer gave them, e.g. {\"Food\": 5, \"Service\": 4, \"Atmosphere\": 4} or {\"Rooms\": 5, \"Location\": 4}"
+      },
+      "visit_details": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Answers to Google's visit questions, e.g. {\"Meal type\": \"Dinner\", \"Price per person\": \"€20–30\", \"Wait time\": \"No wait\"}"
+      },
+      "visited_in": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Month of the visit, YYYY-MM, when stated"
+      },
+      "cid": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "place rows: the place's CID"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "place rows: address"
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "place rows: primary category"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "place rows: the average rating Google shows"
+      },
+      "reviews_total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "place rows: how many reviews Google lists"
+      },
+      "histogram": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "place rows: listed reviews per star, {\"1\": n … \"5\": n}"
+      },
+      "reviews_read": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "place rows: distinct reviews this run read, before filters"
+      },
+      "reviews_delivered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "place rows: reviews delivered and charged"
+      },
+      "completeness": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "place rows: the verdict, e.g. \"4,404 listed, 4,404 read — complete\" or \"1,950 listed, 1,948 read, 2 withheld by Google\""
+      },
+      "stopped_by": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "place rows: what ended the walk early — maxReviewsPerPlace, fromDate, onlyNew, spendingLimit — or null for a full walk"
+      },
+      "stars_read": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "place rows: reviews read per star"
+      },
+      "trend": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "place rows: average stars of the last 90 days against the 90 days before (only when the newest-first walk covered 180 days)"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "status rows: ok | no_reviews | not_found | duplicate | error"
+      },
+      "found": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: reviews read"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: reviews delivered"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: reviews removed by filters"
+      },
+      "filtered_by": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "status rows: removed per filter, e.g. {\"onlyWithText\": 31, \"minStars\": 4}"
+      },
+      "already_seen": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: reviews an earlier new-only run already delivered"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: repeats Google served that were dropped"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: pages fetched"
+      },
+      "passes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: sort orders walked (more than 1 = the completeness second pass ran)"
+      },
+      "listed": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: total Google lists"
+      },
+      "charged": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "status rows: review events charged for this place — always equals reviews"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "status rows: what went wrong"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO 8601 UTC"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "place_name",
+          "stars",
+          "published_at",
+          "text",
+          "owner_reply_text",
+          "reviewer_name",
+          "completeness",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "place_name",
+          "review_id",
+          "stars",
+          "published_at",
+          "edited",
+          "text",
+          "text_translated",
+          "original_language",
+          "likes",
+          "photos",
+          "owner_reply_text",
+          "owner_reply_at",
+          "reviewer_name",
+          "reviewer_review_count",
+          "reviewer_is_local_guide",
+          "sub_ratings",
+          "visit_details",
+          "review_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "places": {
+      "title": "Places",
+      "transformation": {
+        "fields": [
+          "place_name",
+          "rating",
+          "reviews_total",
+          "histogram",
+          "reviews_read",
+          "reviews_delivered",
+          "completeness",
+          "stopped_by",
+          "trend",
+          "address",
+          "category",
+          "place_url"
+        ],
+        "filter": {
+          "type": "place"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "place_name",
+          "status",
+          "listed",
+          "found",
+          "reviews",
+          "filtered",
+          "filtered_by",
+          "already_seen",
+          "duplicates",
+          "pages",
+          "passes",
+          "charged",
+          "error"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

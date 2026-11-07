@@ -1,0 +1,305 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "product_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product id"
+      },
+      "product_key": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product key"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Title"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Url"
+      },
+      "vendor": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Vendor"
+      },
+      "price_min": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Price min"
+      },
+      "price_max": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Price max"
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency"
+      },
+      "available": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Available"
+      },
+      "variants": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Variants"
+      },
+      "images": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Images"
+      },
+      "description_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Description text"
+      },
+      "store_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Store url"
+      },
+      "handle": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Handle"
+      },
+      "product_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product type"
+      },
+      "tags": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Tags"
+      },
+      "description_html": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Description html"
+      },
+      "variant_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Variant count"
+      },
+      "options": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Options"
+      },
+      "published_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Published at"
+      },
+      "created_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Created at"
+      },
+      "updated_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Updated at"
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Type"
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Content hash"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Fetched at"
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status"
+      },
+      "rows": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Rows"
+      },
+      "source_rows": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Source rows"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Filtered"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Duplicates"
+      },
+      "errors": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Errors"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Error"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Pages"
+      },
+      "cap_reached": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Cap reached"
+      },
+      "currency_warning": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency warning"
+      }
+    }
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "type",
+          "product_id",
+          "product_key",
+          "title",
+          "url",
+          "vendor",
+          "price_min",
+          "price_max",
+          "currency",
+          "available",
+          "variants",
+          "images",
+          "description_text"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "type",
+          "source",
+          "status",
+          "rows",
+          "source_rows",
+          "filtered",
+          "duplicates",
+          "errors",
+          "error",
+          "cap_reached"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

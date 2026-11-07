@@ -1,0 +1,280 @@
+{
+  "actorSpecification": 1,
+  "title": "Amazon Best Sellers charts",
+  "description": "Two row types share one dataset: product (one chart entry with its rank, charged) and status (per category, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "product",
+          "status"
+        ],
+        "description": "Row type: product or status."
+      },
+      "rank": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The product's position in the chart — its best seller rank within the category."
+      },
+      "asin": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Amazon's product id — feed these straight into an Amazon reviews run."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product title. Null only when a lazy-loaded entry's product page was unavailable."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product page URL."
+      },
+      "chart": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "bestsellers or new_releases."
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The category slug this chart was pulled for."
+      },
+      "page": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Which chart page the entry sits on (50 ranks per page)."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Price as a number, when one is shown."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Price exactly as printed."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency actually rendered on the price (Amazon localises it to the caller)."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Star rating out of 5."
+      },
+      "ratings_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many ratings the product has."
+      },
+      "image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product image URL."
+      },
+      "sponsored": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Always false: charts carry no ads. Kept so exports line up with the Amazon Search Scraper dataset."
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Always null here (search rows only). Kept for column parity with the Amazon Search Scraper."
+      },
+      "position": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Always null here (search rows only). Kept for column parity with the Amazon Search Scraper."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace domain suffix."
+      },
+      "marketplace": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace country name."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_results or error."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the category this job was given."
+      },
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: always chart."
+      },
+      "products": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: product rows delivered."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: rows dropped by minRating, never charged."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: ASINs another category already delivered."
+      },
+      "partial": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: delivered entries whose product page was unavailable (rank, ASIN and URL only)."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: how many pages were requested."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the job failed, null when it did not."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "rank",
+          "asin",
+          "title",
+          "price",
+          "currency",
+          "rating",
+          "ratings_count",
+          "chart",
+          "category",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "chart": {
+      "title": "Chart",
+      "transformation": {
+        "fields": [
+          "chart",
+          "category",
+          "rank",
+          "asin",
+          "title",
+          "price",
+          "price_display",
+          "rating",
+          "ratings_count",
+          "image",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "chart",
+          "status",
+          "products",
+          "filtered",
+          "duplicates",
+          "partial",
+          "pages",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

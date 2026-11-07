@@ -1,0 +1,103 @@
+{
+  "title": "Free Hotel Review Checker",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "hotelNames": {
+      "title": "Hotel names",
+      "type": "array",
+      "description": "One hotel per entry, ideally \"Name, City\", e.g. [\"Altis Grand Hotel, Lisbon\", \"The Savoy, London\"]. Use for \"how is hotel X rated across sites\" or a comp set of up to 10 hotels. The part before the comma is scored for the name match (matched_confidence; under 0.6 = not_found, never a guess). Looked up on Google Hotels, Tripadvisor, Booking.com and Agoda; Hostelworld and Despegar have no name search, give those two a URL in startUrls. Free; hotels beyond the first 10 are reported as skipped.",
+      "editor": "stringList",
+      "prefill": [
+        "Altis Grand Hotel, Lisbon"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels",
+      "sectionDescription": "Hotel names and/or property URLs. At least one. This actor is free, so a run is capped at 10 hotels and makes at most one lookup request and one aggregate request per site per hotel — never a page of reviews."
+    },
+    "startUrls": {
+      "title": "Property URLs",
+      "type": "array",
+      "description": "A property page on any of the six sites, e.g. [\"https://www.booking.com/hotel/pt/memmo-alfama.html\"], a Tripadvisor Hotel_Review-… page, an agoda.com/search?hotelId=… URL, a hostelworld.com/hostels/p/<id>/… page, a despegar.com.ar/hoteles/h-<id>/… page or a google.com/travel/hotels/entity/… page. The URL's site is read first and its name is searched on the others: one URL gives the whole picture — the only way to include Hostelworld and Despegar. Empty (default) = none.",
+      "editor": "stringList",
+      "prefill": [],
+      "default": [],
+      "uniqueItems": true
+    },
+    "sources": {
+      "title": "Review sites to check",
+      "type": "array",
+      "description": "Empty (default) = every site that can find the target: the four name-searchable sites for a name, plus the site a URL came from. Pick explicitly to narrow the run, e.g. [\"google\", \"tripadvisor\", \"booking\"]; a chosen site that cannot resolve the target is then reported as unsupported rather than silently dropped. Allowed: google, tripadvisor, booking, agoda, hostelworld, despegar. Tripadvisor and Despegar are read through residential IPs.",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "google",
+          "tripadvisor",
+          "booking",
+          "agoda",
+          "hostelworld",
+          "despegar"
+        ],
+        "enumTitles": [
+          "Google Hotels",
+          "Tripadvisor",
+          "Booking.com",
+          "Agoda",
+          "Hostelworld",
+          "Despegar"
+        ]
+      },
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which review sites, language and market",
+      "sectionDescription": "Which of the six review sites to read, and in which language and market."
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Two-letter language code, e.g. \"en\" (default), \"de\", \"fr\", \"pt\". Picks the Tripadvisor country site (de = tripadvisor.de) and the locale Google Hotels, Booking.com and Agoda answer in. Ratings are the same in every language; only names, cities and the ranking sentence change.",
+      "editor": "textfield",
+      "default": "en"
+    },
+    "country": {
+      "title": "Market",
+      "type": "string",
+      "description": "Two-letter market code, e.g. \"us\" (default), \"gb\", \"de\", \"br\", \"ar\". Sets Google's gl, Booking's and Agoda's locale suffix and the Despegar country domain (markets Despegar does not serve fall back to despegar.com). Not the hotel's country: keep \"us\" unless the user wants a market's view.",
+      "editor": "textfield",
+      "default": "us"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) per site in parallel, 1 to 8, e.g. 4 (default 2). More is faster for several hotels; each session is paced separately. Free either way.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 8,
+      "default": 2,
+      "sectionCaption": "Performance and proxy",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2 (default 1). Every site answered 1 per second per IP in testing; Despegar is held to 0.5 whatever you set, because DataDome challenges the first request of a fresh session.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Keep the default ({\"useApifyProxy\": true}): Apify Proxy datacenter IPs serve Google Hotels, Booking.com, Agoda and Hostelworld. Tripadvisor and Despegar are always fetched through the RESIDENTIAL group regardless of this setting (both refuse datacenter ranges); an account without residential access gets a warning and this configuration instead.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Free hotel reputation check. Minimal input: {\"hotelNames\": [\"Altis Grand Hotel, Lisbon\"]}. Nothing is charged, ever. Default = every site that can find the hotel by name (Google Hotels, Tripadvisor, Booking.com, Agoda); Hostelworld and Despegar need a property URL in startUrls. 10 hotels per run; the rest are reported as skipped."
+}

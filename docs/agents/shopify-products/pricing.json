@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "product": {
+      "eventTitle": "Product",
+      "eventDescription": "One delivered product (row keys product_id, product_key, title, url, vendor, price_min, price_max, currency, available, variants, images, description_text): $2 per 1,000 rows. All variants and images included; prices are source currency units, currency may be null. No charge for filters, excluded IDs, duplicates, empty results, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at Apify run option maxTotalChargeUsd (not an input field). 10 rows cost $0.02; maxResults caps rows across all sources.",
+      "eventPriceUsd": 0.002,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:08.715Z"
+}

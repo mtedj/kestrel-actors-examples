@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-rss-atom-feed-reader": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/rss-atom-feed-reader"
+    }
+  }
+}

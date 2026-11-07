@@ -1,0 +1,14 @@
+{
+  "actor": "kestrel/google-search-rank-tracker",
+  "input": {
+    "queries": [
+      "python documentation"
+    ],
+    "maxResultsPerSource": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

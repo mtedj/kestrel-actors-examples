@@ -1,0 +1,310 @@
+{
+  "actorSpecification": 1,
+  "title": "Airbnb reviews",
+  "description": "Three row types share one dataset: review (one guest review, charged), listing (context for a listing, free) and status (per listing or place, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "listing",
+          "status"
+        ],
+        "description": "Row type: review, listing or status."
+      },
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Airbnb listing id the row belongs to."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing URL."
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing title, when known."
+      },
+      "reviews_total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews Airbnb reports for the listing."
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Listing rows: how many reviews were fetched for it."
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language requested for translations."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Airbnb's id for the review."
+      },
+      "rating": {
+        "type": [
+          "string",
+          "integer",
+          "null"
+        ],
+        "description": "Star rating the guest gave, 1-5."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review as written, in its original language."
+      },
+      "text_localized": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Airbnb's translation into the requested language, when it differs."
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the review was written in."
+      },
+      "created_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the review was posted (UTC)."
+      },
+      "date_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date as Airbnb shows it, e.g. \"1 week ago\"."
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's first name."
+      },
+      "reviewer_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's Airbnb id."
+      },
+      "reviewer_location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Where the reviewer says they are from."
+      },
+      "reviewer_is_superhost": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the reviewer is themselves a Superhost."
+      },
+      "host_reply": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The host's public reply, when there is one."
+      },
+      "host_reply_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the host replied."
+      },
+      "highlight": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The sentence Airbnb highlights from the review."
+      },
+      "stay_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Airbnb's tag for the stay, e.g. a group or family trip."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, unknown_area, no_results or error."
+      },
+      "listings": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: listings harvested."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: review rows delivered."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: reviews dropped by the rating filter, never charged."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: listings already harvested by another input."
+      },
+      "listing_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the listing this job was for."
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the place searched."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the job failed, null when it did not."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "id",
+          "name",
+          "rating",
+          "text",
+          "language",
+          "created_at",
+          "reviewer_name",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "id",
+          "name",
+          "rating",
+          "text",
+          "text_localized",
+          "language",
+          "created_at",
+          "reviewer_name",
+          "reviewer_location",
+          "host_reply",
+          "stay_type"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "listings": {
+      "title": "Listings",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "name",
+          "reviews_total",
+          "reviews_fetched",
+          "locale"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "listing_id",
+          "query",
+          "status",
+          "listings",
+          "reviews",
+          "reviews_total",
+          "filtered",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

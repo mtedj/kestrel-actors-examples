@@ -1,0 +1,201 @@
+{
+  "title": "Booking.com Prices",
+  "type": "object",
+  "schemaVersion": 1,
+  "required": [],
+  "properties": {
+    "locationQueries": {
+      "title": "Destinations",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [
+        "Lisbon"
+      ],
+      "description": "Places as typed into Booking.com's search box, e.g. [\"Lisbon\"], [\"Algarve\"], [\"Portugal\"]: a city, region, district, landmark, airport or country, resolved through Booking's own autocomplete. Each becomes one search for the stay, returning up to maxHotelsPerQuery properties in sortBy order. Add the country for ambiguous names (\"Barcelona, Spain\"). An unmatched place is a free status row, nothing charged. Empty = price only the hotels named below. Use for \"hotel prices in Lisbon next weekend\".",
+      "sectionCaption": "What to price"
+    },
+    "hotelNames": {
+      "title": "Hotel names",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [],
+      "description": "Property names as typed into Booking's search box, e.g. [\"Memmo Alfama Lisbon\", \"Hotel Artemide Rome\"]: add the city. Booking's autocomplete picks the first matching property; check hotel_name in the free status row. A name that matches nothing costs nothing. Each name is priced on its own for the stay: sortBy, maxHotelsPerQuery and minStars do not apply to named hotels, maxPrice does. Use for \"what does hotel X cost on these dates\" and for comp sets."
+    },
+    "hotelIds": {
+      "title": "Hotel ids",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [],
+      "description": "Booking.com numeric property ids, e.g. [\"536251\", \"2251985\"]: the hotel_id column of an earlier run. The fastest way to re-price the same hotels every day (a comp set, a portfolio): one small request per hotel, no name lookup. Use with a relative checkIn (\"30 days\") on an Apify schedule for price tracking. An id Booking does not know is a free status row (not_found). A hotel given twice, or reached by a destination search too, is delivered and billed once."
+    },
+    "startUrls": {
+      "title": "Hotel URLs",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [],
+      "description": "Booking.com property pages, e.g. [\"https://www.booking.com/hotel/pt/memmo-alfama.html\"]. A URL carries no id, so its slug is resolved through Booking's autocomplete first (the country code must match), then the hotel is priced on its own for the stay. Search pages and other sites are refused before anything is charged. Prefer hotelIds when you have them."
+    },
+    "checkIn": {
+      "title": "Check-in",
+      "type": "string",
+      "editor": "textfield",
+      "prefill": "30 days",
+      "description": "REQUIRED (no default): check-in date as \"2026-11-20\" (YYYY-MM-DD) or relative to the day the run starts: \"30 days\", \"6 weeks\", \"tomorrow\". Use relative dates for scheduled runs (\"track prices daily at a 30-day lead time\"): the input never goes stale. Check-out = checkIn + nights. A past date is refused before anything is charged.",
+      "sectionCaption": "Stay and guests"
+    },
+    "nights": {
+      "title": "Nights",
+      "type": "integer",
+      "editor": "number",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 30,
+      "description": "Length of stay, 1 to 30, e.g. 2 (default 1). price_total is for the whole stay; price_nightly = price_total ÷ nights. Rows from runs with the same nights, adults and rooms line up as a price history."
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "editor": "number",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 30,
+      "description": "Adults across all rooms, 1 to 30, e.g. 2 (default 2). Booking prices the party you ask for: a solo traveller and a couple can see different rates for the same room."
+    },
+    "childrenAges": {
+      "title": "Children's ages",
+      "type": "array",
+      "editor": "stringList",
+      "prefill": [],
+      "description": "One age per child, 0 to 17, e.g. [\"5\", \"9\"] for two children aged 5 and 9. Empty (default) = no children. Booking needs ages, not a count, to match family rooms and child policies; the stay total covers the whole party."
+    },
+    "rooms": {
+      "title": "Rooms",
+      "type": "integer",
+      "editor": "number",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 30,
+      "description": "Rooms the party needs, 1 to 30, e.g. 1 (default 1). With 2 rooms Booking matches two room blocks per property and price_total covers both."
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "editor": "textfield",
+      "default": "USD",
+      "description": "ISO 4217 code for every price, e.g. \"EUR\" (default \"USD\"). When the user names no currency, pass the destination's (\"GBP\" for London). The hotel's own currency stays alongside in hotel_currency and price_hotel_currency_total, so conversions are yours to make."
+    },
+    "maxHotelsPerQuery": {
+      "title": "Max properties per destination",
+      "type": "integer",
+      "editor": "number",
+      "default": 50,
+      "prefill": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "Properties to return per destination search, 1 to 1000, e.g. 100 (default 50). The main cost control: at most maxHotelsPerQuery × $0.004 per destination, plus room rows when includeRooms is true. Taken in sortBy order after Booking's minStars filter; maxPrice then drops rows above the cap, so 50 asked with maxPrice set can deliver fewer. Booking pages 100 at a time: 100 = one request, 1000 = ten. Not applied to named hotels.",
+      "sectionCaption": "How many hotels, sort and filters (before billing)"
+    },
+    "sortBy": {
+      "title": "Sort destination results by",
+      "type": "string",
+      "editor": "select",
+      "default": "popularity",
+      "enum": [
+        "popularity",
+        "price",
+        "price_desc",
+        "review_score",
+        "review_score_and_price",
+        "stars",
+        "stars_asc",
+        "stars_and_price",
+        "distance",
+        "homes_first"
+      ],
+      "enumTitles": [
+        "Booking's top picks",
+        "Price (lowest first)",
+        "Price (highest first)",
+        "Best reviewed",
+        "Best reviewed and lowest price",
+        "Stars (5 to 1)",
+        "Stars (1 to 5)",
+        "Stars and price",
+        "Distance from the centre",
+        "Homes and apartments first"
+      ],
+      "description": "Booking's own order for destination searches: \"popularity\" (default: Booking's personalised top picks, which shift between pages), \"price\" (cheapest first), \"price_desc\", \"review_score\", \"review_score_and_price\", \"stars\", \"stars_asc\", \"stars_and_price\", \"distance\" (from the centre), \"homes_first\". Use \"price\" with maxHotelsPerQuery for \"the 50 cheapest hotels in Lisbon\"; use price, review_score, stars or distance for repeatable daily runs. The rank column follows this order."
+    },
+    "maxPrice": {
+      "title": "Max nightly price",
+      "type": "number",
+      "editor": "number",
+      "default": 0,
+      "minimum": 0,
+      "description": "Highest nightly price in `currency`, e.g. 150. 0 (default) = no cap. Keeps properties whose price_nightly (stay total ÷ nights, the displayed total, which in some markets excludes taxes) is at or under it; dropped properties are never delivered or billed, so a daily \"anything under 150\" alert costs nothing on days without a match. With a cap set, sold-out properties are dropped too (no price to compare). Applies to destination searches and named hotels. Use for \"hotels under 150 EUR a night\"."
+    },
+    "minStars": {
+      "title": "Minimum stars",
+      "type": "integer",
+      "editor": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5,
+      "description": "Booking's own star filter, 0 to 5, e.g. 4: sent to Booking as its class=N search filter (what the site sends when a star class is ticked), so filtered properties are never fetched or billed. 0 (default) = no star filter. Read the stars column of the rows that come back: with 4 Booking returns the properties its 4-star filter matches, and unrated apartments and hostels have no stars. Destination searches only; named hotels are always priced."
+    },
+    "includeRooms": {
+      "title": "Room-level rates",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": false,
+      "description": "false (DEFAULT) = one hotel row per property, carrying the cheapest room's name only. true = also one room row per room and rate combination Booking matched to the stay, at $0.002 each: room name, occupancy, meal plan, stay total and nightly rate, free-cancellation deadline, \"only X left\". The hotel row's rooms_listed is the number of room rows to expect. Keep false for price tracking and market scans; true for \"every room and rate hotel X offers\", meal plans or cancellation deadlines.",
+      "sectionCaption": "Room-level rates"
+    },
+    "locale": {
+      "title": "Locale",
+      "type": "string",
+      "editor": "textfield",
+      "default": "en-US",
+      "description": "Booking locale for the request, e.g. \"en-US\" (default), \"en-GB\", \"de-DE\", \"fr-FR\", \"pt-PT\", \"ja-JP\". Sets the language of labels (meal plan, distance texts, sold-out message, charges note) and the number format of price_display. Prices are set by currency, not by locale.",
+      "sectionCaption": "Language"
+    },
+    "sessions": {
+      "title": "Proxy sessions",
+      "type": "integer",
+      "editor": "number",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, e.g. 4 (default 4). More is faster; each session is paced separately by perIp. Leave the default unless Booking refuses requests.",
+      "sectionCaption": "Proxy and pacing"
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "editor": "number",
+      "default": 1,
+      "minimum": 0.1,
+      "maximum": 3,
+      "description": "Requests per second per session, 0.1 to 3, e.g. 1 (default 1). Booking answered 10 searches at 1/s from one IP without refusals, and a search takes 2 to 4 s anyway, so raising it rarely helps."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      },
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      },
+      "description": "Apify Proxy with the RESIDENTIAL group (default) is required: Booking's search call answers datacenter IPs with its WAF challenge and residential IPs without cookies or tokens. Keep the default; a datacenter group makes every search fail (nothing charged)."
+    }
+  },
+  "description": "Booking.com prices. Minimal input: {\"locationQueries\": [\"Lisbon\"], \"checkIn\": \"30 days\"} or {\"hotelIds\": [\"536251\"], \"checkIn\": \"2026-11-20\"}. checkIn is required (no default), plus one of locationQueries / hotelNames / hotelIds / startUrls. maxHotelsPerQuery defaults to 50 (up to $0.20 per destination at $0.004 a hotel); includeRooms defaults to false (room rows at $0.002 each only when true)."
+}

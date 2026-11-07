@@ -1,0 +1,629 @@
+{
+  "actorSpecification": 1,
+  "title": "TripAdvisor restaurant reviews",
+  "description": "One row per diner or visitor review (charged), plus a free location context row and a free status row per location and language.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | location | status"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input value (URL, id or name) this row came from"
+      },
+      "location_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's numeric location id (the d<number> in its URLs)"
+      },
+      "geo_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's numeric geo id of the city (the g<number> in its URLs)"
+      },
+      "location_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Restaurant or attraction name as the review page shows it"
+      },
+      "location_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "restaurant | attraction (what TripAdvisor's own placeType says the location is)"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Site language the row was read in (en = tripadvisor.com, de = tripadvisor.de, …)"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's numeric review id"
+      },
+      "original_language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the review was written in"
+      },
+      "translated": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true when the text is a machine translation into the site language"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review title"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full review text"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "1-5 bubbles on review rows; the location's overall bubble rating (e.g. 4.3) on location rows"
+      },
+      "sub_ratings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "On a restaurant review, the bubbles the diner gave for food, service, value and atmosphere; on a location row the averages of the same four. Attractions carry none"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publication date, YYYY-MM-DD"
+      },
+      "created_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date the review was written, YYYY-MM-DD"
+      },
+      "visit_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Month of the visit as TripAdvisor records it, YYYY-MM-DD"
+      },
+      "trip_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "FAMILY | COUPLES | SOLO | BUSINESS | FRIENDS | null"
+      },
+      "tips": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The diner's short tips for the next guest (\"ask for the terrace\"), when the review carries any"
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Helpful votes the review received"
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer display name"
+      },
+      "reviewer_username": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer profile handle"
+      },
+      "reviewer_verified": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether TripAdvisor marks the reviewer as verified"
+      },
+      "reviewer_contributions": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's total contributions on TripAdvisor"
+      },
+      "reviewer_helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Helpful votes across all of the reviewer's contributions"
+      },
+      "reviewer_hometown": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer hometown as shown, e.g. \"Brooklyn, New York\""
+      },
+      "photos": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Photo URLs attached to the review (1200 px renditions)"
+      },
+      "photo_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many photos the review carries"
+      },
+      "response": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The owner's or manager's reply text, if any"
+      },
+      "response_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date of the owner reply, YYYY-MM-DD"
+      },
+      "response_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's id of the owner reply"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Direct URL of the review (review rows) or of the location's review page (location rows)"
+      },
+      "location_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The location's canonical review page on the site the row was read from"
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Total reviews the location has across all languages"
+      },
+      "rating_counts": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Reviews per bubble rating, keys \"1\"…\"5\""
+      },
+      "reviews_by_language": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Reviews per language, e.g. {\"en\": 4686, \"pt\": 2865}"
+      },
+      "ranking": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor ranking sentence, e.g. \"#735 of 6,596 Restaurants in Lisbon\""
+      },
+      "ranking_position": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Rank position in the city"
+      },
+      "ranking_of": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many locations of this kind are ranked in the city"
+      },
+      "ranking_category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the ranking counts, e.g. \"Restaurants in Lisbon\" or \"things to do in Lisbon\""
+      },
+      "cuisines": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Cuisines TripAdvisor lists for the restaurant, e.g. [\"Portuguese\", \"Seafood\"]"
+      },
+      "price_range": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor price band, e.g. \"$$ - $$$\""
+      },
+      "category_tags": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Attraction categories, e.g. [\"Points of Interest & Landmarks\", \"Cooking Classes\"]"
+      },
+      "dish_tags": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The dish and topic keywords TripAdvisor mines from the reviews (\"clams\", \"tiger prawns\", \"worth the wait\")"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street address"
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City"
+      },
+      "state": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "State or region, where TripAdvisor lists one"
+      },
+      "postal_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Postal code"
+      },
+      "country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO country code"
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Latitude"
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Longitude"
+      },
+      "phone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Phone as listed"
+      },
+      "email": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Contact e-mail as listed"
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Official website as listed"
+      },
+      "menu_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Menu link TripAdvisor points at"
+      },
+      "accepts_reservations": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether TripAdvisor marks the restaurant as taking reservations"
+      },
+      "open_now": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether TripAdvisor rendered the location as open at the time of the request"
+      },
+      "hours": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Opening hours as sentences, e.g. [\"Sunday 12:00-23:00\"]"
+      },
+      "permanently_closed": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true when TripAdvisor marks the location as closed"
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The location's own description, when TripAdvisor has one"
+      },
+      "neighborhoods": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Neighbourhood names TripAdvisor places the location in"
+      },
+      "reviews_listed": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews the site lists for the location in this language (translations included)"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews read in this run for the location and language before filters"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | wrong_type | duplicate | error (status rows)"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews delivered for this location and language (status rows)"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by the filters, never charged (status rows)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review pages read (status rows)"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews the site lists in this language (status rows)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this target resolved to a location another target already covers (status rows)"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a target failed, or what it turned out to be (status rows)"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "location_name",
+          "location_type",
+          "language",
+          "rating",
+          "title",
+          "text",
+          "review_date",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "location_name",
+          "location_type",
+          "language",
+          "rating",
+          "title",
+          "text",
+          "sub_ratings",
+          "review_date",
+          "visit_date",
+          "trip_type",
+          "tips",
+          "original_language",
+          "translated",
+          "reviewer_name",
+          "helpful_votes",
+          "response",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "location_name",
+          "rating",
+          "title",
+          "text",
+          "sub_ratings",
+          "review_date",
+          "trip_type",
+          "response",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "locations": {
+      "title": "Restaurants",
+      "transformation": {
+        "fields": [
+          "location_id",
+          "location_name",
+          "location_type",
+          "language",
+          "rating",
+          "review_count",
+          "rating_counts",
+          "reviews_by_language",
+          "sub_ratings",
+          "ranking",
+          "cuisines",
+          "price_range",
+          "dish_tags",
+          "city",
+          "country_code",
+          "reviews_listed",
+          "reviews_fetched"
+        ],
+        "filter": {
+          "type": "location"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "location_id",
+          "location_name",
+          "location_type",
+          "language",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "duplicates",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

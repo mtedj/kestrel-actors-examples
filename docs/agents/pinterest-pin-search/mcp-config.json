@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-pinterest-pin-search": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/pinterest-pin-search"
+    }
+  }
+}

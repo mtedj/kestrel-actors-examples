@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/google-news",
+  "input": {
+    "queries": [
+      "artificial intelligence"
+    ],
+    "maxArticlesPerQuery": 3,
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

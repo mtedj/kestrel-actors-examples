@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-google-patents-search": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-patents-search"
+    }
+  }
+}

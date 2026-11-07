@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/booking-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.booking.com/hotel/pt/memmo-alfama.html"
+    ],
+    "maxReviewsPerHotel": 3,
+    "reviewsSort": "most_recent"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

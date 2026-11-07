@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-greenhouse-jobs-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/greenhouse-jobs-scraper"
+    }
+  }
+}

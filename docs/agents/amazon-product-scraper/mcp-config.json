@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-amazon-product-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-product-scraper"
+    }
+  }
+}

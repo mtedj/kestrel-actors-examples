@@ -1,0 +1,415 @@
+{
+  "actorSpecification": 1,
+  "title": "Hotel price tracker",
+  "description": "Two row types share one dataset: rate (one property and check-in date with the lowest rate across every booking source, the cheapest source and the date's rank in the window; charged) and status (one per property; never charged).",
+  "fields": {
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "rate",
+          "status"
+        ],
+        "description": "Row type: rate (charged) or status (free)."
+      },
+      "query": {
+        "type": "string",
+        "description": "The input this row came from: the Google Hotels URL, entity token or property name as given."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Property name as Google Hotels shows it."
+      },
+      "entity_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Hotels entity token; reuse it in the hotels input."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's numeric property id (name lookups only)."
+      },
+      "hotel_url": {
+        "type": "string",
+        "description": "The property's Google Hotels page."
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Star class (name lookups only)."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Google review rating (name lookups only)."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Google review count (name lookups only)."
+      },
+      "check_in": {
+        "type": "string",
+        "description": "Check-in date (YYYY-MM-DD). On status rows: the first date of the window."
+      },
+      "check_out": {
+        "type": "string",
+        "description": "Check-out date (YYYY-MM-DD)."
+      },
+      "nights": {
+        "type": "integer",
+        "description": "Length of stay."
+      },
+      "adults": {
+        "type": "integer",
+        "description": "Adults the rate was priced for."
+      },
+      "children": {
+        "type": "integer",
+        "description": "Children the rate was priced for."
+      },
+      "currency": {
+        "type": "string",
+        "description": "Currency of every price in the row."
+      },
+      "price": {
+        "type": "number",
+        "description": "The lowest nightly rate across every source that day."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "That rate as Google displays it."
+      },
+      "total": {
+        "type": "number",
+        "description": "Stay total at the cheapest source (nightly × nights when the source shows only a nightly rate)."
+      },
+      "source": {
+        "type": "string",
+        "description": "The cheapest source: an OTA or the property's official site."
+      },
+      "official": {
+        "type": "boolean",
+        "description": "Whether the cheapest source is the property's official site."
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Booking link at the cheapest source with the dates filled in."
+      },
+      "free_cancellation": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the cheapest rate is refundable, when Google says."
+      },
+      "official_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The official site's lowest nightly rate that day, null when Google lists no official site."
+      },
+      "n_sources": {
+        "type": "integer",
+        "description": "How many sources priced the stay that day."
+      },
+      "cheapest_in_window": {
+        "type": "boolean",
+        "description": "True on the cheapest check-in date of the property's window."
+      },
+      "rank_in_window": {
+        "type": "integer",
+        "description": "1 = cheapest check-in date of the window, 2 = next, … (the earlier date wins a tie)."
+      },
+      "days": {
+        "type": "integer",
+        "description": "Status rows: check-in dates in the window."
+      },
+      "rates": {
+        "type": "integer",
+        "description": "Status rows: rate rows delivered (and billed) for the property."
+      },
+      "filtered": {
+        "type": "integer",
+        "description": "Status rows: dates dropped by maxPrice (free)."
+      },
+      "no_rates": {
+        "type": "integer",
+        "description": "Status rows: dates with no priced source (free)."
+      },
+      "errors": {
+        "type": "integer",
+        "description": "Status rows: dates whose offers call failed after retries (free)."
+      },
+      "cheapest": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Status rows: the lowest nightly rate seen in the window, filtered dates included."
+      },
+      "cheapest_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the check-in date of that rate."
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "ok",
+          "no_rates",
+          "not_found",
+          "duplicate",
+          "unpaid",
+          "error"
+        ],
+        "description": "Status rows: what happened to the property."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the first error message, if any."
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "When the row was fetched (UTC, ISO 8601)."
+      }
+    }
+  },
+  "views": {
+    "rates": {
+      "title": "Price history",
+      "description": "One row per property and check-in date: the lowest rate, where it is, and how that date ranks in the window.",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "check_in",
+          "check_out",
+          "currency",
+          "price",
+          "total",
+          "source",
+          "official",
+          "official_price",
+          "free_cancellation",
+          "n_sources",
+          "rank_in_window",
+          "cheapest_in_window",
+          "source_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "hotel_name": {
+            "label": "Property",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "price": {
+            "label": "Lowest nightly",
+            "format": "number"
+          },
+          "total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "source": {
+            "label": "Cheapest source",
+            "format": "text"
+          },
+          "official": {
+            "label": "Official site?",
+            "format": "boolean"
+          },
+          "official_price": {
+            "label": "Official nightly",
+            "format": "number"
+          },
+          "free_cancellation": {
+            "label": "Free cancellation",
+            "format": "boolean"
+          },
+          "n_sources": {
+            "label": "Sources",
+            "format": "number"
+          },
+          "rank_in_window": {
+            "label": "Rank",
+            "format": "number"
+          },
+          "cheapest_in_window": {
+            "label": "Cheapest date",
+            "format": "boolean"
+          },
+          "source_url": {
+            "label": "Book",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "cheapest": {
+      "title": "Cheapest dates",
+      "description": "The same rows sorted by rank: rank 1 is the cheapest check-in date of each property's window.",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rank_in_window",
+          "check_in",
+          "price",
+          "currency",
+          "source",
+          "cheapest_in_window",
+          "hotel_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "hotel_name": {
+            "label": "Property",
+            "format": "text"
+          },
+          "rank_in_window": {
+            "label": "Rank",
+            "format": "number"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "price": {
+            "label": "Lowest nightly",
+            "format": "number"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "source": {
+            "label": "Cheapest source",
+            "format": "text"
+          },
+          "cheapest_in_window": {
+            "label": "Cheapest date",
+            "format": "boolean"
+          },
+          "hotel_url": {
+            "label": "Google Hotels",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "status": {
+      "title": "Status",
+      "description": "One row per property: dates searched, delivered, filtered, unpriced or failed, and the cheapest rate seen.",
+      "transformation": {
+        "fields": [
+          "query",
+          "hotel_name",
+          "check_in",
+          "days",
+          "rates",
+          "filtered",
+          "no_rates",
+          "errors",
+          "cheapest",
+          "cheapest_date",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "query": {
+            "label": "Input",
+            "format": "text"
+          },
+          "hotel_name": {
+            "label": "Property",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Window from",
+            "format": "text"
+          },
+          "days": {
+            "label": "Dates",
+            "format": "number"
+          },
+          "rates": {
+            "label": "Delivered",
+            "format": "number"
+          },
+          "filtered": {
+            "label": "Over maxPrice",
+            "format": "number"
+          },
+          "no_rates": {
+            "label": "No rate",
+            "format": "number"
+          },
+          "errors": {
+            "label": "Failed",
+            "format": "number"
+          },
+          "cheapest": {
+            "label": "Cheapest",
+            "format": "number"
+          },
+          "cheapest_date": {
+            "label": "On",
+            "format": "text"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "error": {
+            "label": "Error",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

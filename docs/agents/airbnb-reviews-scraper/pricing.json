@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One guest review with star rating, text, Airbnb's translation and original language, date, reviewer, location, stay type and the host's reply (row keys id, url, name, review_id, rating, text, text_localized, language, created_at, date_label, reviewer_name, reviewer_location, stay_type, host_reply, host_reply_date, reviews_total): $5 per 1,000 reviews, billed once per review per run. Not charged: reviews minRating removes (a 441-review listing returned 4 rows under minRating 3), listing rows, status rows, listings with no reviews, unknown places, failed listings. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:35.153Z"
+}

@@ -1,0 +1,126 @@
+{
+  "title": "Pinterest Pin Search - Image URLs & Destination Domains",
+  "schemaVersion": 1,
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Minimal input: {\"queries\": [\"home office\"], \"maxPinsPerQuery\": 3}. Each parsed source response costs $0.008 plus $0.001 per delivered row. Empty/unchanged successful checks are billed. maxTotalChargeUsd belongs in Apify run options.",
+  "required": [
+    "queries"
+  ],
+  "properties": {
+    "queries": {
+      "title": "Search queries",
+      "type": "array",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "prefill": [
+        "home office"
+      ],
+      "minItems": 1,
+      "maxItems": 20,
+      "sectionCaption": "Sources and result limits",
+      "description": "Public pin search keywords, for example [\"home office\",\"ceramic mugs\"]. Up to 20. Each parsed page costs $0.008 plus $0.001 per delivered pin. This is keyword search, not a board/profile URL input."
+    },
+    "maxPinsPerQuery": {
+      "title": "Maximum pins per query",
+      "type": "integer",
+      "description": "Output ceiling per original source, for example 50. Applied after filters, exclusions and monitoring. Each delivered row costs $0.001; source checks are separate. Fewer rows may exist. Duplicate results across sources are delivered only once.",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 500
+    },
+    "textContains": {
+      "title": "Text includes any phrase",
+      "type": "array",
+      "description": "Keep results containing any phrase, case-insensitive; for example [\"office\"] or [\"free\"]. Checks title, description and alt text. Empty [] accepts all. Applied before row charging; successful source checks still cost money.",
+      "default": [],
+      "sectionCaption": "Result filters",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "textExcludes": {
+      "title": "Text excludes any phrase",
+      "type": "array",
+      "description": "Drop results containing any phrase, for example [\"download\"] or [\"bedroom\"]. Empty [] disables the filter. Filtered rows are not charged; successful source checks remain billable.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "onlyWithDestinationUrl": {
+      "title": "Require an external destination URL",
+      "type": "boolean",
+      "description": "false by default. true keeps only pins with a source-provided HTTP(S) destination link. Missing links are never inferred. Filtered pins have no row fee; parsed pages remain billable at $0.008.",
+      "default": false
+    },
+    "destinationDomains": {
+      "title": "Destination domains",
+      "type": "array",
+      "description": "Allow hostnames such as [\"etsy.com\",\"youtube.com\"], including their subdomains. Do not include https:// or paths. Empty [] disables filtering. Pins without destinations are excluded when this filter is active. No row charge for exclusions.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "imageOrientation": {
+      "title": "Image orientation",
+      "type": "string",
+      "description": "\"any\" (default), \"portrait\", \"landscape\" or \"square\", based on source image dimensions. Active filters exclude unknown dimensions. No extra filtering fee; only matching pins incur the row fee.",
+      "default": "any",
+      "enum": [
+        "any",
+        "portrait",
+        "landscape",
+        "square"
+      ]
+    },
+    "maxPagesPerQuery": {
+      "title": "Maximum search pages per query",
+      "type": "integer",
+      "description": "Safety cap, for example 3. Range 1–10. A parsed page costs $0.008 even with no matching or new pins, usually with up to 25 source records. Stops on repeated pages/tokens. The result or request cap may stop earlier.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 10
+    },
+    "onlyNew": {
+      "title": "Only new results",
+      "type": "boolean",
+      "description": "false by default. true saves delivered IDs under monitorKey; later runs skip them. The first run returns the baseline. Successful checks still cost $0.008 each even with no new rows. Use an Apify schedule for recurring checks; this flag creates no schedule.",
+      "default": false,
+      "sectionCaption": "Monitoring and safety"
+    },
+    "monitorKey": {
+      "title": "Monitor name",
+      "type": "string",
+      "description": "Name such as \"daily-research\"; default \"default\". Reuse it for repeat runs. Targets, date window, locale and filters automatically form a separate baseline when changed. Keeps the latest 50,000 IDs per scope. Do not overlap runs with the same name and scope.",
+      "default": "default",
+      "pattern": "^[A-Za-z0-9_-]{1,60}$",
+      "editor": "textfield"
+    },
+    "excludeIds": {
+      "title": "Previously collected IDs",
+      "type": "array",
+      "description": "Optional output id values, for example [\"previous-output-id\"]. Up to 10,000. Empty [] excludes nothing. Useful for caller-managed deduplication. Excluded rows are not charged; parsed source checks are.",
+      "default": [],
+      "maxItems": 10000,
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxRequests": {
+      "title": "Maximum HTTP requests",
+      "type": "integer",
+      "description": "Hard run-wide source request cap, for example 100; range 1–200. The initial public-session handshake uses one request before the first page, so at least 2 are needed for any pins. This is not a dollar limit. Set maxTotalChargeUsd as an Apify run option for a monetary cap.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 200
+    }
+  }
+}

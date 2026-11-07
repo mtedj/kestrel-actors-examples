@@ -1,0 +1,1747 @@
+{
+  "generatedAt": "2026-11-07T09:07:48.204637+00:00",
+  "publisher": "kestrel",
+  "actors": [
+    {
+      "actor": "kestrel/agoda-prices-scraper",
+      "title": "Agoda Prices Scraper — Hotel Rates & Availability by Date",
+      "description": "Agoda hotel prices and availability for destinations or hotels by URL, id or name. One row per hotel: nightly and total price, taxes, free cancellation, rooms left, stars, guest score, sold out. Price calendar: cheapest dates. Filters before billing: max price, stars, guest score. ราคาโรงแรม, ホテル料金",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.1.4",
+      "verifiedAt": "2026-11-07T09:07:29.015268+00:00",
+      "storeUrl": "https://apify.com/kestrel/agoda-prices-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "hotel": {
+            "eventTitle": "Priced hotel row",
+            "eventDescription": "One Agoda property's cheapest rate for your dates and guests (row keys hotel_id, hotel_name, stars, review_score, review_count, area, country, latitude, longitude, price_nightly, price_nightly_with_taxes, price_total, price_total_with_taxes, crossed_out_price, available_rooms, cancellation, free_cancellation_until, breakfast_included): $4 per 1,000 hotels. Not charged: sold-out properties (free rows with includeSoldOut), properties maxPrice, minStars, minReviewScore or freeCancellationOnly remove, a property reached twice in one run, destinations or names that match nothing, status rows, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          },
+          "calendar_day": {
+            "eventTitle": "Calendar day row",
+            "eventDescription": "One check-in date of a named hotel's price calendar (calendarDays, up to 60 dates from checkIn): per-night and stay price at your nights and adults priced live for that date, rank_in_window (1 = the cheapest date), Agoda's Low/Normal/High trend word where it has one (row keys hotel_id, hotel_name, check_in, check_out, nights, adults, currency, price_nightly, price_total, trend, rank_in_window, cheapest_in_window): $2 per 1,000 dates. Not charged: dates Agoda has no price for (skipped), hotels from destination searches (no calendar is read for them), bad input. No start fee; the same maximum-cost stop applies.",
+            "eventPriceUsd": 0.002
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:30.835Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/agoda-prices-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/agoda-reviews-scraper",
+      "title": "Agoda Reviews Scraper — Hotel Reviews, Guest Reviews & Ratings",
+      "description": "Agoda hotel reviews by hotel name, URL or id, with the Booking.com reviews Agoda shows. One row per review: 0-10 rating, title, text, positives, negatives, language, stay dates, room, reviewer country, photos, hotel reply, source. Free filters before billing: max score (negative reviews), text only.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.23",
+      "verifiedAt": "2026-11-07T09:07:29.136259+00:00",
+      "storeUrl": "https://apify.com/kestrel/agoda-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One guest review of an Agoda property: 0-10 rating (and out of 5), rating word, title, text, positives and negatives, language and the original text where Agoda translated it, review and stay dates, room, reviewer name and country, helpful votes, photos, source (Agoda or Booking.com) and the hotel's reply with date (row keys rating, rating_5, rating_text, title, text, positives, negatives, language, original_text, review_date, check_in, check_out, room_type, reviewer_name, reviewer_country, helpful_votes, images, source, response, response_date): $5 per 1,000 reviews. Not charged: hotel rows, status rows, reviews removed by maxRating or requireText, a property given twice (name, URL and id of one hotel are read once), properties with no reviews, names or URLs that match nothing, bad input. No start fee; proxy and compute are included in the event price. Agoda pages about 100 reviews at a time; a mid-size hotel has a few hundred, a busy hostel over a thousand. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:32.032Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/agoda-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/airbnb-occupancy-scraper",
+      "title": "Airbnb Occupancy Rate Scraper — Availability & Nightly Rates",
+      "description": "Estimate Airbnb occupancy from listing availability calendars by place or listing ID. One row per listing and month: available and blocked-or-booked days, occupancy %, minimum stay and sampled nightly rate. For rental market research and comps; blocked nights cannot be separated from bookings.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:28.807726+00:00",
+      "storeUrl": "https://apify.com/kestrel/airbnb-occupancy-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "occupancy": {
+            "eventTitle": "Occupancy row (listing × month)",
+            "eventDescription": "One calendar month of one listing: days available, days blocked or booked, occupancy %, minimum stay, next free night and a sampled nightly rate (row keys id, url, name, month, days_available, days_unavailable, occupancy_pct, checkin_days, nights_min, next_available, rate_nightly, rate_total, rate_check_in, rate_status, currency, rating, reviews_count): $3 per 1,000 rows (12 months of one listing $0.036; 100 listings for 6 months $1.80). Not charged: months under minOccupancyPct (filtered before billing), listing rows, status rows, unknown places, failed calendars. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:32.789Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/airbnb-occupancy-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/airbnb-prices-calendar",
+      "title": "Airbnb Scraper — Prices, Availability Calendar & Listings",
+      "description": "Airbnb vacation rental listings and prices by place, URL or ID for your dates and guests. Rows: nightly rate, stay total, rating, bedrooms, Superhost, photos. Optional 24-month availability calendar and reviews. Free details: amenities, house rules, host, price breakdown. No daily calendar prices.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.12",
+      "verifiedAt": "2026-11-07T09:07:29.185882+00:00",
+      "storeUrl": "https://apify.com/kestrel/airbnb-prices-calendar",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "listing": {
+            "eventTitle": "Listing row",
+            "eventDescription": "One Airbnb listing with its price for your dates and guests (row keys price_total, price_nightly, price_nightly_effective, currency, rating, reviews_count, is_superhost, url): $5 per 1,000 listings. Amenities, house rules, host and the price breakdown (includeDetails) ride on this row at no extra charge. Not charged: listings Airbnb cannot price for the dates, duplicates, unknown places, empty searches, status rows. Without dates every listing row counts, at its default displayed price. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          },
+          "calendar_month": {
+            "eventTitle": "Calendar month",
+            "eventDescription": "One month of day-by-day availability for one listing (available, check-in and check-out allowed, minimum and maximum nights per day): $2 per 1,000 months, so a 12-month calendar is $0.024 per listing; the row also carries occupancy for the next 30, 90 and 365 nights. Not charged: calendarMonths 0 (the default), failed calendars, months beyond your spending limit (the row is trimmed to the months billed).",
+            "eventPriceUsd": 0.002
+          },
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One guest review with rating, text, Airbnb's translation and original language, date, reviewer name and location, stay type and host reply: $3 per 1,000 reviews, up to maxReviewsPerListing per listing (default 0 = none, maximum 200). Not charged: listings with no reviews, failed review fetches. For a rating filter, every review of a listing or more than 200, use kestrel/airbnb-reviews-scraper.",
+            "eventPriceUsd": 0.003
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:33.969Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/airbnb-prices-calendar",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/airbnb-reviews-scraper",
+      "title": "Airbnb Reviews Scraper — Guest Reviews, Ratings & Host Replies",
+      "description": "Airbnb vacation rental guest reviews by URL, id or place. One row per review: rating, text, host replies, translation, language, date, reviewer, location. Lowest rated first and minRating keep only negative reviews (complaints) and bill only those. For sentiment, reputation, competitor research.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.6",
+      "verifiedAt": "2026-11-07T09:07:30.700499+00:00",
+      "storeUrl": "https://apify.com/kestrel/airbnb-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One guest review with star rating, text, Airbnb's translation and original language, date, reviewer, location, stay type and the host's reply (row keys id, url, name, review_id, rating, text, text_localized, language, created_at, date_label, reviewer_name, reviewer_location, stay_type, host_reply, host_reply_date, reviews_total): $5 per 1,000 reviews, billed once per review per run. Not charged: reviews minRating removes (a 441-review listing returned 4 rows under minRating 3), listing rows, status rows, listings with no reviews, unknown places, failed listings. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:35.153Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/airbnb-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/aliexpress-reviews-scraper",
+      "title": "AliExpress Reviews Scraper: Product Reviews, Ratings & Feedback",
+      "description": "Scrape AliExpress product reviews by URL or item id: star rating, buyer feedback translated into 16 languages, buyer photos, country, SKU variant. Date, keyword and star filters, new-review monitoring, free sentiment analysis. For dropshipping product research. No login. API and MCP ready.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.1.9",
+      "verifiedAt": "2026-11-07T09:07:30.646213+00:00",
+      "storeUrl": "https://apify.com/kestrel/aliexpress-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One AliExpress buyer review (row keys review_id, rating = 1-5, text, text_translated = language you pick, buyer_name, buyer_country, sku_info = variant, images = photos, logistics = shipping method, follow_up_text, helpful_votes, attributes = attributes rated, review_date): $3 per 1,000 reviews. Not charged: the product row (average rating, star histogram, review topics), insights rows, status rows, reviews your filters remove (stars, date, keyword, country, photos, text), reviews an earlier onlyNewReviews run already delivered, duplicate targets, products with no reviews, unknown item ids, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:36.065Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/aliexpress-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/amazon-best-sellers-scraper",
+      "title": "Amazon Best Sellers Scraper: Top 100 by Category, New Releases",
+      "description": "Amazon Best Sellers and New Releases charts by category in 20 marketplaces, every rank: 2 pages = the Top 100. One row per chart entry: best seller rank (BSR), ASIN, title, price, rating, ratings count, image. Free: minimum rating filter, top-N cap. Track sales rank daily, spot trending products.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.2",
+      "verifiedAt": "2026-11-07T09:07:30.371291+00:00",
+      "storeUrl": "https://apify.com/kestrel/amazon-best-sellers-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "product": {
+            "eventTitle": "Chart product row",
+            "eventDescription": "One entry of a Best Sellers or New Releases chart (row keys rank, asin, title, url, chart, category, page, price, currency, rating, ratings_count, image, domain): $4 per 1,000 entries. A chart page is 50 ranks, so one category's Top 100 (pages 2, the default) is 100 rows, $0.40. Price is null where the chart prints none; an entry whose tile Amazon withholds still comes with rank, ASIN and URL. Not charged: entries removed by minRating or maxResultsPerCategory, an ASIN already delivered from another category, categories that return nothing, failed categories, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:36.857Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-best-sellers-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/amazon-product-scraper",
+      "title": "Amazon Product Scraper — Details, Prices & Availability by ASIN",
+      "description": "Amazon product details by ASIN or URL, 20 marketplaces. One row per product: title, brand, buybox price, list price, availability, in stock, rating, ratings count, images, bullet points, description, details table, Best Sellers Rank (BSR). Free filters: in stock only, max price. No login.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.3.3",
+      "verifiedAt": "2026-11-07T09:07:30.641732+00:00",
+      "storeUrl": "https://apify.com/kestrel/amazon-product-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "product": {
+            "eventTitle": "Product row",
+            "eventDescription": "One product's details from its public page (row keys asin, title, brand, price = buybox price, list_price, currency, availability, in_stock, prime, rating, ratings_count, 5_star_pct to 1_star_pct = histogram, images, features = bullets, description, category, details = details table, bsr = Best Sellers Rank, sold_by, variations_count): $4 per 1,000 products, one page fetch each. No buybox price or no rank still delivers the row (price or bsr null); inStockOnly or maxPrice skip paying for those. Not charged: products dropped by inStockOnly or maxPrice, unknown ASINs (404), pages Amazon blocked, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:37.791Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-product-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/amazon-reviews-scraper",
+      "title": "Amazon Reviews Scraper — Customer Reviews, Product Reviews",
+      "description": "Amazon product-page reviews by ASIN or URL in 20 marketplaces. Current US tests hit a sign-in wall and return no reviews. When available: rating, text, date, author, verified purchase and helpful votes. Product-page samples only, not full review history. Currently under maintenance.",
+      "notice": "UNDER_MAINTENANCE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.6.4",
+      "verifiedAt": "2026-11-07T09:07:32.457969+00:00",
+      "storeUrl": "https://apify.com/kestrel/amazon-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One customer review from the public product page (row keys rating, title, text, author, country, date_text, verified, helpful_votes, variant): $5 per 1,000 reviews. Measured: 8 to 13 reviews per product and never more (Amazon shows no more without a login), so review rows cost at most $0.065 per product. Not charged: reviews removed by minRating, verifiedOnly or requireText, duplicates, products with no visible reviews, unknown or blocked ASINs, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          },
+          "product": {
+            "eventTitle": "Product row",
+            "eventDescription": "One product's rating summary (row keys asin, title, brand, rating, ratings_count, 5_star_pct to 1_star_pct — the star histogram as percentages, null when Amazon hides it — price, currency, availability, in_stock, bsr, image, features, reviews_visible = reviews on the page): $3 per 1,000 products. Delivered once per ASIN and marketplace while includeProductRow is true (the default); set it false to pay for review rows only. Not charged: duplicates, unknown or blocked ASINs, status rows. No start fee; proxy and compute are included in the event price.",
+            "eventPriceUsd": 0.003
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:38.881Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/mcp-call.json",
+      "recommended": false
+    },
+    {
+      "actor": "kestrel/amazon-search-scraper",
+      "title": "Amazon Search Scraper — Search Results, Keyword Rank & Prices",
+      "description": "Amazon search results by keyword in 20 marketplaces, plus Best Sellers and New Releases charts. One row per product: ASIN, title, price, rating, ratings count, image, sponsored flag, position on the page, chart rank. Free filters: skip sponsored (organic rank), min rating, department.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.4.2",
+      "verifiedAt": "2026-11-07T09:07:32.735455+00:00",
+      "storeUrl": "https://apify.com/kestrel/amazon-search-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "product": {
+            "eventTitle": "Product row",
+            "eventDescription": "One product from a search page or a chart page (row keys asin, title, url, query, chart, category, position = slot on the page for a keyword search, rank = chart rank for Best Sellers and New Releases, page, price, currency, rating, ratings_count, image, sponsored, domain): $4 per 1,000 products. Measured: a search page carries about 20 organic products plus sponsored ones; a chart page 30. Price is null where the page shows none. Not charged: rows removed by skipSponsored, minRating or maxResultsPerQuery, an ASIN already delivered by another keyword, searches with no results, failed searches, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:44.632Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-search-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/app-store-reviews-scraper",
+      "title": "Apple App Store Reviews Scraper — iOS App Reviews & Ratings",
+      "description": "Get Apple App Store reviews by app ID, URL or name across country storefronts. Rows: rating, title, text, reviewer, date, app version and developer replies. Free app ratings and review counts. Filter negative reviews, star ratings, text and since date before billing. For iOS app feedback monitoring.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:32.297725+00:00",
+      "storeUrl": "https://apify.com/kestrel/app-store-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review",
+            "eventDescription": "One App Store customer review (row keys review_id, app_id, country, rating = 1-5, title, text, author, review_date, is_edited, developer_response, developer_response_date, url): $4 per 1,000 reviews. Not charged: app rows (App Store rating, rating count, star histogram), status rows, reviews removed by minRating, maxRating, sinceDate or requireText, a review Apple lists on two storefronts (delivered once), apps with no reviews, ids or names that match nothing, failed jobs, bad input. No start fee; proxy and compute are included in the event price. Apple answers 10 reviews per request; every delivered review is a written review. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:45.660Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/app-store-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/ashby-jobs-scraper",
+      "title": "Ashby Jobs Scraper - Remote Jobs, Salaries & Job Descriptions",
+      "description": "Get Ashby jobs from company board URLs or tokens. One row per job: title, location, department, full description, apply URL, dates and published salaries. Filter titles, locations, remote or hybrid jobs before billing. Exclude known job IDs for new jobs. No login or API key needed.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:31.752069+00:00",
+      "storeUrl": "https://apify.com/kestrel/ashby-jobs-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "job": {
+            "eventTitle": "Job",
+            "eventDescription": "One delivered Ashby job (row keys job_id, job_key, title, company, location, departments, description_text, url, apply_url, published_at, updated_at, workplace_type, salary_ranges, compensation_status): $2 per 1,000 jobs. Full descriptions and published pay included; missing pay is not estimated. Not charged: filtered jobs, excluded IDs, duplicates, empty boards, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at the caller's Apify run option maxTotalChargeUsd. 10 jobs cost $0.02; maxResults caps jobs across all boards.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:46.432Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/ashby-jobs-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/booking-prices-scraper",
+      "title": "Booking.com Scraper — Hotel Prices & Availability by Date",
+      "description": "Booking.com prices and availability by date for destinations or hotels by URL, name or id. One row per hotel: stay total, nightly rate, taxes, free cancellation, breakfast, stars, review score, sold out. Optional room rates. Filters before billing: max price, star class. Price tracking, comp sets.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.2",
+      "verifiedAt": "2026-11-07T09:07:33.444434+00:00",
+      "storeUrl": "https://apify.com/kestrel/booking-prices-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "hotel": {
+            "eventTitle": "Priced hotel row",
+            "eventDescription": "One Booking.com property priced for your dates and guests: its lowest stay price, flags, rating and location (row keys hotel_id, name, url, stars, review_score, review_count, address, latitude, longitude, distance_from_center, price_total, price_nightly, currency, taxes_fees_excluded, free_cancellation, no_prepayment, breakfast_included, room_name): $4 per 1,000 hotels. Not charged: sold-out or unpriced properties (delivered free with Booking's alternative dates), properties maxPrice or minStars remove, a property reached twice in one run, destinations or names that match nothing, status rows, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          },
+          "room": {
+            "eventTitle": "Room rate row",
+            "eventDescription": "One room and rate combination Booking.com matched to your stay, only when includeRooms is true: room name, occupancy, meal plan, stay total and nightly rate, hotel-currency price, free-cancellation deadline, \"only X left\" message (row keys hotel_id, hotel_name, room_id, room_name, occupancy, meal_plan, price_total, price_nightly, currency, price_original, original_currency, free_cancellation, free_cancellation_until, only_x_left, check_in, check_out): $2 per 1,000 rows. Not charged when includeRooms is false (default), and never for sold-out properties. The hotel row's rooms_listed is the number of room rows that property adds. No start fee; proxy and compute are included in the event price.",
+            "eventPriceUsd": 0.002
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:47.259Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/booking-prices-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/booking-reviews-scraper",
+      "title": "Booking.com Reviews Scraper — Hotel Reviews, Guest Reviews",
+      "description": "Booking.com guest reviews by URL, name or id. One row per review: score, title, liked/disliked, language, review/stay dates, room, traveller type, country, photos, property reply. Free hotel row: score, 7 category ratings. Free filters: language, keyword, max score (negative reviews), since date.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.3.1",
+      "verifiedAt": "2026-11-07T09:07:33.978128+00:00",
+      "storeUrl": "https://apify.com/kestrel/booking-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One guest review of a Booking.com hotel: 1-10 score (and out of 5), title, liked and disliked text, language, review and stay dates, nights, room, traveller type, reviewer name and country, helpful votes, photos and the property's reply (row keys rating, rating_5, title, positives, negatives, text, language, review_date, check_in, check_out, nights, room_type, traveler_type, reviewer_name, reviewer_country, helpful_votes, photos, response): $5 per 1,000 reviews. Not charged: hotel rows (category ratings, review count), status rows, reviews removed by maxRating, sinceDate or requireText, reviews Booking's language, traveller-type and keyword filters skip (never fetched), a hotel given twice, hotels with no reviews, names or URLs that match nothing, bad input. No start fee; proxy and compute are included in the event price. About 4 reviews in 10 are score-only. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:48.103Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/booking-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/clinical-trials-search",
+      "title": "Clinical Trials Search - Studies, Sponsors & 临床试验",
+      "description": "Search clinical trials on ClinicalTrials.gov by query and recruitment status. Rows: NCT ID, title, sponsor, conditions, phase, enrollment, eligibility, locations and public study contacts. Free country/text filters; exclude known IDs or content hashes for repeat-run research. 临床试验。",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.5",
+      "verifiedAt": "2026-11-07T09:07:33.682241+00:00",
+      "storeUrl": "https://apify.com/kestrel/clinical-trials-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "study": {
+            "eventTitle": "Study snapshot",
+            "eventDescription": "One delivered study snapshot ($5 per 1,000 rows; row keys id, title, official_title, status, last_updated, start_date, completion_date, conditions, interventions, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:49.022Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/clinical-trials-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/despegar-hotel-ratings",
+      "title": "Despegar Hotel Ratings Scraper - Guest Scores, AI Summary",
+      "description": "Get Despegar hotel ratings by hotel URL or ID in Latin America. One row per hotel: guest score, review count, six category scores, stars, city and Despegar AI review summary. Free: up to four published comments, not a full review list. Filter minimum rating. Opiniones y calificaciones de hoteles.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:34.385687+00:00",
+      "storeUrl": "https://apify.com/kestrel/despegar-hotel-ratings",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "hotel": {
+            "eventTitle": "Hotel",
+            "eventDescription": "One Despegar hotel: the 0-10 guest rating with its review count, six category scores (service, staff, location, Wi-Fi, cleanliness, value), Despegar's AI summary of what guests say, stars, city, country and coordinates (row keys hotel_id, rating, review_count, score_service, score_staff, score_location, score_internet, score_cleanliness, score_value, summary, stars, city, country, latitude, longitude): $4 per 1,000 hotels. Free: the up-to-four comments the page publishes (whatever the review count says; there is no full review list), hotels with no rating, unknown ids, hotels below minRating, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:49.843Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/despegar-hotel-ratings",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/ebay-search-scraper",
+      "title": "eBay Scraper - Listings, Prices, Auctions & Seller Feedback",
+      "description": "Search active eBay listings by keyword or search URL on 10 marketplaces. Rows: prices, shipping, condition, auctions, bids, units sold, watchers and seller feedback. Free filters: condition, format, price, category, sort. Item-page details are currently unreliable. UK and sold history unsupported.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.1.9",
+      "verifiedAt": "2026-11-07T09:07:35.304986+00:00",
+      "storeUrl": "https://apify.com/kestrel/ebay-search-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "item": {
+            "eventTitle": "Listing row",
+            "eventDescription": "One delivered active eBay listing: $4 per 1,000 listings ($0.004 each; up to 60 search rows/page). Item-page details are currently unreliable; search rows do not include item specifics, and successful search does not guarantee detail rows. Blocked item pages are not charged. Search row keys: item_id, title, url, price, currency, list_price, discount_pct, shipping_cost, condition, buying_format = buy_it_now or auction, bids, time_left, best_offer, units_sold, watchers, seller, seller_feedback_pct, location, image. Active listings only; UK and sold/completed modes are unsupported. Not charged: empty searches, listings outside minPrice/maxPrice, duplicate item IDs within one run, status rows, refused pages, bad input. No start fee; proxy and compute are included in the event price. If a separate item-URL run delivers a detail row, it is charged again at $0.004; failed attempts are free. The run stops at the Apify run option maxTotalChargeUsd, never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:50.663Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/ebay-search-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/flight-price-tracker",
+      "title": "Flight Price Tracker — Cheapest Day to Fly & Fare Calendar",
+      "description": "Track Google Flights fares across 1–60 departure dates per route. One row per day: cheapest price, airline, stops and rank. Flight price calendar for one-way or round trips, with nonstop and max-price filters. Schedule snapshots for price history; threshold rows do not send notifications.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.1.3",
+      "verifiedAt": "2026-11-07T09:07:34.935588+00:00",
+      "storeUrl": "https://apify.com/kestrel/flight-price-tracker",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "fare": {
+            "eventTitle": "Fare row (cheapest of the day)",
+            "eventDescription": "One route and departure day: that day's cheapest Google Flights itinerary with price, airline, stops, times, duration, layovers, CO2 and its rank in the window (row keys route, origin, destination, depart_date, return_date, seat, price, currency, airline, stops, depart_time, arrive_time, duration_minutes, layovers, co2_kg, rank_in_window, cheapest_in_window, itineraries_seen): $4 per 1,000 days. At most one row per route and day, so a 30-day window on one route is at most 30 rows. Not charged: days with no fare, days over your maxPrice (filtered before billing), failed days, status rows, refused inputs. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:51.477Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/flight-price-tracker",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-ads-transparency-scraper",
+      "title": "Google Ads Transparency Scraper - Creatives & Advertisers",
+      "description": "Search the Google Ads Transparency ad library by domain or advertiser ID. Rows: advertiser, creative ID, format, dates, previews and optional OCR ad copy. Monitor new or changed competitor ads; filter region and date. No login. Domain matches do not prove ownership; missing text is reported.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.9",
+      "verifiedAt": "2026-11-07T09:07:35.233624+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-ads-transparency-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "ad": {
+            "eventTitle": "Ad",
+            "eventDescription": "One delivered Google Ads creative with advertiser_id, advertiser_name, creative_id, ad_url, format, first_shown, last_shown, preview_urls, ad_text, text_status and content_hash. $3 per 1000 ad rows. Optional English OCR of up to 3 previews is included; text may be unavailable or approximate. No start fee; proxy and compute are included in the event price. Filtered rows, duplicates, unchanged monitored creatives, empty searches, failed detail requests and status rows are not charged. Stops at Apify run option maxTotalChargeUsd. Source serving dates alone do not trigger a monitored update.",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-10-16T13:42:02.984Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-ads-transparency-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-autocomplete-keywords",
+      "title": "Google Autocomplete - Keyword Suggestions & Seed Expansion",
+      "description": "Get Google autocomplete keyword suggestions from seed queries, country and language. One row per suggestion: seed, expanded query, text, position and locale. Optional a-z seed expansion, text filters and new-only monitoring. Parsed queries are billed even when no suggestions remain.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-07T09:07:35.445566+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-autocomplete-keywords",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "query-parsed": {
+            "eventTitle": "Parsed query",
+            "eventDescription": "One successfully parsed seed or expanded query: $2 per 1,000 checks. Charged even when filters, exclusions, duplicates or monitoring leave zero rows. Failed/unrecognized responses and invalid input are not charged. A separate delivered-row fee applies. No start fee; compute included. No extra source account or API key. Work stops before a new check when the Apify run option maxTotalChargeUsd cannot cover that check plus one row.",
+            "eventPriceUsd": 0.002
+          },
+          "suggestion": {
+            "eventTitle": "Suggestion",
+            "eventDescription": "One delivered suggestion row: $0.1 per 1,000 rows. Row keys: seed, expanded_query, suggestion, position, country, language. Filtered, duplicate, excluded and unchanged rows are not charged. Successful source checks are separately billed at $0.002 each, including empty checks. No start fee; compute included. maxTotalChargeUsd is an Apify run option, not input.",
+            "eventPriceUsd": 0.0001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-05T06:47:31.680Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-autocomplete-keywords",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-flights-prices",
+      "title": "Google Flights Scraper — Airfare Prices, Fares & Price Tracking",
+      "description": "Get Google Flights prices by route, dates, cabin and passengers. One row per itinerary: price, airline, times, duration, stops, layovers, CO2. One-way or round trip; nonstop and business class fares. Sweep dates for a fare calendar. Schedule daily flight price tracking to build price history.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.1.3",
+      "verifiedAt": "2026-11-07T09:07:36.535693+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-flights-prices",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "flight": {
+            "eventTitle": "Itinerary row",
+            "eventDescription": "One flight itinerary for your route, dates, cabin and passengers: price for all passengers, airline, departure and arrival times, duration, stops, layovers, CO2 (row keys route, origin, destination, depart_date, return_date, seat, adults, price, currency, airline, stops, depart_time, arrive_time, duration_minutes, layovers, co2_kg, rank, google_url): $5 per 1,000 itineraries. Usually 10 to 35 rows per route and date; maxResultsPerSearch caps them. Not charged: empty or failed searches, duplicates (an itinerary two overlapping searches both return is billed once), status rows, refused inputs. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:52.281Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-flights-prices",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-hotels-prices",
+      "title": "Google Hotels Prices Scraper & API - OTA Rates, Hotel Details",
+      "description": "Google Hotels API: hotel prices by city, hotel name or URL for your dates. One row per hotel: nightly rate, stay total, taxes, deals, availability, rating. Optional OTA rates (Booking.com, Expedia, Agoda, official site): rate parity, price comparison, price tracking. Free: address, phone, amenities.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.9.8",
+      "verifiedAt": "2026-11-07T09:07:37.317640+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-hotels-prices",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "hotel": {
+            "eventTitle": "Hotel price row",
+            "eventDescription": "One hotel with its lowest nightly rate, stay total and taxes for your dates (row keys name, entity_id, hotel_id, stars, rating, reviews, lat, lng, nightly, total, taxes, fees, total_with_taxes, currency, source, check_in, check_out, google_url): $4 per 1,000 hotels. Address, phone, amenities and photos (includeDetails; keys address, phone, place_id, amenities, photos) ride on this row at no extra charge. Not charged: sold-out or unpriced hotels, duplicates, hotels your filters remove, empty or failed searches, hotel names that match nothing, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          },
+          "offer": {
+            "eventTitle": "Source rate row",
+            "eventDescription": "One booking site's rate for one hotel and stay (Booking.com, Expedia, Agoda, official site…) with free-cancellation flag and link (row keys entity_id, hotel_id, name, source, official, room, nightly, total, currency, link, partner_url, free_cancel, free_cancel_until_date, max_guests, lowest, check_in, check_out): $2 per 1,000. Measured: about 18 rows per hotel (4 to 36) with offerLevel \"sources\", about 65 (up to 150) with \"rooms\". Not charged when includeOffers is false; maxOffersPerHotel caps the rows per hotel. Failed offer lookups are free.",
+            "eventPriceUsd": 0.002
+          }
+        },
+        "effectiveAt": "2026-11-06T09:10:49.293Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-hotels-prices",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-maps-reviews-scraper",
+      "title": "Google Maps Reviews Scraper — Date Range, New-Only, Owner Reply",
+      "description": "Google Maps reviews by place id, URL, short link or name. One row per review: stars, text, owner replies, exact dates, translation, photos, reviewer. Free place row: rating, review count, completeness check. Free filters: date range, only new reviews, negative reviews, text-only, keywords, language.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.9",
+      "verifiedAt": "2026-11-07T09:07:36.949200+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-maps-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One Google Maps review: stars, text, translation, exact publish and edit dates, owner reply (row keys review_id, place_id, stars, text, text_translated, published_at, updated_at, owner_reply_text, owner_reply_at, likes, photos, reviewer_name, reviewer_is_local_guide, reviewer_review_count, sub_ratings, visit_details): $1 per 1,000 reviews. Not charged: place rows (rating, review count, histogram, completeness check), status rows, reviews your filters remove, duplicates, reviews an earlier only-new run already delivered, places with no reviews, places or links Google does not know, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:53.528Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-maps-scraper",
+      "title": "Google Maps Scraper — Leads, Emails, Phone Numbers & Contacts",
+      "description": "Google Maps places and business leads by keyword and location: phone, website, rating, hours, place ID. Optional website emails and social links. Email-only mode bills only delivered places with emails. Count after free filters: no website, low rated, unclaimed. Newly seen place monitoring.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.3.3",
+      "verifiedAt": "2026-11-07T09:07:37.323395+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-maps-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "place": {
+            "eventTitle": "Place",
+            "eventDescription": "One Google Maps place delivered as a full row, every detail included: phone, website, rating, review count, hours, address parts, coordinates (row keys place_id, cid, google_maps_url, name, category, phone, website, rating, review_count, opening_hours, address, street, city, postal_code, country_code, lat, lng, is_closed_permanently). $4 per 1,000 places. All filters are free and run BEFORE this charge: places your filters reject, duplicates, places an earlier monitored run delivered, empty or failed searches and unknown locations cost $0. No start fee, proxy and compute included in the event price; charged count always equals delivered rows. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          },
+          "contact-found": {
+            "eventTitle": "Contact found",
+            "eventDescription": "When enrichContacts (or onlyWithEmail) is on: $3 per 1,000 places where an email or social/WhatsApp link is found on the place's own website, in addition to the $4 per 1,000 base place fee (row keys emails, email_primary, phones_from_site, contact_page_url, facebook, instagram, linkedin, x, youtube, tiktok, whatsapp, enrichment_status). No website, unreachable website, phone-only findings or no contact found = no contact fee. At the historical 50% contact yield, 1,000 enriched places cost about $5.50 total ($4 base + $1.50 contacts); yield is not guaranteed. With onlyWithEmail, each delivered place has an email and costs $0.007 total: 50 delivered places cost $0.35; places without an email are omitted and free. Proxy and compute are included in these event prices.",
+            "eventPriceUsd": 0.003
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:54.364Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-news",
+      "title": "Google News - Articles, Headlines, RSS & Keyword Search | 谷歌新闻",
+      "description": "Search Google News articles by keyword, country and language, including Chinese. One row per article: headline, publisher, publication date and Google News link. Filter dates and publisher domains before billing; exclude known IDs. RSS metadata only, not full text or direct publisher article URLs.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.10",
+      "verifiedAt": "2026-11-07T09:07:37.601660+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-news",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "article": {
+            "eventTitle": "Article",
+            "eventDescription": "One delivered article (row keys article_id, title, publisher, publisher_url, publisher_domain, google_news_url, published_at, feed_description, query, language, country): $1 per 1,000 rows. RSS metadata only: Google News link and publisher homepage, not full text or a direct article URL. No charge for filters, excluded IDs, duplicates, empty results, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at Apify run option maxTotalChargeUsd (not an input field). 10 rows cost $0.01; maxResults caps rows across all sources.",
+            "eventPriceUsd": 0.001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:55.330Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-news",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-patents-search",
+      "title": "Google Patents Search - Inventors, Assignees & PDF Links",
+      "description": "Search Google Patents by keywords and patent office. One row per patent: publication number, title, inventor, assignee, priority, filing and publication dates, snippet and PDF link when available. Free text filters and ID/hash exclusions. Search metadata only; full claims are not extracted. 专利检索。",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-07T09:07:38.034917+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-patents-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "patent": {
+            "eventTitle": "Patent snapshot",
+            "eventDescription": "One delivered patent snapshot ($5 per 1,000 rows; row keys id, title, snippet, inventor, assignee, priority_date, filing_date, publication_date, grant_date, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:56.128Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-patents-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-play-reviews-scraper",
+      "title": "Google Play Reviews Scraper — Android App Reviews & Ratings",
+      "description": "Play Store reviews by language and country for Android apps by package name or URL. One row per review: 1-5 rating, text, reviewer, thumbs-up, app version, developer reply. Free app row: Google Play ratings. Filters before billing: star rating (negative, one-star reviews), since date (new reviews).",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.6",
+      "verifiedAt": "2026-11-07T09:07:38.985712+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-play-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review",
+            "eventDescription": "One Google Play review (row keys review_id, app_id, language, country, rating = 1-5, text, author, thumbs_up, app_version, review_date, reply_text = developer reply, reply_date, url): $4 per 1,000 reviews. Not charged: app rows (Google Play rating, rating count, category, price), status rows, reviews removed by minRating, maxRating, sinceDate or requireText, reviews Google itself skips when one star value is asked (never fetched), a review listed under two languages or countries (delivered once), apps with no reviews, unknown packages, failed jobs, bad input. No start fee; proxy and compute are included in the event price. Google answers up to 100 reviews per request. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:56.902Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-play-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-search-rank-tracker",
+      "title": "Google Search Rank Tracker - Domain Rankings & Rank Changes",
+      "description": "Track Google Search domain rankings and organic SERP positions by keyword and country. Rows: domain, title, snippet, rank and result link. Filter domains and titles; monitor previous rank and movement. Parsed pages are billed even when filters or unchanged rankings leave no rows.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:38.411296+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-search-rank-tracker",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed search page",
+            "eventDescription": "One successfully parsed search page: $8 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.",
+            "eventPriceUsd": 0.008,
+            "isPrimaryEvent": true
+          },
+          "result": {
+            "eventTitle": "Result",
+            "eventDescription": "One delivered result: $0.5 per 1,000 rows. Row keys: id, title, domain, domain_url, result_link, snippet, rank, page, query, country, source_url, fetched_at. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.008 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget. Monitoring rows include previous_rank and rank_change; positive rank_change means improvement. New rows have previous_rank=null. Missing domains are not emitted as disappearance alerts.",
+            "eventPriceUsd": 0.0005
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:57.704Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-search-rank-tracker",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/google-shopping-products",
+      "title": "Google Shopping Products - Prices, Merchants & Price Changes",
+      "description": "Search Google Shopping products by keyword and country. One row per product offer: title, price, currency, merchant, rating and delivery text. Merchant and price filters; monitor price changes between runs. Parsed pages are billed even when filters or unchanged prices leave no rows.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:38.669829+00:00",
+      "storeUrl": "https://apify.com/kestrel/google-shopping-products",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source page: $15 per 1,000 pages. This fee applies even when filters, duplicates, exclusions or monitoring leave no delivered rows. Failed requests and unrecognized responses are not charged. Separate delivered-product fee applies. No start fee; proxy and compute included. Work stops before a new page when maxTotalChargeUsd cannot cover a page plus one row.",
+            "eventPriceUsd": 0.015,
+            "isPrimaryEvent": true
+          },
+          "product": {
+            "eventTitle": "Product",
+            "eventDescription": "One delivered product row: $2 per 1,000 rows. Row keys: id, title, price, price_text, currency, merchant, rating, delivery_text, source_url. Filtered, duplicate, unchanged and excluded rows have no row fee. Parsed pages are billed separately at $0.015 each, even with zero rows. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option, not actor input.",
+            "eventPriceUsd": 0.002
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:58.463Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-shopping-products",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/greenhouse-jobs-scraper",
+      "title": "Greenhouse Jobs - Remote Jobs, Salaries & Job Descriptions",
+      "description": "Get Greenhouse job postings from company board URLs or tokens. One row per job: title, location, department, full description, apply URL, dates and published salaries. Filter titles, departments, remote or hybrid jobs before billing. Exclude known job IDs for new jobs. No login or API key.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:39.109558+00:00",
+      "storeUrl": "https://apify.com/kestrel/greenhouse-jobs-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "job": {
+            "eventTitle": "Job",
+            "eventDescription": "One delivered Greenhouse job (row keys job_id, job_key, title, company, location, departments, description_text, url, apply_url, published_at, updated_at, workplace_type, salary_ranges, compensation_status): $3 per 1,000 jobs. Full descriptions and published pay included; missing pay is not estimated. Not charged: filtered jobs, excluded IDs, duplicates, empty boards, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at the caller's Apify run option maxTotalChargeUsd. 10 jobs cost $0.03; maxResults caps jobs across all boards.",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:24:59.281Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/greenhouse-jobs-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/hostelworld-reviews-scraper",
+      "title": "Hostelworld Reviews Scraper - Hostel Guest Reviews, Ratings",
+      "description": "Get Hostelworld hostel and backpacker reviews by property URL or ID. Each review includes score, safety, location, staff and cleanliness ratings, text, owner reply, group type, age, nationality and date. Free hostel row: address, lowest price. Filters: negative reviews, dates and group type.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.9",
+      "verifiedAt": "2026-11-07T09:07:40.115135+00:00",
+      "storeUrl": "https://apify.com/kestrel/hostelworld-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review",
+            "eventDescription": "One Hostelworld guest review: 0-100 score with seven sub-ratings, the text, the hostel's reply, group type, age band, trip types, nickname and nationality (row keys review_id, rating, sub_ratings, text, owner_comment, group_type, age_group, trip_types, reviewer_nickname, reviewer_country, review_date): $4 per 1,000 reviews. Not charged: reviews removed by minRating, maxRating, groupTypes, sinceDate or requireText, duplicate targets, hostels with no reviews, unknown ids, hostel rows, status rows. No start fee; proxy and compute are included in the event price. Hostelworld pages 50 reviews at a time and a busy hostel has a few thousand: maxReviewsPerProperty caps the rows per hostel. The run stops at the maximum cost per run you set (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:00.060Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/hostelworld-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/hotel-price-tracker",
+      "title": "Hotel Price Tracker — Google Hotels Price History & Alerts",
+      "description": "Track hotel prices on Google Hotels by name or URL across up to 60 dates. Each hotel/date row has lowest nightly rate, total, cheapest source and link, cancellation and cheapest date. Price calendar and rate monitoring; scheduled runs build price history. maxPrice filters rows for price-drop alerts.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:39.942529+00:00",
+      "storeUrl": "https://apify.com/kestrel/hotel-price-tracker",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "rate": {
+            "eventTitle": "Rate row",
+            "eventDescription": "One hotel and check-in date: the lowest nightly rate across every booking site Google Hotels lists, stay total, cheapest source with booking link, official-site rate, free-cancellation flag and the date's rank in the window (row keys hotel_name, entity_id, check_in, check_out, currency, price, total, source, source_url, official_price, free_cancellation, rank_in_window): $4 per 1,000 rows. At most one row per hotel per check-in date (days, up to 60): 2 hotels × 30 dates = 60 rows = $0.24. Not charged: dates with no rate (sold out), dates over maxPrice, names that match nothing, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:00.858Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/hotel-price-tracker",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/hotel-rate-parity",
+      "title": "Hotel Rate Parity Checker — OTA Price Comparison",
+      "description": "Check hotel rate parity on Google Hotels by name or URL. Each stay compares OTA and official site rates: nightly price, cancellation, booking link, cheapest source, spread and direct booking rate. Find parity violations: who undercuts the hotel and by how much. Available rates only; rate shopping.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:40.227785+00:00",
+      "storeUrl": "https://apify.com/kestrel/hotel-rate-parity",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "parity": {
+            "eventTitle": "Parity row",
+            "eventDescription": "One hotel and stay with every booking site's rate (Booking.com, Expedia, Agoda…), cheapest and dearest, spread, median, official-site rate and who undercuts it (row keys hotel_name, entity_id, check_in, sources, min_source, min_price, max_source, max_price, spread_pct, median_price, official_price, undercut_by, undercut_pct): $10 per 1,000 rows (1 cent per hotel and stay). One row per hotel and stay however many sources (about 18, 4 to 36): 10 hotels × 7 dates (sweepDays 6) = 70 rows = $0.70. Not charged: hotels with no rate, rows under minSpreadPct, names that match nothing, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.01,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:01.696Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/hotel-rate-parity",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/hotel-reputation-checker",
+      "title": "Free Hotel Review Checker — Hotel Reputation, Rating Comparison",
+      "description": "Compare hotel ratings across Google Hotels, Tripadvisor, Booking.com, Agoda, Hostelworld and Despegar. Free hotel reputation check: rating, 0-5 score, review count, stars, ranking and comparison summary. Up to 10 hotels per run. Use names for four sources; Hostelworld and Despegar need URLs.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.3.2",
+      "verifiedAt": "2026-11-07T09:07:40.970701+00:00",
+      "storeUrl": "https://apify.com/kestrel/hotel-reputation-checker",
+      "pricing": {
+        "model": "FREE",
+        "events": {},
+        "effectiveAt": "2026-08-29T16:27:32.236Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/hotel-reputation-checker",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/hrs-reviews-scraper",
+      "title": "HRS Reviews Scraper - Hotel Reviews, Guest Reviews, Ratings",
+      "description": "Get HRS hotel reviews by URL or hotel ID. Each guest review includes 0-10 rating, 12 category scores, positives, negatives, hotel reply, traveller type, stay dates, language and text. Free hotel row: stars, address. Filters: complaints, negative reviews, business travel, German. Hotelbewertungen.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:41.590391+00:00",
+      "storeUrl": "https://apify.com/kestrel/hrs-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review",
+            "eventDescription": "One commented guest rating of an HRS hotel: 0-10 score, 12 category scores, positives, negatives, the hotel's replies, traveller type, age group, stay dates, language and text (row keys review_id, rating, votes, positives, negatives, hotel_reply, traveller_type, age_group, arrival_date, departure_date, language, text, review_date): $4 per 1,000 reviews. Not charged: reviews removed by maxRating, travellerTypes, languages or requireText, duplicates, hotels with no commented ratings, unknown ids, hotel rows, status rows. No start fee; proxy and compute are included in the event price. A busy hotel has 50-150 commented ratings; maxReviewsPerHotel caps the rows per hotel. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:02.464Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/hrs-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/image-to-text-ocr",
+      "title": "Image to Text - OCR, Word Coordinates & 图片文字识别",
+      "description": "Extract printed text from public image URLs with English or simplified Chinese OCR. One row per nonempty image: text, words, confidence, bounding boxes, language and TXT download URL. Free empty images and ID/hash exclusions. 图片文字识别。 Handwriting recognition is not guaranteed.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.6",
+      "verifiedAt": "2026-11-07T09:07:41.380921+00:00",
+      "storeUrl": "https://apify.com/kestrel/image-to-text-ocr",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "result": {
+            "eventTitle": "Nonempty image",
+            "eventDescription": "One delivered nonempty image: $20 per 1,000 rows. Row keys text, words, truncated, language, source_url. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+            "eventPriceUsd": 0.02,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:03.253Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/image-to-text-ocr",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/indeed-company-reviews",
+      "title": "Indeed Company Reviews Scraper - Employee Reviews, Ratings",
+      "description": "Scrape Indeed company reviews (employer reviews) by name or URL. One row per employee review: rating, 5 sub-ratings, text, pros, cons, job title, location, employer reply. Free: employer ratings, industry, size. Filters: rating, date, job title, location. Only-new mode for monitoring. 44 countries.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.1",
+      "verifiedAt": "2026-11-07T09:07:41.900331+00:00",
+      "storeUrl": "https://apify.com/kestrel/indeed-company-reviews",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review",
+            "eventDescription": "One Indeed employee review: rating, 5 sub-ratings, pros, cons, job title, employer reply (row keys review_id, company, rating, work_life_balance, compensation_benefits, job_security_advancement, management, culture_values, title, text, pros, cons, job_title, location, review_date, employer_reply, url): $3 per 1,000 reviews, at most companies x maxReviewsPerCompany x $0.003 per run (default 100 = $0.30 per company). Not charged: reviews your filters remove, reviews an earlier onlyNewReviews run already delivered, duplicates, the company row (ratings, industry, size, CEO), status rows, companies without reviews, unknown company names, failed pages. No start fee; proxy and compute are included in the event price. A maximum cost per run set when starting the run is honoured too.",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:04.004Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/indeed-company-reviews",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/kurzurlaub-reviews-scraper",
+      "title": "Kurzurlaub Reviews Scraper - Hotel Reviews, Gästebewertungen",
+      "description": "German Kurzurlaub.de hotel reviews by URL or hotel id. One row per guest rating: 1-6 score, category scores (room, service, food, wellness, location, value), title, comments, date. Free hotel row: stars, city. Free filters: complaints, only new since a date. Kurzurlaub Bewertungen, Hotelbewertungen.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:42.432666+00:00",
+      "storeUrl": "https://apify.com/kestrel/kurzurlaub-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Rating",
+            "eventDescription": "One guest rating of a Kurzurlaub.de hotel: 1-6 score, the category scores the guest gave, title, comment when there is one, reviewer first name and date (row keys review_id, hotel_id, hotel_name, url, score, category_scores, title, text, reviewer, review_date): $4 per 1,000 ratings. Not charged: ratings removed by maxScore, minScore or sinceDate, duplicates, hotels with no ratings, unknown ids, failed hotels, hotel rows, status rows. No start fee; proxy and compute are included in the event price. Kurzurlaub lists 10-20 ratings per page, newest first; maxReviewsPerHotel caps the rows per hotel and sinceDate stops paging early. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:04.832Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/kurzurlaub-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/linkedin-job-search",
+      "title": "LinkedIn Jobs - Job Descriptions & New Jobs",
+      "description": "Search LinkedIn jobs by keyword and location. Each job includes title, company, location, posted date, URL and available salary text. Optional job descriptions and employment types. Filter company, title and date; monitor new jobs. Parsed pages are billed even when no rows match.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:42.399808+00:00",
+      "storeUrl": "https://apify.com/kestrel/linkedin-job-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed search page",
+            "eventDescription": "One successfully parsed search page: $5 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          },
+          "job": {
+            "eventTitle": "Job",
+            "eventDescription": "One delivered job: $1 per 1,000 rows. Row keys: id, job_id, title, url, company, company_url, location, posted_date, posted_text, salary_text, logo_url, description. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.005 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget. With includeDetails=true this event is replaced by job-with-description, not added to it.",
+            "eventPriceUsd": 0.001
+          },
+          "job-with-description": {
+            "eventTitle": "Job with description",
+            "eventDescription": "One delivered job with a successfully fetched full description: $4 per 1,000 enriched jobs. Replaces the $0.001 job event, not an add-on. Row keys include description, seniority, employment_type, job_function and industries; unavailable criteria stay null. Failed descriptions have no job fee. Parsed search pages cost $0.005 each, including filtered or unchanged checks. No start fee; proxy and compute included. maxTotalChargeUsd is a run option, not input.",
+            "eventPriceUsd": 0.004
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:05.595Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/linkedin-job-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/pdf-to-excel-tables",
+      "title": "PDF to Excel - Tables, XLSX Downloads & PDF转Excel",
+      "description": "Extract tables from digital PDF URLs into Excel spreadsheets and XLSX downloads. One row per page with tables: cells, table count, page number, strategy and download URL. Choose ruled lines or text alignment. Free empty pages and ID/hash exclusions. PDF转Excel。 Scanned-table OCR is unsupported.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.6",
+      "verifiedAt": "2026-11-07T09:07:42.832059+00:00",
+      "storeUrl": "https://apify.com/kestrel/pdf-to-excel-tables",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "result": {
+            "eventTitle": "Pdf page with tables",
+            "eventDescription": "One delivered PDF page with tables: $20 per 1,000 rows. Row keys page, total_pages, source_url, extraction, tables, table_count, table_strategy. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+            "eventPriceUsd": 0.02,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:06.353Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/pdf-to-excel-tables",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/pdf-to-markdown-pages",
+      "title": "PDF to Markdown - Text, Scanned OCR & PDF转Markdown",
+      "description": "Convert public PDF URLs to Markdown with page text extraction. Each nonempty page includes text, page number, extraction method, dimensions and download URL. Optional English/Chinese OCR for scanned pages without text. Free blank pages and ID/hash exclusions; page ranges. PDF转Markdown、扫描PDF识别。",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:43.160494+00:00",
+      "storeUrl": "https://apify.com/kestrel/pdf-to-markdown-pages",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "result": {
+            "eventTitle": "Nonempty pdf page",
+            "eventDescription": "One delivered nonempty PDF page: $10 per 1,000 rows. Row keys page, total_pages, source_url, extraction, markdown, characters, width. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+            "eventPriceUsd": 0.01,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:07.148Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/pdf-to-markdown-pages",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/pinterest-pin-search",
+      "title": "Pinterest Pin Search - Image URLs & Destination Domains",
+      "description": "Search Pinterest pins by keywords. One row per pin: title, description, image URL, dimensions, destination URL, domain, board name and date. Filter text, image orientation and destination domains; collect only new pins. Parsed pages are billed even when filters or monitoring return no rows.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.3",
+      "verifiedAt": "2026-11-07T09:07:43.450290+00:00",
+      "storeUrl": "https://apify.com/kestrel/pinterest-pin-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed search page",
+            "eventDescription": "One successfully parsed Pinterest search page: $8 per 1,000 checks. Charged even when filters, exclusions, duplicates or monitoring leave zero rows. Failed/unrecognized responses and invalid input are not charged. A separate delivered-row fee applies. No start fee; compute included. No extra source account or API key. Work stops before a new check when the Apify run option maxTotalChargeUsd cannot cover that check plus one row.",
+            "eventPriceUsd": 0.008
+          },
+          "pin": {
+            "eventTitle": "Pin",
+            "eventDescription": "One delivered pin row: $1 per 1,000 rows. Row keys: query, title, image_url, image_orientation, destination_domain, destination_url, board_name, created_at. Filtered, duplicate, excluded and unchanged rows are not charged. Successful source checks are separately billed at $0.008 each, including empty checks. No start fee; compute included. maxTotalChargeUsd is an Apify run option, not input.",
+            "eventPriceUsd": 0.001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-05T06:47:02.889Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/pinterest-pin-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/rss-atom-feed-reader",
+      "title": "RSS Feed Reader - Atom, Articles, Dates & New Items | RSS订阅",
+      "description": "Parse RSS and Atom feeds from URLs. Each article entry includes title, link, feed text, author, dates, categories and stable ID. Filter titles and dates; exclude known IDs for new items on repeat runs. Successful feed checks are billed even with no new items. No article crawling or login.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.6",
+      "verifiedAt": "2026-11-07T09:07:43.470965+00:00",
+      "storeUrl": "https://apify.com/kestrel/rss-atom-feed-reader",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "feed-parsed": {
+            "eventTitle": "Parsed feed",
+            "eventDescription": "One successfully parsed feed file: $2.5 per 1,000 files. Includes up to maxItemsPerFeed matching entry rows (keys id, title, url, text, author, published_at, updated_at, categories, feed_url). No per-entry fee. Empty sources and sources with no matching or new rows ARE charged for parsing. Invalid input, HTTP failures, malformed XML and duplicate source URLs are not charged. No start fee; compute and transfer are included. maxTotalChargeUsd is an Apify run option, not an input field. Work stops when the remaining budget cannot cover the next event.",
+            "eventPriceUsd": 0.0025,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-10-30T03:14:16.821Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/rss-atom-feed-reader",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/sec-company-filings",
+      "title": "SEC Filings - EDGAR Forms, 10-K, 10-Q, Dates & 公司公告",
+      "description": "Collect SEC EDGAR filings by company CIK: 10-K, 10-Q, 8-K and other forms. Each filing includes company, accession number, form, filing/report dates and original document link. Free date/form filters and ID/hash exclusions. Bounded archive pages; no filing-text extraction. 公司公告、财报。",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.5",
+      "verifiedAt": "2026-11-07T09:07:43.871186+00:00",
+      "storeUrl": "https://apify.com/kestrel/sec-company-filings",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "filing": {
+            "eventTitle": "Filing snapshot",
+            "eventDescription": "One delivered filing snapshot ($3 per 1,000 rows; row keys id, cik, company, accession_number, form, filing_date, report_date, accepted_at, items, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+            "eventPriceUsd": 0.003,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:07.892Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/sec-company-filings",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/shopify-products",
+      "title": "Shopify Products - Prices, Variants, SKUs & Availability",
+      "description": "Get Shopify product catalogs from store URLs or a collection. Each product includes prices, currency, variants, SKUs, availability, images, vendor and descriptions. Filter titles, vendors and available products before billing. Exclude known IDs for new products. No login or API key needed.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.12",
+      "verifiedAt": "2026-11-07T09:07:44.192150+00:00",
+      "storeUrl": "https://apify.com/kestrel/shopify-products",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "product": {
+            "eventTitle": "Product",
+            "eventDescription": "One delivered product (row keys product_id, product_key, title, url, vendor, price_min, price_max, currency, available, variants, images, description_text): $2 per 1,000 rows. All variants and images included; prices are source currency units, currency may be null. No charge for filters, excluded IDs, duplicates, empty results, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at Apify run option maxTotalChargeUsd (not an input field). 10 rows cost $0.02; maxResults caps rows across all sources.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:08.715Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/shopify-products",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/sitemap-url-extractor",
+      "title": "Sitemap URL Extractor - Links, Lastmod & Nested Indexes | 站点地图",
+      "description": "Extract URLs from XML sitemaps, gzip files and nested sitemap indexes. Each URL includes link, lastmod, priority, change frequency and source sitemap. Filter paths and last-modified dates; exclude known IDs for repeat runs. Source parsing is billed even with zero matches. No browser or proxy.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:44.504529+00:00",
+      "storeUrl": "https://apify.com/kestrel/sitemap-url-extractor",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "sitemap-parsed": {
+            "eventTitle": "Parsed sitemap",
+            "eventDescription": "One successfully parsed sitemap file: $5 per 1,000 files. Index files count. URL rows have a separate $0.10 per 1,000 fee. Empty sources and sources with no matching or new rows ARE charged for parsing. Invalid input, HTTP failures, malformed XML and duplicate source URLs are not charged. No start fee; compute and transfer are included. maxTotalChargeUsd is an Apify run option, not an input field. Work stops when the remaining budget cannot cover the next event.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": false
+          },
+          "url": {
+            "eventTitle": "URL row",
+            "eventDescription": "One delivered URL row (keys id, url, lastmod, changefreq, priority, sitemap_url): $0.10 per 1,000 URLs, plus $0.005 per successfully parsed sitemap or index file. Filtered, excluded and duplicate rows are not charged as URLs. No start fee; compute and transfer included. 1,000 URLs from one file cost $0.105. maxTotalChargeUsd is an Apify run option; no URL is delivered beyond its charge limit.",
+            "eventPriceUsd": 0.0001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-10-30T03:14:16.755Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/sitemap-url-extractor",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/steam-player-reviews",
+      "title": "Steam Reviews - Text, Ratings, Playtime & 中文评论",
+      "description": "Collect Steam player reviews by App ID and language. Each review includes text, dates, positive/negative recommendation, helpful votes and playtime. Free date/text filters and ID/hash exclusions. 中文评论。 Cursor pagination; no profile enrichment or comment replies.",
+      "notice": "UNDER_MAINTENANCE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.6",
+      "verifiedAt": "2026-11-07T09:07:44.699899+00:00",
+      "storeUrl": "https://apify.com/kestrel/steam-player-reviews",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review snapshot",
+            "eventDescription": "One delivered review snapshot ($1 per 1,000 rows; row keys id, app_id, review_text, language, recommended, created_at, updated_at, helpful_votes, funny_votes, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+            "eventPriceUsd": 0.001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:09.446Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/steam-player-reviews",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/mcp-call.json",
+      "recommended": false
+    },
+    {
+      "actor": "kestrel/trip-com-reviews-scraper",
+      "title": "Trip.com Reviews Scraper — Ctrip Hotel Guest Reviews & Ratings",
+      "description": "Trip.com and Ctrip (携程) hotel guest reviews by URL or id. One row per review: 0-10 rating, 4 sub-scores, text, stay date, room, travel type, reviewer country, photos, hotel reply, source. Free hotel row: stars, address, scores. Filters before billing: language, max score (negative reviews). 酒店点评",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.9",
+      "verifiedAt": "2026-11-07T09:07:45.325865+00:00",
+      "storeUrl": "https://apify.com/kestrel/trip-com-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One guest review of a Trip.com or Ctrip hotel: 0-10 rating (and out of 5) with four sub-scores, rating word, review text as written, language, recommend flag, review and check-in dates, room, travel type, reviewer name, country, level and review count, helpful votes, photos, source (Trip.com, Ctrip, Expedia, Hotels.com) and the hotel's reply with date (row keys rating, rating_5, rating_location, rating_facility, rating_service, rating_room, rating_text, text, language, recommend, review_date, check_in, room_type, travel_type, reviewer_name, reviewer_country, reviewer_level, reviewer_reviews, helpful_votes, images, source, response, response_date): $4 per 1,000 reviews. Not charged: hotel rows, status rows, reviews removed by maxRating or requireText, reviews Trip.com's language filter skips (never fetched), a hotel given twice (URL and id of one hotel are read once), hotels with no reviews, unknown ids, bad input. No start fee; proxy and compute are included in the event price. Trip.com pages 100 reviews at a time. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:10.289Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/trip-com-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/tripadvisor-restaurant-reviews",
+      "title": "TripAdvisor Restaurant Reviews Scraper — Diner Reviews, Ratings",
+      "description": "TripAdvisor restaurant reviews and attraction reviews by URL or name. One row per review: bubbles, text, food, service, value, atmosphere ratings, visit date, diner tips, photos, owner reply. Free location row: rating, review count, cuisine, menu, hours. Filters: negative reviews, new reviews only.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.5",
+      "verifiedAt": "2026-11-07T09:07:46.064618+00:00",
+      "storeUrl": "https://apify.com/kestrel/tripadvisor-restaurant-reviews",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One TripAdvisor restaurant or attraction review: 1-5 bubbles, food/service/value/atmosphere sub-ratings, tips, owner's reply (row keys review_id, rating, title, text, sub_ratings, language, original_language, visit_date, trip_type, tips, reviewer_name, photos, helpful_votes, response): $5 per 1,000 reviews, once per language site. Not charged: the location row (rating, ranking, cuisine, hours, address, phone), reviews removed by maxRating, tripTypes, sinceDate, requireText or includeTranslated, locations with no reviews, unknown ids, hotel ids (wrong_type), duplicate targets, failed pages and status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:11.096Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tripadvisor-restaurant-reviews",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/tripadvisor-reviews-scraper",
+      "title": "TripAdvisor Reviews Scraper & API: Hotel Reviews, Guest Reviews",
+      "description": "TripAdvisor hotel reviews and TripAdvisor ratings by URL, id or name. One row per review: bubbles, title, text, six sub-ratings, stay date, trip type, reviewer, photos, management response. Free hotel row: rating, review count, city ranking. Filters: negative reviews, new reviews only. 24 languages.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.2.5",
+      "verifiedAt": "2026-11-07T09:07:46.310240+00:00",
+      "storeUrl": "https://apify.com/kestrel/tripadvisor-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One TripAdvisor hotel review: 1-5 bubbles, six sub-ratings, management response (row keys review_id, rating, title, text, sub_ratings, language, original_language, stay_date, trip_type, reviewer_name, photos, helpful_votes, response): $5 per 1,000 reviews, once per language site; maxReviewsPerHotel 100 (default) caps a hotel at $0.50 per language. Not charged: the hotel row (rating, review count, city ranking, address, amenities), reviews removed by maxRating, tripTypes, sinceDate, requireText or includeTranslated, hotels with no reviews, unknown ids, duplicate targets, failed pages and status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:12.013Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tripadvisor-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/trustpilot-reviews-scraper",
+      "title": "Trustpilot Reviews Scraper — Customer Reviews & TrustScore",
+      "description": "Trustpilot customer reviews of any company by domain or URL. One row per review: star rating, title, text, dates, reviewer country, verified, company reply. Free: TrustScore, star histogram, email, phone. Filters before billing: negative reviews, date range, language, keyword, only new reviews.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.1.2",
+      "verifiedAt": "2026-11-07T09:07:46.350225+00:00",
+      "storeUrl": "https://apify.com/kestrel/trustpilot-reviews-scraper",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "review": {
+            "eventTitle": "Review row",
+            "eventDescription": "One Trustpilot review: 1-5 star rating, title, text, language, review and experience dates, reviewer name, country and lifetime review count, verification level and source, likes, the company's reply and its date (row keys rating, title, text, language, review_date, experience_date, reviewer_name, reviewer_country, reviewer_reviews, verified, verification_level, source, likes, reply_text, reply_date, url): $1.50 per 1,000 reviews. Not charged: the company row (TrustScore, star histogram, email, phone), status rows, reviews Trustpilot's star, date, language, verified and keyword filters skip (never fetched), reviews before sinceDate or without text (requireText), a company given twice, companies with no reviews or no Trustpilot profile, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+            "eventPriceUsd": 0.0015,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:12.916Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/trustpilot-reviews-scraper",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/website-email-finder",
+      "title": "Website Email Finder - Contacts, Source Pages & 邮箱提取",
+      "description": "Extract public email contacts from supplied websites and linked contact pages. One row per website/email: address, source page and page title. Bounded same-site crawl; free duplicates and ID/hash exclusions. 网站邮箱提取。 No guessed addresses, private profiles or mailbox verification.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:46.377928+00:00",
+      "storeUrl": "https://apify.com/kestrel/website-email-finder",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "result": {
+            "eventTitle": "Site/email contact",
+            "eventDescription": "One delivered site/email contact: $5 per 1,000 rows. Row keys id, email, website, page_title, source_url, verification. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:13.717Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/website-email-finder",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/website-screenshot-capture",
+      "title": "Website Screenshot - Full Page, PNG, Mobile & 网页截图",
+      "description": "Capture website screenshots as PNG downloads with desktop or mobile viewport sizes. Each URL returns title, dimensions, source and download link. Full-page capture capped at 12,000 pixels; blocked requests are reported. 网页截图。 No login, POST actions, cookies or unrestricted network access.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:07:47.133073+00:00",
+      "storeUrl": "https://apify.com/kestrel/website-screenshot-capture",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "result": {
+            "eventTitle": "Screenshot",
+            "eventDescription": "One delivered screenshot: $25 per 1,000 rows. Row keys source_url, title, viewport_width, viewport_height, full_page, height_capped, blocked_requests. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+            "eventPriceUsd": 0.025,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:14.497Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/website-screenshot-capture",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/workday-company-jobs",
+      "title": "Workday Jobs - Careers, Job Descriptions & 招聘职位",
+      "description": "Collect Workday jobs from company career URLs with keyword search. Each job includes title, company, location, requisition ID, description and apply URL. Free location/text filters and ID/hash exclusions. Public employer job boards; no global company discovery. 招聘职位。",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-07T09:07:47.361089+00:00",
+      "storeUrl": "https://apify.com/kestrel/workday-company-jobs",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "job": {
+            "eventTitle": "Job snapshot",
+            "eventDescription": "One delivered job snapshot ($4 per 1,000 rows; row keys id, title, company, job_requisition_id, location, additional_locations, posted_at, posted_label, employment_type, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+            "eventPriceUsd": 0.004,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:15.234Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/workday-company-jobs",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/yahoo-finance-price-history",
+      "title": "Yahoo Finance Historical Prices - OHLCV, Dividends & Splits",
+      "description": "Fetch Yahoo Finance historical prices by ticker and date range. One row per daily bar: open, high, low, close, volume, adjusted close, dividends, splits and currency. Stocks, ETFs, forex and crypto. Monitor new or changed bars; successful history checks are billed even with no new rows.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.3",
+      "verifiedAt": "2026-11-07T09:07:47.400511+00:00",
+      "storeUrl": "https://apify.com/kestrel/yahoo-finance-price-history",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "history-fetched": {
+            "eventTitle": "History check",
+            "eventDescription": "One successfully parsed ticker history: $3 per 1,000 checks. Charged even when filters, exclusions, duplicates or monitoring leave zero rows. Failed/unrecognized responses and invalid input are not charged. A separate delivered-row fee applies. No start fee; compute included. No extra source account or API key. Work stops before a new check when the Apify run option maxTotalChargeUsd cannot cover that check plus one row.",
+            "eventPriceUsd": 0.003
+          },
+          "price": {
+            "eventTitle": "Daily price bar",
+            "eventDescription": "One delivered price row: $0.2 per 1,000 rows. Row keys: ticker, date, open, high, low, close, volume, adjusted_close, dividend, split_ratio, currency. Filtered, duplicate, excluded and unchanged rows are not charged. Successful source checks are separately billed at $0.003 each, including empty checks. No start fee; compute included. maxTotalChargeUsd is an Apify run option, not input.",
+            "eventPriceUsd": 0.0002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-05T06:46:16.807Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/yahoo-finance-price-history",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/youtube-channel-videos",
+      "title": "YouTube Channel Videos - Uploads, Views & Duration",
+      "description": "List YouTube channel videos from handles, IDs or channel URLs. Each upload includes title, URL, views, video duration, thumbnail and published text. Filter titles, minimum views and duration; monitor new uploads. Parsed pages are billed even when filters or monitoring leave no rows.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.6",
+      "verifiedAt": "2026-11-07T09:07:47.453977+00:00",
+      "storeUrl": "https://apify.com/kestrel/youtube-channel-videos",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source page: $5 per 1,000 pages. This fee applies even when filters, duplicates, exclusions or monitoring leave no delivered rows. Failed requests and unrecognized responses are not charged. Separate delivered-video fee applies. No start fee; proxy and compute included. Work stops before a new page when maxTotalChargeUsd cannot cover a page plus one row.",
+            "eventPriceUsd": 0.005,
+            "isPrimaryEvent": true
+          },
+          "video": {
+            "eventTitle": "Video",
+            "eventDescription": "One delivered video row: $1 per 1,000 rows. Row keys: id, video_id, title, url, channel_id, views, duration_seconds, published_text, thumbnail_url. Filtered, duplicate, unchanged and excluded rows have no row fee. Parsed pages are billed separately at $0.005 each, even with zero rows. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option, not actor input.",
+            "eventPriceUsd": 0.001
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:16.051Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/youtube-channel-videos",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/mcp-call.json",
+      "recommended": true
+    },
+    {
+      "actor": "kestrel/zillow-property-search",
+      "title": "Zillow Properties - Rentals, New Listings & Price Changes",
+      "description": "Search Zillow real estate from city URLs: property listings and rental buildings with unit options. Each row has address, price, beds, baths, area, status and URL. Filter price and bedrooms; monitor new listings and price changes. Parsed pages are billed even with no matching rows.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:07:48.200985+00:00",
+      "storeUrl": "https://apify.com/kestrel/zillow-property-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed search page",
+            "eventDescription": "One successfully parsed search page: $20 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.",
+            "eventPriceUsd": 0.02,
+            "isPrimaryEvent": true
+          },
+          "property": {
+            "eventTitle": "Property",
+            "eventDescription": "One delivered property: $2 per 1,000 rows. Row keys: id, zpid, listing_type, title, url, address, street, city, state, zipcode, price, price_text. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.02 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget.",
+            "eventPriceUsd": 0.002
+          }
+        },
+        "effectiveAt": "2026-11-06T09:25:16.790Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/zillow-property-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/mcp-call.json",
+      "recommended": true
+    }
+  ],
+  "bundles": [
+    {
+      "id": "news-monitoring",
+      "title": "News and feed monitoring",
+      "description": "Read Google News articles, follow RSS feeds and discover new sitemap URLs.",
+      "actors": [
+        "kestrel/google-news",
+        "kestrel/rss-atom-feed-reader",
+        "kestrel/sitemap-url-extractor"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/news-monitoring.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-news,kestrel/rss-atom-feed-reader,kestrel/sitemap-url-extractor"
+    },
+    {
+      "id": "business-leads",
+      "title": "Business leads and public emails",
+      "description": "Find local businesses and extract email addresses published on their websites.",
+      "actors": [
+        "kestrel/google-maps-scraper",
+        "kestrel/website-email-finder"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/business-leads.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-scraper,kestrel/website-email-finder"
+    },
+    {
+      "id": "hotel-flight-prices",
+      "title": "Hotel and flight price comparison",
+      "description": "Compare hotel booking-site rates, check rate parity and collect flight prices.",
+      "actors": [
+        "kestrel/google-hotels-prices",
+        "kestrel/hotel-rate-parity",
+        "kestrel/google-flights-prices"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/hotel-flight-prices.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-hotels-prices,kestrel/hotel-rate-parity,kestrel/google-flights-prices"
+    },
+    {
+      "id": "keyword-content-research",
+      "title": "Keyword and content research",
+      "description": "Collect autocomplete suggestions, Google search positions, Pinterest images and channel uploads.",
+      "actors": [
+        "kestrel/google-autocomplete-keywords",
+        "kestrel/google-search-rank-tracker",
+        "kestrel/pinterest-pin-search",
+        "kestrel/youtube-channel-videos"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/keyword-content-research.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-autocomplete-keywords,kestrel/google-search-rank-tracker,kestrel/pinterest-pin-search,kestrel/youtube-channel-videos"
+    },
+    {
+      "id": "product-prices",
+      "title": "Products, variants and prices",
+      "description": "Read Shopify catalogs, Amazon products, Google Shopping results and eBay listings.",
+      "actors": [
+        "kestrel/shopify-products",
+        "kestrel/amazon-product-scraper",
+        "kestrel/google-shopping-products",
+        "kestrel/ebay-search-scraper"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/product-prices.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/shopify-products,kestrel/amazon-product-scraper,kestrel/google-shopping-products,kestrel/ebay-search-scraper"
+    },
+    {
+      "id": "review-monitoring",
+      "title": "Customer and app reviews",
+      "description": "Read customer feedback and app-store reviews, with source-specific locale and date filters.",
+      "actors": [
+        "kestrel/google-maps-reviews-scraper",
+        "kestrel/trustpilot-reviews-scraper",
+        "kestrel/app-store-reviews-scraper",
+        "kestrel/google-play-reviews-scraper"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/review-monitoring.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-reviews-scraper,kestrel/trustpilot-reviews-scraper,kestrel/app-store-reviews-scraper,kestrel/google-play-reviews-scraper"
+    },
+    {
+      "id": "job-openings",
+      "title": "Company job openings",
+      "description": "Read public job postings from Greenhouse, Ashby, Workday and LinkedIn.",
+      "actors": [
+        "kestrel/greenhouse-jobs-scraper",
+        "kestrel/ashby-jobs-scraper",
+        "kestrel/workday-company-jobs",
+        "kestrel/linkedin-job-search"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/job-openings.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/greenhouse-jobs-scraper,kestrel/ashby-jobs-scraper,kestrel/workday-company-jobs,kestrel/linkedin-job-search"
+    },
+    {
+      "id": "document-extraction",
+      "title": "PDF tables, Markdown and OCR",
+      "description": "Extract PDF pages, tables and image text for document analysis.",
+      "actors": [
+        "kestrel/pdf-to-markdown-pages",
+        "kestrel/pdf-to-excel-tables",
+        "kestrel/image-to-text-ocr"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/document-extraction.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/pdf-to-markdown-pages,kestrel/pdf-to-excel-tables,kestrel/image-to-text-ocr"
+    },
+    {
+      "id": "financial-research",
+      "title": "Price history and SEC filings",
+      "description": "Fetch daily Yahoo Finance OHLCV bars, dividends and splits; find SEC company filings.",
+      "actors": [
+        "kestrel/yahoo-finance-price-history",
+        "kestrel/sec-company-filings"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/financial-research.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/yahoo-finance-price-history,kestrel/sec-company-filings"
+    },
+    {
+      "id": "research-records",
+      "title": "Patents and clinical trials",
+      "description": "Search patent records and clinical-trial registry records.",
+      "actors": [
+        "kestrel/google-patents-search",
+        "kestrel/clinical-trials-search"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/research-records.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-patents-search,kestrel/clinical-trials-search"
+    }
+  ]
+}

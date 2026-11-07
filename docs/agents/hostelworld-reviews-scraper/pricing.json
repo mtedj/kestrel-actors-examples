@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review",
+      "eventDescription": "One Hostelworld guest review: 0-100 score with seven sub-ratings, the text, the hostel's reply, group type, age band, trip types, nickname and nationality (row keys review_id, rating, sub_ratings, text, owner_comment, group_type, age_group, trip_types, reviewer_nickname, reviewer_country, review_date): $4 per 1,000 reviews. Not charged: reviews removed by minRating, maxRating, groupTypes, sinceDate or requireText, duplicate targets, hostels with no reviews, unknown ids, hostel rows, status rows. No start fee; proxy and compute are included in the event price. Hostelworld pages 50 reviews at a time and a busy hostel has a few thousand: maxReviewsPerProperty caps the rows per hostel. The run stops at the maximum cost per run you set (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:00.060Z"
+}

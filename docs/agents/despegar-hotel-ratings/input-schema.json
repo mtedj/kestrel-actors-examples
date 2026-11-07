@@ -1,0 +1,139 @@
+{
+  "title": "Despegar Hotel Ratings",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Despegar hotel URLs",
+      "type": "array",
+      "description": "Despegar hotel pages, e.g. [\"https://www.despegar.com.ar/hoteles/h-265543/riu-cancun\"]: any country domain works (.com, .com.ar, .com.mx, .com.co, .cl, .com.pe, us.despegar.com/hotels/...) and each URL is fetched on the domain you give, so countries can be mixed in one run; the slug does not matter. Use for \"the guest rating of this hotel\". A URL from another site ends the run with the reason on the run card and nothing charged. One of startUrls or hotelIds is required.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.despegar.com.ar/hoteles/h-265543/riu-cancun"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels",
+      "sectionDescription": "Despegar hotel URLs and/or Despegar's numeric hotel ids; one of the two is required. A URL and its id are the same hotel, harvested once."
+    },
+    "hotelIds": {
+      "title": "Despegar hotel ids",
+      "type": "array",
+      "description": "Despegar's numeric hotel ids, e.g. [\"265543\", \"123456\"]: the number in /h-<id>/ and the hotel_id on an earlier run's rows; the id is the same on every country site. Fetched on the country site chosen below, one request per hotel: the cheapest input. An id Despegar does not have costs nothing and is reported as a status row with status \"not_found\". One of startUrls or hotelIds is required.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "country": {
+      "title": "Despegar country site",
+      "type": "string",
+      "description": "\"com\" (default) = Despegar picks the site by the proxy's exit country. Or one country site: \"us\" (English), \"ar\", \"mx\", \"co\", \"cl\", \"pe\", \"uy\", \"ec\", \"bo\", \"py\", \"pa\", \"cr\", \"gt\" (Spanish). Every site publishes the same hotel, 0-10 rating, review count and comments; the site decides the language of the AI summary, category labels and dates, and the page currency. Use \"mx\" for \"ratings as seen from Mexico\". \"br\" (decolar.com) refused every request in testing: expect blocked status rows.",
+      "editor": "select",
+      "enum": [
+        "com",
+        "us",
+        "ar",
+        "mx",
+        "co",
+        "cl",
+        "pe",
+        "uy",
+        "ec",
+        "bo",
+        "py",
+        "pa",
+        "cr",
+        "gt",
+        "br"
+      ],
+      "enumTitles": [
+        "despegar.com (auto by IP)",
+        "us.despegar.com (English)",
+        "Argentina — despegar.com.ar",
+        "Mexico — despegar.com.mx",
+        "Colombia — despegar.com.co",
+        "Chile — despegar.cl",
+        "Peru — despegar.com.pe",
+        "Uruguay — despegar.com.uy",
+        "Ecuador — despegar.com.ec",
+        "Bolivia — despegar.com.bo",
+        "Paraguay — despegar.com.py",
+        "Panama — despegar.com.pa",
+        "Costa Rica — despegar.co.cr",
+        "Guatemala — despegar.com.gt",
+        "Brazil — decolar.com (blocked)"
+      ],
+      "default": "com",
+      "sectionCaption": "Country site and language"
+    },
+    "locale": {
+      "title": "Language",
+      "type": "string",
+      "description": "\"auto\" (default), \"es\" or \"en\": the language of the AI summary, category labels and dates when country is left at \"com\" (\"en\" reads us.despegar.com, \"es\" reads despegar.com.ar). Despegar has no language switch of its own, so the site is the language; an explicit country always wins over locale. Pass \"en\" for \"the summary in English\".",
+      "editor": "select",
+      "enum": [
+        "auto",
+        "es",
+        "en"
+      ],
+      "enumTitles": [
+        "Follow the country site",
+        "Spanish",
+        "English"
+      ],
+      "default": "auto"
+    },
+    "includeComments": {
+      "title": "Include the published comments",
+      "type": "boolean",
+      "description": "true (DEFAULT) = also emit the guest comments the hotel page publishes, at most four per hotel whatever the review count says, as free rows (type \"review\") with 0-10 score, the good half, the bad half, month, traveller type, reviewer country and helpful votes. A hotel costs the same with or without them. false = hotel and status rows only. Despegar has no full review list: for hundreds of reviews per property use a Booking or TripAdvisor reviews scraper.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "What to deliver",
+      "sectionDescription": "Comments are free; minRating runs before billing."
+    },
+    "minRating": {
+      "title": "Only hotels rated at or above",
+      "type": "number",
+      "description": "0 (default) = no floor. 1-10 = keep only hotels whose 0-10 guest rating is at or above it, e.g. 8 for \"well-rated hotels only\" (rating_5 = rating / 2). Hotels below the floor are dropped before billing and never charged; hotels with no rating at all are reported as no_reviews and are always free.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) run in parallel, 1-16, e.g. 2 (default 2). Each keeps its own DataDome cookie, which is what makes a session work at all; each is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "RESIDENTIAL proxy is required; the pace is deliberately slow."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.1-3, e.g. 0.5 (default 0.5). Measured on Despegar: one session served four hotel pages at 1/s and was then refused for the rest of the minute, so the default is deliberately slow. 0.3-0.5 is comfortable; above 1 expect blocks and retries that cost residential traffic without going faster.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy RESIDENTIAL is required and is the default: Despegar's DataDome gate refuses every datacenter range (403 on every attempt); only residential IPs with a Chrome TLS fingerprint are served. Keep the default.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      }
+    }
+  },
+  "required": [],
+  "description": "Despegar hotel ratings (opiniones y calificaciones de hoteles). Minimal input: {\"hotelIds\": [\"265543\"]} or {\"startUrls\": [\"https://www.despegar.com.ar/hoteles/h-265543/riu-cancun\"]}; one of the two is required. $0.004 per hotel rated; includeComments defaults to true and the up-to-four comments per hotel are free; minRating drops hotels before billing. The RESIDENTIAL proxy default is required."
+}

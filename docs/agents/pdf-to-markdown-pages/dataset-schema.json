@@ -1,0 +1,148 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "page": {
+        "description": "page"
+      },
+      "total_pages": {
+        "description": "total pages"
+      },
+      "source_url": {
+        "type": "string",
+        "description": "source url"
+      },
+      "extraction": {
+        "type": "string",
+        "enum": [
+          "digital_text_no_ocr",
+          "ocr_scanned_page"
+        ],
+        "description": "Text extraction method used for this page."
+      },
+      "markdown": {
+        "description": "markdown"
+      },
+      "characters": {
+        "description": "characters"
+      },
+      "width": {
+        "description": "width"
+      },
+      "height": {
+        "description": "height"
+      },
+      "id": {
+        "type": "string",
+        "description": "id"
+      },
+      "content_hash": {
+        "type": "string",
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "fetched at"
+      },
+      "download_url": {
+        "description": "download url"
+      },
+      "artifact_key": {
+        "description": "artifact key"
+      },
+      "artifact_bytes": {
+        "description": "artifact bytes"
+      },
+      "artifact_sha256": {
+        "description": "artifact sha256"
+      },
+      "ocr_language": {
+        "type": "string",
+        "description": "OCR language, only present for ocr_scanned_page extraction."
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "page",
+          "total_pages",
+          "source_url",
+          "extraction",
+          "markdown",
+          "characters"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "page": {
+            "label": "page",
+            "format": "text"
+          },
+          "total_pages": {
+            "label": "total_pages",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "extraction": {
+            "label": "extraction",
+            "format": "text"
+          },
+          "markdown": {
+            "label": "markdown",
+            "format": "text"
+          },
+          "characters": {
+            "label": "characters",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "title": "Evidence",
+      "transformation": {
+        "fields": [
+          "id",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content_hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched_at",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

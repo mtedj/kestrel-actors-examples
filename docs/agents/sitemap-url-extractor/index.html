@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sitemap URL Extractor - Links, Lastmod &amp; Nested Indexes | 站点地图 | kestrel</title><meta name="description" content="Extract URLs from XML sitemaps, gzip files and nested sitemap indexes. Each URL includes link, lastmod, priority, change frequency and source sitemap. Filter paths and last-modified dates; exclude known IDs for repeat runs. Source parsing is billed even with zero matches. No browser or proxy."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/sitemap-url-extractor</p><h1>Sitemap URL Extractor - Links, Lastmod &amp; Nested Indexes | 站点地图</h1><p class="intro">Extract URLs from XML sitemaps, gzip files and nested sitemap indexes. Each URL includes link, lastmod, priority, change frequency and source sitemap. Filter paths and last-modified dates; exclude known IDs for repeat runs. Source parsing is billed even with zero matches. No browser or proxy.</p>
+<p><a class="button" href="https://apify.com/kestrel/sitemap-url-extractor">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/sitemap-url-extractor</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-sitemap-url-extractor&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/sitemap-url-extractor&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.0.7; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/sitemap-url-extractor&quot;,
+  &quot;input&quot;: {
+    &quot;sitemapUrls&quot;: [
+      &quot;https://docs.python.org/sitemap.xml&quot;
+    ],
+    &quot;maxResults&quot;: 3,
+    &quot;maxSources&quot;: 3
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>sitemap-parsed</code></td><td>$0.005</td><td>One successfully parsed sitemap file: $5 per 1,000 files. Index files count. URL rows have a separate $0.10 per 1,000 fee. Empty sources and sources with no matching or new rows ARE charged for parsing. Invalid input, HTTP failures, malformed XML and duplicate source URLs are not charged. No start fee; compute and transfer are included. maxTotalChargeUsd is an Apify run option, not an input field. Work stops when the remaining budget cannot cover the next event.</td></tr><tr><td><code>url</code></td><td>$0.0001</td><td>One delivered URL row (keys id, url, lastmod, changefreq, priority, sitemap_url): $0.10 per 1,000 URLs, plus $0.005 per successfully parsed sitemap or index file. Filtered, excluded and duplicate rows are not charged as URLs. No start fee; compute and transfer included. 1,000 URLs from one file cost $0.105. maxTotalChargeUsd is an Apify run option; no URL is delivered beyond its charge limit.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/sitemap-url-extractor/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.0.7. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

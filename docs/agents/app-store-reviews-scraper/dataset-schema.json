@@ -1,0 +1,446 @@
+{
+  "actorSpecification": 1,
+  "title": "App Store reviews",
+  "description": "Three row types share one dataset: review (one customer review, charged), app (context for an app on a storefront, free) and status (per app and country, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "app",
+          "status"
+        ],
+        "description": "Row type: review, app or status."
+      },
+      "app_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Apple's numeric app id."
+      },
+      "app_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App name on that storefront."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Storefront the row came from (two-letter code)."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Apple's id for the review."
+      },
+      "rating": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Stars the reviewer gave, 1-5."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review headline."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review body."
+      },
+      "author": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's public nickname."
+      },
+      "version": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App version the review was written against, when Apple reports it."
+      },
+      "is_edited": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the reviewer edited the review after posting."
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the review was posted (ISO 8601, UTC)."
+      },
+      "review_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The same as a plain YYYY-MM-DD date, for filtering and charts."
+      },
+      "developer_response": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The developer's public reply, when there is one."
+      },
+      "developer_response_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the developer replied."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The app's reviews page on that storefront."
+      },
+      "developer": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: developer (artist) name."
+      },
+      "seller": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: seller of record."
+      },
+      "bundle_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: bundle identifier."
+      },
+      "genre": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: primary genre."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "App rows: price on that storefront (0 = free)."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: currency of the price."
+      },
+      "age_rating": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: content advisory rating, e.g. 12+."
+      },
+      "rating_avg": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "App rows: average star rating on that storefront."
+      },
+      "rating_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: how many ratings the app has there."
+      },
+      "rating_avg_current": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "App rows: average rating of the current version."
+      },
+      "rating_count_current": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: rating count of the current version."
+      },
+      "hist_1": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: number of 1-star ratings."
+      },
+      "hist_2": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: number of 2-star ratings."
+      },
+      "hist_3": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: number of 3-star ratings."
+      },
+      "hist_4": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: number of 4-star ratings."
+      },
+      "hist_5": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: number of 5-star ratings."
+      },
+      "written_reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: how many written reviews the storefront holds (ratings without text are not reviews)."
+      },
+      "released": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: first release date."
+      },
+      "updated": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: current version's release date."
+      },
+      "icon": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: icon image URL."
+      },
+      "app_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App rows: the App Store page."
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "App rows: how many reviews were read for the app on that storefront before filtering."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_reviews, not_found or error."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the id, URL or name this job was given."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: review rows delivered."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: reviews dropped by minRating, maxRating, sinceDate or requireText, never charged."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: pages of reviews read."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when another input already covered this app on this storefront."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the job failed, null when it did not."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "app_name",
+          "country",
+          "rating",
+          "title",
+          "text",
+          "version",
+          "review_day",
+          "developer_response",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "app_name",
+          "country",
+          "rating",
+          "title",
+          "text",
+          "author",
+          "version",
+          "is_edited",
+          "review_date",
+          "developer_response",
+          "developer_response_date",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "app_name",
+          "country",
+          "rating",
+          "title",
+          "text",
+          "version",
+          "review_day",
+          "developer_response"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "apps": {
+      "title": "Apps",
+      "transformation": {
+        "fields": [
+          "app_name",
+          "country",
+          "developer",
+          "genre",
+          "price",
+          "currency",
+          "version",
+          "rating_avg",
+          "rating_count",
+          "hist_1",
+          "hist_2",
+          "hist_3",
+          "hist_4",
+          "hist_5",
+          "written_reviews",
+          "reviews_fetched",
+          "app_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "app_id",
+          "app_name",
+          "country",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

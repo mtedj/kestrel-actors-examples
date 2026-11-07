@@ -1,0 +1,8 @@
+{
+  "companyDomains": [
+    "www.booking.com"
+  ],
+  "maxReviewsPerCompany": 3,
+  "sort": "most_recent",
+  "languages": "all"
+}

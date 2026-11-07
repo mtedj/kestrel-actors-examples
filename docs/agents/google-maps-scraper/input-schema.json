@@ -1,0 +1,374 @@
+{
+  "title": "Google Maps Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searches": {
+      "title": "Search terms",
+      "type": "array",
+      "description": "Business type or keyword, one per entry, exactly as typed into Google Maps: [\"dentist\"] or [\"coffee shop\", \"bakery\"]. Every term is searched in every entry of `locations`, so do not repeat the city here. A full phrase that already says where (\"pubs near Prague 2\") also works with `locations` left empty.",
+      "editor": "stringList",
+      "prefill": [
+        "coffee shop"
+      ],
+      "default": [],
+      "sectionCaption": "What to search",
+      "sectionDescription": "Search terms × locations. Filters, contacts and monitoring below are optional."
+    },
+    "locations": {
+      "title": "Locations",
+      "type": "array",
+      "description": "Where to search, as free text, one per entry: [\"Austin, TX\"], [\"Lyon, France\"], [\"Shibuya, Tokyo\"], a ZIP code or a neighbourhood. Add the state or country when a name is ambiguous. Each location is verified on Google Maps first: an unknown location ends that search with an explanation and $0 charged, never with places from somewhere else.",
+      "editor": "stringList",
+      "prefill": [
+        "Austin, TX"
+      ],
+      "default": []
+    },
+    "maxPlacesPerSearch": {
+      "title": "Max places per search",
+      "type": "integer",
+      "description": "Maximum delivered places per search term per location, counted after filters. Base price: N × $0.004. With enrichContacts, add $0.003 per place where an email or social/WhatsApp link is found (maximum N × $0.007 total). onlyWithEmail costs $0.007 per delivered place. A cap is not a guarantee enough matches exist. One Google Maps query lists about 120–220 places; fullCoverage searches a grid.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 20000,
+      "default": 100,
+      "prefill": 20
+    },
+    "enrichContacts": {
+      "title": "Find emails & social links",
+      "type": "boolean",
+      "description": "true = read each place's website for emails, phone numbers and social/WhatsApp links (up to maxPagesPerSite pages). Adds $0.003 only when an email or social/WhatsApp link is found; phone-only findings do not trigger this fee. The $0.004 base place fee still applies. No website, blocked site or no contact found = no contact fee. For email-bearing places only, use onlyWithEmail. Default false.",
+      "default": false,
+      "sectionCaption": "Contacts: emails & social links",
+      "sectionDescription": "$0.003 per place with an email or social/WhatsApp link found on its website, in addition to the $0.004 base place fee. No contact found = no contact fee."
+    },
+    "onlyWithEmail": {
+      "title": "Only places with an email",
+      "type": "boolean",
+      "description": "true = deliver and bill only places with an email found on their website. Automatically enables enrichContacts and reads further down the results toward maxPlacesPerSearch after filters. $0.007 per delivered place including base and contact fees: up to 50 costs $0.35. Places without found email are omitted and free. Enough matches are not guaranteed; addresses are extracted, not deliverability-verified.",
+      "default": false
+    },
+    "hasWebsite": {
+      "title": "Website",
+      "type": "string",
+      "description": "\"any\" (default), \"yes\" = only places that list a website, \"no\" = only places WITHOUT a website (prospects for web design and marketing agencies). Free; filtered places are not charged.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "yes",
+        "no"
+      ],
+      "enumTitles": [
+        "Any",
+        "Has a website",
+        "Has NO website"
+      ],
+      "default": "any",
+      "sectionCaption": "Filters — free, applied before billing",
+      "sectionDescription": "A place a filter rejects costs nothing; the status row reports how many each filter removed."
+    },
+    "hasPhone": {
+      "title": "Phone",
+      "type": "string",
+      "description": "\"any\" (default), \"yes\" = only places with a phone number, \"no\" = only places without one. Free; filtered places are not charged.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "yes",
+        "no"
+      ],
+      "enumTitles": [
+        "Any",
+        "Has a phone",
+        "Has NO phone"
+      ],
+      "default": "any"
+    },
+    "isClaimed": {
+      "title": "Claimed listing",
+      "type": "string",
+      "description": "\"any\" (default), \"no\" = only UNCLAIMED listings (Google still shows \"Claim this business\": owners who have not set up their profile — prospects for local SEO and profile management), \"yes\" = only claimed listings. Free; filtered places are not charged.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "yes",
+        "no"
+      ],
+      "enumTitles": [
+        "Any",
+        "Claimed by an owner",
+        "Unclaimed"
+      ],
+      "default": "any"
+    },
+    "minRating": {
+      "title": "Min rating",
+      "type": "number",
+      "description": "Keep places rated at least this many stars (1–5). 0 = no limit. Places with no rating do not pass. Free filter.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "maxRating": {
+      "title": "Max rating",
+      "type": "number",
+      "description": "Keep places rated at most this many stars, e.g. 3.9 to find low rated businesses for reputation services. 0 = no limit. Places with no rating do not pass. Free filter.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "minReviews": {
+      "title": "Min reviews",
+      "type": "integer",
+      "description": "Keep places with at least this many Google reviews (established businesses). 0 = no limit. Free filter.",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0
+    },
+    "maxReviews": {
+      "title": "Max reviews",
+      "type": "integer",
+      "description": "Keep places with at most this many Google reviews (new or under-marketed businesses). 0 = no limit. Free filter.",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0
+    },
+    "categoriesInclude": {
+      "title": "Categories to include",
+      "type": "array",
+      "description": "Keep a place only if one of its Google Maps categories contains one of these words, case-insensitive: [\"dentist\", \"dental\"]. Removes off-topic results before they are charged.",
+      "editor": "stringList",
+      "default": []
+    },
+    "skipClosed": {
+      "title": "Skip closed places",
+      "type": "boolean",
+      "description": "Set true to drop permanently and temporarily closed places before billing.",
+      "default": false
+    },
+    "onlyNew": {
+      "title": "Only new places",
+      "type": "boolean",
+      "description": "Leave false for a one-time list. Set true only for repeated monitoring: deliver and bill place IDs not delivered by earlier runs with the same monitorKey. The first run returns the current matching places; later runs return newly seen places, not confirmed business openings. Use a separate monitorKey for each list. Default false.",
+      "default": false,
+      "sectionCaption": "Monitoring: only new places"
+    },
+    "monitorKey": {
+      "title": "Monitor key",
+      "type": "string",
+      "description": "Name of the memory `onlyNew` compares against. Use one key per list you maintain, e.g. \"austin-dentists\". Letters, digits, dash, underscore.",
+      "editor": "textfield",
+      "default": "default"
+    },
+    "startUrls": {
+      "title": "Google Maps URLs, place ids or CIDs",
+      "type": "array",
+      "description": "Known places or saved searches instead of (or besides) `searches`, e.g. [\"ChIJb5gBC-u0RIYRHkntaUcdJGs\", \"https://maps.google.com/?cid=7720327853776914718\"]. Accepts Google Maps place URLs, search URLs (google.com/maps/search/…), short links (maps.app.goo.gl/…), place IDs (ChIJ…) and CIDs. A place returns one full row: use it to look up the phone, website or emails of specific businesses.",
+      "editor": "stringList",
+      "default": [],
+      "sectionCaption": "Known places: URLs, place IDs, CIDs"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Language for source category names, opening hours and descriptions. Default en; examples: de, fr, es, pt-BR, ja, ar. Use zh-CN for Simplified Chinese (verified category labels); it does not change the search location or guarantee every name is translated. locations chooses the target place; country disambiguates location and formats phone numbers.",
+      "editor": "textfield",
+      "default": "en",
+      "sectionCaption": "Language & country"
+    },
+    "country": {
+      "title": "Country",
+      "type": "string",
+      "description": "Two-letter country code Google should assume for ambiguous names and phone formats: us, gb, de, fr, br, in, jp, ae … Default us.",
+      "editor": "textfield",
+      "default": "us"
+    },
+    "fullCoverage": {
+      "title": "Full coverage (grid)",
+      "type": "boolean",
+      "description": "Set true to collect MORE than the ~120–220 places one Google Maps query lists: the area is split into a grid and every cell is searched. Works with `locations` or with latitude/longitude/radiusKm, `boundingBox` or `polygon`. Each place is still delivered and charged once.",
+      "default": false,
+      "sectionCaption": "Coverage & area",
+      "sectionDescription": "Go past Google's per-query limit with a grid, or search a circle, bounding box or polygon instead of named locations."
+    },
+    "maxPlacesTotal": {
+      "title": "Max places in the whole run",
+      "type": "integer",
+      "description": "Hard cap across every search in the run. 0 = no cap beyond the per-search limit and your spending limit.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 1000000,
+      "default": 0
+    },
+    "latitude": {
+      "title": "Latitude",
+      "type": "string",
+      "description": "Centre of a circular search area, for example 30.2672. Use with Longitude and Radius instead of Locations.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "longitude": {
+      "title": "Longitude",
+      "type": "string",
+      "description": "Centre of a circular search area, for example -97.7431.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "radiusKm": {
+      "title": "Radius (km)",
+      "type": "number",
+      "description": "Radius around the centre, 0.2–200 km. Google ranks by prominence as well as distance, so turn on \"Only inside my area\" to drop anything beyond this radius before billing.",
+      "editor": "number",
+      "minimum": 0.2,
+      "maximum": 200,
+      "default": 5
+    },
+    "withinRadiusOnly": {
+      "title": "Only inside my area",
+      "type": "boolean",
+      "description": "Drop places outside the circle, box or polygon before billing. Without it Google may include prominent places a little beyond the area.",
+      "default": false
+    },
+    "boundingBox": {
+      "title": "Bounding box",
+      "type": "object",
+      "description": "A rectangle as {\"south\": 30.20, \"west\": -97.80, \"north\": 30.30, \"east\": -97.70}.",
+      "editor": "json",
+      "default": {}
+    },
+    "polygon": {
+      "title": "Polygon",
+      "type": "array",
+      "description": "A custom shape as a list of [latitude, longitude] points, for example [[30.20,-97.80],[30.30,-97.80],[30.25,-97.70]]. (A GeoJSON Polygon object is accepted through the API.)",
+      "editor": "json",
+      "default": []
+    },
+    "gridCellKm": {
+      "title": "Grid cell size (km)",
+      "type": "number",
+      "description": "Side of one grid cell in km (0.5–50). 0 = size cells automatically so the area fits in Max grid cells. Smaller cells find more places in dense cities and take longer.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 50,
+      "default": 0
+    },
+    "maxGridCells": {
+      "title": "Max grid cells",
+      "type": "integer",
+      "description": "Upper bound on cells per search; cells are searched from the centre outwards.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 400,
+      "default": 64
+    },
+    "categoriesExclude": {
+      "title": "Categories to exclude",
+      "type": "array",
+      "description": "Drop a place if any of its Google Maps categories contains one of these words: [\"supplier\", \"school\"].",
+      "editor": "stringList",
+      "default": [],
+      "sectionCaption": "More filters & skip-lists"
+    },
+    "nameContains": {
+      "title": "Name contains",
+      "type": "array",
+      "description": "Keep a place only if its name contains one of these words.",
+      "editor": "stringList",
+      "default": []
+    },
+    "nameExcludes": {
+      "title": "Name excludes",
+      "type": "array",
+      "description": "Drop a place if its name contains any of these words — for example chain names.",
+      "editor": "stringList",
+      "default": []
+    },
+    "excludePlaceIds": {
+      "title": "Skip these place ids",
+      "type": "array",
+      "description": "Place ids (ChIJ…), CIDs or feature ids you already have. They are skipped before billing.",
+      "editor": "stringList",
+      "default": []
+    },
+    "excludeDatasetId": {
+      "title": "Skip places from a dataset",
+      "type": "string",
+      "description": "Id of an earlier dataset of this actor: every place_id in it is skipped before billing.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "maxPagesPerSite": {
+      "title": "Pages to read per website",
+      "type": "integer",
+      "description": "Home page plus the most promising contact, about, team and imprint pages, up to this many.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 5,
+      "sectionCaption": "Advanced: crawl depth, speed, proxy"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (IPs) used in parallel.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 32,
+      "default": 6
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Pace for each session.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify datacenter proxies work for Google Maps and are the default; residential is not needed.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      },
+      "prefill": {
+        "useApifyProxy": true
+      }
+    },
+    "searchStringsArray": {
+      "title": "Search terms (compatibility alias)",
+      "type": "array",
+      "description": "Same as Search terms. Accepted so an input saved for another Google Maps actor can be pasted unchanged.",
+      "editor": "hidden",
+      "default": []
+    },
+    "locationQuery": {
+      "title": "Location (compatibility alias)",
+      "type": "string",
+      "description": "Same as one entry in Locations.",
+      "editor": "hidden",
+      "default": ""
+    },
+    "maxCrawledPlacesPerSearch": {
+      "title": "Max places per search (compatibility alias)",
+      "type": "integer",
+      "description": "Same as Max places per search.",
+      "editor": "hidden",
+      "default": 0
+    },
+    "countryCode": {
+      "title": "Country (compatibility alias)",
+      "type": "string",
+      "description": "Same as Country.",
+      "editor": "hidden",
+      "default": ""
+    }
+  },
+  "required": [],
+  "description": "Find local businesses on Google Maps and return them as lead rows with phone, website, rating and hours; optionally add emails and social links from each website. Minimal input: {\"searches\": [\"dentist\"], \"locations\": [\"Austin, TX\"], \"maxPlacesPerSearch\": 50}."
+}

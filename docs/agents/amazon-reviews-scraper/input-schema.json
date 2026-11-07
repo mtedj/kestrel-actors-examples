@@ -1,0 +1,97 @@
+{
+  "title": "Amazon Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "asins": {
+      "title": "ASINs or product URLs",
+      "type": "array",
+      "description": "Amazon ASINs or product URLs, e.g. [\"B0BSHF7WHW\", \"https://www.amazon.co.uk/dp/B09G9FPHY6\"]. A URL's marketplace is used as is; a bare ASIN uses `domain`. Each ASIN + marketplace is fetched and billed once per run. Expect 8 to 13 reviews per product, never more: Amazon shows only that many without a login, so review rows cost at most $0.065 per product, plus $0.003 for its product row. An unknown ASIN or a page Amazon blocks costs nothing and is reported in a status row.",
+      "editor": "stringList",
+      "prefill": [
+        "B0BSHF7WHW"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "What to scrape"
+    },
+    "domain": {
+      "title": "Marketplace",
+      "type": "string",
+      "description": "Marketplace for bare ASINs, e.g. \"de\" for amazon.de. Default \"com\". One of: com, co.uk, de, fr, it, es, ca, com.au, co.jp, in, com.mx, com.br, nl, se, pl, sa, ae, sg, com.tr, com.be. Reviews, ratings and currency are that marketplace's own, so the same ASIN on two marketplaces is two products. Reviews come in whatever languages the marketplace page shows (no language filter, no translation). Ignored for full URLs, which carry their own marketplace.",
+      "editor": "textfield",
+      "default": "com"
+    },
+    "minRating": {
+      "title": "Only reviews at or below this rating",
+      "type": "integer",
+      "description": "Star CEILING, not a floor: keeps only reviews rated at or BELOW this many stars, e.g. 2 = one- and two-star reviews only, 3 = three stars and below. 0 (default) = every rating. Use for \"negative reviews\", \"complaints\", \"what do customers dislike\". The filter selects within the 8 to 13 reviews on the page, so a negative-only run returns a few rows per product and none when no visible review is negative. Dropped reviews are never charged; the product row is still delivered.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0,
+      "sectionCaption": "Which reviews (filters run before billing)"
+    },
+    "verifiedOnly": {
+      "title": "Only verified purchases",
+      "type": "boolean",
+      "description": "true = keep only reviews Amazon marks as Verified Purchase. Default false (every review). Dropped reviews are never charged. Use for \"verified purchase reviews only\".",
+      "editor": "checkbox",
+      "default": false
+    },
+    "requireText": {
+      "title": "Only reviews with written text",
+      "type": "boolean",
+      "description": "true = drop rating-only reviews that have no written text. Default false. Use for sentiment analysis, topic mining or any request that needs words; dropped reviews are never charged.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeProductRow": {
+      "title": "Include a product row",
+      "type": "boolean",
+      "description": "true (DEFAULT) = one extra row per product at $0.003 with its overall rating, ratings count, 5-to-1-star histogram (when Amazon shows it), title, brand, availability, image, feature bullets and reviews_visible. Keep it for \"rating and review count for these ASINs\" and catalogue-wide rating sweeps. Set false to pay for review rows only.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Rows and caps"
+    },
+    "maxReviewsPerProduct": {
+      "title": "Max reviews per product",
+      "type": "integer",
+      "description": "0 (default) = every visible review: 8 to 13, the most Amazon shows without a login (the hard ceiling of this actor, hence the maximum of 13). N = the first N in Amazon's order (a mix of most recent and most helpful), e.g. 1 for a rating-only sweep: one review row plus the product row per ASIN, $0.008. There is no sort, date or only-new control: each run re-reads the same visible sample, so dedupe on review_id between runs. Applied after the filters.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 13,
+      "default": 0
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (one egress IP each), 1 to 16, e.g. 4 (default 4). More is faster for long ASIN lists; each session is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2 (default 0.5). Amazon tolerates about 0.5/s per IP; faster causes captchas, not speed. Leave the default.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true} (datacentre). Required: Amazon captchas unrotated datacentre traffic. The run detects a captcha or a \"Sign in to see customer reviews\" page and rotates the IP, and after two refusals in a row moves the run to residential proxies by itself. For the most reliable runs outside amazon.com pass residential explicitly: {\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]}.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Amazon customer reviews. Minimal input: {\"asins\": [\"B0BSHF7WHW\"]}. Each product returns the 8 to 13 reviews Amazon shows without a login ($0.005 each) plus one product row ($0.003; includeProductRow is on by default). minRating, verifiedOnly and requireText drop reviews before billing. No only-new mode: every run re-reads the same visible sample, dedupe on review_id. Rating-only sweep: maxReviewsPerProduct 1."
+}

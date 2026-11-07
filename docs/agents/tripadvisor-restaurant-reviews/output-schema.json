@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "TripAdvisor restaurant reviews",
+  "description": "Three row types share one dataset: review (one diner or visitor review, charged), location (context for a restaurant or attraction, free) and status (per location and language, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "TripAdvisor restaurant reviews",
+      "description": "One row per diner review, plus per-location context and status rows. Charged rows are billed as delivered; location and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error, wrong-type and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

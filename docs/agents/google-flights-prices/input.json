@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "LIS-LHR"
+  ],
+  "departDate": "30 days",
+  "sweepDays": 0,
+  "currency": "EUR",
+  "market": "pt"
+}

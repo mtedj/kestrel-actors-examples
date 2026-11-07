@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/agoda-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.agoda.com/tivoli-avenida-liberdade-lisboa/hotel/lisbon-pt.html"
+    ],
+    "maxReviewsPerHotel": 3,
+    "reviewsSort": "most_recent"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

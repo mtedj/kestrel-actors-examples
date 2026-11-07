@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One TripAdvisor restaurant or attraction review: 1-5 bubbles, food/service/value/atmosphere sub-ratings, tips, owner's reply (row keys review_id, rating, title, text, sub_ratings, language, original_language, visit_date, trip_type, tips, reviewer_name, photos, helpful_votes, response): $5 per 1,000 reviews, once per language site. Not charged: the location row (rating, ranking, cuisine, hours, address, phone), reviews removed by maxRating, tripTypes, sinceDate, requireText or includeTranslated, locations with no reviews, unknown ids, hotel ids (wrong_type), duplicate targets, failed pages and status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:11.096Z"
+}

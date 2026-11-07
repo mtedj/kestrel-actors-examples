@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "hotel": {
+      "eventTitle": "Priced hotel row",
+      "eventDescription": "One Booking.com property priced for your dates and guests: its lowest stay price, flags, rating and location (row keys hotel_id, name, url, stars, review_score, review_count, address, latitude, longitude, distance_from_center, price_total, price_nightly, currency, taxes_fees_excluded, free_cancellation, no_prepayment, breakfast_included, room_name): $4 per 1,000 hotels. Not charged: sold-out or unpriced properties (delivered free with Booking's alternative dates), properties maxPrice or minStars remove, a property reached twice in one run, destinations or names that match nothing, status rows, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    },
+    "room": {
+      "eventTitle": "Room rate row",
+      "eventDescription": "One room and rate combination Booking.com matched to your stay, only when includeRooms is true: room name, occupancy, meal plan, stay total and nightly rate, hotel-currency price, free-cancellation deadline, \"only X left\" message (row keys hotel_id, hotel_name, room_id, room_name, occupancy, meal_plan, price_total, price_nightly, currency, price_original, original_currency, free_cancellation, free_cancellation_until, only_x_left, check_in, check_out): $2 per 1,000 rows. Not charged when includeRooms is false (default), and never for sold-out properties. The hotel row's rooms_listed is the number of room rows that property adds. No start fee; proxy and compute are included in the event price.",
+      "eventPriceUsd": 0.002
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:47.259Z"
+}

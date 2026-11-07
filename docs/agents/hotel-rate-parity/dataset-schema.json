@@ -1,0 +1,472 @@
+{
+  "actorSpecification": 1,
+  "title": "Hotel rate parity",
+  "description": "Two row types share one dataset: parity (one property and stay with every booking source side by side and the parity math; charged) and status (per property and stay; never charged).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "parity",
+          "status"
+        ],
+        "description": "Row type: parity (charged) or status (free)."
+      },
+      "query": {
+        "type": "string",
+        "description": "The input this row came from: the Google Hotels URL, entity token or property name as given."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Property name as Google Hotels shows it."
+      },
+      "entity_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Hotels entity token; reuse it in the hotels input."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's numeric hotel id (name lookups only)."
+      },
+      "hotel_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Hotels page of the property."
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel class, 1–5 (name lookups only)."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Google rating, 1–5 (name lookups only)."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of Google reviews (name lookups only)."
+      },
+      "check_in": {
+        "type": "string",
+        "description": "Check-in date, YYYY-MM-DD."
+      },
+      "check_out": {
+        "type": "string",
+        "description": "Check-out date, YYYY-MM-DD."
+      },
+      "nights": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Nights in the stay."
+      },
+      "adults": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Adults per room used for pricing."
+      },
+      "children": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Children per room used for pricing."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency of every price in the row (ISO code)."
+      },
+      "sources": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Every booking source Google lists for the stay, cheapest first: {source, source_id, official, price_nightly, price_total, free_cancellation, url}. url is the source's own booking link with the dates filled in when Google exposes it.",
+        "items": {
+          "type": "object"
+        }
+      },
+      "n_sources": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many sources carried a rate."
+      },
+      "min_source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The cheapest source."
+      },
+      "min_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Nightly rate of the cheapest source."
+      },
+      "max_source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The dearest source."
+      },
+      "max_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Nightly rate of the dearest source."
+      },
+      "spread_pct": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "(max − min) ÷ min × 100, one decimal. The size of the parity gap across all sources."
+      },
+      "median_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Median nightly rate across sources."
+      },
+      "official_source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property's own listing (official site), when Google lists one."
+      },
+      "official_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Nightly rate on the official site; null when Google lists no official site."
+      },
+      "official_is_cheapest": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when no source beats the official site; null when there is no official site."
+      },
+      "undercut_by": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Sources cheaper than the official site, cheapest first. Empty when direct is the cheapest or there is no official site.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "undercut_pct": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "How far the cheapest source beats the official site: (official − min) ÷ official × 100. 0 when direct is cheapest; null when there is no official site."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, filtered, no_rates, not_found, duplicate, unpaid or error."
+      },
+      "filtered": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Status rows: true when minSpreadPct dropped the property (not billed)."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: error message, null when the job succeeded."
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "UTC timestamp of the fetch."
+      }
+    },
+    "required": [
+      "type",
+      "query",
+      "check_in",
+      "check_out",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "parity": {
+      "title": "Rate parity",
+      "description": "One row per property and stay: cheapest and dearest source, spread, direct rate and who undercuts it.",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "check_in",
+          "check_out",
+          "currency",
+          "n_sources",
+          "min_source",
+          "min_price",
+          "max_source",
+          "max_price",
+          "spread_pct",
+          "median_price",
+          "official_source",
+          "official_price",
+          "official_is_cheapest",
+          "undercut_by",
+          "undercut_pct",
+          "hotel_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "hotel_name": {
+            "label": "Property",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "n_sources": {
+            "label": "Sources",
+            "format": "number"
+          },
+          "min_source": {
+            "label": "Cheapest source",
+            "format": "text"
+          },
+          "min_price": {
+            "label": "Cheapest",
+            "format": "number"
+          },
+          "max_source": {
+            "label": "Dearest source",
+            "format": "text"
+          },
+          "max_price": {
+            "label": "Dearest",
+            "format": "number"
+          },
+          "spread_pct": {
+            "label": "Spread %",
+            "format": "number"
+          },
+          "median_price": {
+            "label": "Median",
+            "format": "number"
+          },
+          "official_source": {
+            "label": "Official site",
+            "format": "text"
+          },
+          "official_price": {
+            "label": "Direct rate",
+            "format": "number"
+          },
+          "official_is_cheapest": {
+            "label": "Direct is cheapest",
+            "format": "boolean"
+          },
+          "undercut_by": {
+            "label": "Undercut by",
+            "format": "text"
+          },
+          "undercut_pct": {
+            "label": "Undercut %",
+            "format": "number"
+          },
+          "hotel_url": {
+            "label": "Google Hotels",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "undercut": {
+      "title": "Undercut check",
+      "description": "The direct-booking view: official rate against the cheapest OTA and the gap in percent.",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "check_in",
+          "official_source",
+          "official_price",
+          "min_source",
+          "min_price",
+          "undercut_pct",
+          "undercut_by",
+          "official_is_cheapest",
+          "stars",
+          "rating",
+          "entity_id"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "hotel_name": {
+            "label": "Property",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "official_source": {
+            "label": "Official site",
+            "format": "text"
+          },
+          "official_price": {
+            "label": "Direct rate",
+            "format": "number"
+          },
+          "min_source": {
+            "label": "Cheapest source",
+            "format": "text"
+          },
+          "min_price": {
+            "label": "Cheapest",
+            "format": "number"
+          },
+          "undercut_pct": {
+            "label": "Undercut %",
+            "format": "number"
+          },
+          "undercut_by": {
+            "label": "Undercut by",
+            "format": "text"
+          },
+          "official_is_cheapest": {
+            "label": "Direct is cheapest",
+            "format": "boolean"
+          },
+          "stars": {
+            "label": "Stars",
+            "format": "number"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "entity_id": {
+            "label": "Entity id",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "description": "One row per property and stay: resolved, filtered, no rates, not found, error. Never charged.",
+      "transformation": {
+        "fields": [
+          "query",
+          "hotel_name",
+          "check_in",
+          "check_out",
+          "status",
+          "n_sources",
+          "spread_pct",
+          "filtered",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "query": {
+            "label": "Input",
+            "format": "text"
+          },
+          "hotel_name": {
+            "label": "Property",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "n_sources": {
+            "label": "Sources",
+            "format": "number"
+          },
+          "spread_pct": {
+            "label": "Spread %",
+            "format": "number"
+          },
+          "filtered": {
+            "label": "Filtered",
+            "format": "boolean"
+          },
+          "error": {
+            "label": "Error",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

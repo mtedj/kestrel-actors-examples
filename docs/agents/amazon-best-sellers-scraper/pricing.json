@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "product": {
+      "eventTitle": "Chart product row",
+      "eventDescription": "One entry of a Best Sellers or New Releases chart (row keys rank, asin, title, url, chart, category, page, price, currency, rating, ratings_count, image, domain): $4 per 1,000 entries. A chart page is 50 ranks, so one category's Top 100 (pages 2, the default) is 100 rows, $0.40. Price is null where the chart prints none; an entry whose tile Amazon withholds still comes with rank, ASIN and URL. Not charged: entries removed by minRating or maxResultsPerCategory, an ASIN already delivered from another category, categories that return nothing, failed categories, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:36.857Z"
+}

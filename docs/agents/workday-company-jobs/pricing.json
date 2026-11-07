@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "job": {
+      "eventTitle": "Job snapshot",
+      "eventDescription": "One delivered job snapshot ($4 per 1,000 rows; row keys id, title, company, job_requisition_id, location, additional_locations, posted_at, posted_label, employment_type, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:15.234Z"
+}

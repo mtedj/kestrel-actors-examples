@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-financial-research": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/yahoo-finance-price-history,kestrel/sec-company-filings"
+    }
+  }
+}

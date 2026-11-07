@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Google Search Rank Tracker - Domain Rankings &amp; Rank Changes | kestrel</title><meta name="description" content="Track Google Search domain rankings and organic SERP positions by keyword and country. Rows: domain, title, snippet, rank and result link. Filter domains and titles; monitor previous rank and movement. Parsed pages are billed even when filters or unchanged rankings leave no rows."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/google-search-rank-tracker</p><h1>Google Search Rank Tracker - Domain Rankings &amp; Rank Changes</h1><p class="intro">Track Google Search domain rankings and organic SERP positions by keyword and country. Rows: domain, title, snippet, rank and result link. Filter domains and titles; monitor previous rank and movement. Parsed pages are billed even when filters or unchanged rankings leave no rows.</p>
+<p><a class="button" href="https://apify.com/kestrel/google-search-rank-tracker">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-search-rank-tracker</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-google-search-rank-tracker&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-search-rank-tracker&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.0.8; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/google-search-rank-tracker&quot;,
+  &quot;input&quot;: {
+    &quot;queries&quot;: [
+      &quot;python documentation&quot;
+    ],
+    &quot;maxResultsPerSource&quot;: 3
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>page-parsed</code></td><td>$0.008</td><td>One successfully parsed search page: $8 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.</td></tr><tr><td><code>result</code></td><td>$0.0005</td><td>One delivered result: $0.5 per 1,000 rows. Row keys: id, title, domain, domain_url, result_link, snippet, rank, page, query, country, source_url, fetched_at. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.008 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget. Monitoring rows include previous_rank and rank_change; positive rank_change means improvement. New rows have previous_rank=null. Missing domains are not emitted as disappearance alerts.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/google-search-rank-tracker/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.0.8. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

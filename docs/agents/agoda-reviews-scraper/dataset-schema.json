@@ -1,0 +1,416 @@
+{
+  "actorSpecification": 1,
+  "title": "Agoda reviews",
+  "description": "Three row types share one dataset: review (one guest review, charged), hotel (context for a property, free) and status (per property, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "hotel",
+          "status"
+        ],
+        "description": "Row type: review, hotel or status."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda's numeric property id."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Property name, as the hotel signs its own replies."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Agoda property page, when the run was given one."
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda locale the request used."
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: how many reviews were taken for the property."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda's id for the review."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Guest score on Agoda's 0-10 scale."
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same score out of five, for comparing with five-star sources."
+      },
+      "rating_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda's word for the score, e.g. \"Exceptional\"."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review headline the guest wrote."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review body. Many Agoda reviews are a score with no words: this is then empty."
+      },
+      "positives": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest liked, when they filled that field separately."
+      },
+      "negatives": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest disliked, when they filled that field separately."
+      },
+      "original_title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Untranslated headline, when Agoda translated the review."
+      },
+      "original_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Untranslated body, when Agoda translated the review."
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the review was written in."
+      },
+      "translated_to": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the review was shown in."
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the review was posted."
+      },
+      "review_date_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review date as Agoda prints it."
+      },
+      "check_in": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Start of the stay being reviewed."
+      },
+      "check_out": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "End of the stay being reviewed."
+      },
+      "stay_month": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Month and year of the stay, as Agoda prints it."
+      },
+      "stay_length": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Nights stayed, when Agoda reports it."
+      },
+      "room_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Room the guest stayed in, when Agoda reports it."
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Display name of the guest."
+      },
+      "reviewer_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country the guest booked from."
+      },
+      "reviewer_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Agoda's label for the reviewer, when present."
+      },
+      "group_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Traveller group Agoda assigns the stay, when present."
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many readers marked the review helpful."
+      },
+      "unhelpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many readers marked it unhelpful."
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Which source the review came from — Agoda aggregates partners alongside its own."
+      },
+      "provider_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Numeric id of that source."
+      },
+      "responder": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Who replied, normally the property itself."
+      },
+      "response": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property's public reply, when there is one."
+      },
+      "response_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the property replied."
+      },
+      "images": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Photos the guest attached, when any."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_reviews or error."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the URL or id this job was given."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: review rows delivered."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: reviews dropped by maxRating or requireText, never charged."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: pages of reviews read."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when another input already covered this property."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the property failed, null when it did not."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_id",
+          "hotel_name",
+          "rating",
+          "rating_text",
+          "title",
+          "text",
+          "language",
+          "review_date_text",
+          "reviewer_country",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "rating_5",
+          "rating_text",
+          "title",
+          "text",
+          "positives",
+          "negatives",
+          "language",
+          "review_date_text",
+          "check_in",
+          "check_out",
+          "room_type",
+          "reviewer_name",
+          "reviewer_country",
+          "response"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Low scores",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "title",
+          "text",
+          "negatives",
+          "review_date_text",
+          "reviewer_country",
+          "response"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "hotel_id",
+          "hotel_name",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

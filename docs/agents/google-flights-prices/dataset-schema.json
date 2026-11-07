@@ -1,0 +1,397 @@
+{
+  "actorSpecification": 1,
+  "title": "Google Flights prices",
+  "description": "Two row types share one dataset: flight (one itinerary for a route, date and cabin) and status (one per route and date; never charged).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "flight",
+          "status"
+        ],
+        "description": "Row type: flight or status."
+      },
+      "route": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The route as given, e.g. \"LIS-LHR\"."
+      },
+      "origin_query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Origin code as searched."
+      },
+      "destination_query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Destination code as searched."
+      },
+      "depart_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Departure date, YYYY-MM-DD."
+      },
+      "return_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Return date for round trips, null for one-way."
+      },
+      "trip": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "one_way or round_trip."
+      },
+      "seat": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Cabin priced: economy, premium_economy, business or first."
+      },
+      "adults": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Adults the price covers."
+      },
+      "children": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Children the price covers."
+      },
+      "infants": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Infants the price covers (seat + lap)."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency of the price (ISO code), as Google actually priced it."
+      },
+      "max_stops": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Stop limit applied to the search, null when unrestricted."
+      },
+      "rank": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Position in Google's ranking for the search; 1 is its top pick."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Price for all passengers. For round trips this is the total for both legs."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Price exactly as Google states it, e.g. \"127 US dollars\"."
+      },
+      "round_trip_total": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the price covers both legs of a round trip."
+      },
+      "airline": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Operating airline; the first when several operate the itinerary."
+      },
+      "airlines": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Every airline operating the itinerary."
+      },
+      "stops": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of stops; 0 is nonstop."
+      },
+      "depart_time": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Departure time, local to the origin."
+      },
+      "depart_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Departure day as Google states it."
+      },
+      "arrive_time": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Arrival time, local to the destination."
+      },
+      "arrive_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Arrival day as Google states it — later than the departure day on overnight flights."
+      },
+      "depart_airport": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full name of the origin airport."
+      },
+      "arrive_airport": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full name of the destination airport."
+      },
+      "origin": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Origin airport code on the itinerary."
+      },
+      "destination": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Destination airport code on the itinerary."
+      },
+      "duration": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Total travel time as Google states it, e.g. \"2 hr 55 min\"."
+      },
+      "duration_minutes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Total travel time in minutes — the sortable form."
+      },
+      "layovers": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Each layover: index, of, minutes, airport, city."
+      },
+      "layover_airports": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Layover airport names, in order."
+      },
+      "overnight_layover": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when Google flags an overnight layover."
+      },
+      "co2_kg": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Google's carbon estimate for the itinerary, in kilograms."
+      },
+      "emissions_vs_typical": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Percent above or below the typical emissions for the route."
+      },
+      "google_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Google Flights URL for this exact search — opens the same results."
+      },
+      "searches": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: searches run for this route and date."
+      },
+      "flights": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: itinerary rows delivered."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: itineraries already delivered by an overlapping search, not billed again."
+      },
+      "cheapest": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Status rows: lowest price found for this route and date."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_results or error."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the search failed, null when it did not."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "route",
+          "depart_date",
+          "return_date",
+          "price",
+          "currency",
+          "airline",
+          "stops",
+          "duration",
+          "depart_time",
+          "arrive_time",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "flights": {
+      "title": "Flights",
+      "transformation": {
+        "fields": [
+          "route",
+          "depart_date",
+          "return_date",
+          "rank",
+          "price",
+          "currency",
+          "airline",
+          "stops",
+          "duration_minutes",
+          "depart_time",
+          "arrive_time",
+          "layover_airports",
+          "co2_kg",
+          "google_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "cheapest_by_day": {
+      "title": "Cheapest by day",
+      "transformation": {
+        "fields": [
+          "route",
+          "depart_date",
+          "cheapest",
+          "flights",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "route",
+          "depart_date",
+          "return_date",
+          "searches",
+          "flights",
+          "duplicates",
+          "cheapest",
+          "status",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

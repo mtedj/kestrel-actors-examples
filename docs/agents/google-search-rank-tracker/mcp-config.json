@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-google-search-rank-tracker": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-search-rank-tracker"
+    }
+  }
+}

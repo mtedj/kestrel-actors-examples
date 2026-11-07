@@ -1,0 +1,243 @@
+{
+  "title": "Google Maps Reviews Scraper",
+  "description": "Google Maps reviews. Minimal input: {\"places\": [\"Katz's Delicatessen, New York\"]} — any mix of place URLs, short links, place ids, CIDs or \"name, city\". maxReviewsPerPlace defaults to 100 ($0.10 per place at $0.001 a review): 0 = every review; add fromDate \"30 days\" for the last month only, or onlyNew true for reviews not delivered by an earlier run. Every filter is free and runs before billing.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "places": {
+      "title": "Places",
+      "type": "array",
+      "editor": "stringList",
+      "uniqueItems": true,
+      "default": [],
+      "prefill": [
+        "https://www.google.com/maps/place/?q=place_id:ChIJD3uTd9hx5kcR1IQvGfr8dbk"
+      ],
+      "description": "One place per line, any mix: a Google Maps place URL, a maps.app.goo.gl or share.google short link, a place id (\"ChIJD3uTd9hx5kcR1IQvGfr8dbk\"), a CID, a feature id, a Maps search URL, or just \"Katz's Delicatessen, New York\". A place Google does not know ends as a free not_found status row, never a failed run. A chain name can resolve to another branch: for repeat runs pass the URL, place id or CID. The same place given twice is read once; a pasted spreadsheet column works as it is.",
+      "sectionCaption": "Which places",
+      "sectionDescription": "Anything that identifies a place on Google Maps. A place Google does not know ends as a free not_found status row, never a failed run."
+    },
+    "maxReviewsPerPlace": {
+      "title": "Max reviews per place",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 1000000,
+      "default": 100,
+      "prefill": 20,
+      "description": "Reviews delivered and charged per place, counted after filters: 100 (default), 0 = every review the place has. The main cost control: 100 reviews × 50 places is at most 5,000 reviews = $5.00. Use 0 with fromDate for \"every review since 1 July\", 0 alone for a full backup. Filters never count against it: 50 asked with onlyWithText = 50 reviews with text.",
+      "sectionCaption": "How many reviews, from when, in what order",
+      "sectionDescription": "Every filter below runs before billing, so a filtered review is never charged."
+    },
+    "fromDate": {
+      "title": "From date",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Only reviews published on or after this day: \"2026-07-01\" (YYYY-MM-DD) or a look-back such as \"30 days\", \"2 weeks\", \"6 months\". Empty (default) = no lower bound. With sort newest the actor stops reading at this date, so \"reviews from the last 30 days\" of a place with 50,000 reviews reads one page, not a thousand, and only reviews in range are billed. Use a look-back for scheduled runs: the input never needs editing.",
+      "default": ""
+    },
+    "toDate": {
+      "title": "To date",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Only reviews published on or before this day: \"2026-09-30\" (YYYY-MM-DD) or a look-back such as \"7 days\". Empty (default) = no upper bound. With fromDate it is a true date range, e.g. one calendar quarter; reviews newer than toDate are read past free. Dates compare with published_at (first posted); set includeEdited true to also count a review edited inside the range.",
+      "default": ""
+    },
+    "sort": {
+      "title": "Order",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "newest",
+        "most_relevant",
+        "highest",
+        "lowest"
+      ],
+      "enumTitles": [
+        "Newest first",
+        "Most relevant (Google's default)",
+        "Highest rating first",
+        "Lowest rating first"
+      ],
+      "default": "newest",
+      "description": "\"newest\" (default), \"most_relevant\" (Google's own order), \"highest\", \"lowest\". Keep newest for date ranges and monitoring: the walk stops at fromDate, so nothing older is read or paid for. \"lowest\" answers \"the complaints about this place\" fastest; combine it with maxStars 2. With onlyNew the order is always newest."
+    },
+    "onlyNew": {
+      "title": "Only new reviews since the last run",
+      "type": "boolean",
+      "default": false,
+      "description": "false (default) = every run delivers what the other inputs ask for. true = monitoring: the actor remembers which reviews it delivered for each place (memory named by monitorKey) and later runs deliver and bill only reviews not delivered before, stopping at the first page of already-delivered ones. Put it on a schedule for \"new Google reviews every week\"; a run that finds nothing new delivers 0 rows and costs $0. The first run delivers up to maxReviewsPerPlace per place. Sort is forced to newest.",
+      "sectionCaption": "Monitoring: only new reviews",
+      "sectionDescription": "Deliver each review once, however often the run repeats."
+    },
+    "monitorKey": {
+      "title": "Monitor key",
+      "type": "string",
+      "editor": "textfield",
+      "default": "default",
+      "description": "Name of the memory onlyNew uses, e.g. \"acme-weekly\" (default \"default\"; letters, digits and hyphens, up to 40). Runs with the same key share one memory: give each separate feed (a client, a Slack channel, a test) its own key so they do not hide reviews from each other. Ignored unless onlyNew is true."
+    },
+    "includeEdited": {
+      "title": "Also deliver edited reviews",
+      "type": "boolean",
+      "default": false,
+      "description": "false (default) = a review is delivered once, as first seen. true = with onlyNew, a review whose author edited it after you received it is delivered (and billed) again with edited = true and both dates; with a date range, a review edited inside the range counts as inside it."
+    },
+    "minStars": {
+      "title": "Min stars",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0,
+      "description": "Keep reviews with at least this many stars, 1 to 5, e.g. 4 for positive reviews only. 0 (default) = no lower bound. Free: filtered reviews are never charged.",
+      "sectionCaption": "Filters (all free, applied before billing)",
+      "sectionDescription": "The status row reports how many reviews each filter removed."
+    },
+    "maxStars": {
+      "title": "Max stars",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0,
+      "description": "Keep reviews with at most this many stars, e.g. 2 for negative reviews and complaints only, 3 for \"everything below 4 stars\". 0 (default) = no upper bound. Free; pair it with sort \"lowest\" to reach them first."
+    },
+    "onlyWithText": {
+      "title": "Only reviews with text",
+      "type": "boolean",
+      "default": false,
+      "description": "false (default) = star-only ratings are delivered too. true = skip them: about a third of Google reviews carry no text, and with this on they are read past free, so you pay only for reviews that say something — what sentiment analysis and AI summaries need. maxReviewsPerPlace then counts only reviews with text."
+    },
+    "hasOwnerReply": {
+      "title": "Owner reply",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "any",
+        "yes",
+        "no"
+      ],
+      "enumTitles": [
+        "Any",
+        "Only reviews the owner replied to",
+        "Only reviews still waiting for a reply"
+      ],
+      "default": "any",
+      "description": "\"any\" (default), \"yes\" = only reviews the owner replied to, \"no\" = only reviews still waiting for a reply. \"no\" is a reputation manager's to-do list (\"which reviews have we not answered\"); \"yes\" shows a competitor's reply tone and speed (owner_reply_at). Free."
+    },
+    "keywords": {
+      "title": "Keywords (any of)",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Keep a review only if its text contains at least one of these words or phrases, case-insensitive, e.g. [\"parking\", \"wait time\"]. Empty (default) = no keyword filter. Matched in the original text and, with translate \"both\", in Google's translation too. Free."
+    },
+    "excludeKeywords": {
+      "title": "Exclude keywords",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Drop a review if its text contains any of these words or phrases, e.g. [\"delivery\"]. Empty (default) = nothing dropped. Case-insensitive, matched like keywords. Free."
+    },
+    "reviewLanguages": {
+      "title": "Review languages",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Keep only reviews written in these languages, as two-letter codes: [\"en\"] or [\"de\", \"fr\"]. Empty (default) = every language. Uses the language Google detected (original_language); star-only ratings have no language and are dropped when this is set. Free."
+    },
+    "hasPhotos": {
+      "title": "Only reviews with photos",
+      "type": "boolean",
+      "default": false,
+      "description": "false (default) = all reviews. true = only reviews that carry at least one photo (URLs in photos). Free."
+    },
+    "translate": {
+      "title": "Text",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "original",
+        "translated",
+        "both"
+      ],
+      "enumTitles": [
+        "Original text",
+        "Google's translation into the Language below",
+        "Both: original in text, translation in text_translated"
+      ],
+      "default": "original",
+      "description": "\"original\" (default) = text as written, text_translated empty. \"translated\" = text holds Google's translation into language (reviews already in that language are unchanged). \"both\" = text original, text_translated the translation. Use \"translated\" or \"both\" for \"all reviews in English\" or sentiment analysis across languages. The owner reply follows the same choice. Free.",
+      "sectionCaption": "Language and output",
+      "sectionDescription": "What language Google answers in, and the free place row."
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "editor": "textfield",
+      "default": "en",
+      "description": "Interface language as a code: \"en\" (default), \"de\", \"fr\", \"es\", \"pt-BR\", \"ja\". Sets the language of translations (translate), of place categories and of Google's relative dates (published_text). Exact dates (published_at, updated_at) never depend on it."
+    },
+    "country": {
+      "title": "Country",
+      "type": "string",
+      "editor": "textfield",
+      "default": "us",
+      "description": "Two-letter country Google is asked from (gl): \"us\" (default), \"gb\", \"de\", \"jp\". Rarely matters: change it only when a plain name resolves to a branch in the wrong country. It does not filter reviews."
+    },
+    "includePlaceRow": {
+      "title": "Place summary row",
+      "type": "boolean",
+      "default": true,
+      "description": "true (default) = one free type \"place\" row per place: Google's rating, listed review count, per-star histogram, how many reviews this run read and delivered, the completeness verdict (\"4,404 listed, 4,404 read — complete\"), what stopped the walk early, and a 90-day rating trend when the walk covered 180 days. For \"rating and review count only\" set maxReviewsPerPlace 1: one review is billed, the place row is free. false = review rows only."
+    },
+    "placeIds": {
+      "title": "Place ids (same as Places)",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Alias for places that takes Google place ids only, e.g. [\"ChIJD3uTd9hx5kcR1IQvGfr8dbk\"], so the placeIds list of a compass/google-maps-reviews-scraper input or of a Google Places API export pastes straight in. Read exactly like lines in places; the same place in both is read once.",
+      "sectionCaption": "Aliases: pasted Compass input and integrations",
+      "sectionDescription": "Other names for the places input; nothing here adds a capability."
+    },
+    "startUrls": {
+      "title": "Start URLs (same as Places)",
+      "type": "array",
+      "editor": "requestListSources",
+      "default": [],
+      "description": "Alias for places, for integrations that always send startUrls (Make, n8n, Zapier, a Google Sheet of links) and for input copied from compass/google-maps-reviews-scraper, e.g. [{\"url\": \"https://www.google.com/maps/place/…\"}]. Each entry is read exactly like a line in places. Compass names maxReviews, reviewsSort (newest, mostRelevant, highestRanking, lowestRanking), reviewsStartDate and language are understood too."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "description": "Proxy sessions (IPs) working at once, 1 to 16, default 4. Places are read in parallel; the pages of one place in order. Raise it for hundreds of places.",
+      "sectionCaption": "Speed and proxy",
+      "sectionDescription": "The defaults are tuned; change them only for very large runs."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "string",
+      "editor": "textfield",
+      "default": "1",
+      "description": "Requests per second per session, e.g. \"1\" (default) or \"0.5\". Lower is gentler on Google; 50 reviews come back per request."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      },
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "description": "Apify datacenter proxies (default {\"useApifyProxy\": true}) are enough and keep the run cheap; residential is not needed. The actor rotates the IP whenever Google answers an empty or cut-down page."
+    }
+  },
+  "required": []
+}

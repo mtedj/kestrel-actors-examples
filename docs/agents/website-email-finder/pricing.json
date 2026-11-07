@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "result": {
+      "eventTitle": "Site/email contact",
+      "eventDescription": "One delivered site/email contact: $5 per 1,000 rows. Row keys id, email, website, page_title, source_url, verification. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:13.717Z"
+}

@@ -1,0 +1,7 @@
+{
+  "boards": [
+    "openai"
+  ],
+  "maxJobsPerBoard": 3,
+  "maxResults": 3
+}

@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "parity": {
+      "eventTitle": "Parity row",
+      "eventDescription": "One hotel and stay with every booking site's rate (Booking.com, Expedia, Agoda…), cheapest and dearest, spread, median, official-site rate and who undercuts it (row keys hotel_name, entity_id, check_in, sources, min_source, min_price, max_source, max_price, spread_pct, median_price, official_price, undercut_by, undercut_pct): $10 per 1,000 rows (1 cent per hotel and stay). One row per hotel and stay however many sources (about 18, 4 to 36): 10 hotels × 7 dates (sweepDays 6) = 70 rows = $0.70. Not charged: hotels with no rate, rows under minSpreadPct, names that match nothing, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.01,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:01.696Z"
+}

@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Amazon products",
+  "description": "Two row types share one dataset: product (one product's details, charged) and status (per target, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Amazon products",
+      "description": "Product detail rows plus one status row per ASIN or URL given. Product rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered, filtered and charged, its not-found, blocked and error tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

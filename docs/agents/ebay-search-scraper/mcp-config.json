@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-ebay-search-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/ebay-search-scraper"
+    }
+  }
+}

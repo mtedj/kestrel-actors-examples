@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-workday-company-jobs": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/workday-company-jobs"
+    }
+  }
+}

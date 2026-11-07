@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/steam-player-reviews",
+  "input": {
+    "appIds": [
+      "730"
+    ],
+    "language": "all",
+    "reviewType": "all",
+    "sinceDate": "",
+    "untilDate": "",
+    "maxResults": 3,
+    "maxPages": 1
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

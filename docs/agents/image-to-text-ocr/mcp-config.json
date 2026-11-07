@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-image-to-text-ocr": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/image-to-text-ocr"
+    }
+  }
+}

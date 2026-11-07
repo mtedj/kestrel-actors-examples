@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/greenhouse-jobs-scraper",
+  "input": {
+    "boards": [
+      "anthropic"
+    ],
+    "maxJobsPerBoard": 3,
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

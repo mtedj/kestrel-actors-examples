@@ -1,0 +1,9 @@
+{
+  "searches": [
+    "coffee shop"
+  ],
+  "locations": [
+    "Austin, TX"
+  ],
+  "maxPlacesPerSearch": 3
+}

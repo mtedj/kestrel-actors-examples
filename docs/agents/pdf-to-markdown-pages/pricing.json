@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "result": {
+      "eventTitle": "Nonempty pdf page",
+      "eventDescription": "One delivered nonempty PDF page: $10 per 1,000 rows. Row keys page, total_pages, source_url, extraction, markdown, characters, width. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+      "eventPriceUsd": 0.01,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:07.148Z"
+}

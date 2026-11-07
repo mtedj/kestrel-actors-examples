@@ -1,0 +1,16 @@
+{
+  "actor": "kestrel/amazon-best-sellers-scraper",
+  "input": {
+    "categories": [
+      "electronics"
+    ],
+    "chart": "bestsellers",
+    "pages": 1,
+    "maxResultsPerCategory": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

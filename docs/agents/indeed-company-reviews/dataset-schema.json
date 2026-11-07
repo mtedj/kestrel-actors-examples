@@ -1,0 +1,532 @@
+{
+  "actorSpecification": 1,
+  "title": "Indeed company reviews",
+  "description": "One row per Indeed employee review (charged), plus a free company context row and a free status row per company and country.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | company | status"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input value (company name, slug or /cmp/ URL) this row came from, exactly as given"
+      },
+      "company": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The slug Indeed files the company under, the part after /cmp/ (e.g. Google, The-Home-Depot) — also when the input was a plain name like \"Home Depot\""
+      },
+      "company_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Company name as Indeed displays it"
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Which Indeed domain the row was read on: us, all, ca, uk, de, ..."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Indeed's stable encrypted review id, the id in the review URL"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Overall rating: 1-5 stars on review rows, Indeed's average (e.g. 4.3) on company rows"
+      },
+      "work_life_balance": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's 1-5 rating for work/life balance; null when they did not rate it"
+      },
+      "compensation_benefits": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's 1-5 rating for compensation and benefits; null when they did not rate it"
+      },
+      "job_security_advancement": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's 1-5 rating for job security and advancement; null when they did not rate it"
+      },
+      "management": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's 1-5 rating for management; null when they did not rate it"
+      },
+      "culture_values": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's 1-5 rating for culture; null when they did not rate it"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review headline the employee wrote"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The full review body, untruncated"
+      },
+      "pros": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The reviewer's Pros field, when the review was submitted with the pros/cons form"
+      },
+      "cons": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The reviewer's Cons field, when the review was submitted with the pros/cons form"
+      },
+      "job_title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The reviewer's job title, e.g. \"Software Engineer\""
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Where the reviewer worked, e.g. \"Mountain View, CA\""
+      },
+      "review_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO country code Indeed files the review under, e.g. US"
+      },
+      "employment_status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "current (still works there) | former"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publication date as YYYY-MM-DD, parsed from the domain's own language"
+      },
+      "review_date_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The date exactly as Indeed printed it, e.g. \"August 25, 2026\" or \"3. September 2025\""
+      },
+      "helpful_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many people voted the review helpful"
+      },
+      "unhelpful_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many people voted the review not helpful"
+      },
+      "employer_reply": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The employer's official public response to the review, if any"
+      },
+      "employer_reply_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date of the employer response, YYYY-MM-DD"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Direct link to the review on Indeed"
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "All reviews Indeed holds for the company worldwide (company rows)"
+      },
+      "found_review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews this domain actually lists — the number the walk can reach (company and status rows)"
+      },
+      "histogram": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Star histogram: how many reviews gave 1, 2, 3, 4 and 5 stars (company rows)"
+      },
+      "ratings_breakdown": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Indeed's company averages for work_life_balance, compensation_benefits, job_security_advancement, management and culture_values (company rows)"
+      },
+      "happiness_score": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Indeed's Work Happiness score, 0-100 (company rows)"
+      },
+      "happiness_grade": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The band Indeed puts that score in, e.g. EXCELLENT, FAIR (company rows)"
+      },
+      "top_pros": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The positives Indeed extracts from the review corpus (company rows)"
+      },
+      "top_cons": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The negatives Indeed extracts from the review corpus (company rows)"
+      },
+      "topics": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Indeed's topic breakdown: name, rating and count for work-life balance, pay and benefits, job security, management and culture (company rows)"
+      },
+      "industry": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Industry Indeed files the company under, e.g. \"Internet & Web Services\" (company rows)"
+      },
+      "company_size": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Employee range, e.g. \"10,000+\" or \"51 to 200\" (company rows)"
+      },
+      "headquarters": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Headquarters location (company rows)"
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The company's own website as Indeed lists it (company rows)"
+      },
+      "founded": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Year founded (company rows)"
+      },
+      "revenue": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Revenue band, e.g. \"more than $10B\" (company rows)"
+      },
+      "ceo": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "CEO name as Indeed lists it (company rows)"
+      },
+      "company_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The company's Indeed profile page (company rows)"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews read in this run for the company before filters (company rows)"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | duplicate | partial | error (status rows). partial = some reviews were delivered and charged, then Indeed refused the next page; error = nothing was delivered"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews delivered and charged for this company and country (status rows)"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by the filters, never charged (status rows)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review pages read (status rows)"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews Indeed holds for the company worldwide (status rows)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this target resolved to a company another target already covers (status rows)"
+      },
+      "already_seen": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "onlyNewReviews: reviews skipped because an earlier run already delivered them — never charged (status rows)"
+      },
+      "suggestions": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "On not_found: the closest companies Indeed's own autocomplete knows, each {name, company, url} — pass one's company or url as the next input. null otherwise (status rows)"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a company or country failed or was cut short; on not_found it lists the closest company names Indeed knows (status rows)"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "company_name",
+          "country",
+          "rating",
+          "review_date",
+          "title",
+          "text",
+          "job_title",
+          "location",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "company_name",
+          "review_id",
+          "rating",
+          "title",
+          "text",
+          "pros",
+          "cons",
+          "job_title",
+          "location",
+          "employment_status",
+          "review_date",
+          "work_life_balance",
+          "compensation_benefits",
+          "job_security_advancement",
+          "management",
+          "culture_values",
+          "helpful_count",
+          "employer_reply",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "company_name",
+          "rating",
+          "title",
+          "text",
+          "cons",
+          "job_title",
+          "location",
+          "employment_status",
+          "review_date",
+          "management",
+          "work_life_balance",
+          "compensation_benefits",
+          "employer_reply",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "companies": {
+      "title": "Companies",
+      "transformation": {
+        "fields": [
+          "company",
+          "company_name",
+          "country",
+          "rating",
+          "review_count",
+          "found_review_count",
+          "histogram",
+          "ratings_breakdown",
+          "happiness_score",
+          "happiness_grade",
+          "top_pros",
+          "top_cons",
+          "topics",
+          "industry",
+          "company_size",
+          "headquarters",
+          "website",
+          "founded",
+          "revenue",
+          "ceo",
+          "reviews_fetched",
+          "company_url"
+        ],
+        "filter": {
+          "type": "company"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "company",
+          "company_name",
+          "country",
+          "status",
+          "reviews",
+          "filtered",
+          "already_seen",
+          "pages",
+          "total",
+          "found_review_count",
+          "duplicates",
+          "error",
+          "suggestions"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-airbnb-occupancy-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/airbnb-occupancy-scraper"
+    }
+  }
+}

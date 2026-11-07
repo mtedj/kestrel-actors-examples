@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Google Maps places",
+  "description": "Two row types share one dataset: place (one Google Maps place, charged) and status (one per search, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Google Maps places",
+      "description": "One flat row per place with contact, reputation, status and lead-helper columns, plus one free status row per search that accounts for every place found, filtered, deduplicated, delivered and charged.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its filtered, duplicate and error tallies, and its HTTP and crawl stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

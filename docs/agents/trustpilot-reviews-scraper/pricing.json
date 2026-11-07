@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One Trustpilot review: 1-5 star rating, title, text, language, review and experience dates, reviewer name, country and lifetime review count, verification level and source, likes, the company's reply and its date (row keys rating, title, text, language, review_date, experience_date, reviewer_name, reviewer_country, reviewer_reviews, verified, verification_level, source, likes, reply_text, reply_date, url): $1.50 per 1,000 reviews. Not charged: the company row (TrustScore, star histogram, email, phone), status rows, reviews Trustpilot's star, date, language, verified and keyword filters skip (never fetched), reviews before sinceDate or without text (requireText), a company given twice, companies with no reviews or no Trustpilot profile, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.0015,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:12.916Z"
+}

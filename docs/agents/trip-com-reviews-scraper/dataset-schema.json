@@ -1,0 +1,488 @@
+{
+  "actorSpecification": 1,
+  "title": "Trip.com reviews",
+  "description": "One row per guest review (charged), plus a free hotel context row and a free status row per property.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "hotel",
+          "status"
+        ],
+        "description": "Row type: review, hotel or status."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trip.com's numeric hotel id."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel name, from the hotel page (hotel rows and, when the page was read, review rows)."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Trip.com hotel page, when the run was given one."
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trip.com locale the request used."
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: star class."
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: street address."
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: city."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: country."
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: how many reviews Trip.com shows for the property."
+      },
+      "languages": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Hotel rows: the languages the property's reviews come in, with Trip.com's id and count for each.",
+        "items": {
+          "type": "object"
+        }
+      },
+      "travel_types": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Hotel rows: traveler types with review counts.",
+        "items": {
+          "type": "object"
+        }
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: how many reviews were taken for the property."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trip.com's review id (stable; use it to dedupe scheduled runs)."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Overall score on Trip.com's 0-10 scale (hotel rows: the property's overall score)."
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same score on the 5-star scale."
+      },
+      "rating_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trip.com's word for the score: Outstanding, Amazing, Great, Very good, Good…"
+      },
+      "rating_location": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Location sub-score (0-10)."
+      },
+      "rating_facility": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Amenities sub-score (0-10)."
+      },
+      "rating_service": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Service sub-score (0-10)."
+      },
+      "rating_room": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Cleanliness sub-score (0-10)."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review, in the language it was written in."
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language code of the review text (en, zh, ja, fr…)."
+      },
+      "recommend": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the guest recommends the hotel."
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the review was posted (ISO 8601)."
+      },
+      "check_in": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-in date of the stay (YYYY-MM-DD)."
+      },
+      "room_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Room type booked."
+      },
+      "room_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trip.com's room type id."
+      },
+      "travel_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Couple, Family, Business traveler, Solo traveler, Traveling with friends, Booked for others, Other."
+      },
+      "travel_type_id": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Trip.com's id for the travel type."
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's display name."
+      },
+      "reviewer_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's country or region."
+      },
+      "reviewer_country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO country code of the reviewer."
+      },
+      "reviewer_reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews the reviewer has written on Trip.com."
+      },
+      "reviewer_level": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trip.com reviewer grade (Rising review star, Review Specialist…)."
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Helpful votes the review received."
+      },
+      "images": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Photo URLs attached to the review.",
+        "items": {
+          "type": "string"
+        }
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Where the review came from: Trip.com, ctrip, Expedia Group verified review, Hotels.com verified review."
+      },
+      "source_code": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Trip.com's numeric source code."
+      },
+      "response": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The hotel's public reply, when it replied."
+      },
+      "response_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the hotel replied."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the input this row is about."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_reviews or error."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: review rows delivered for the property."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: reviews dropped by maxRating / requireText (never charged)."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: review pages read."
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: how many reviews Trip.com shows for the property."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when this input pointed at a property already harvested in the run."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the property failed, if it did."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the row was fetched (UTC, ISO 8601)."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_id",
+          "hotel_name",
+          "rating",
+          "rating_text",
+          "text",
+          "language",
+          "review_date",
+          "travel_type",
+          "reviewer_country",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "rating_5",
+          "rating_text",
+          "text",
+          "language",
+          "review_date",
+          "check_in",
+          "room_type",
+          "travel_type",
+          "reviewer_name",
+          "reviewer_country",
+          "rating_location",
+          "rating_facility",
+          "rating_service",
+          "rating_room",
+          "source",
+          "response"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Low scores",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "text",
+          "language",
+          "review_date",
+          "room_type",
+          "travel_type",
+          "reviewer_country",
+          "response"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "stars",
+          "city",
+          "country",
+          "rating",
+          "rating_text",
+          "rating_location",
+          "rating_facility",
+          "rating_service",
+          "rating_room",
+          "review_count",
+          "reviews_fetched",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "hotel_id",
+          "hotel_name",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/google-ads-transparency-scraper",
+  "input": {
+    "domains": [
+      "shopify.com"
+    ],
+    "maxAdsPerSource": 3,
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

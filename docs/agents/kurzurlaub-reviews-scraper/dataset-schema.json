@@ -1,0 +1,339 @@
+{
+  "actorSpecification": 1,
+  "title": "Kurzurlaub reviews",
+  "description": "One row per guest rating (charged), plus a free hotel context row and a free status row per property.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "hotel",
+          "status"
+        ],
+        "description": "Row type: review, hotel or status."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Kurzurlaub's numeric hotel id (its o_id)."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel name."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Kurzurlaub hotel page, when the run was given one."
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: star class (Hotelstars Union)."
+      },
+      "street": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: street address (when the hotel page was read)."
+      },
+      "postal_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: postal code."
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: town."
+      },
+      "region": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: Kurzurlaub's holiday region, e.g. Rhein / Lahn / Taunus."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: country, in German (Deutschland, Österreich, Italien…)."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Hotel rows: the property's overall score, 1-6 (6 is best)."
+      },
+      "rating_word": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: Kurzurlaub's word for the overall score (Exzellent, Sehr gut, Gut…)."
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: how many ratings the property has."
+      },
+      "category_averages": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Hotel rows: the property's per-area averages — hotel, room, service, food, leisure, location, value — each 1-6."
+      },
+      "price_range": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel rows: the price range of the hotel's current offers, as the page states it."
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel rows: how many ratings were taken for the property."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "A stable id for the rating (Kurzurlaub gives ratings none; this is a hash of hotel, date, score, title, reviewer and comment — use it to dedupe scheduled runs)."
+      },
+      "score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The guest's overall score, 1-6 (6 is best)."
+      },
+      "category_scores": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "The per-area scores the guest gave — overall, hotel, room, service, food, leisure, location, value — only the areas rated appear."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The rating's title, as the guest wrote it (German)."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The guest's comment, when there is one. Many Kurzurlaub ratings are a title and scores only."
+      },
+      "reviewer": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The guest's first name, or Gast when the guest stayed anonymous."
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date of the rating (YYYY-MM-DD)."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the input this row is about."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_reviews or error."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: rating rows delivered for the property."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: ratings dropped by maxScore / minScore / sinceDate (never charged)."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: rating pages read."
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: how many ratings Kurzurlaub shows for the property."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when this input pointed at a property already harvested in the run."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the property failed, if it did."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the row was fetched (UTC, ISO 8601)."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_id",
+          "hotel_name",
+          "score",
+          "title",
+          "text",
+          "reviewer",
+          "review_date",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Ratings",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "score",
+          "title",
+          "text",
+          "reviewer",
+          "review_date",
+          "category_scores",
+          "review_id",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Low scores",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "score",
+          "title",
+          "text",
+          "reviewer",
+          "review_date",
+          "category_scores"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "stars",
+          "city",
+          "region",
+          "country",
+          "rating",
+          "rating_word",
+          "review_count",
+          "category_averages",
+          "price_range",
+          "reviews_fetched",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "hotel_id",
+          "hotel_name",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

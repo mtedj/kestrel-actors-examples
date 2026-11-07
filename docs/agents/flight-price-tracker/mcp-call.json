@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/flight-price-tracker",
+  "input": {
+    "routes": [
+      "LIS-LHR"
+    ],
+    "departDate": "30 days",
+    "days": 1,
+    "currency": "EUR",
+    "market": "pt"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-document-extraction": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/pdf-to-markdown-pages,kestrel/pdf-to-excel-tables,kestrel/image-to-text-ocr"
+    }
+  }
+}

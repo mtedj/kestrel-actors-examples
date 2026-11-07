@@ -1,0 +1,14 @@
+{
+  "actor": "kestrel/youtube-channel-videos",
+  "input": {
+    "channels": [
+      "@3blue1brown"
+    ],
+    "maxResultsPerSource": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

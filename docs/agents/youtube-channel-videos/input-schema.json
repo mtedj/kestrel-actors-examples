@@ -1,0 +1,110 @@
+{
+  "title": "YouTube Channel Videos - Uploads, Views & Duration",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input: {\"channels\": [\"@3blue1brown\"], \"maxResultsPerSource\": 3}. Cost is $0.005 per parsed page plus $0.001 per delivered video. Empty monitoring/filter results still incur page fees. Set maxTotalChargeUsd in Apify run options for a monetary cap.",
+  "properties": {
+    "channels": {
+      "title": "YouTube channels",
+      "type": "array",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "prefill": [
+        "@3blue1brown"
+      ],
+      "description": "Public channel handles, UC IDs or HTTPS /@handle and /channel/UC… URLs, for example [\"@3blue1brown\"]. Up to 50 channels. Regular Videos tab only; Shorts/live tabs, video URLs and playlists are not accepted. Each parsed page costs $0.005 plus $0.001 per delivered video.",
+      "sectionCaption": "Sources and result limits"
+    },
+    "maxResultsPerSource": {
+      "title": "Maximum delivered rows per source",
+      "type": "integer",
+      "description": "Maximum rows delivered per query/channel after filters and monitoring, for example 50. A source can return fewer. Duplicates are removed across this run.",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 2000,
+      "prefill": 3
+    },
+    "minViews": {
+      "title": "Minimum views",
+      "type": "integer",
+      "description": "Keep videos at or above this displayed view count, for example 100000. Zero disables it. YouTube rounds counts such as 2.6M; views_approximate marks these. Missing counts do not pass an active bound.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
+    "minDurationSeconds": {
+      "title": "Minimum video duration",
+      "type": "integer",
+      "description": "Minimum video length in seconds, for example 300 for five minutes. Zero disables the bound. Missing/live durations do not pass an active bound.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 86400
+    },
+    "maxDurationSeconds": {
+      "title": "Maximum video duration",
+      "type": "integer",
+      "description": "Maximum video length in seconds, for example 1200 for twenty minutes. Zero disables the bound. Filtering adds no fee; parsed pages still cost $0.005.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 86400
+    },
+    "onlyNew": {
+      "title": "Only new videos",
+      "type": "boolean",
+      "description": "true emits only video IDs not previously delivered under monitorKey. First run establishes the baseline by delivering matching videos. Later checks still pay parsed-page fees, even with no new uploads. Use a saved task and an Apify schedule.",
+      "default": false
+    },
+    "titleContains": {
+      "title": "Title includes any",
+      "type": "array",
+      "description": "Keep titles containing at least one phrase, case-insensitive; for example [\"wireless\"] or [\"math\"]. Empty means any title. Applied before row billing; successful page checks are still billed.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "sectionCaption": "Title filters"
+    },
+    "titleExcludes": {
+      "title": "Title excludes any",
+      "type": "array",
+      "description": "Drop titles containing any phrase, case-insensitive; for example [\"case\"] or [\"trailer\"]. Empty disables exclusions. Dropped rows are not billed; parsed pages are.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "monitorKey": {
+      "title": "Monitor name",
+      "type": "string",
+      "description": "Name for persistent delivered-row history, for example \"daily-competitors\". Use 1–60 letters, digits, underscores or hyphens. Reuse with the same target list and filters; change it for a new baseline. Keeps the latest 50,000 delivered IDs.",
+      "default": "default",
+      "editor": "textfield",
+      "sectionCaption": "Monitoring and page limits"
+    },
+    "excludeIds": {
+      "title": "Previously collected IDs",
+      "type": "array",
+      "description": "Skip exact output id values, for example [\"a-previous-id\"]. Up to 10,000. An optional alternative to persistent monitoring; excluded rows are not billed but parsed pages are.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxPagesPerSource": {
+      "title": "Maximum pages per source",
+      "type": "integer",
+      "description": "Safety cap on successful page reads per query/channel, for example 5. Maximum 50. Every parsed page costs $0.005, including filtered/unchanged pages. The result limit can stop sooner. Source pagination does not guarantee complete coverage.",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 50
+    }
+  },
+  "required": [
+    "channels"
+  ]
+}

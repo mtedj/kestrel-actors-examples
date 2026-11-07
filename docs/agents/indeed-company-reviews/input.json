@@ -1,0 +1,10 @@
+{
+  "companies": [
+    "https://www.indeed.com/cmp/Google/reviews"
+  ],
+  "countries": [
+    "us"
+  ],
+  "maxReviewsPerCompany": 3,
+  "sort": "newest"
+}

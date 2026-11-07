@@ -1,0 +1,9 @@
+{
+  "documentUrls": [
+    "https://raw.githubusercontent.com/jsvine/pdfplumber/stable/examples/pdfs/background-checks.pdf"
+  ],
+  "startPage": 1,
+  "maxPagesPerDocument": 3,
+  "tableStrategy": "lines",
+  "maxResults": 3
+}

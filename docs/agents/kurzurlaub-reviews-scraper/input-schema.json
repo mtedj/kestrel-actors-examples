@@ -1,0 +1,103 @@
+{
+  "title": "Kurzurlaub Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Kurzurlaub hotel URLs",
+      "type": "array",
+      "description": "Kurzurlaub.de hotel pages, e.g. [\"https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html\"]. Each page is read once for the hotel's id, name, stars, address and price range. Use for \"reviews of this Kurzurlaub hotel\". A URL from another site ends the run with the reason on the run card and nothing charged. One of startUrls or hotelIds is required.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels",
+      "sectionDescription": "Kurzurlaub.de hotel URLs and/or Kurzurlaub's numeric hotel ids; one of the two is required. A URL and its id are the same hotel, harvested once."
+    },
+    "hotelIds": {
+      "title": "Kurzurlaub hotel ids",
+      "type": "array",
+      "description": "Kurzurlaub's numeric hotel ids, e.g. [\"15699\"]: the hotel_id on the rows of an earlier run (the id is not part of the hotel URL). Skips the page read: use for scheduled runs over a known list. An id Kurzurlaub does not have costs nothing and is reported as a status row with status \"error\" and the reason. One of startUrls or hotelIds is required.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerHotel": {
+      "title": "Max ratings per hotel",
+      "type": "integer",
+      "description": "Ratings fetched per hotel, newest first, e.g. 50 (default 200). 0 = every rating the hotel has (Kurzurlaub pages them 10-20 at a time; a busy hotel has a few hundred). The main cost control: at most N x $0.004 per hotel. maxScore and minScore are applied to these newest N, so for \"every complaint in the hotel's history\" set 0; for \"the 30 newest ratings\" set 30.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 200,
+      "sectionCaption": "Which ratings",
+      "sectionDescription": "Cap and filters. Kurzurlaub scores run 1 to 6 and 6 is the best. Filters run before billing: you pay only for the rows delivered."
+    },
+    "sinceDate": {
+      "title": "Only ratings from this date on",
+      "type": "string",
+      "description": "Empty (default) = no date limit. \"2026-09-01\" (YYYY-MM-DD) or relative to the day the run starts: \"30 days\", \"6 weeks\", \"3 months\", \"yesterday\". Use for \"only new reviews\" on a schedule: ratings come newest first, so paging stops as soon as the date is passed and older ratings are never fetched or charged. A daily run with \"2 days\" delivers only what was written since; nothing older is billed.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "maxScore": {
+      "title": "Only ratings at or below this score",
+      "type": "number",
+      "description": "0 (default) = keep every rating. 1-6 = keep only ratings at or below it on Kurzurlaub's 1-6 scale (6 is best, 4 a middling stay), e.g. 4 for \"negative reviews\", \"complaints\", \"what guests disliked\". Applied to the newest maxReviewsPerHotel ratings fetched: set that to 0 to scan a hotel's whole history. Filtered ratings are counted in the status row and never billed.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 6,
+      "default": 0
+    },
+    "minScore": {
+      "title": "Only ratings at or above this score",
+      "type": "number",
+      "description": "0 (default) = keep every rating. 1-6 = keep only ratings at or above it, e.g. 5.5 for \"praise\", \"what guests loved\", quotes for marketing. Combine with maxScore for a band (minScore must not be above maxScore). Applied to the newest maxReviewsPerHotel ratings fetched; filtered ratings are never billed.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 6,
+      "default": 0
+    },
+    "includeHotelRow": {
+      "title": "Include a hotel row",
+      "type": "boolean",
+      "description": "true (DEFAULT) = one free row per hotel (type \"hotel\") with id, name, stars, street, city, region, country, overall score and its word, review count, category averages and price range. No charge. false = rating and status rows only.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Hotel row"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) run in parallel, 1-16, e.g. 2 (default 2). More is faster; each session is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1-3, e.g. 1 (default 1). Kurzurlaub answered 10 of 10 requests at 1/s from one IP in testing.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy so runs rotate IPs; the default datacenter group is enough for Kurzurlaub (no residential proxy needed). Traffic: one page per hotel URL plus one fragment per 10-20 ratings.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Kurzurlaub.de hotel reviews (Hotelbewertungen). Minimal input: {\"hotelIds\": [\"15699\"]} or {\"startUrls\": [\"https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html\"]}; one of the two is required. maxReviewsPerHotel defaults to 200 (the newest 200) at $0.004 per rating delivered; includeHotelRow defaults to true and is free. maxScore, minScore and sinceDate filter BEFORE billing; sinceDate also stops paging early."
+}

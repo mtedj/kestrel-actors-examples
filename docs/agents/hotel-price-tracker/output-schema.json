@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Hotel price tracker",
+  "description": "Two row types share one dataset: rate (one property and check-in date with the lowest rate across every booking source, the cheapest source and the date's rank in the window; charged) and status (one per property: how many dates were searched, delivered, filtered or failed; never charged).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Rate rows",
+      "description": "Rate rows and status rows. Charged rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, the cheapest rate and date found, how many dates were filtered or failed, and the RPC stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

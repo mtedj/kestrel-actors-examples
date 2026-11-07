@@ -1,0 +1,214 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "id"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "title"
+      },
+      "company": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "company"
+      },
+      "job_requisition_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "job requisition id"
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "location"
+      },
+      "additional_locations": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "additional locations"
+      },
+      "posted_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "posted at"
+      },
+      "posted_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "posted label"
+      },
+      "employment_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "employment type"
+      },
+      "remote_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "remote type"
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "description"
+      },
+      "job_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "job url"
+      },
+      "apply_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "apply url"
+      },
+      "details_included": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "details included"
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "source url"
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "fetched at"
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "title",
+          "company",
+          "job_requisition_id",
+          "location",
+          "posted_at",
+          "posted_label"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "title": {
+            "label": "title",
+            "format": "text"
+          },
+          "company": {
+            "label": "company",
+            "format": "text"
+          },
+          "job_requisition_id": {
+            "label": "job requisition id",
+            "format": "text"
+          },
+          "location": {
+            "label": "location",
+            "format": "text"
+          },
+          "posted_at": {
+            "label": "posted at",
+            "format": "text"
+          },
+          "posted_label": {
+            "label": "posted label",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "monitoring": {
+      "title": "Monitoring",
+      "transformation": {
+        "fields": [
+          "id",
+          "content_hash",
+          "fetched_at",
+          "source_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched at",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source url",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

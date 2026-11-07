@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Hotel reputation across six review sites",
+  "description": "Three row types share one dataset: reputation (one hotel on one review site), summary (one hotel across every site checked) and status (one hotel per site, including the sites that found nothing). Every row is free.",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Reputation rows",
+      "description": "One row per hotel per review site with the rating, review count, ranking and sub-scores, plus a cross-source summary row and a status row per check. Nothing here is charged.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record: how many hotels were checked, how many sites answered, how many were not found, and the HTTP stats of every source.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

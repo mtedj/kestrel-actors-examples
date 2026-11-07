@@ -1,0 +1,150 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "lastmod": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "changefreq": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "priority": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sitemap_url": {
+        "type": "string"
+      },
+      "fetched_at": {
+        "type": "string"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "id",
+          "url",
+          "lastmod",
+          "changefreq",
+          "priority",
+          "sitemap_url",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "lastmod": {
+            "label": "Lastmod",
+            "format": "text"
+          },
+          "changefreq": {
+            "label": "Changefreq",
+            "format": "text"
+          },
+          "priority": {
+            "label": "Priority",
+            "format": "text"
+          },
+          "sitemap_url": {
+            "label": "Sitemap Url",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "all_fields": {
+      "title": "All Fields",
+      "transformation": {
+        "fields": [
+          "type",
+          "id",
+          "url",
+          "lastmod",
+          "changefreq",
+          "priority",
+          "sitemap_url",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "lastmod": {
+            "label": "Lastmod",
+            "format": "text"
+          },
+          "changefreq": {
+            "label": "Changefreq",
+            "format": "text"
+          },
+          "priority": {
+            "label": "Priority",
+            "format": "text"
+          },
+          "sitemap_url": {
+            "label": "Sitemap Url",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

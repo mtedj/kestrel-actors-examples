@@ -1,0 +1,334 @@
+{
+  "title": "Google Hotels Prices — input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "queries": {
+      "title": "Places",
+      "type": "array",
+      "description": "Place searches as typed into Google Hotels, e.g. [\"hotels in Lisbon\"], [\"hotels near Times Square\"], [\"5-star hotels Bangkok Sukhumvit\"]. Returns up to maxHotels hotels per place. Write the place exactly and add the country when it is ambiguous (\"hotels in Barcelona Spain\"): Google never fails a place search, a misspelt place is matched to somewhere else and those hotels are billed. After the run check the status row: spread_km (large = wrong or vague place) and each hotel's lat/lng.",
+      "editor": "stringList",
+      "prefill": [
+        "hotels in Lisbon"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "What to price"
+    },
+    "hotelNames": {
+      "title": "Hotels by name",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "prefill": [],
+      "description": "Exact hotels by name, no URL needed, e.g. [\"Hyatt Regency Lisbon\", \"Altis Grand Hotel Lisbon\"] (add the city; \"Hotel Artemide, Rome\" with a comma works too). Use for \"what does each booking site charge for hotel X\" and for rate parity. A Google Maps place link works too, and names in Chinese, Japanese, Korean or Thai. A name that matches nothing costs nothing and is reported in a status row; only a hotel whose name matches yours is billed. Filters and maxHotels do not apply to named hotels."
+    },
+    "checkIn": {
+      "title": "Check-in",
+      "type": "string",
+      "description": "Check-in date: \"2026-10-03\" (YYYY-MM-DD), or relative to the day the run starts: \"30 days\", \"6 weeks\", \"tomorrow\". Use relative dates for scheduled runs (\"track prices daily\"): the input never needs editing. A past date is rejected before anything is charged.",
+      "editor": "datepicker",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)$",
+      "dateType": "absoluteOrRelative",
+      "prefill": "30 days",
+      "sectionCaption": "Stay and guests"
+    },
+    "checkOut": {
+      "title": "Check-out",
+      "type": "string",
+      "description": "Check-out date, after checkIn: \"2026-10-06\", or relative: \"32 days\". Nights = checkOut minus checkIn, so checkIn \"30 days\" + checkOut \"32 days\" = a 2-night stay starting 30 days after each run.",
+      "editor": "datepicker",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)$",
+      "dateType": "absoluteOrRelative",
+      "prefill": "32 days"
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "description": "Adults in the room, 1 to 6, e.g. 2 (default 2). Google prices ONE room for the whole party: there is no rooms input, and above 6 adults Google returns no price at all.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 6,
+      "editor": "number"
+    },
+    "childrenAges": {
+      "title": "Children (ages)",
+      "type": "array",
+      "description": "Ages of the children in the same room, e.g. [5, 9] for two children aged 5 and 9. Empty (default) = no children. The price is for one room holding the adults plus these children.",
+      "editor": "json",
+      "default": [],
+      "prefill": []
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "ISO 4217 code for every price in the run, e.g. \"EUR\". Any currency Google supports: USD, EUR, GBP, JPY, THB, SGD, AUD, AED, … Left empty the actor uses \"USD\". When the user names no currency, pass the destination's (\"EUR\" for Paris).",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$",
+      "editor": "textfield",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "maxHotels": {
+      "title": "Max hotels per place",
+      "type": "integer",
+      "description": "Hotels to return per place search and stay, 1 to 200, e.g. 50 (default 20). Filters and sortBy are applied by Google BEFORE this cap: 30 with sortBy \"lowest_price\" = the 30 cheapest matching hotels, and fewer come back only when fewer match. The main cost control: at most maxHotels × $0.004 per place and stay, plus offer rows while includeOffers is true. The largest cities end near 185 hotels.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 200,
+      "editor": "number",
+      "sectionCaption": "How many hotels, which rows"
+    },
+    "sortBy": {
+      "title": "Sort by",
+      "type": "string",
+      "editor": "select",
+      "default": "relevance",
+      "enum": [
+        "relevance",
+        "lowest_price",
+        "highest_rating",
+        "most_reviewed"
+      ],
+      "enumTitles": [
+        "Relevance (Google's default)",
+        "Lowest price",
+        "Highest rating",
+        "Most reviewed"
+      ],
+      "description": "Google Hotels' own order for place searches: \"relevance\" (default), \"lowest_price\", \"highest_rating\", \"most_reviewed\". Use with maxHotels for \"the 30 cheapest\" or \"the 40 best-rated hotels\". Applied to every stay of a sweep separately. \"lowest_price\" is Google Hotels' own cheapest-first order for the stay."
+    },
+    "includeOffers": {
+      "title": "Fetch every source's rates",
+      "type": "boolean",
+      "description": "true (DEFAULT) = also return each booking site's rate per hotel as offer rows at $0.002 each: about 18 per hotel (up to 36), so about $0.04 per hotel, not $0.004. Set false for one price per hotel, a price calendar or plain price tracking. Keep true for rate parity, OTA comparison, \"which site is cheapest\". The official site is the offer row with official: true, present only when Google lists it. With false the hotel row has the lowest nightly rate but not which site sells it.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "offerLevel": {
+      "title": "Offer rows per hotel",
+      "type": "string",
+      "description": "\"sources\" (default) = one offer row per booking site with its lowest rate: about 18 rows per hotel. \"rooms\" = every booking site × room type × rate, with room name, max guests and free-cancellation deadline: about 65 rows per hotel, up to 150 ($0.13–0.30 in offer fees, plus the $0.004 hotel row). Choose \"rooms\" only when the user asks for room types or cancellation deadlines. Ignored when includeOffers is false.",
+      "enum": [
+        "sources",
+        "rooms"
+      ],
+      "enumTitles": [
+        "One row per source (lowest rate)",
+        "Every room and rate"
+      ],
+      "default": "sources",
+      "editor": "select"
+    },
+    "includeDetails": {
+      "title": "Hotel details",
+      "type": "boolean",
+      "default": false,
+      "description": "true = each hotel row also gets address, phone, Google Maps place_id, long description, amenities by name (about 120, e.g. \"Wi-Fi (free)\", \"Indoor pool\", \"Parking (extra charge)\"), amenities_unavailable, rating_breakdown (5 to 1 stars), review_aspects (Service, Location, Breakfast… with positive and negative counts), external_ratings (Tripadvisor…) and photos. No extra charge. Default false. Also fills star class, rating and coordinates for hotels given by URL."
+    },
+    "sweepDays": {
+      "title": "Sweep check-in over N more days",
+      "type": "integer",
+      "description": "0 (default) = only the stay above. N = repeat the same length of stay for each of the next N check-in days, e.g. checkIn \"2026-11-02\", checkOut \"2026-11-04\", sweepDays 13 = 14 two-night stays with check-ins 2 to 15 Nov. Use for a price calendar or \"which day is cheapest\". Every stay is billed as its own rows, so cost × (N + 1): set includeOffers false to keep it low. Maximum 60.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 60,
+      "editor": "number",
+      "sectionCaption": "Price calendar"
+    },
+    "freeCancellation": {
+      "title": "Free cancellation only",
+      "type": "boolean",
+      "default": false,
+      "description": "true = only hotels with a free-cancellation rate for the dates. Google then quotes that refundable rate as the hotel's nightly price, and maxPrice applies to it. Default false. Place searches only.",
+      "sectionCaption": "Filters (place searches)"
+    },
+    "maxPrice": {
+      "title": "Maximum price per night",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 0,
+      "description": "Highest nightly price in `currency`, e.g. 250. 0 (default) = no maximum. Google applies it to the nightly price it displays (the `nightly` field), before maxHotels, so hotels above it are never returned or billed. Place searches only.",
+      "default": 0
+    },
+    "minRating": {
+      "title": "Guest rating",
+      "type": "string",
+      "editor": "select",
+      "default": "any",
+      "enum": [
+        "any",
+        "3.5",
+        "4.0",
+        "4.5"
+      ],
+      "enumTitles": [
+        "Any",
+        "3.5+",
+        "4.0+",
+        "4.5+"
+      ],
+      "description": "Minimum Google guest rating out of 5, as a string: \"3.5\", \"4.0\" or \"4.5\" (Google offers only these steps). Default \"any\"."
+    },
+    "hotelClass": {
+      "title": "Hotel class (stars)",
+      "type": "array",
+      "editor": "select",
+      "default": [],
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "enumTitles": [
+          "2-star",
+          "3-star",
+          "4-star",
+          "5-star"
+        ]
+      },
+      "description": "Star classes to keep, as strings: [\"4\", \"5\"] = 4-star and 5-star hotels only. Allowed: \"2\", \"3\", \"4\", \"5\". Empty (default) = any class."
+    },
+    "amenities": {
+      "title": "Amenities",
+      "type": "array",
+      "editor": "select",
+      "default": [],
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "free_wifi",
+          "free_breakfast",
+          "restaurant",
+          "bar",
+          "kid_friendly",
+          "pet_friendly",
+          "free_parking",
+          "parking",
+          "ev_charger",
+          "room_service",
+          "fitness_center",
+          "spa",
+          "pool",
+          "indoor_pool",
+          "outdoor_pool",
+          "air_conditioned",
+          "wheelchair_accessible",
+          "beach_access",
+          "all_inclusive"
+        ],
+        "enumTitles": [
+          "Free Wi-Fi",
+          "Free breakfast",
+          "Restaurant",
+          "Bar",
+          "Kid friendly",
+          "Pet friendly",
+          "Free parking",
+          "Parking",
+          "EV charger",
+          "Room service",
+          "Fitness center",
+          "Spa",
+          "Pool",
+          "Indoor pool",
+          "Outdoor pool",
+          "Air conditioned",
+          "Wheelchair accessible",
+          "Beach access",
+          "All inclusive"
+        ]
+      },
+      "description": "Only hotels that have ALL of these, e.g. [\"pool\", \"free_breakfast\"]. Google Hotels' own filters: free_wifi, free_breakfast, restaurant, bar, kid_friendly, pet_friendly, free_parking, parking, ev_charger, room_service, fitness_center, spa, pool (any pool), indoor_pool, outdoor_pool, air_conditioned, wheelchair_accessible, beach_access, all_inclusive. Empty (default) = no filter. To LIST each hotel's amenities use includeDetails."
+    },
+    "country": {
+      "title": "Market",
+      "type": "string",
+      "description": "Google market (gl): any 2-letter country code, e.g. \"gb\", \"pt\", \"jp\". Default \"us\". It is the country of the person searching, NOT the destination: keep \"us\" unless the user wants prices as seen from a country. It changes which booking sites are listed (Klook, Traveloka, Wego in Asian markets).",
+      "default": "us",
+      "editor": "textfield",
+      "sectionCaption": "Market and language"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Google language (hl), e.g. \"en\", \"ja\", \"zh-CN\", \"es\", \"de\". Default \"en\". Sets the language of hotel names (where Google has a translation), room names, class labels and deal notes. Queries and hotelNames may be written in any language.",
+      "default": "en",
+      "editor": "textfield"
+    },
+    "hotels": {
+      "title": "Specific hotels",
+      "type": "array",
+      "description": "Exact hotels by Google Hotels URL (https://www.google.com/travel/hotels/entity/ChkI…) or entity token, e.g. the `entity_id` or `google_url` of rows from an earlier run. Use to price the SAME set of hotels every day: run a place search once, then pass its entity_id values here. Filters and maxHotels do not apply. Add includeDetails for star class, rating and coordinates.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "prefill": [],
+      "sectionCaption": "More ways to pick hotels and cap cost"
+    },
+    "maxOffersPerHotel": {
+      "title": "Max offer rows per hotel",
+      "type": "integer",
+      "description": "0 (default) = every offer row. N = only the N cheapest offer rows per hotel, e.g. 5: a hard cost cap, at most $0.004 + N × $0.002 per hotel. The official-site row is kept only if it is among the N cheapest, so leave 0 for rate parity.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 500,
+      "editor": "number"
+    },
+    "minPrice": {
+      "title": "Minimum price per night",
+      "type": "integer",
+      "editor": "number",
+      "minimum": 0,
+      "description": "Lowest nightly price in `currency`, e.g. 80. 0 (default) = no minimum. Applied by Google before maxHotels. Place searches only.",
+      "default": 0
+    },
+    "specialOffers": {
+      "title": "Special offers only",
+      "type": "boolean",
+      "default": false,
+      "description": "true = only hotels Google marks as a deal for the dates; `deal` carries the note (\"23% less than usual\") and `deal_percent` the number. Default false. Place searches only."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Google accepts Apify datacenter proxies for these calls; keep the default. Residential is unnecessary.",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing"
+    },
+    "sessions": {
+      "title": "Parallel proxy sessions",
+      "type": "integer",
+      "description": "Concurrent egress IPs; each is paced at perIp requests per second.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Pace per proxy session. 0.5 is safe; raise carefully.",
+      "default": 0.5,
+      "minimum": 0.1,
+      "maximum": 2,
+      "editor": "number"
+    }
+  },
+  "required": [
+    "checkIn",
+    "checkOut"
+  ],
+  "description": "Google Hotels prices. Minimal input: {\"queries\": [\"hotels in Lisbon\"], \"checkIn\": \"2026-10-03\", \"checkOut\": \"2026-10-06\"}. One of queries / hotelNames / hotels is required. includeOffers defaults to true (every booking site's rate, about 18 extra rows per hotel): set it false for one price per hotel."
+}

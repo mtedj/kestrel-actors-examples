@@ -1,0 +1,13 @@
+{
+  "queries": [
+    "hotels in Lisbon"
+  ],
+  "checkIn": "30 days",
+  "checkOut": "32 days",
+  "adults": 2,
+  "currency": "USD",
+  "maxHotels": 3,
+  "includeOffers": true,
+  "offerLevel": "sources",
+  "maxOffersPerHotel": 3
+}

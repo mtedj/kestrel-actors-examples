@@ -1,0 +1,7 @@
+{
+  "tickers": [
+    "AAPL"
+  ],
+  "maxRowsPerTicker": 3,
+  "maxRequests": 3
+}

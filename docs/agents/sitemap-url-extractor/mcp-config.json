@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-sitemap-url-extractor": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/sitemap-url-extractor"
+    }
+  }
+}

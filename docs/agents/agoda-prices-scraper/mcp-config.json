@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-agoda-prices-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/agoda-prices-scraper"
+    }
+  }
+}

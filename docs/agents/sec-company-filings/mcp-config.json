@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-sec-company-filings": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/sec-company-filings"
+    }
+  }
+}

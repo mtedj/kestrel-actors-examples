@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/tripadvisor-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.tripadvisor.com/Hotel_Review-g189158-d4509998-Reviews-Memmo_Alfama_Hotel-Lisbon_Lisbon_District_Central_Portugal.html"
+    ],
+    "languages": [
+      "en"
+    ],
+    "maxReviewsPerHotel": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

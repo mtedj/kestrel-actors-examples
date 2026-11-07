@@ -1,0 +1,135 @@
+{
+  "title": "Google Ads Transparency input",
+  "schemaVersion": 1,
+  "type": "object",
+  "description": "Minimal input: {\"domains\":[\"shopify.com\"],\"maxResults\":3}. $3 per 1000 delivered ads. includeAdText defaults true and includes approximate English OCR at no extra charge. Provide domains or advertiserIds.",
+  "properties": {
+    "domains": {
+      "title": "Domains",
+      "type": "array",
+      "description": "Bare domains, e.g. [\"shopify.com\"]. At least one domain or advertiser ID is required; 20 sources total. Domain results can include resellers or other advertisers mentioning the domain. Ownership is NOT inferred. Use advertiserIds for an exact legal advertiser. No customer login needed.",
+      "default": [],
+      "sectionCaption": "Sources and output limits",
+      "prefill": [
+        "shopify.com"
+      ],
+      "editor": "stringList"
+    },
+    "advertiserIds": {
+      "title": "AdvertiserIds",
+      "type": "array",
+      "description": "Exact advertiser accounts, e.g. [\"AR01625195283841286145\"], from ad_url or advertiser_id in earlier results. Empty = use domains. Provide IDs instead of domains when you need only a specific legal advertiser; do not combine both for that request.",
+      "default": [],
+      "editor": "stringList"
+    },
+    "maxAdsPerSource": {
+      "title": "MaxAdsPerSource",
+      "type": "integer",
+      "description": "Hard cap per domain or advertiser, even when maxResults is higher: default 20; range 1-1000. For 50 ads from one source, set this AND maxResults to 50. Counts delivered matches AFTER date/format filters, exclusions and monitoring. maxPagesPerSource bounds the scan; fewer matches are possible. 20 delivered ads cost $0.06.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "editor": "number",
+      "prefill": 3
+    },
+    "maxResults": {
+      "title": "MaxResults",
+      "type": "integer",
+      "description": "For N ads from one source, set BOTH maxResults and maxAdsPerSource to N; the per-source default 20 still applies. Total paid ad cap across sources after deduplication/filters; default 100. Maximum charge = maxResults × $0.003. Set Apify run option maxTotalChargeUsd for a dollar ceiling (not input JSON). One free status row per visited source; skipped sources have none. Status rows do not count toward caps.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 1000,
+      "editor": "number",
+      "prefill": 3
+    },
+    "includeAdText": {
+      "title": "IncludeAdText",
+      "type": "boolean",
+      "description": "true (DEFAULT) attempts English OCR or renderer text from up to 3 creative previews per ad; included in $0.003/ad. OCR is approximate, not a verified transcript. false = previews and metadata only, same price and faster. Check ad_text, text_method and text_status; missing text is null.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "region": {
+      "title": "Region",
+      "type": "string",
+      "description": "\"ALL\" default means all regions. Country where ads were shown, not advertiser headquarters. Use \"US\", \"GB\", \"DE\", etc.; choose ALL if no region was requested. Source-side filter. Reported first_shown/last_shown are source search dates, not a spend or performance measure.",
+      "default": "ALL",
+      "sectionCaption": "Region and free filters",
+      "enum": [
+        "ALL",
+        "US",
+        "GB",
+        "CA",
+        "AU",
+        "DE",
+        "FR",
+        "ES",
+        "IT",
+        "NL",
+        "IN",
+        "BR",
+        "AE",
+        "SG"
+      ],
+      "editor": "select"
+    },
+    "adFormat": {
+      "title": "AdFormat",
+      "type": "string",
+      "description": "\"all\" default. \"text\", \"image\" or \"video\" filters Google’s format classification before caps/billing. A text ad may have only an image preview and require OCR. Does not filter by Search/YouTube platform; platform targeting is not a supported input.",
+      "default": "all",
+      "enum": [
+        "all",
+        "text",
+        "image",
+        "video"
+      ],
+      "editor": "select"
+    },
+    "lastShownAfter": {
+      "title": "LastShownAfter",
+      "type": "string",
+      "description": "Empty = no lower bound. \"2026-10-01\" includes ads last shown on or after that UTC date, filtering returned search metadata before billing. This is NOT first-launch date or proof an ad is still running. Scan limits can leave additional matching ads unvisited.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "lastShownBefore": {
+      "title": "LastShownBefore",
+      "type": "string",
+      "description": "Empty = no upper bound. \"2026-10-16\" includes ads last shown on or before that UTC date. Inclusive and must be on/after lastShownAfter. No charge for filtered records. This is a source last-shown date, not a complete historical archive.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "onlyNewOrChanged": {
+      "title": "OnlyNewOrChanged",
+      "type": "boolean",
+      "description": "false default. true requires monitorKey: first run delivers baseline ads; later runs deliver unseen or changed creative-preview records. Unchanged rows are free. Serving-date changes alone do not count. Never reports stopped ads. Set an Apify schedule separately and avoid overlapping runs for the same key.",
+      "default": false,
+      "sectionCaption": "Repeat runs and scan budget",
+      "editor": "checkbox"
+    },
+    "monitorKey": {
+      "title": "MonitorKey",
+      "type": "string",
+      "description": "Empty by default. With onlyNewOrChanged=true, use a stable key such as \"shopify-weekly\" (letters/digits/_/-; max 60). Stores up to 50000 paid creative fingerprints in your named storage. Same key requires identical sources/filters. Use a new key for a fresh baseline; do not run the same key concurrently.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "excludeCreativeIds": {
+      "title": "ExcludeCreativeIds",
+      "type": "array",
+      "description": "[] default. Skip creative_id values or advertiser_id:creative_id pairs from past output before billing, e.g. [\"CR02097857130550788097\"]. Maximum 10000. Useful for externally managed state. Distinct advertiser/creative pairs are deduplicated across the entire run.",
+      "default": [],
+      "editor": "stringList"
+    },
+    "maxPagesPerSource": {
+      "title": "MaxPagesPerSource",
+      "type": "integer",
+      "description": "5 by default; 1-20 search pages, up to 100 source records per page. Scanning stops at this bound even if filters/monitoring deliver fewer ads than requested. No separate page fee. Raise for deeper scans; partial coverage is explicit in free status rows. This does not promise exhaustive historical coverage.",
+      "default": 5,
+      "minimum": 1,
+      "maximum": 20,
+      "editor": "number"
+    }
+  }
+}

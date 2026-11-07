@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Rating",
+      "eventDescription": "One guest rating of a Kurzurlaub.de hotel: 1-6 score, the category scores the guest gave, title, comment when there is one, reviewer first name and date (row keys review_id, hotel_id, hotel_name, url, score, category_scores, title, text, reviewer, review_date): $4 per 1,000 ratings. Not charged: ratings removed by maxScore, minScore or sinceDate, duplicates, hotels with no ratings, unknown ids, failed hotels, hotel rows, status rows. No start fee; proxy and compute are included in the event price. Kurzurlaub lists 10-20 ratings per page, newest first; maxReviewsPerHotel caps the rows per hotel and sinceDate stops paging early. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:04.832Z"
+}

@@ -1,0 +1,409 @@
+{
+  "actorSpecification": 1,
+  "title": "Amazon products",
+  "description": "Two row types share one dataset: product (one product's details from its public page, charged) and status (per ASIN or URL given, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "product",
+          "status"
+        ],
+        "description": "Row type: product or status."
+      },
+      "asin": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Amazon's product id."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace domain suffix, e.g. com, co.uk, de."
+      },
+      "marketplace": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace country name."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Canonical product URL on that marketplace."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product title as printed."
+      },
+      "brand": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Brand from the byline ('Visit the … Store' and 'Brand:' prefixes removed)."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Buybox price as a number. Null when the page shows no buying option (unavailable products, or a marketplace that hides the offer from the caller's location)."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The buybox price exactly as printed, e.g. '$54.99'."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency read from the printed price, falling back to the marketplace's currency. Amazon prices in the caller's location's currency, so this can differ from the marketplace."
+      },
+      "list_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The struck-through list price when Amazon shows one."
+      },
+      "list_price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "List price exactly as printed."
+      },
+      "availability": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The availability line: 'In Stock', 'Only 3 left in stock', 'Currently unavailable.' and so on, in the marketplace's language."
+      },
+      "in_stock": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true/false from the availability wording, else true when a buybox price exists, else null (unknown)."
+      },
+      "prime": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the Prime badge is shown on the offer."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Overall star rating (1-5)."
+      },
+      "ratings_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many ratings the product has in total."
+      },
+      "image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Main image URL (highest resolution the page offers)."
+      },
+      "images": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Every gallery image URL, main image first."
+      },
+      "features": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The bullet points under the title."
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The product description block as plain text (up to 2,000 characters), null when Amazon renders none."
+      },
+      "breadcrumbs": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Category path from the breadcrumb bar, top level first. Null on pages without a breadcrumb bar (most amazon.com pages)."
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The last breadcrumb, i.e. the product's own category."
+      },
+      "details": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "The Product information / Technical details / Product overview tables as {label: value}: dimensions, weight, manufacturer, model number, colour, date first available and whatever else the page lists."
+      },
+      "bsr": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Best Sellers Rank entries [{rank, category}] when the page renders them. Amazon serves the rank to some sessions only, so this is null on many pages."
+      },
+      "bsr_top": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The first Best Sellers Rank number (the top-level category), null when not shown."
+      },
+      "date_first_available": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "'Date First Available' from the details table, as printed."
+      },
+      "sold_by": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The seller line from the buybox, e.g. 'Amazon.com' or 'Amazon Resale and Fulfilled by Amazon'."
+      },
+      "variations_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many variations (colours, sizes, models) the listing carries, null when the page has no variation picker."
+      },
+      "5_star_pct": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Share of ratings that are 5 stars, when the histogram is shown."
+      },
+      "4_star_pct": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Share of 4-star ratings."
+      },
+      "3_star_pct": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Share of 3-star ratings."
+      },
+      "2_star_pct": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Share of 2-star ratings."
+      },
+      "1_star_pct": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Share of 1-star ratings."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, filtered, not_found, blocked, limit or error."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the ASIN or URL this job was given."
+      },
+      "products": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when the product row was delivered, else 0."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when inStockOnly or maxPrice dropped the product, never charged."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when another input already covered this product."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the product was not delivered, null when it was."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "asin",
+          "marketplace",
+          "title",
+          "brand",
+          "price",
+          "currency",
+          "availability",
+          "in_stock",
+          "rating",
+          "ratings_count",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "products": {
+      "title": "Products",
+      "transformation": {
+        "fields": [
+          "asin",
+          "marketplace",
+          "title",
+          "brand",
+          "price",
+          "list_price",
+          "currency",
+          "availability",
+          "in_stock",
+          "prime",
+          "rating",
+          "ratings_count",
+          "category",
+          "bsr_top",
+          "sold_by",
+          "variations_count",
+          "image",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "prices": {
+      "title": "Prices",
+      "transformation": {
+        "fields": [
+          "asin",
+          "marketplace",
+          "title",
+          "price",
+          "price_display",
+          "list_price",
+          "currency",
+          "in_stock",
+          "availability",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "content": {
+      "title": "Content",
+      "transformation": {
+        "fields": [
+          "asin",
+          "title",
+          "features",
+          "description",
+          "images",
+          "breadcrumbs",
+          "details",
+          "date_first_available"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "asin",
+          "domain",
+          "status",
+          "products",
+          "filtered",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

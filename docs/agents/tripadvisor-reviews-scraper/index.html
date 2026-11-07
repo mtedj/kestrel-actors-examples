@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TripAdvisor Reviews Scraper &amp; API: Hotel Reviews, Guest Reviews | kestrel</title><meta name="description" content="TripAdvisor hotel reviews and TripAdvisor ratings by URL, id or name. One row per review: bubbles, title, text, six sub-ratings, stay date, trip type, reviewer, photos, management response. Free hotel row: rating, review count, city ranking. Filters: negative reviews, new reviews only. 24 languages."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/tripadvisor-reviews-scraper</p><h1>TripAdvisor Reviews Scraper &amp; API: Hotel Reviews, Guest Reviews</h1><p class="intro">TripAdvisor hotel reviews and TripAdvisor ratings by URL, id or name. One row per review: bubbles, title, text, six sub-ratings, stay date, trip type, reviewer, photos, management response. Free hotel row: rating, review count, city ranking. Filters: negative reviews, new reviews only. 24 languages.</p>
+<p><a class="button" href="https://apify.com/kestrel/tripadvisor-reviews-scraper">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tripadvisor-reviews-scraper</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-tripadvisor-reviews-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tripadvisor-reviews-scraper&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.2.5; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/tripadvisor-reviews-scraper&quot;,
+  &quot;input&quot;: {
+    &quot;startUrls&quot;: [
+      &quot;https://www.tripadvisor.com/Hotel_Review-g189158-d4509998-Reviews-Memmo_Alfama_Hotel-Lisbon_Lisbon_District_Central_Portugal.html&quot;
+    ],
+    &quot;languages&quot;: [
+      &quot;en&quot;
+    ],
+    &quot;maxReviewsPerHotel&quot;: 3
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>review</code></td><td>$0.005</td><td>One TripAdvisor hotel review: 1-5 bubbles, six sub-ratings, management response (row keys review_id, rating, title, text, sub_ratings, language, original_language, stay_date, trip_type, reviewer_name, photos, helpful_votes, response): $5 per 1,000 reviews, once per language site; maxReviewsPerHotel 100 (default) caps a hotel at $0.50 per language. Not charged: the hotel row (rating, review count, city ranking, address, amenities), reviews removed by maxRating, tripTypes, sinceDate, requireText or includeTranslated, hotels with no reviews, unknown ids, duplicate targets, failed pages and status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/tripadvisor-reviews-scraper/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.2.5. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

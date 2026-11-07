@@ -1,0 +1,656 @@
+{
+  "actorSpecification": 1,
+  "title": "Google Maps places",
+  "description": "Two row types share one dataset: place (one Google Maps place, charged) and status (one per search, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "Row type: place (charged) or status (one per search, free).",
+        "enum": [
+          "place",
+          "status"
+        ]
+      },
+      "search_term": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The search term that returned this place (null for a pasted place)."
+      },
+      "search_location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The location the term was searched in, as you typed it."
+      },
+      "rank": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Position in Google Maps' result list for that search, 1 = first."
+      },
+      "place_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google place id (ChIJ…), stable across time and the key used for de-duplication and only-new monitoring."
+      },
+      "cid": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google customer id — the number in maps.google.com/?cid=… links."
+      },
+      "feature_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Maps feature id (0x…:0x…)."
+      },
+      "google_maps_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Link that opens this place on Google Maps."
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Business name as listed."
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Primary Google category, in the requested language."
+      },
+      "categories": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Every Google category of the place."
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full address on one line."
+      },
+      "street": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street and number."
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City or town."
+      },
+      "state": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "State, province or region when Google gives one."
+      },
+      "postal_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Postal or ZIP code."
+      },
+      "country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Two-letter country code."
+      },
+      "neighborhood": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Neighbourhood or district when Google gives one."
+      },
+      "plus_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Global plus code (Open Location Code) of the coordinates."
+      },
+      "lat": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Latitude."
+      },
+      "lng": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Longitude."
+      },
+      "distance_km_from_center": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Kilometres from the centre of the searched location or area."
+      },
+      "phone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Phone number in local format."
+      },
+      "phone_international": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Phone number in international format (+1 512-…)."
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Website listed on Google Maps."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Website host without www."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Average star rating, 1.0–5.0. Null when the place has no reviews."
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of Google reviews (0 when there are none)."
+      },
+      "reviews_per_star": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Reviews by star: {\"1\": n, …, \"5\": n}."
+      },
+      "price_level": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Price level when Google shows one for the place."
+      },
+      "is_closed_permanently": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when Google marks the place permanently closed."
+      },
+      "is_closed_temporarily": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when Google marks the place temporarily closed."
+      },
+      "is_claimed": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the listing has an owner, false when Google offers \"Claim this business\", null when unknown."
+      },
+      "opening_hours": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Opening hours per day: {\"monday\": \"8 AM–5 PM\", …} in the requested language."
+      },
+      "open_now": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the place was open when the row was fetched."
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's short description of the place."
+      },
+      "attributes": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Attributes Google lists as present: accessibility, amenities, service options …"
+      },
+      "menu_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Menu link when present."
+      },
+      "booking_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reservation or appointment link when present."
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Cover photo."
+      },
+      "photo_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of photos Google reports (a lower bound: Google prints \"870+\")."
+      },
+      "timezone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "IANA timezone of the place."
+      },
+      "emails": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Enrichment: emails read off the place's own website, each {email, type: named|role, source_url}. Addresses on somebody else's domain that are not a mailto link (the web agency, a booking widget) are left out."
+      },
+      "email_primary": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: the best address — on the website's own domain and from a mailto link first."
+      },
+      "phones_from_site": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Enrichment: phone numbers from tel: links on the website."
+      },
+      "contact_page_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: the contact page that was read."
+      },
+      "facebook": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: Facebook page."
+      },
+      "instagram": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: Instagram profile."
+      },
+      "linkedin": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: LinkedIn page."
+      },
+      "x": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: X / Twitter profile."
+      },
+      "youtube": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: YouTube channel."
+      },
+      "tiktok": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: TikTok profile."
+      },
+      "whatsapp": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: WhatsApp number from a wa.me or click-to-chat link."
+      },
+      "enrichment_status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Enrichment: found (charged) | none_found | no_website | social_only | blocked_by_robots | site_unreachable | spending_limit_reached — only \"found\" is charged."
+      },
+      "has_website": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Lead helper: the place lists a website."
+      },
+      "has_email": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Lead helper: enrichment found an email (null when enrichment is off)."
+      },
+      "lead_flags": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Lead helper: any of no_website, low_rating (< 4.0), few_reviews (< 10), unclaimed."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the pasted URL or id this row accounts for."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok | no_results | unknown_location | error."
+      },
+      "requested": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: places asked for."
+      },
+      "found": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: distinct places Google returned."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: places your filters removed (free)."
+      },
+      "filtered_by": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Status rows: how many each filter removed."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: places already delivered by another search in this run (free)."
+      },
+      "already_seen": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: places an earlier monitored run delivered (free)."
+      },
+      "delivered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: place rows delivered for this search."
+      },
+      "charged": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: place events charged for this search — always equal to delivered."
+      },
+      "contacts_found": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: contact-found events charged for this search."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: result pages read."
+      },
+      "grid_cells": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: grid cells searched when full coverage is on."
+      },
+      "coverage_note": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: set when Google's per-query limit was reached and full coverage would find more."
+      },
+      "note": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: anything the search had to do differently, for example searching around a looked-up town centre."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the search failed, null when it did not. A throttled or blocked page lands here, never as an empty result."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "name",
+          "category",
+          "phone",
+          "website",
+          "rating",
+          "review_count",
+          "city",
+          "address",
+          "email_primary",
+          "lead_flags",
+          "google_maps_url",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "leads": {
+      "title": "Leads & contacts",
+      "transformation": {
+        "fields": [
+          "name",
+          "category",
+          "phone_international",
+          "website",
+          "email_primary",
+          "emails",
+          "facebook",
+          "instagram",
+          "linkedin",
+          "whatsapp",
+          "enrichment_status",
+          "rating",
+          "review_count",
+          "lead_flags",
+          "city",
+          "google_maps_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reputation": {
+      "title": "Reputation",
+      "transformation": {
+        "fields": [
+          "name",
+          "category",
+          "rating",
+          "review_count",
+          "reviews_per_star",
+          "is_claimed",
+          "is_closed_permanently",
+          "is_closed_temporarily",
+          "lead_flags",
+          "city",
+          "google_maps_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "location": {
+      "title": "Location",
+      "transformation": {
+        "fields": [
+          "name",
+          "address",
+          "street",
+          "city",
+          "state",
+          "postal_code",
+          "country_code",
+          "neighborhood",
+          "plus_code",
+          "lat",
+          "lng",
+          "distance_km_from_center",
+          "timezone",
+          "place_id",
+          "cid"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "search_term",
+          "search_location",
+          "target",
+          "status",
+          "requested",
+          "found",
+          "filtered",
+          "filtered_by",
+          "duplicates",
+          "already_seen",
+          "delivered",
+          "charged",
+          "contacts_found",
+          "pages",
+          "grid_cells",
+          "coverage_note",
+          "note",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

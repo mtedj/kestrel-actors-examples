@@ -1,0 +1,395 @@
+{
+  "actorSpecification": 1,
+  "title": "Google Play reviews",
+  "description": "Three row types share one dataset: review (one user review, charged), app (context for an app in a language and country, free) and status (per app, language and country, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "app",
+          "status"
+        ],
+        "description": "Row type: review, app or status."
+      },
+      "app_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Android package name, e.g. com.whatsapp."
+      },
+      "app_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App name in that language."
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Play language the row was read in (hl), e.g. en, pt-BR."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Play country the row was read in (gl), two-letter code."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's id for the review."
+      },
+      "rating": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Stars the reviewer gave, 1-5."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review text; null for a star-only review."
+      },
+      "author": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's display name."
+      },
+      "author_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's id for the reviewer."
+      },
+      "thumbs_up": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many users marked the review helpful."
+      },
+      "app_version": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App version the review was written against."
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the review was posted, ISO 8601 UTC."
+      },
+      "review_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review date as YYYY-MM-DD."
+      },
+      "reply_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The developer's public reply, when there is one."
+      },
+      "reply_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the developer replied, ISO 8601 UTC."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Play page deep-linked to the review (reviewId)."
+      },
+      "developer": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Developer name (app rows)."
+      },
+      "developer_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Developer website (app rows)."
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Play category, e.g. COMMUNICATION (app rows)."
+      },
+      "content_rating": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Content rating, e.g. Everyone (app rows)."
+      },
+      "rating_avg": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Average rating on Google Play (app rows)."
+      },
+      "rating_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many ratings the app has (app rows)."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "List price, 0 for free apps (app rows)."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency of the price (app rows)."
+      },
+      "icon": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "App icon URL (app rows)."
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Short description (app rows)."
+      },
+      "app_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Play page URL (app rows)."
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews read for this app and locale before filtering (app rows)."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok, no_reviews, not_found or error (status rows)."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The package name you gave (status rows)."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review rows delivered for this job (status rows)."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by minRating, maxRating, sinceDate or requireText — never billed (status rows)."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review calls made for this job (status rows)."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews already delivered under another locale — never billed twice (status rows)."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why the job failed, when it did (status rows)."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the row was read, ISO 8601 UTC."
+      }
+    },
+    "required": [
+      "type"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "app_name",
+          "language",
+          "country",
+          "rating",
+          "text",
+          "app_version",
+          "review_day",
+          "reply_text",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "review_id",
+          "app_id",
+          "app_name",
+          "language",
+          "country",
+          "rating",
+          "text",
+          "author",
+          "thumbs_up",
+          "app_version",
+          "review_date",
+          "reply_text",
+          "reply_date",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "app_name",
+          "language",
+          "country",
+          "rating",
+          "text",
+          "thumbs_up",
+          "app_version",
+          "review_day",
+          "reply_text"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "apps": {
+      "title": "Apps",
+      "transformation": {
+        "fields": [
+          "app_id",
+          "app_name",
+          "language",
+          "country",
+          "developer",
+          "category",
+          "content_rating",
+          "rating_avg",
+          "rating_count",
+          "price",
+          "currency",
+          "reviews_fetched",
+          "app_url"
+        ],
+        "filter": {
+          "type": "app"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "app_id",
+          "language",
+          "country",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "duplicates",
+          "error"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

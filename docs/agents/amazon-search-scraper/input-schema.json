@@ -1,0 +1,122 @@
+{
+  "title": "Amazon Search & Best Sellers",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "queries": {
+      "title": "Search keywords",
+      "type": "array",
+      "description": "Search keywords exactly as a shopper types them, e.g. [\"wireless earbuds\", \"cast iron skillet\"]. Each keyword is searched over `pages` result pages (about 20 organic products plus sponsored ones per page, $0.004 per row). Use for \"search results for X\", \"where does ASIN Y rank for X\" (read `position`; organic rank with skipSponsored), \"prices for X\", competitor listings. A keyword with no results costs nothing. Either queries or categories is required.",
+      "editor": "stringList",
+      "prefill": [
+        "wireless earbuds"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "What to search"
+    },
+    "domain": {
+      "title": "Marketplace",
+      "type": "string",
+      "description": "Marketplace, e.g. \"de\" for amazon.de. Default \"com\". One of: com, co.uk, de, fr, it, es, ca, com.au, co.jp, in, com.mx, com.br, nl, se, pl, sa, ae, sg, com.tr, com.be. Rank and price differ per marketplace, so run each marketplace as its own run; prices come in the marketplace's currency.",
+      "editor": "textfield",
+      "default": "com"
+    },
+    "department": {
+      "title": "Search department",
+      "type": "string",
+      "description": "Department to search inside, Amazon's own slug as in the search URL's i= parameter, e.g. \"electronics\", \"kitchen\", \"books\". Empty (default) = all departments. Use when the user names a department (\"in Electronics\").",
+      "editor": "textfield",
+      "default": ""
+    },
+    "pages": {
+      "title": "Pages per keyword or category",
+      "type": "integer",
+      "description": "Result pages per keyword or category, 1 to 20, e.g. 3 (default 1). A search page is about 20 organic products plus sponsored ones; a chart page 30. Walking stops early when a page adds nothing new. Cost = pages × rows per page × $0.004: 3 keywords × 2 pages is a little over 100 rows.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 20,
+      "default": 1,
+      "sectionCaption": "How many rows, which rows (filters run before billing)"
+    },
+    "maxResultsPerQuery": {
+      "title": "Max products per keyword or category",
+      "type": "integer",
+      "description": "0 (default) = everything the pages returned. N = only the first N per keyword or category in Amazon's order, e.g. 10 for \"the top 10 results for X\". Applied after skipSponsored and minRating. Rows beyond N are never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 2000,
+      "default": 0
+    },
+    "skipSponsored": {
+      "title": "Skip sponsored results",
+      "type": "boolean",
+      "description": "true = drop sponsored (ad) placements before billing and keep organic results only: the honest keyword rank. Default false (sponsored rows are delivered with sponsored: true, in the slot a shopper sees). Use for \"organic rank\", \"where do we rank excluding ads\".",
+      "editor": "checkbox",
+      "default": false
+    },
+    "minRating": {
+      "title": "Minimum rating",
+      "type": "number",
+      "description": "Keep only products rated at or above this, e.g. 4 or 4.5. 0 (default) = every product. Products without a rating are dropped too. Filtered rows are never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "categories": {
+      "title": "Category charts",
+      "type": "array",
+      "description": "Category slugs to pull a chart for instead of (or as well as) keywords, e.g. [\"electronics\", \"kitchen\", \"books\"]: the segment after /gp/bestsellers/ in a Best Sellers URL. A chart page renders 30 of its 50 entries; for every rank of the Top 100 use kestrel/amazon-best-sellers-scraper. Empty (default) = no charts.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Category charts (optional)"
+    },
+    "chart": {
+      "title": "Chart type",
+      "type": "string",
+      "description": "\"bestsellers\" (default) or \"new_releases\": which chart to pull for each category above. Ignored for keyword searches. Movers & Shakers is not available (Amazon renders it client-side; the page carries no products).",
+      "enum": [
+        "bestsellers",
+        "new_releases"
+      ],
+      "enumTitles": [
+        "Best Sellers",
+        "New Releases"
+      ],
+      "default": "bestsellers",
+      "editor": "select"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (one egress IP each), 1 to 16, e.g. 4 (default 4). More is faster for long keyword lists; each session is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2 (default 0.5). Amazon tolerates about 0.5/s per IP; faster causes captchas, not speed. Leave the default.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true} (datacentre). Required: Amazon captchas unrotated datacentre traffic and refuses search pages from whole datacentre ranges for minutes at a time; the run rotates the IP on a captcha or 503 and after two refusals in a row moves to residential proxies by itself. Pass {\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]} for the most reliable runs.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Amazon search results. Minimal input: {\"queries\": [\"wireless earbuds\"]}: about 20 organic products plus sponsored ones per page at $0.004 each. pages (default 1) × keywords decides the bill; skipSponsored, minRating and maxResultsPerQuery drop rows before billing. Charts: {\"categories\": [\"electronics\"], \"chart\": \"bestsellers\"} gives 30 of the 50 entries per page; for the full Top 100 use kestrel/amazon-best-sellers-scraper."
+}

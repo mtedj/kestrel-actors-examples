@@ -1,0 +1,155 @@
+{
+  "title": "TripAdvisor Restaurant Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "restaurantNames": {
+      "title": "Restaurant names",
+      "type": "array",
+      "description": "Restaurant or attraction names, ideally with the city, e.g. [\"Cervejaria Ramiro, Lisbon\", \"Oceanário de Lisboa\"]. Use for \"reviews of restaurant X\". Resolved through TripAdvisor's own typeahead; a hit must share at least half of your words, so a name TripAdvisor does not know ends as a free error row, never as a random bistro — check location_name and location_type in the location and status rows. Empty (default) = none; one of restaurantNames, startUrls or locationIds is required.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which restaurants or attractions",
+      "sectionDescription": "Restaurant or attraction names, TripAdvisor URLs and/or location ids (the d<number> in a URL). At least one; a URL, its id and its name are read and billed once."
+    },
+    "startUrls": {
+      "title": "TripAdvisor restaurant or attraction URLs",
+      "type": "array",
+      "description": "TripAdvisor restaurant or attraction pages on any country site, e.g. [\"https://www.tripadvisor.com/Restaurant_Review-g189158-d2703366-Reviews-Cervejaria_Ramiro-Lisbon.html\"] or an Attraction_Review URL; ShowUserReviews deep links work too. Only the numeric d<id> matters. Hotel URLs are refused before anything is charged (use kestrel/tripadvisor-reviews-scraper). Empty (default) = none.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.tripadvisor.com/Restaurant_Review-g189158-d2703366-Reviews-Cervejaria_Ramiro-Lisbon_Lisbon_District_Central_Portugal.html"
+      ],
+      "default": [],
+      "uniqueItems": true
+    },
+    "locationIds": {
+      "title": "TripAdvisor location ids",
+      "type": "array",
+      "description": "TripAdvisor location ids, the number after \"d\" in a restaurant or attraction URL, e.g. [\"2703366\", \"d190147\"] — what an earlier run's location_id gives you. The fastest path (no lookup) and the way to re-read the same places on a schedule; TripAdvisor resolves whether the id is a restaurant or an attraction. A hotel id ends as status wrong_type and an unknown id as not_found, both free. Empty (default) = none.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "locationType": {
+      "title": "Location type",
+      "type": "string",
+      "description": "\"any\" (default) = restaurants and attractions. \"restaurant\" or \"attraction\" = only that family: a target of the other family is reported as status wrong_type after one page and never charged. Hotels are wrong_type whatever you choose. Use \"restaurant\" when the user says \"restaurants only\".",
+      "editor": "select",
+      "enum": [
+        "any",
+        "restaurant",
+        "attraction"
+      ],
+      "enumTitles": [
+        "Any (restaurants and attractions)",
+        "Restaurants only",
+        "Attractions only"
+      ],
+      "default": "any"
+    },
+    "maxReviewsPerLocation": {
+      "title": "Max reviews per location and language",
+      "type": "integer",
+      "description": "The main cost control: the newest N reviews per location and language are read, e.g. 50 (default 100, maximum 20000), at most N × $0.005 ($0.50 at the default). 0 = every review the site lists (15 per page on restaurants, 10 on attractions; busy places run into the thousands). Filters apply AFTER this cap: 100 with maxRating 2 delivers only the low-rated reviews among the newest 100, so pair a filter with 0 or with sinceDate when the user wants all of them.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 100,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per location and language, and which ones. TripAdvisor lists reviews newest first; every filter here runs before billing, after the maxReviewsPerLocation cap."
+    },
+    "sinceDate": {
+      "title": "Only reviews published on or after",
+      "type": "string",
+      "description": "Only reviews published on or after this date: \"2026-06-01\", or relative so a schedule never goes stale: \"30 days\", \"2 weeks\", \"6 months\". Reviews come newest first, so reading stops once a whole page is older — a daily run with \"2 days\" reads one or two pages per restaurant and bills only the new reviews. Empty (default) = no date limit. Use for \"new reviews only\" and review monitoring.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this rating",
+      "type": "number",
+      "description": "0 (default) = every rating. 1-5 = keep only reviews with that many bubbles or fewer, e.g. 2 for a complaints feed across a restaurant group (\"negative reviews only\"), 3 to include the middling ones. Filtered reviews are never billed; the pages are still read. Applied to the reviews read under maxReviewsPerLocation, so use 0 or a sinceDate for a complete list of negative reviews.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "tripTypes": {
+      "title": "Trip types",
+      "type": "array",
+      "description": "Keep only reviews from these trip types, e.g. [\"family\"] or [\"couples\", \"friends\"]; allowed: family, couples, solo, business, friends. Empty (default) = all. Filtered reviews are never billed. TripAdvisor no longer publishes a meal type (breakfast/lunch/dinner), so trip type is the visit context it does carry.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "languages": {
+      "title": "Review languages",
+      "type": "array",
+      "description": "Availability: the zh site failed live checks on 2026-10-16; Chinese collection is currently unverified. Use [\"en\"] for the tested example. Each language selects a TripAdvisor country site, not a translation target. includeTranslated=false keeps original reviews; filters apply after maxReviewsPerLocation. Each language is a separate job and bill, and translated duplicates can recur across languages. See README for supported site codes.",
+      "editor": "stringList",
+      "default": [
+        "en"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "Languages",
+      "sectionDescription": "Each TripAdvisor country site serves the reviews in its own language, machine translations included."
+    },
+    "includeTranslated": {
+      "title": "Include machine-translated reviews",
+      "type": "boolean",
+      "description": "true (default) = keep the machine-translated reviews each site shows (rows carry translated: true and original_language). false = only reviews written in that site's language — with several languages this also stops one review being billed once per language. Use false for \"Italian reviews written by Italian diners\".",
+      "editor": "checkbox",
+      "default": true
+    },
+    "requireText": {
+      "title": "Only reviews with a written text",
+      "type": "boolean",
+      "description": "true = drop rating-only reviews before billing. false (default) = keep them. TripAdvisor reviews almost always carry text, so this rarely removes much.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeLocationRow": {
+      "title": "Include a location row",
+      "type": "boolean",
+      "description": "true (default) = also emit one free row per location and language (type \"location\"): name and type, bubble rating, review count, reviews per rating and per language, food/service/value/atmosphere averages, city ranking (\"#12 of 4,870 restaurants in Lisbon\"), cuisines, price band, dish tags, category tags, address, coordinates, phone, e-mail, website, menu link, opening hours, open-now and permanently-closed flags. Never charged. false = review and status rows only.",
+      "editor": "checkbox",
+      "default": true
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Residential proxy sessions (egress IPs) reading in parallel, 1 to 16, e.g. 4 (default 2). More is faster for many locations; each session is paced separately. Does not change the bill.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2,
+      "sectionCaption": "Performance and proxy",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3 (default 1). TripAdvisor serves about 1 page per second per IP; raising it causes IP rotations, not speed. Leave the default.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Keep the default: Apify Proxy, RESIDENTIAL group ({\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]}). TripAdvisor's bot gate refuses every datacenter IP, so any other proxy fails every page before anything is charged.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      }
+    }
+  },
+  "required": [],
+  "description": "TripAdvisor restaurant reviews. Minimal input: {\"restaurantNames\": [\"Cervejaria Ramiro, Lisbon\"]} — or startUrls / locationIds; attractions work the same way (locationType \"any\"). Default = the newest 100 English reviews per location at $0.005 each (at most $0.50 per location) plus a free location row. maxReviewsPerLocation 0 = every review; sinceDate = new reviews only; maxRating 2 = complaints only (filtered reviews are free). Hotel URLs and ids are refused free of charge: use kestrel/tripadvisor-reviews-scraper."
+}

@@ -1,0 +1,18 @@
+{
+  "actor": "kestrel/indeed-company-reviews",
+  "input": {
+    "companies": [
+      "https://www.indeed.com/cmp/Google/reviews"
+    ],
+    "countries": [
+      "us"
+    ],
+    "maxReviewsPerCompany": 3,
+    "sort": "newest"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

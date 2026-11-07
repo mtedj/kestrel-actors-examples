@@ -1,10 +1,16 @@
 # kestrel actors — examples
 
+<!-- agent-catalog:start -->
+## For AI agents
+
+[Connect an MCP toolkit](https://mtedj.github.io/kestrel-actors-examples/agents/) · [Agent workflow](https://mtedj.github.io/kestrel-actors-examples/agents/guide.md) · [All 57 Actors as JSON](https://mtedj.github.io/kestrel-actors-examples/agents/catalog.json). Each Actor has a current input schema, pricing events, and a prepared call with an explicit spending ceiling.
+<!-- agent-catalog:end -->
+
 **Runnable examples for 30 Apify scrapers: hotel and flight prices, guest reviews from every major OTA, Amazon and eBay listings, and app-store reviews.**
 
 Copy-paste calls in **Python, JavaScript and curl** · **verified n8n workflows** · an **agent skill file** for Claude Code and Cursor · **[full documentation](https://mtedj.github.io/kestrel-actors-examples/)** with every input, every output field, a sample row and each actor's honest limits, plus a [comparison of every review scraper](https://mtedj.github.io/kestrel-actors-examples/comparison.html).
 
-Every actor is **pay per delivered row** — filtered rows, empty runs and anything a spending limit refused are free — and takes relative dates (`"30 days"`) so a schedule never goes stale. Run one with the [kestrel](https://apify.com/kestrel) actors on Apify, or read the code to see exactly what each call returns before you spend anything.
+Billing is Actor-specific: delivered rows and, for some tools, successful source checks even when no rows match. Read the current pricing events and supported date formats before scheduling. Run one with the [kestrel](https://apify.com/kestrel) actors on Apify, or read the code to see exactly what each call returns before you spend anything.
 
 ### Hotel & flight prices
 

@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Google Maps reviews",
+  "description": "Three row types share one dataset: review (one review, charged), place (listed total, histogram, completeness verdict and trend for a place, free) and status (one per input line, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Google Maps reviews",
+      "description": "One row per review, plus one place row and one status row per place. Review rows are billed as delivered; place and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its filtered, already-seen, duplicate and error tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "advertiser_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "advertiser_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "creative_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "ad_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "attribution": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "format": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "first_shown": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "last_shown": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "preview_urls": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "variants_count": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "ad_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text_method": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text_status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "detail_status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "change_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rows": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "scanned": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "unchanged": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "complete": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  },
+  "views": {
+    "ads": {
+      "title": "Ads",
+      "transformation": {
+        "fields": [
+          "type",
+          "advertiser_name",
+          "format",
+          "ad_text",
+          "last_shown",
+          "ad_url",
+          "change_type",
+          "text_status"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "type"
+          },
+          "advertiser_name": {
+            "label": "advertiser_name"
+          },
+          "format": {
+            "label": "format"
+          },
+          "ad_text": {
+            "label": "ad_text"
+          },
+          "last_shown": {
+            "label": "last_shown"
+          },
+          "ad_url": {
+            "label": "ad_url"
+          },
+          "change_type": {
+            "label": "change_type"
+          },
+          "text_status": {
+            "label": "text_status"
+          }
+        }
+      }
+    },
+    "audit": {
+      "title": "Audit",
+      "transformation": {
+        "fields": [
+          "type",
+          "query",
+          "status",
+          "rows",
+          "scanned",
+          "pages",
+          "errors",
+          "complete",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "type"
+          },
+          "query": {
+            "label": "query"
+          },
+          "status": {
+            "label": "status"
+          },
+          "rows": {
+            "label": "rows"
+          },
+          "scanned": {
+            "label": "scanned"
+          },
+          "pages": {
+            "label": "pages"
+          },
+          "errors": {
+            "label": "errors"
+          },
+          "complete": {
+            "label": "complete"
+          },
+          "error": {
+            "label": "error"
+          }
+        }
+      }
+    }
+  }
+}

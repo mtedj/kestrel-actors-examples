@@ -1,0 +1,11 @@
+{
+  "locationQueries": [
+    "Lisbon"
+  ],
+  "checkIn": "30 days",
+  "nights": 1,
+  "adults": 2,
+  "maxHotelsPerQuery": 3,
+  "sortBy": "price_low",
+  "currency": "USD"
+}

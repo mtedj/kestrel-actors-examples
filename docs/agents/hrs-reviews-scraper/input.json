@@ -1,0 +1,13 @@
+{
+  "startUrls": [
+    "https://www.hrs.com/en/hotel/10520"
+  ],
+  "maxReviewsPerHotel": 3,
+  "reviewsSort": "most_recent",
+  "proxyConfiguration": {
+    "useApifyProxy": true,
+    "apifyProxyGroups": [
+      "RESIDENTIAL"
+    ]
+  }
+}

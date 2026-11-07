@@ -1,0 +1,16 @@
+{
+  "actor": "kestrel/hotel-rate-parity",
+  "input": {
+    "hotels": [
+      "https://www.google.com/travel/hotels/entity/ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE"
+    ],
+    "checkIn": "30 days",
+    "nights": 1,
+    "currency": "USD"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

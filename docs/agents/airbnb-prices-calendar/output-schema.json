@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Airbnb prices and calendars",
+  "description": "Row types in one dataset: listing (price for the dates, rating, location, optional details), calendar (day-by-day availability with an occupancy summary), review, status (per place or listing; never charged).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Airbnb prices and calendars",
+      "description": "Listing rows with prices, day-by-day calendar rows, review rows and status rows. Charged rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

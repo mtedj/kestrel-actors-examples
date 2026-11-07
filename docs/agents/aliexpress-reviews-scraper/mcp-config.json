@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-aliexpress-reviews-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/aliexpress-reviews-scraper"
+    }
+  }
+}

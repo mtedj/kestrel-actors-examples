@@ -1,0 +1,238 @@
+{
+  "title": "AliExpress Product Reviews Scraper",
+  "description": "AliExpress product URLs or item ids in; one row per buyer review out — star rating, text and translation, buyer photos, country, SKU variant, follow-up review. Optional: date and keyword filters, only-new-reviews monitoring, free sentiment analysis and insights.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "productUrls": {
+      "title": "AliExpress product URLs",
+      "type": "array",
+      "description": "AliExpress product pages, e.g. https://www.aliexpress.com/item/1005006255429323.html — aliexpress.us, aliexpress.ru, the /i/<id>.html short form and any share link with tracking junk after the ? all work, because every AliExpress item URL carries the numeric item id in its path. No page has to be loaded to resolve them. A bare item id pasted here works too.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.aliexpress.com/item/1005006255429323.html"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which products",
+      "sectionDescription": "AliExpress product URLs and/or AliExpress item ids — either kind is accepted in any of the three lists. At least one."
+    },
+    "productIds": {
+      "title": "AliExpress item ids",
+      "type": "array",
+      "description": "AliExpress numeric item ids, e.g. 1005006255429323 — the number in /item/<id>.html, and what an earlier run's product_id gives you. All three AliExpress id namespaces work (1005…, 3256… on aliexpress.us, and the legacy 2255…/4000… ids), and they resolve to the same reviews.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "startUrls": {
+      "title": "Start URLs (same as product URLs)",
+      "type": "array",
+      "editor": "requestListSources",
+      "default": [],
+      "description": "An alias for AliExpress product URLs, for integrations, templates and tools that always send startUrls: Make, n8n, Zapier, a Google Sheet of links, or the output of an AliExpress product scraper. Every entry is an AliExpress product URL; they are merged with the two lists above and a product named twice is still read once."
+    },
+    "maxReviewsPerProduct": {
+      "title": "Max reviews per product",
+      "type": "integer",
+      "description": "0 = every review the product has (AliExpress pages them in blocks of up to 500; a best-seller runs to a few thousand). N = the first N AliExpress serves. This is the main cost control: it caps how many reviews are read, and the filters below then decide which of them are worth paying for.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 50000,
+      "default": 100,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per product, which of them to keep, and in what order to deliver them. Every filter here runs before billing, so a filtered review is never charged."
+    },
+    "reviewsFilter": {
+      "title": "Server-side review filter",
+      "type": "string",
+      "description": "\"all\" (default) = no filter. \"with_photos\" = only reviews with buyer photos (AliExpress's own photo filter, the fastest way to judge whether a product is worth listing). \"with_follow_up\" = only buyers who came back weeks later to update their review, the best durability signal. \"same_country\" = only buyers from the one country in countries (exactly one entry there). The only three filters AliExpress itself applies: pages you do not want are never fetched or billed.",
+      "editor": "select",
+      "enum": [
+        "all",
+        "with_photos",
+        "with_follow_up",
+        "same_country"
+      ],
+      "enumTitles": [
+        "All reviews",
+        "Only reviews with photos",
+        "Only reviews with a follow-up",
+        "Only buyers from the chosen country"
+      ],
+      "default": "all"
+    },
+    "minRating": {
+      "title": "Only reviews at or above this star rating",
+      "type": "integer",
+      "description": "AliExpress reviews are whole stars, 1 to 5. 0 = no floor; 5 keeps only the perfect scores. AliExpress has no server-side star filter, so this one runs in the actor — the pages are still read, the filtered reviews are simply never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this star rating",
+      "type": "integer",
+      "description": "The other end of the same 1-5 scale: 0 = no ceiling, 3 gives a complaints feed of everything a buyer was unhappy about. Combine with Sort = lowest rated first and the Complaints view in the dataset tab. Filtered reviews are never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "sinceDate": {
+      "title": "Only reviews since",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Keep only reviews written on or after this date: \"2026-06-01\" (YYYY-MM-DD) or a look-back window: \"30 days\", \"2 weeks\", \"6 months\", \"1 year\". Empty (default) = no date limit. Set maxReviewsPerProduct to 0 with it: AliExpress cannot sort or filter by date, so this runs in the actor across the whole list, before billing — older reviews are dropped and never charged. Use for \"reviews from the last 30 days\" or a weekly monitoring schedule (onlyNewReviews delivers each review once).",
+      "default": ""
+    },
+    "requireText": {
+      "title": "Only reviews with a written text",
+      "type": "boolean",
+      "description": "true = drop star-only reviews (an empty feedback field) before billing: on AliExpress roughly one review in five is a bare star rating, so this is a real saving when you are after review text for product research or sentiment analysis. false (default) = keep them, with text empty.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "keywords": {
+      "title": "Only reviews mentioning",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "description": "Keep only reviews that mention at least one of these words or phrases, e.g. battery, broke, fake, refund, size, customs. Matching ignores case and looks at the buyer's original text, the translation and the follow-up review, so an English keyword finds a review written in Portuguese once it is translated. Empty = no keyword filter. Runs before billing: a review that mentions none of them is never charged."
+    },
+    "countries": {
+      "title": "Buyer countries",
+      "type": "array",
+      "description": "Keep only reviews from buyers in these ISO-2 countries, e.g. US, BR, ES, PL. Empty = every country. The first entry also tells AliExpress which market to answer as, which decides the ordering it serves and which reviews the \"Only buyers from the chosen country\" filter keeps. Filtered reviews are never charged.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "sort": {
+      "title": "Review order",
+      "type": "string",
+      "description": "The order the reviews are delivered in. AliExpress ignores every sort parameter its own endpoint accepts (verified 2026-08-29: complex_default, dateDescending and positive_first all return the identical page), so this actor orders the reviews it collected instead of pretending the site does. Newest/oldest use the review date; lowest rated first is the complaints feed.",
+      "editor": "select",
+      "enum": [
+        "default",
+        "newest",
+        "oldest",
+        "lowest_rating",
+        "highest_rating"
+      ],
+      "enumTitles": [
+        "As AliExpress serves them",
+        "Newest first",
+        "Oldest first",
+        "Lowest rated first",
+        "Highest rated first"
+      ],
+      "default": "default"
+    },
+    "language": {
+      "title": "Translation language",
+      "type": "string",
+      "description": "Language of text_translated: \"en_US\" (default), \"es_ES\", \"pt_BR\", \"fr_FR\", \"de_DE\", \"it_IT\", \"nl_NL\", \"pl_PL\", \"tr_TR\", \"ru_RU\", \"ja_JP\", \"ko_KR\", \"ar_MA\", \"he_IL\", \"id_ID\", \"th_TH\". AliExpress machine-translates every review into it whatever the buyer wrote in; text keeps the original. Keep \"en_US\" when analyzeReviews is on (it reads English). AliExpress translates lazily, so a cold page can answer with translations missing: the actor re-asks it once and fills them in, never charging twice.",
+      "editor": "select",
+      "enum": [
+        "en_US",
+        "es_ES",
+        "pt_BR",
+        "fr_FR",
+        "de_DE",
+        "it_IT",
+        "nl_NL",
+        "pl_PL",
+        "tr_TR",
+        "ru_RU",
+        "ja_JP",
+        "ko_KR",
+        "ar_MA",
+        "he_IL",
+        "id_ID",
+        "th_TH"
+      ],
+      "enumTitles": [
+        "English",
+        "Spanish",
+        "Portuguese",
+        "French",
+        "German",
+        "Italian",
+        "Dutch",
+        "Polish",
+        "Turkish",
+        "Russian",
+        "Japanese",
+        "Korean",
+        "Arabic",
+        "Hebrew",
+        "Indonesian",
+        "Thai"
+      ],
+      "default": "en_US"
+    },
+    "includeProductRow": {
+      "title": "Include a product row",
+      "type": "boolean",
+      "description": "Also emit one free row per product with its title, image, average rating, the full 1-5 star histogram, the positive/neutral/negative split, how many of its reviews carry photos or a follow-up, and the structured attributes buyers rated it on. It is what a product-research run actually wants, it costs one extra request per product, and it is never charged.",
+      "editor": "checkbox",
+      "default": true
+    },
+    "hideBuyerDetails": {
+      "title": "Hide buyer details",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": false,
+      "description": "true = blank the buyer's display name, avatar and gender in every review row (the columns stay, the values are empty); the buyer's country, the review text, photos and everything else are unchanged. For teams whose data policy does not allow storing reviewer identity, or a dataset going into an LLM or a shared sentiment pipeline. false (default) = buyer details as AliExpress shows them."
+    },
+    "analyzeReviews": {
+      "title": "Analyze reviews (sentiment, topics, insights)",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": false,
+      "description": "true = free review analysis: each review row gains sentiment (positive / neutral / negative), a -1 to 1 sentiment_score, topics (quality, delivery, size and fit, value, durability, seller service…) and rating_text_mismatch (4-5 star reviews that read as complaints); each product gets a free insights row: sentiment split, top complaints and praise, ratings by SKU variant, country and month. Keep language \"en_US\": it reads English. No AI model, no extra charge. false (default) = no extra columns."
+    },
+    "onlyNewReviews": {
+      "title": "Only new reviews (monitoring mode)",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": false,
+      "sectionCaption": "Review monitoring",
+      "sectionDescription": "For a scheduled run — daily, weekly — that should deliver, and bill, only the reviews that appeared since the last run.",
+      "description": "true = monitoring mode for a schedule: the first run is the baseline and delivers everything your filters keep; every later run delivers and bills only reviews it has never delivered before. Set maxReviewsPerProduct to 0 with it: AliExpress does not serve reviews newest-first, so a new review can sit anywhere in the list. Only delivered reviews are remembered (one refused by your spending limit returns next run). false (default) = every run delivers every matching review."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) fetching pages in parallel, e.g. 2 (default). More is faster; each is paced separately. Raise it for a long product list.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2,
+      "sectionCaption": "Performance",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Pace for each session. AliExpress's feedback endpoint answered 150 back-to-back requests from a single datacenter IP with no throttling at all, and 10 of 10 at 1 req/s; 1-2 is comfortable.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 5,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy with the datacenter group is enough: the feedback endpoint answers plain HTTP requests from datacenter ranges with no key, no cookies and no bot gate. Residential works too and costs more. Keep the default.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": []
+}

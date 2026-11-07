@@ -1,0 +1,118 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "id"
+      },
+      "email": {
+        "description": "email"
+      },
+      "website": {
+        "description": "website"
+      },
+      "page_title": {
+        "description": "page title"
+      },
+      "source_url": {
+        "type": "string",
+        "description": "source url"
+      },
+      "verification": {
+        "description": "verification"
+      },
+      "content_hash": {
+        "type": "string",
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "fetched at"
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "email",
+          "website",
+          "page_title",
+          "source_url",
+          "verification"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "email": {
+            "label": "email",
+            "format": "text"
+          },
+          "website": {
+            "label": "website",
+            "format": "text"
+          },
+          "page_title": {
+            "label": "page_title",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "verification": {
+            "label": "verification",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "title": "Evidence",
+      "transformation": {
+        "fields": [
+          "id",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content_hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched_at",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

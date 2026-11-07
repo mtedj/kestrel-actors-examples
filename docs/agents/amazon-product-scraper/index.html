@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Amazon Product Scraper — Details, Prices &amp; Availability by ASIN | kestrel</title><meta name="description" content="Amazon product details by ASIN or URL, 20 marketplaces. One row per product: title, brand, buybox price, list price, availability, in stock, rating, ratings count, images, bullet points, description, details table, Best Sellers Rank (BSR). Free filters: in stock only, max price. No login."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/amazon-product-scraper</p><h1>Amazon Product Scraper — Details, Prices &amp; Availability by ASIN</h1><p class="intro">Amazon product details by ASIN or URL, 20 marketplaces. One row per product: title, brand, buybox price, list price, availability, in stock, rating, ratings count, images, bullet points, description, details table, Best Sellers Rank (BSR). Free filters: in stock only, max price. No login.</p>
+<p><a class="button" href="https://apify.com/kestrel/amazon-product-scraper">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-product-scraper</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-amazon-product-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-product-scraper&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.3.3; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/amazon-product-scraper&quot;,
+  &quot;input&quot;: {
+    &quot;asins&quot;: [
+      &quot;B0CHWRXH8B&quot;
+    ],
+    &quot;domain&quot;: &quot;com&quot;
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>product</code></td><td>$0.004</td><td>One product&#x27;s details from its public page (row keys asin, title, brand, price = buybox price, list_price, currency, availability, in_stock, prime, rating, ratings_count, 5_star_pct to 1_star_pct = histogram, images, features = bullets, description, category, details = details table, bsr = Best Sellers Rank, sold_by, variations_count): $4 per 1,000 products, one page fetch each. No buybox price or no rank still delivers the row (price or bsr null); inStockOnly or maxPrice skip paying for those. Not charged: products dropped by inStockOnly or maxPrice, unknown ASINs (404), pages Amazon blocked, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/amazon-product-scraper/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.3.3. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

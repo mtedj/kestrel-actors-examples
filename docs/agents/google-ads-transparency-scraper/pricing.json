@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "ad": {
+      "eventTitle": "Ad",
+      "eventDescription": "One delivered Google Ads creative with advertiser_id, advertiser_name, creative_id, ad_url, format, first_shown, last_shown, preview_urls, ad_text, text_status and content_hash. $3 per 1000 ad rows. Optional English OCR of up to 3 previews is included; text may be unavailable or approximate. No start fee; proxy and compute are included in the event price. Filtered rows, duplicates, unchanged monitored creatives, empty searches, failed detail requests and status rows are not charged. Stops at Apify run option maxTotalChargeUsd. Source serving dates alone do not trigger a monitored update.",
+      "eventPriceUsd": 0.003,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-10-16T13:42:02.984Z"
+}

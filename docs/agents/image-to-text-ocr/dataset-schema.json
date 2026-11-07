@@ -1,0 +1,130 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "text": {
+        "description": "text"
+      },
+      "words": {
+        "description": "words"
+      },
+      "truncated": {
+        "description": "truncated"
+      },
+      "language": {
+        "description": "language"
+      },
+      "source_url": {
+        "type": "string",
+        "description": "source url"
+      },
+      "id": {
+        "type": "string",
+        "description": "id"
+      },
+      "content_hash": {
+        "type": "string",
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "fetched at"
+      },
+      "download_url": {
+        "description": "download url"
+      },
+      "artifact_key": {
+        "description": "artifact key"
+      },
+      "artifact_bytes": {
+        "description": "artifact bytes"
+      },
+      "artifact_sha256": {
+        "description": "artifact sha256"
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "text",
+          "words",
+          "truncated",
+          "language",
+          "source_url",
+          "id"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "text": {
+            "label": "text",
+            "format": "text"
+          },
+          "words": {
+            "label": "words",
+            "format": "text"
+          },
+          "truncated": {
+            "label": "truncated",
+            "format": "text"
+          },
+          "language": {
+            "label": "language",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "id": {
+            "label": "id",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "title": "Evidence",
+      "transformation": {
+        "fields": [
+          "id",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content_hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched_at",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

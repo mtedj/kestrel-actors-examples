@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/google-maps-scraper",
+  "input": {
+    "searches": [
+      "coffee shop"
+    ],
+    "locations": [
+      "Austin, TX"
+    ],
+    "maxPlacesPerSearch": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

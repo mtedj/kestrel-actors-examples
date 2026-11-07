@@ -1,0 +1,7 @@
+{
+  "queries": [
+    "keyword research"
+  ],
+  "maxSuggestionsPerSeed": 3,
+  "maxRequests": 3
+}

@@ -1,0 +1,14 @@
+{
+  "actor": "kestrel/google-shopping-products",
+  "input": {
+    "queries": [
+      "wireless headphones"
+    ],
+    "maxResultsPerSource": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

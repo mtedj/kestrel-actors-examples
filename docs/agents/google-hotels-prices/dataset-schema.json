@@ -1,0 +1,943 @@
+{
+  "actorSpecification": 1,
+  "title": "Google Hotels prices",
+  "description": "Three row types share one dataset: hotel (lowest nightly rate and stay total per hotel), offer (one booking source's rate for a hotel and stay), status (per place or property and stay; never charged).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "hotel",
+          "offer",
+          "status"
+        ],
+        "description": "Row type: hotel, offer or status."
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The place search this row came from (null in property mode)."
+      },
+      "hotel": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows in property mode: the hotel URL or entity token that was priced."
+      },
+      "check_in": {
+        "type": "string",
+        "description": "Check-in date, YYYY-MM-DD."
+      },
+      "check_out": {
+        "type": "string",
+        "description": "Check-out date, YYYY-MM-DD."
+      },
+      "nights": {
+        "type": "integer",
+        "description": "Nights in the stay."
+      },
+      "adults": {
+        "type": "integer",
+        "description": "Adults per room used for pricing."
+      },
+      "children": {
+        "type": "integer",
+        "description": "Children per room used for pricing."
+      },
+      "currency": {
+        "type": "string",
+        "description": "Currency of every price in the row (ISO code)."
+      },
+      "rank": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Position in Google's results for the place search (null in property mode)."
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel name."
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's numeric hotel id."
+      },
+      "entity_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Hotels entity token; reuse it in the hotels input to price this property directly."
+      },
+      "cid": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Maps place id (CID)."
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Hotel class, 1–5."
+      },
+      "class_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's class label, e.g. 4-star hotel."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Google rating, 1–5."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of Google reviews."
+      },
+      "lat": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "lng": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's one-line description of the hotel."
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel website."
+      },
+      "types": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        },
+        "description": "Google place types, e.g. hostel, boutique_hotel."
+      },
+      "checkin_time": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "checkout_time": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "thumbnail": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Thumbnail image URL."
+      },
+      "nightly": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Lowest nightly rate (hotel rows) or this source's nightly rate (offer rows). Null = no price for the stay (sold out)."
+      },
+      "nightly_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Nightly rate as Google displays it, e.g. $82."
+      },
+      "total": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total for the whole stay."
+      },
+      "total_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Stay total as Google displays it."
+      },
+      "deal": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's deal note, e.g. 19% less than usual."
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Booking source: an OTA name, or the hotel's own name when official is true. On hotel rows: the source of the lowest rate when Google names it."
+      },
+      "source_id": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Google's id for the source — the key of a source (a name can appear twice: official listing and marketplace rate)."
+      },
+      "official": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the source is the hotel's official site."
+      },
+      "room": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Room name (offerLevel rooms only)."
+      },
+      "max_guests": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Guests the rate covers (offerLevel rooms only)."
+      },
+      "free_cancel": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Free cancellation available."
+      },
+      "free_cancel_until": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Free-cancellation deadline as Google shows it, e.g. Oct 1."
+      },
+      "link": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's click-through link for the source."
+      },
+      "partner_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The source's own URL with the dates filled in (official sites: the booking engine)."
+      },
+      "lowest": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True for a source's lowest rate row."
+      },
+      "maps_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Maps link for the hotel."
+      },
+      "google_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Hotels page of the hotel."
+      },
+      "total_results": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Google's result count for the place search (capped at 15000)."
+      },
+      "hotels": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: hotel rows produced."
+      },
+      "priced": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: hotels with a price (the only ones charged)."
+      },
+      "offers": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: offer rows produced."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: hotels skipped because another search already delivered them for this stay."
+      },
+      "offer_errors": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: hotels whose offers page failed."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: error message, null when the job succeeded."
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "UTC timestamp of the fetch."
+      },
+      "spread_km": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Status rows, place mode only: median distance in km of the returned hotels from their centre. A city is single digits, a region tens. A large value means Google may not have resolved your place and answered with scattered unrelated hotels — those rows are still billed, so check this before trusting a run."
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street address (includeDetails)."
+      },
+      "phone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Phone number as Google lists it (includeDetails)."
+      },
+      "place_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google Maps place ID, ChIJ… — joins to Maps and Places data (includeDetails)."
+      },
+      "description_long": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google's long description of the property (includeDetails)."
+      },
+      "rating_breakdown": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Google rating distribution: [{stars, percent, reviews}] for 5 to 1 stars (includeDetails)."
+      },
+      "review_aspects": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Topics guests mention in reviews: [{aspect, mentions, positive, negative, score}], e.g. Service, Location, Breakfast (includeDetails)."
+      },
+      "external_ratings": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Ratings on other sites Google shows: [{source, rating, scale, reviews}], e.g. Tripadvisor, Trip.com (includeDetails)."
+      },
+      "photos": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Photo URLs from the property page (includeDetails)."
+      },
+      "detail_errors": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows, with includeDetails: hotels whose details could not be fetched (the rows are still delivered)."
+      },
+      "total_base": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Stay total before taxes and fees. total_base + taxes + fees = total_with_taxes."
+      },
+      "taxes": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Taxes included in the stay total, as Google breaks it down."
+      },
+      "fees": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Fees included in the stay total (service charges, resort fees), as Google breaks it down."
+      },
+      "deal_percent": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The number in the deal note: 19 for \"19% less than usual\"."
+      },
+      "total_with_taxes": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Stay total including taxes and fees, Google's all-in figure. Unlike `total` (what Google displays: base + fees without taxes from a US IP, all-in from most others) it does not depend on the proxy's country."
+      },
+      "amenities": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Amenities the property has, by name, with notes: \"Wi-Fi (free)\", \"Parking (extra charge)\" (includeDetails). English labels."
+      },
+      "amenities_unavailable": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Amenities Google lists as not available at the property (includeDetails)."
+      },
+      "free_cancel_until_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Offer rows: the free-cancellation deadline as an ISO date (2026-10-25), derived from free_cancel_until and the stay; empty when the wording cannot be read unambiguously."
+      },
+      "free_cancel_until_time": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Offer rows: the time of day the free-cancellation deadline ends, as Google words it (\"11:59 PM\", \"18:00\")."
+      }
+    },
+    "required": [
+      "type",
+      "check_in",
+      "check_out",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "Every row: hotels with their lowest rate, each source's offer, and status rows.",
+      "transformation": {
+        "fields": [
+          "type",
+          "name",
+          "check_in",
+          "check_out",
+          "nightly_display",
+          "total_display",
+          "source",
+          "official",
+          "free_cancel",
+          "stars",
+          "rating",
+          "deal",
+          "google_url",
+          "partner_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Row",
+            "format": "text"
+          },
+          "name": {
+            "label": "Hotel",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "nightly_display": {
+            "label": "Nightly",
+            "format": "text"
+          },
+          "total_display": {
+            "label": "Stay total",
+            "format": "text"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          },
+          "official": {
+            "label": "Official site",
+            "format": "boolean"
+          },
+          "free_cancel": {
+            "label": "Free cancellation",
+            "format": "boolean"
+          },
+          "stars": {
+            "label": "Stars",
+            "format": "number"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "deal": {
+            "label": "Deal",
+            "format": "text"
+          },
+          "google_url": {
+            "label": "Google Hotels",
+            "format": "link"
+          },
+          "partner_url": {
+            "label": "Book",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "description": "Hotel rows: lowest nightly rate and stay total per hotel for the dates.",
+      "transformation": {
+        "fields": [
+          "rank",
+          "name",
+          "nightly",
+          "total",
+          "currency",
+          "stars",
+          "rating",
+          "reviews",
+          "deal",
+          "source",
+          "check_in",
+          "check_out",
+          "nights",
+          "query",
+          "entity_id",
+          "website",
+          "maps_url",
+          "google_url",
+          "thumbnail"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "rank": {
+            "label": "#",
+            "format": "number"
+          },
+          "name": {
+            "label": "Hotel",
+            "format": "text"
+          },
+          "nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "stars": {
+            "label": "Stars",
+            "format": "number"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "reviews": {
+            "label": "Reviews",
+            "format": "number"
+          },
+          "deal": {
+            "label": "Deal",
+            "format": "text"
+          },
+          "source": {
+            "label": "Lowest from",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "nights": {
+            "label": "Nights",
+            "format": "number"
+          },
+          "query": {
+            "label": "Search",
+            "format": "text"
+          },
+          "entity_id": {
+            "label": "Entity id",
+            "format": "text"
+          },
+          "website": {
+            "label": "Website",
+            "format": "link"
+          },
+          "maps_url": {
+            "label": "Maps",
+            "format": "link"
+          },
+          "google_url": {
+            "label": "Google Hotels",
+            "format": "link"
+          },
+          "thumbnail": {
+            "label": "Photo",
+            "format": "image"
+          }
+        }
+      }
+    },
+    "details": {
+      "title": "Hotel details",
+      "description": "With includeDetails: contact data, place ID, rating breakdown, review topics and ratings on other sites per hotel.",
+      "transformation": {
+        "fields": [
+          "name",
+          "stars",
+          "rating",
+          "reviews",
+          "address",
+          "phone",
+          "website",
+          "place_id",
+          "rating_breakdown",
+          "review_aspects",
+          "external_ratings",
+          "amenities",
+          "description_long",
+          "photos",
+          "lat",
+          "lng",
+          "entity_id"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Hotel",
+            "format": "text"
+          },
+          "stars": {
+            "label": "Stars",
+            "format": "number"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "reviews": {
+            "label": "Reviews",
+            "format": "number"
+          },
+          "address": {
+            "label": "Address",
+            "format": "text"
+          },
+          "phone": {
+            "label": "Phone",
+            "format": "text"
+          },
+          "website": {
+            "label": "Website",
+            "format": "link"
+          },
+          "place_id": {
+            "label": "Place ID",
+            "format": "text"
+          },
+          "rating_breakdown": {
+            "label": "Rating breakdown",
+            "format": "array"
+          },
+          "review_aspects": {
+            "label": "Review topics",
+            "format": "array"
+          },
+          "external_ratings": {
+            "label": "Other sites",
+            "format": "array"
+          },
+          "description_long": {
+            "label": "Description",
+            "format": "text"
+          },
+          "photos": {
+            "label": "Photos",
+            "format": "array"
+          },
+          "lat": {
+            "label": "Lat",
+            "format": "number"
+          },
+          "lng": {
+            "label": "Lng",
+            "format": "number"
+          },
+          "entity_id": {
+            "label": "Entity",
+            "format": "text"
+          },
+          "amenities": {
+            "label": "Amenities",
+            "format": "array"
+          }
+        }
+      }
+    },
+    "offers": {
+      "title": "Offers by source",
+      "description": "Offer rows: one booking source's rate for a hotel and stay (rate parity view).",
+      "transformation": {
+        "fields": [
+          "name",
+          "source",
+          "official",
+          "nightly",
+          "total",
+          "currency",
+          "free_cancel",
+          "free_cancel_until",
+          "room",
+          "max_guests",
+          "lowest",
+          "check_in",
+          "check_out",
+          "partner_url",
+          "link",
+          "source_id",
+          "entity_id"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Hotel",
+            "format": "text"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          },
+          "official": {
+            "label": "Official site",
+            "format": "boolean"
+          },
+          "nightly": {
+            "label": "Nightly",
+            "format": "number"
+          },
+          "total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "free_cancel": {
+            "label": "Free cancellation",
+            "format": "boolean"
+          },
+          "free_cancel_until": {
+            "label": "Cancel by",
+            "format": "text"
+          },
+          "room": {
+            "label": "Room",
+            "format": "text"
+          },
+          "max_guests": {
+            "label": "Guests",
+            "format": "number"
+          },
+          "lowest": {
+            "label": "Source's lowest",
+            "format": "boolean"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "partner_url": {
+            "label": "Book",
+            "format": "link"
+          },
+          "link": {
+            "label": "Via Google",
+            "format": "link"
+          },
+          "source_id": {
+            "label": "Source id",
+            "format": "number"
+          },
+          "entity_id": {
+            "label": "Entity id",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "description": "One row per place or property and stay: counts and errors. Never charged.",
+      "transformation": {
+        "fields": [
+          "query",
+          "hotel",
+          "check_in",
+          "check_out",
+          "hotels",
+          "priced",
+          "offers",
+          "duplicates",
+          "offer_errors",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "query": {
+            "label": "Search",
+            "format": "text"
+          },
+          "hotel": {
+            "label": "Property",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "hotels": {
+            "label": "Hotels",
+            "format": "number"
+          },
+          "priced": {
+            "label": "Priced (charged)",
+            "format": "number"
+          },
+          "offers": {
+            "label": "Offers",
+            "format": "number"
+          },
+          "duplicates": {
+            "label": "Duplicates skipped",
+            "format": "number"
+          },
+          "offer_errors": {
+            "label": "Offer errors",
+            "format": "number"
+          },
+          "error": {
+            "label": "Error",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

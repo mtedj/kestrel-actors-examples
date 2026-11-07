@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "page-parsed": {
+      "eventTitle": "Parsed search page",
+      "eventDescription": "One successfully parsed search page: $8 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.",
+      "eventPriceUsd": 0.008,
+      "isPrimaryEvent": true
+    },
+    "result": {
+      "eventTitle": "Result",
+      "eventDescription": "One delivered result: $0.5 per 1,000 rows. Row keys: id, title, domain, domain_url, result_link, snippet, rank, page, query, country, source_url, fetched_at. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.008 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget. Monitoring rows include previous_rank and rank_change; positive rank_change means improvement. New rows have previous_rank=null. Missing domains are not emitted as disappearance alerts.",
+      "eventPriceUsd": 0.0005
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:57.704Z"
+}

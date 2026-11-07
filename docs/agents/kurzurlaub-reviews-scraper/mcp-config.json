@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-kurzurlaub-reviews-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/kurzurlaub-reviews-scraper"
+    }
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "merchant": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "delivery_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "previous_price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price_is_from": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "product_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "cluster_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "offer_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviews_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "google_product_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price_change": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "title",
+          "price",
+          "currency",
+          "merchant",
+          "rating",
+          "delivery_text",
+          "change",
+          "previous_price",
+          "source_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "price": {
+            "label": "Price",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "merchant": {
+            "label": "Merchant",
+            "format": "text"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "text"
+          },
+          "delivery_text": {
+            "label": "Delivery Text",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "previous_price": {
+            "label": "Previous Price",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "Source Url",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "details": {
+      "title": "All fields",
+      "transformation": {
+        "fields": [
+          "title",
+          "price",
+          "currency",
+          "merchant",
+          "rating",
+          "delivery_text",
+          "change",
+          "previous_price",
+          "source_url",
+          "id",
+          "fetched_at",
+          "price_text",
+          "price_is_from",
+          "product_id",
+          "cluster_id",
+          "offer_id",
+          "query",
+          "country",
+          "reviews_text",
+          "google_product_url",
+          "price_change"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "price": {
+            "label": "Price",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "merchant": {
+            "label": "Merchant",
+            "format": "text"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "text"
+          },
+          "delivery_text": {
+            "label": "Delivery Text",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "previous_price": {
+            "label": "Previous Price",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "Source Url",
+            "format": "text"
+          },
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          },
+          "price_text": {
+            "label": "Price Text",
+            "format": "text"
+          },
+          "price_is_from": {
+            "label": "Price Is From",
+            "format": "text"
+          },
+          "product_id": {
+            "label": "Product Id",
+            "format": "text"
+          },
+          "cluster_id": {
+            "label": "Cluster Id",
+            "format": "text"
+          },
+          "offer_id": {
+            "label": "Offer Id",
+            "format": "text"
+          },
+          "query": {
+            "label": "Query",
+            "format": "text"
+          },
+          "country": {
+            "label": "Country",
+            "format": "text"
+          },
+          "reviews_text": {
+            "label": "Reviews Text",
+            "format": "text"
+          },
+          "google_product_url": {
+            "label": "Google Product Url",
+            "format": "text"
+          },
+          "price_change": {
+            "label": "Price Change",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

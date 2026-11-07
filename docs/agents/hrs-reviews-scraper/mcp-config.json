@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-hrs-reviews-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/hrs-reviews-scraper"
+    }
+  }
+}

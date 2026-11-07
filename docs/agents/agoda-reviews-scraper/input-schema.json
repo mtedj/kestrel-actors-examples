@@ -1,0 +1,131 @@
+{
+  "title": "Agoda Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Agoda hotel URLs",
+      "type": "array",
+      "description": "Agoda property pages, e.g. [\"https://www.agoda.com/tivoli-avenida-liberdade-lisboa/hotel/lisbon-pt.html\"]; any agoda.com URL of the property works. The numeric hotel id is read from the page for you (one page request, no browser). A URL whose page carries no id costs nothing and is reported in a status row. Give at least one of startUrls, hotelNames or hotelIds.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.agoda.com/tivoli-avenida-liberdade-lisboa/hotel/lisbon-pt.html"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which properties (at least one of the three)",
+      "sectionDescription": "Agoda hotel URLs, property names and/or Agoda's numeric hotel ids. A URL, a name and an id of the same property are read once."
+    },
+    "hotelNames": {
+      "title": "Hotel names",
+      "type": "array",
+      "description": "Property names as typed into Agoda's search box, e.g. [\"Park Hyatt Tokyo\", \"Tivoli Avenida Liberdade Lisbon\"]; add the city for chains. Resolved to the exact property through Agoda's own autocomplete (best match first), so no id hunting. Use for \"reviews of hotel X\" when you have no URL. A name that matches nothing costs nothing and is reported in a status row; check hotel_name on the rows when the name is generic.",
+      "editor": "stringList",
+      "prefill": [],
+      "default": [],
+      "uniqueItems": true
+    },
+    "hotelIds": {
+      "title": "Agoda hotel ids",
+      "type": "array",
+      "description": "Agoda's numeric property ids, e.g. [\"63820\"] — the hotel_id on an earlier run's rows. The fastest path: no lookup. Use to re-read the same properties every day. hotel_name is filled from the reviews themselves. An id Agoda answers with no reviews at all is reported as an error status row (free) rather than as \"no reviews\", because a throttled call looks the same.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerHotel": {
+      "title": "Max reviews per hotel",
+      "type": "integer",
+      "description": "The main cost control: reviews delivered per property, e.g. 50; default 200 (at most $1 per property at $0.005 a review). 0 = every review (at most 6,000 per property per run; a busy hostel can exceed 1,000, so 0 can cost $5+). Reviews come in reviewsSort order: 50 with \"most_recent\" = the 50 newest. maxRating and requireText are applied AFTER this cap: 200 asked with maxRating 5 delivers only those of the 200 at or below 5, so pair maxRating with reviewsSort \"lowest_rated\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 200,
+      "sectionCaption": "How many reviews, in what order"
+    },
+    "reviewsSort": {
+      "title": "Order",
+      "type": "string",
+      "description": "\"most_recent\" (default), \"highest_rated\", \"lowest_rated\" or \"most_relevant\" — Agoda's own orders. Use \"lowest_rated\" with maxReviewsPerHotel 50 for \"the 50 worst reviews\" or with maxRating for complaints; \"most_recent\" for a scheduled feed (each run re-reads the newest N — dedupe on review_id).",
+      "enum": [
+        "most_recent",
+        "highest_rated",
+        "lowest_rated",
+        "most_relevant"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Highest rated",
+        "Lowest rated",
+        "Most relevant"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this score",
+      "type": "number",
+      "description": "Only reviews at or below this score on Agoda's 0-10 scale, e.g. 5 for complaints; 0 (default) = every score. Use for \"negative reviews\", \"complaints\", \"what guests dislike\". Reviews above the score are never delivered or charged, but they count against maxReviewsPerHotel: set reviewsSort \"lowest_rated\" so the cap is spent on low scores.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0,
+      "sectionCaption": "Filters — applied before billing",
+      "sectionDescription": "Reviews these remove are never delivered or charged. Both are applied after maxReviewsPerHotel, so pair maxRating with reviewsSort \"lowest_rated\"."
+    },
+    "requireText": {
+      "title": "Only reviews with a written comment",
+      "type": "boolean",
+      "description": "true = deliver and pay only for reviews with written text; many Agoda reviews are a score with no words, and these are dropped before billing. Default false. Applied after maxReviewsPerHotel, so 200 asked with true delivers fewer. Use for sentiment analysis, summaries or any task that reads the text.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeHotelRow": {
+      "title": "Include a hotel row",
+      "type": "boolean",
+      "description": "true (default) = also one free row per property (type \"hotel\"): hotel_id, hotel_name, url and reviews_fetched. Never charged. It carries no scores: Agoda's category ratings are not on the review endpoint this actor reads.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Free extras"
+    },
+    "locale": {
+      "title": "Language",
+      "type": "string",
+      "description": "Agoda locale for the request, e.g. \"en-us\" (default), \"ja-jp\", \"ko-kr\", \"th-th\", \"zh-cn\", \"de-de\", \"es-es\". Sets the language of labels and of the translation Agoda supplies: for some reviews text holds Agoda's translation into this language, original_text the guest's own words and language the language it was written in; reviews Agoda does not translate come as written. Not a filter: every language is delivered.",
+      "editor": "textfield",
+      "default": "en-us",
+      "sectionCaption": "Language"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, default 4. More is faster; each is paced separately by perIp. Leave the default unless runs are throttled.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3, default 1. Agoda tolerates about 1/s per IP; faster causes retries, not speed.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true}; the default datacenter group works. Agoda throttles unrotated datacenter traffic by answering 200 with no reviews — the actor detects that and retries on a fresh IP, so a busy property is never reported as having none. No browser, no login; HTTP/2 is handled for you.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Agoda hotel reviews. Minimal input: {\"hotelNames\": [\"Park Hyatt Tokyo\"]} or {\"startUrls\": [\"https://www.agoda.com/tivoli-avenida-liberdade-lisboa/hotel/lisbon-pt.html\"]} or {\"hotelIds\": [\"63820\"]} — at least one of the three. maxReviewsPerHotel defaults to 200 (up to $1 per property at $0.005 a review): set it lower for a scheduled feed, 0 for every review."
+}

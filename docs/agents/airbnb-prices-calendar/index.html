@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Airbnb Scraper — Prices, Availability Calendar &amp; Listings | kestrel</title><meta name="description" content="Airbnb vacation rental listings and prices by place, URL or ID for your dates and guests. Rows: nightly rate, stay total, rating, bedrooms, Superhost, photos. Optional 24-month availability calendar and reviews. Free details: amenities, house rules, host, price breakdown. No daily calendar prices."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/airbnb-prices-calendar</p><h1>Airbnb Scraper — Prices, Availability Calendar &amp; Listings</h1><p class="intro">Airbnb vacation rental listings and prices by place, URL or ID for your dates and guests. Rows: nightly rate, stay total, rating, bedrooms, Superhost, photos. Optional 24-month availability calendar and reviews. Free details: amenities, house rules, host, price breakdown. No daily calendar prices.</p>
+<p><a class="button" href="https://apify.com/kestrel/airbnb-prices-calendar">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/airbnb-prices-calendar</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-airbnb-prices-calendar&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/airbnb-prices-calendar&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.2.12; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/airbnb-prices-calendar&quot;,
+  &quot;input&quot;: {
+    &quot;locationQueries&quot;: [
+      &quot;Lisbon, Portugal&quot;
+    ],
+    &quot;checkIn&quot;: &quot;30 days&quot;,
+    &quot;checkOut&quot;: &quot;33 days&quot;,
+    &quot;adults&quot;: 2,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;maxListingsPerQuery&quot;: 3,
+    &quot;calendarMonths&quot;: 0
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>listing</code></td><td>$0.005</td><td>One Airbnb listing with its price for your dates and guests (row keys price_total, price_nightly, price_nightly_effective, currency, rating, reviews_count, is_superhost, url): $5 per 1,000 listings. Amenities, house rules, host and the price breakdown (includeDetails) ride on this row at no extra charge. Not charged: listings Airbnb cannot price for the dates, duplicates, unknown places, empty searches, status rows. Without dates every listing row counts, at its default displayed price. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).</td></tr><tr><td><code>calendar_month</code></td><td>$0.002</td><td>One month of day-by-day availability for one listing (available, check-in and check-out allowed, minimum and maximum nights per day): $2 per 1,000 months, so a 12-month calendar is $0.024 per listing; the row also carries occupancy for the next 30, 90 and 365 nights. Not charged: calendarMonths 0 (the default), failed calendars, months beyond your spending limit (the row is trimmed to the months billed).</td></tr><tr><td><code>review</code></td><td>$0.003</td><td>One guest review with rating, text, Airbnb&#x27;s translation and original language, date, reviewer name and location, stay type and host reply: $3 per 1,000 reviews, up to maxReviewsPerListing per listing (default 0 = none, maximum 200). Not charged: listings with no reviews, failed review fetches. For a rating filter, every review of a listing or more than 200, use kestrel/airbnb-reviews-scraper.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/airbnb-prices-calendar/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.2.12. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

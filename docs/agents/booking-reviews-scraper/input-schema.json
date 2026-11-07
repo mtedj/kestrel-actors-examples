@@ -1,0 +1,177 @@
+{
+  "title": "Booking.com Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Booking.com hotel URLs",
+      "type": "array",
+      "description": "Booking.com property pages as plain strings, e.g. [\"https://www.booking.com/hotel/pt/memmo-alfama.html\"] ({\"url\": ...} objects are accepted too); any language variant or query string is fine. Booking URLs carry no numeric id, so the slug is matched through Booking's own autocomplete within the URL's country; hotel_name on every row lets you check the match. A URL Booking cannot match costs nothing and is reported in a status row. Give at least one of startUrls, hotelNames or hotelIds.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.booking.com/hotel/pt/memmo-alfama.html"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels (at least one of the three)",
+      "sectionDescription": "Booking.com hotel URLs, hotel names and/or Booking's numeric hotel ids. A URL, a name and an id of the same hotel are read once."
+    },
+    "hotelNames": {
+      "title": "Hotel names",
+      "type": "array",
+      "description": "Hotel names as typed into Booking.com's search box, e.g. [\"Memmo Alfama Lisbon\", \"Hotel Artemide Rome\"]; add the city for chains. The first hotel Booking's autocomplete returns is used and its full name is on every row: check hotel_name when the name is generic. Names in any language work. Use for \"reviews of hotel X\" when you have no URL. A name that matches nothing costs nothing and is reported in a status row.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "hotelIds": {
+      "title": "Booking.com hotel ids",
+      "type": "array",
+      "description": "Booking's numeric property ids, e.g. [\"536251\"] — the hotel_id on an earlier run's rows. The fastest path: no lookup. Ids carry no name, so hotel_name is null unless the same hotel is also given as a URL or name. Use to re-read the same hotels every day. An unknown id returns zero reviews (status no_reviews, free).",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerHotel": {
+      "title": "Max reviews per hotel",
+      "type": "integer",
+      "description": "The main cost control: reviews delivered per hotel, e.g. 50; default 200 (at most $1 per hotel at $0.005 a review). 0 = every review the hotel has, read in reviewsSort order up to 10,000 per hotel per run (0 can cost $10+ per hotel). 50 with \"most_recent\" = the 50 newest. languages, travelerType, keyword and maxRating apply BEFORE this cap (50 asked = up to 50 matching reviews); requireText after it (50 asked = about 30 written ones). sinceDate cuts by date before this cap.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 200,
+      "sectionCaption": "How many reviews, in what order"
+    },
+    "reviewsSort": {
+      "title": "Order",
+      "type": "string",
+      "description": "\"most_recent\" (default), \"oldest\", \"highest_rated\", \"lowest_rated\" or \"most_relevant\" — Booking's own orders. Use \"lowest_rated\" with maxReviewsPerHotel 50 for \"the 50 worst reviews\"; \"most_recent\" for a scheduled feed (each run re-reads the newest N — dedupe on review_id). Ignored when maxRating is set: that reads lowest score first.",
+      "enum": [
+        "most_recent",
+        "highest_rated",
+        "lowest_rated",
+        "most_relevant",
+        "oldest"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Highest rated",
+        "Lowest rated",
+        "Most relevant",
+        "Oldest first"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this score",
+      "type": "number",
+      "description": "Only reviews at or below this score on Booking's 1-10 scale, e.g. 6 for complaints; 0 (default) = every score. Scores carry one decimal, so \"below 6\" is 5.9 and \"6 or below\" is 6. Use for \"negative reviews\", \"complaints\", \"what guests dislike\". The hotel is read lowest score first and paging stops at the threshold, so a hotel with 892 reviews and 24 at 6 or below reads one page, not 36. Reviews above the score are never delivered or charged. Overrides reviewsSort.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0,
+      "sectionCaption": "Filters — applied before billing",
+      "sectionDescription": "Reviews these remove are never delivered or charged; languages, travelerType and keyword are applied by Booking itself, so skipped reviews are never even fetched."
+    },
+    "sinceDate": {
+      "title": "Since date",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Keep only reviews published on or after this date: \"2026-09-01\" (YYYY-MM-DD) or relative to the run day — \"1 day\", \"2 weeks\", \"12 months\", \"today\" — so a schedule never needs editing. Empty (default) = no date cut. In most_recent order (the default) paging stops at the first page older than the cut: a daily feed reads a page or two and older reviews are never fetched or billed; in other orders they are dropped before billing. No memory between runs: dedupe on review_id.",
+      "default": ""
+    },
+    "requireText": {
+      "title": "Only reviews with a written comment",
+      "type": "boolean",
+      "description": "true = deliver and pay only for reviews where the guest wrote something (positives or negatives). Booking allows score-only reviews — about 4 in 10 — and these are dropped before billing. Default false. Applied after maxReviewsPerHotel: 50 asked with true = about 30 written reviews. Use for sentiment analysis, summaries or any task that reads the text.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "languages": {
+      "title": "Review languages",
+      "type": "array",
+      "description": "Review languages to keep, e.g. [\"en\"] or [\"de\", \"fr\"]; empty (default) = every language. Booking's own 2-letter codes: en, de, fr, es, it, pt, nl, ru, pl, ja, zh, ko, tr, sv, da, no, fi, he … Filtered by Booking before fetching, so skipped reviews cost nothing. Reviews are returned in the language they were written in, never translated; the free hotel row lists every language the hotel has, with counts. Use for \"English reviews only\".",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "travelerType": {
+      "title": "Traveller type",
+      "type": "string",
+      "description": "\"all\" (default), \"families\", \"couples\", \"friends\", \"solo\" or \"business\" — one kind of guest, filtered by Booking before fetching, so skipped reviews cost nothing. Use for \"what do business travellers say about hotel X\". The free hotel row shows how many reviews each type holds.",
+      "enum": [
+        "all",
+        "families",
+        "couples",
+        "friends",
+        "solo",
+        "business"
+      ],
+      "enumTitles": [
+        "All travellers",
+        "Families",
+        "Couples",
+        "Groups of friends",
+        "Solo travellers",
+        "Business travellers"
+      ],
+      "default": "all",
+      "editor": "select"
+    },
+    "keyword": {
+      "title": "Only reviews mentioning",
+      "type": "string",
+      "description": "A word or phrase Booking searches the reviews for, e.g. \"breakfast\", \"noise\", \"parking\"; empty (default) = all reviews. Filtered by Booking before fetching, so only matching reviews are delivered and charged. Use for \"reviews that mention X\". Up to 100 characters.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "includeHotelRow": {
+      "title": "Include a hotel row",
+      "type": "boolean",
+      "description": "true (default) = one free row per hotel (type \"hotel\"): hotel_id, hotel_name, city, country, coordinates, review_score (Booking's overall 1-10 score), stars, property_type, review_count, score_staff, score_facilities, score_cleanliness, score_comfort, score_value, score_location, score_wifi (the seven category ratings) and per-language, traveller-type and season counts. Never charged. For \"hotel ratings without the reviews\" keep this true and set maxReviewsPerHotel 1 (one review, $0.005).",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Free extras"
+    },
+    "locale": {
+      "title": "Site language",
+      "type": "string",
+      "description": "Booking site locale for labels, e.g. \"en-US\" (default), \"en-GB\", \"de-DE\", \"fr-FR\". Sets the language of the traveler_type and reviewer_country labels only; review text is always in the language the guest wrote it in. Not a filter: use languages to choose review languages.",
+      "editor": "textfield",
+      "default": "en-US",
+      "sectionCaption": "Language of labels"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, default 4. More is faster; each is paced separately by perIp. Leave the default unless runs are throttled.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3, default 1 (Booking answered 10 calls at 1/s from one IP without a hiccup). Lower it only if a run is throttled.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true}. The datacenter group is enough: this actor never loads a Booking.com page (only those sit behind a browser challenge); it calls the review endpoint Booking's own review list uses. Residential proxies are not needed.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Booking.com hotel reviews. Minimal input: {\"startUrls\": [\"https://www.booking.com/hotel/pt/memmo-alfama.html\"]} or {\"hotelNames\": [\"Memmo Alfama Lisbon\"]} or {\"hotelIds\": [\"536251\"]} — at least one of the three. maxReviewsPerHotel defaults to 200 (up to $1 per hotel at $0.005 a review): set it lower for a scheduled feed, 0 for every review the hotel has. sinceDate (\"1 day\", \"12 months\" or a date) keeps only newer reviews and stops paging there; no memory between runs, dedupe on review_id."
+}

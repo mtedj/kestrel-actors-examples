@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One guest review of a Booking.com hotel: 1-10 score (and out of 5), title, liked and disliked text, language, review and stay dates, nights, room, traveller type, reviewer name and country, helpful votes, photos and the property's reply (row keys rating, rating_5, title, positives, negatives, text, language, review_date, check_in, check_out, nights, room_type, traveler_type, reviewer_name, reviewer_country, helpful_votes, photos, response): $5 per 1,000 reviews. Not charged: hotel rows (category ratings, review count), status rows, reviews removed by maxRating, sinceDate or requireText, reviews Booking's language, traveller-type and keyword filters skip (never fetched), a hotel given twice, hotels with no reviews, names or URLs that match nothing, bad input. No start fee; proxy and compute are included in the event price. About 4 reviews in 10 are score-only. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:48.103Z"
+}

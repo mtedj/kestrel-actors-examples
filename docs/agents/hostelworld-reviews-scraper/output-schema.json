@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Hostelworld reviews",
+  "description": "Three row types share one dataset: review (one guest review, charged), property (context for a hostel, free) and status (one per target, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Hostelworld reviews",
+      "description": "One row per guest review, plus per-hostel context and status rows. Charged rows are billed as delivered; property and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

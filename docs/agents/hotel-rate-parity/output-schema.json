@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Hotel rate parity",
+  "description": "Two row types share one dataset: parity (one property and stay with every booking source side by side and the parity math; charged) and status (one per property and stay: resolved, filtered, no rates, error; never charged).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Rate parity rows",
+      "description": "Parity rows and status rows. Charged rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, how many properties undercut their official site, how many were filtered, not found or failed, and the HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

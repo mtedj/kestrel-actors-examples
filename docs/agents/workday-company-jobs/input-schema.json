@@ -1,0 +1,94 @@
+{
+  "title": "Workday Jobs - Careers, Descriptions & 招聘职位",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal working input: {\"careerUrls\": [\"https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite\"], \"searchQuery\": \"\", \"includeDescriptions\": true, \"locationContains\": \"\"}. Default maximum 20 paid job rows; only delivered rows billed.",
+  "properties": {
+    "careerUrls": {
+      "title": "careerUrls",
+      "type": "array",
+      "description": "Workday career-board URLs, e.g. [\"https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite\"]. Only myworkdayjobs.com boards; individual job URLs rejected. One page budget per board.",
+      "default": [
+        "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "sectionCaption": "Source targets / 数据来源"
+    },
+    "searchQuery": {
+      "title": "searchQuery",
+      "type": "string",
+      "description": "Keyword search within supplied employer boards, e.g. \"engineer\". Empty means all visible board jobs. Does not discover employers. No query fee.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "includeDescriptions": {
+      "title": "includeDescriptions",
+      "type": "boolean",
+      "description": "true (DEFAULT) fetches each Workday job detail; included in the same job price. Set false for a faster list with description=null. This does not change the per-row price.",
+      "default": true
+    },
+    "locationContains": {
+      "title": "locationContains",
+      "type": "string",
+      "description": "Optional case-insensitive substring in source location fields, e.g. \"London\". Empty disables it. Applied before billing; not a radius or geocoding search.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the entire run, after filters and exclusions. Example: 20. May return fewer when source pages end or maxPages is reached.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "maxPages": {
+      "title": "maxPages",
+      "type": "integer",
+      "description": "Maximum source pages per target, 1–20; default 3. Up to 20 listings per page per employer board; descriptions add detail requests but no extra row fee. Filters are free; maxResults can be lower than this scan budget.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "includeKeywords": {
+      "title": "includeKeywords",
+      "type": "array",
+      "description": "Case-insensitive OR substring filter on title and description (description only when included). Example: [\"battery\"]. Empty [] disables it. Applied before billing inside the page budget; not a semantic classifier or additional source search.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "sectionCaption": "Filters and repeat runs / 筛选与去重"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Copy prior output id values here to skip before billing. id combines board hostname, site name and job path. Empty [] disables it. This also suppresses changes to existing IDs.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "SHA-256 content_hash values from previous output to skip unchanged snapshots before billing. Example: copy returned hashes. Empty [] disables it. Changed counters or content can produce a new paid snapshot.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

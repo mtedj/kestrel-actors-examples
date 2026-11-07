@@ -1,0 +1,14 @@
+{
+  "actor": "kestrel/amazon-product-scraper",
+  "input": {
+    "asins": [
+      "B0CHWRXH8B"
+    ],
+    "domain": "com"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

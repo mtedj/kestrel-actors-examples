@@ -1,0 +1,128 @@
+{
+  "title": "Steam Reviews - Text, Ratings, Playtime & 中文评论",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal working input: {\"appIds\": [\"730\"], \"language\": \"all\", \"reviewType\": \"all\", \"sinceDate\": \"\", \"untilDate\": \"\"}. Default maximum 20 paid review rows; only delivered rows billed.",
+  "properties": {
+    "appIds": {
+      "title": "appIds",
+      "type": "array",
+      "description": "Steam numeric App IDs as strings, for example [\"730\", \"570\"]. Required target; reviews are fetched per app. No account or Steam API key required.",
+      "default": [
+        "730"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "sectionCaption": "Source targets / 数据来源"
+    },
+    "language": {
+      "title": "language",
+      "type": "string",
+      "description": "Review language: \"all\" (default), \"schinese\" for 简体中文 or \"tchinese\" for 繁體中文. Only matching source-language reviews are billed.",
+      "default": "all",
+      "editor": "select",
+      "enum": [
+        "all",
+        "english",
+        "schinese",
+        "tchinese",
+        "japanese",
+        "koreana",
+        "german",
+        "french",
+        "spanish",
+        "russian",
+        "portuguese",
+        "brazilian",
+        "turkish",
+        "polish",
+        "italian",
+        "thai",
+        "vietnamese",
+        "indonesian",
+        "ukrainian"
+      ]
+    },
+    "reviewType": {
+      "title": "reviewType",
+      "type": "string",
+      "description": "\"all\", \"positive\" or \"negative\" from Steam recommendation flags. Example: \"negative\" for criticism. Filtering is free; this is not inferred sentiment.",
+      "default": "all",
+      "editor": "select",
+      "enum": [
+        "all",
+        "positive",
+        "negative"
+      ]
+    },
+    "sinceDate": {
+      "title": "sinceDate",
+      "type": "string",
+      "description": "Inclusive start date, e.g. \"2026-01-01\", for review created_at (UTC). Empty means no lower bound. Free filter within maxPages.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "untilDate": {
+      "title": "untilDate",
+      "type": "string",
+      "description": "Inclusive end date, e.g. \"2026-12-31\", for review created_at (UTC). Empty means no upper bound. Free filter within maxPages.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the entire run, after filters and exclusions. Example: 20. May return fewer when source pages end or maxPages is reached.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "maxPages": {
+      "title": "maxPages",
+      "type": "integer",
+      "description": "Maximum source pages per target, 1–20; default 3. Up to 100 source reviews per page, newest first, per App ID. Date filtering only covers these pages. Filters are free; maxResults can be lower than this scan budget.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 20
+    },
+    "includeKeywords": {
+      "title": "includeKeywords",
+      "type": "array",
+      "description": "Case-insensitive OR substring filter on review_text. Example: [\"battery\"]. Empty [] disables it. Applied before billing inside the page budget; not a semantic classifier or additional source search.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "sectionCaption": "Filters and repeat runs / 筛选与去重"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Copy prior output id values here to skip before billing. id is the Steam recommendation ID. Empty [] disables it. This also suppresses changes to existing IDs.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "SHA-256 content_hash values from previous output to skip unchanged snapshots before billing. Example: copy returned hashes. Empty [] disables it. Changed counters or content can produce a new paid snapshot.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

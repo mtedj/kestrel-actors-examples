@@ -1,0 +1,13 @@
+{
+  "appIds": [
+    "com.whatsapp"
+  ],
+  "languages": [
+    "en"
+  ],
+  "countries": [
+    "us"
+  ],
+  "maxReviewsPerApp": 3,
+  "sort": "most_recent"
+}

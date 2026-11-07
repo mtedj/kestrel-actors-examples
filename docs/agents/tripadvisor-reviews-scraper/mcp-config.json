@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-tripadvisor-reviews-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tripadvisor-reviews-scraper"
+    }
+  }
+}

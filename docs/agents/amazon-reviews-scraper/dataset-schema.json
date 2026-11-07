@@ -1,0 +1,321 @@
+{
+  "actorSpecification": 1,
+  "title": "Amazon reviews",
+  "description": "Three row types share one dataset: review (one customer review, charged), product (the product's rating summary, charged) and status (per product, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "review",
+          "product",
+          "status"
+        ],
+        "description": "Row type: review, product or status."
+      },
+      "asin": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Amazon's product id."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace domain suffix, e.g. com, co.uk, de."
+      },
+      "marketplace": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace country name."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product URL on product rows; the review's permalink on review rows."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product title on product rows; the review headline on review rows."
+      },
+      "product_title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review rows: the product the review belongs to."
+      },
+      "brand": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product rows: brand or 'Visit the … Store' byline."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Product rows: price when Amazon serves one. Often null — Amazon withholds price markup from unauthenticated clients."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product rows: the price exactly as printed, when present."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency of the marketplace."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Overall star rating on product rows; the reviewer's stars on review rows (1-5)."
+      },
+      "ratings_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Product rows: how many ratings the product has in total."
+      },
+      "reviews_visible": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Product rows: how many reviews were visible on the page."
+      },
+      "availability": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product rows: stock message."
+      },
+      "image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product rows: main image URL."
+      },
+      "features": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Product rows: the bullet feature list."
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Amazon's id for the review."
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review body as written."
+      },
+      "author": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer's display name."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country the review was written in — Amazon mixes international reviews in."
+      },
+      "date_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review date as Amazon prints it."
+      },
+      "verified": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether Amazon marks it a Verified Purchase."
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many people found the review helpful."
+      },
+      "variant": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The product variation the reviewer bought, when shown."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_reviews or error."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the ASIN or URL this job was given."
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: review rows delivered."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: reviews dropped by the filters, never charged."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: 1 when another input already covered this product."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the product failed, null when it did not."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "asin",
+          "marketplace",
+          "product_title",
+          "rating",
+          "title",
+          "text",
+          "author",
+          "country",
+          "date_text",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "asin",
+          "product_title",
+          "rating",
+          "title",
+          "text",
+          "author",
+          "country",
+          "date_text",
+          "verified",
+          "helpful_votes",
+          "variant",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "products": {
+      "title": "Products",
+      "transformation": {
+        "fields": [
+          "asin",
+          "marketplace",
+          "title",
+          "brand",
+          "rating",
+          "ratings_count",
+          "reviews_visible",
+          "availability",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "target",
+          "asin",
+          "domain",
+          "status",
+          "reviews",
+          "filtered",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

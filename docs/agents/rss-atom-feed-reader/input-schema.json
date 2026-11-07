@@ -1,0 +1,69 @@
+{
+  "title": "RSS Feed Reader - Atom, Articles, Dates & New Items",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Example: {\"feedUrls\": [\"https://blog.python.org/feeds/posts/default?alt=rss\"], \"maxResults\": 3}. Successful source parsing is billed, including zero-match checks; set maxTotalChargeUsd as an Apify run option.",
+  "properties": {
+    "feedUrls": {
+      "type": "array",
+      "title": "Feed URLs",
+      "description": "Pass 1–50 public feed URLs, e.g. ['https://blog.python.org/feeds/posts/default?alt=rss']. Exact source URLs only; no website discovery. XML must be at most 8 MB decompressed. Successfully parsed sources are billed even when filters leave zero rows.",
+      "prefill": [
+        "https://blog.python.org/feeds/posts/default?alt=rss"
+      ],
+      "sectionCaption": "Sources",
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "maxResults": {
+      "type": "integer",
+      "title": "Maximum output rows",
+      "description": "1000 for URLs or 100 for entries by default. Caps delivered rows across all sources after filters. Reaching this cap stops further source requests.",
+      "minimum": 1,
+      "maximum": 5000,
+      "default": 100
+    },
+    "sinceDate": {
+      "type": "string",
+      "title": "Earliest date",
+      "description": "Empty (default) keeps every date. Example: \"2026-10-01\" or \"2026-10-01T12:00:00Z\". Inclusive UTC cutoff on lastmod or publication date (updated date when publication is absent). Rows with missing or invalid dates are excluded when set. Source parsing is still billed.",
+      "sectionCaption": "Filters",
+      "default": "",
+      "editor": "textfield"
+    },
+    "titleKeywords": {
+      "type": "array",
+      "title": "Title keywords",
+      "description": "[] (default) keeps all titles. Example: [\"Python\", \"release\"] keeps titles containing either literal phrase, case insensitive. Filters apply before row caps; each successfully parsed feed is still billed.",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "maxItemsPerFeed": {
+      "type": "integer",
+      "title": "Maximum entries per feed",
+      "description": "100 (default). Example: 10 keeps at most ten matching entries from each feed, in publisher order. Filters and excluded IDs are applied first. The global maxResults cap may stop earlier. No per-entry fee.",
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Repeat runs and cost limits",
+      "default": 100
+    },
+    "excludeIds": {
+      "type": "array",
+      "title": "Previously returned IDs",
+      "description": "[] (default) keeps all unseen rows within this run. Pass id values from an earlier dataset, e.g. [\"previous-id\"], to omit them. No state is remembered automatically. Source parsing remains billed even when every row is excluded.",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    }
+  },
+  "required": [
+    "feedUrls"
+  ]
+}

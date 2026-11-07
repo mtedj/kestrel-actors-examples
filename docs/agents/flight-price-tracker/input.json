@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "LIS-LHR"
+  ],
+  "departDate": "30 days",
+  "days": 1,
+  "currency": "EUR",
+  "market": "pt"
+}

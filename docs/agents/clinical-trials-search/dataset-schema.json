@@ -1,0 +1,249 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "id"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "title"
+      },
+      "official_title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "official title"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "status"
+      },
+      "last_updated": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "last updated"
+      },
+      "start_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "start date"
+      },
+      "completion_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "completion date"
+      },
+      "conditions": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "conditions"
+      },
+      "interventions": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "interventions"
+      },
+      "phases": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "phases"
+      },
+      "study_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "study type"
+      },
+      "enrollment": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "enrollment"
+      },
+      "sponsor": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "sponsor"
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "summary"
+      },
+      "eligibility": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "eligibility"
+      },
+      "contacts": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "contacts"
+      },
+      "locations": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "locations"
+      },
+      "has_results": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "has results"
+      },
+      "study_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "study url"
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "source url"
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "fetched at"
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "title",
+          "official_title",
+          "status",
+          "last_updated",
+          "start_date",
+          "completion_date"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "title": {
+            "label": "title",
+            "format": "text"
+          },
+          "official_title": {
+            "label": "official title",
+            "format": "text"
+          },
+          "status": {
+            "label": "status",
+            "format": "text"
+          },
+          "last_updated": {
+            "label": "last updated",
+            "format": "text"
+          },
+          "start_date": {
+            "label": "start date",
+            "format": "text"
+          },
+          "completion_date": {
+            "label": "completion date",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "monitoring": {
+      "title": "Monitoring",
+      "transformation": {
+        "fields": [
+          "id",
+          "content_hash",
+          "fetched_at",
+          "source_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched at",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source url",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

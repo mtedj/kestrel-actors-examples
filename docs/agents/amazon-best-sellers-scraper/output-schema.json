@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Amazon Best Sellers charts",
+  "description": "Two row types share one dataset: product (one chart entry with its rank, charged) and status (per category, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Amazon Best Sellers charts",
+      "description": "One row per product on a Best Sellers, New Releases or Movers & Shakers chart, plus one status row per category. Charged rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

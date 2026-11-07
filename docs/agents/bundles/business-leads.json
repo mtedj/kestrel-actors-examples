@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-business-leads": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-maps-scraper,kestrel/website-email-finder"
+    }
+  }
+}

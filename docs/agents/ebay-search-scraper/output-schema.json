@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "eBay listings",
+  "description": "Two row types share one dataset: item (one eBay listing from a search page or an item page, charged) and status (one per keyword or URL, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "eBay listings",
+      "description": "One row per listing with its price, shipping, condition, buying format, demand signals and seller, plus status rows. Charged rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error, filtered and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

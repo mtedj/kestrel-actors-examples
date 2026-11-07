@@ -1,0 +1,169 @@
+{
+  "title": "HRS Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "HRS hotel URLs",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "prefill": [
+        "https://www.hrs.com/en/hotel/10520"
+      ],
+      "description": "HRS hotel pages, e.g. [\"https://www.hrs.com/en/hotel/10520\"]: any language prefix (/de/, /fr/) works and the number after /hotel/ is the hotel id. Use for \"reviews of this HRS hotel\". A URL and its id are one hotel, harvested once. A URL from another site ends the run with the reason on the run card and nothing charged. One of startUrls or hotelIds is required.",
+      "sectionCaption": "Which hotels",
+      "sectionDescription": "HRS hotel URLs or ids; one of the two is required. A URL and its id are the same hotel, harvested once."
+    },
+    "hotelIds": {
+      "title": "HRS hotel ids",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "HRS numeric hotel ids, e.g. [\"10520\", \"162\"]: the number after /hotel/ in any hrs.com hotel URL. Up to 20 ids go into one request, so a portfolio of 200 hotels is ten calls: use for bulk or scheduled runs over a known list. An id HRS does not know costs nothing and is reported as a status row with status \"not_found\". One of startUrls or hotelIds is required."
+    },
+    "maxReviewsPerHotel": {
+      "title": "Max reviews per hotel",
+      "type": "integer",
+      "editor": "number",
+      "default": 200,
+      "minimum": 0,
+      "maximum": 20000,
+      "description": "Reviews delivered per hotel after sorting and filtering, e.g. 50 (default 200). 0 = every commented rating the hotel has: HRS returns the whole list in one call, typically 50-150 for a busy hotel, a few hundred at most. The cost control: at most N x $0.004 per hotel. Use with reviewsSort for \"the 30 newest reviews\" (most_recent) or \"the 20 worst\" (lowest_rated).",
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "Sort, cap and filters. Filters run before billing: you pay only for the rows delivered."
+    },
+    "reviewsSort": {
+      "title": "Sort",
+      "type": "string",
+      "editor": "select",
+      "default": "most_recent",
+      "enum": [
+        "most_recent",
+        "oldest",
+        "highest_rated",
+        "lowest_rated"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Oldest first",
+        "Highest rated",
+        "Lowest rated"
+      ],
+      "description": "Order of the reviews before maxReviewsPerHotel cuts: \"most_recent\" (default), \"oldest\", \"highest_rated\" or \"lowest_rated\". \"lowest_rated\" with a small cap is a complaints feed; \"most_recent\" suits a daily schedule; \"oldest\" with cap 0 is the full history."
+    },
+    "maxRating": {
+      "title": "Max rating (complaints)",
+      "type": "number",
+      "editor": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 10,
+      "description": "0 (default) = keep every review. 1-10 = keep only reviews scored at or below it on HRS's 0-10 scale, e.g. 7 (7 is a middling stay, below 6 a bad one). Runs before billing: a hotel with 85 commented ratings of which 9 are at or below 7 delivers and bills 9 rows; the 76 others are counted as filtered in the status row. Use for \"negative reviews\", \"complaints\", \"what guests disliked\"."
+    },
+    "travellerTypes": {
+      "title": "Traveller types",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Empty (default) = every guest. Otherwise keep only these HRS traveller types, e.g. [\"BUSINESS\"]: BUSINESS, PRIVATE, YOUNG_COUPLE, MATURE_COUPLE, FAMILY_SMALL_CHILDREN, FAMILY_OLDER_CHILDREN, GROUP, CONFERENCE. Use for \"what business travellers say\" or \"family reviews\". A single type is asked of HRS directly; several are filtered here. Filtered reviews are never billed."
+    },
+    "languages": {
+      "title": "Languages",
+      "type": "array",
+      "editor": "stringList",
+      "default": [],
+      "description": "Empty (default) = every language. Otherwise keep only comments written in these languages, e.g. [\"de\"] or [\"de\", \"en\"]: codes de, en, fr, it, es, nl, pl, pt, ru, zh, tr, cs (or deu, eng, ...) or names (\"German\"). Most HRS comments are German, then English; nothing is translated. Use for \"German reviews only\". Filtered reviews are never billed."
+    },
+    "requireText": {
+      "title": "Only reviews with a comment",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": false,
+      "description": "false (default) = every commented rating. true = only rows with a written positive or negative. HRS's list already holds only commented ratings, so this rarely removes anything; set it when every billed row must carry text. Filtered rows are never billed."
+    },
+    "includeHotelRow": {
+      "title": "Hotel context rows",
+      "type": "boolean",
+      "editor": "checkbox",
+      "default": true,
+      "description": "true (DEFAULT) = one free row per hotel (type \"hotel\") with name, stars, address, city, overall rating, rating count, recommendation rate and the averages by traveller type and by category, and the hotel name on every review row; costs one page read per hotel, no charge. false = no hotel rows and hotel_name empty on review rows: the cheapest daily poll over a known list of ids.",
+      "sectionCaption": "Hotel row and page language"
+    },
+    "language": {
+      "title": "Site language for hotel pages",
+      "type": "string",
+      "editor": "select",
+      "default": "en",
+      "enum": [
+        "en",
+        "de",
+        "fr",
+        "it",
+        "es",
+        "nl",
+        "pl",
+        "pt",
+        "ru",
+        "zh_cn",
+        "tr",
+        "cs"
+      ],
+      "enumTitles": [
+        "English",
+        "German",
+        "French",
+        "Italian",
+        "Spanish",
+        "Dutch",
+        "Polish",
+        "Portuguese",
+        "Russian",
+        "Chinese",
+        "Turkish",
+        "Czech"
+      ],
+      "description": "Language of the hrs.com page read for the hotel row (name, address, stars): \"en\" (default), \"de\", \"fr\", \"it\", \"es\", \"nl\", \"pl\", \"pt\", \"ru\", \"zh_cn\", \"tr\", \"cs\". Review comments keep the language their author wrote in whatever you pass here; to keep only German comments use languages."
+    },
+    "sessions": {
+      "title": "Proxy sessions",
+      "type": "integer",
+      "editor": "number",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "description": "Proxy sessions (egress IPs) run in parallel, 1-16, e.g. 4 (default 4). More is faster; each session is paced separately.",
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "RESIDENTIAL proxy is required; traffic is small."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "editor": "number",
+      "default": 1,
+      "minimum": 0.1,
+      "maximum": 3,
+      "description": "Requests per second per session, 0.1-3, e.g. 1 (default 1). HRS answered 10 of 10 at 1/s on one residential IP."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      },
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      },
+      "description": "Apify Proxy RESIDENTIAL is required and is the default: hrs.com and its ratings API answer 403 to datacenter IPs. Traffic is small: one JSON call per 20 hotels plus one page per hotel for the hotel row."
+    }
+  },
+  "required": [],
+  "description": "HRS (hrs.com) hotel reviews. Minimal input: {\"hotelIds\": [\"10520\"]} or {\"startUrls\": [\"https://www.hrs.com/en/hotel/10520\"]}; one of the two is required. maxReviewsPerHotel defaults to 200 at $0.004 per review delivered; includeHotelRow defaults to true and is free. maxRating, travellerTypes, languages and requireText filter BEFORE billing."
+}

@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "rate": {
+      "eventTitle": "Rate row",
+      "eventDescription": "One hotel and check-in date: the lowest nightly rate across every booking site Google Hotels lists, stay total, cheapest source with booking link, official-site rate, free-cancellation flag and the date's rank in the window (row keys hotel_name, entity_id, check_in, check_out, currency, price, total, source, source_url, official_price, free_cancellation, rank_in_window): $4 per 1,000 rows. At most one row per hotel per check-in date (days, up to 60): 2 hotels × 30 dates = 60 rows = $0.24. Not charged: dates with no rate (sold out), dates over maxPrice, names that match nothing, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:00.858Z"
+}

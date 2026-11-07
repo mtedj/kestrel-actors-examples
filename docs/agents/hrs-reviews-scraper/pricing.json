@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review",
+      "eventDescription": "One commented guest rating of an HRS hotel: 0-10 score, 12 category scores, positives, negatives, the hotel's replies, traveller type, age group, stay dates, language and text (row keys review_id, rating, votes, positives, negatives, hotel_reply, traveller_type, age_group, arrival_date, departure_date, language, text, review_date): $4 per 1,000 reviews. Not charged: reviews removed by maxRating, travellerTypes, languages or requireText, duplicates, hotels with no commented ratings, unknown ids, hotel rows, status rows. No start fee; proxy and compute are included in the event price. A busy hotel has 50-150 commented ratings; maxReviewsPerHotel caps the rows per hotel. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:02.464Z"
+}

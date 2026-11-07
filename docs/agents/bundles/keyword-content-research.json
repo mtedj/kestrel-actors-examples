@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-keyword-content-research": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-autocomplete-keywords,kestrel/google-search-rank-tracker,kestrel/pinterest-pin-search,kestrel/youtube-channel-videos"
+    }
+  }
+}

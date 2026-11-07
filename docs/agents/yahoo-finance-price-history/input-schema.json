@@ -1,0 +1,100 @@
+{
+  "title": "Yahoo Finance Historical Prices - OHLCV, Dividends & Splits",
+  "schemaVersion": 1,
+  "type": "object",
+  "additionalProperties": false,
+  "description": "Minimal input: {\"tickers\": [\"AAPL\"], \"maxRowsPerTicker\": 3}. Each parsed source response costs $0.003 plus $0.0002 per delivered row. Empty/unchanged successful checks are billed. maxTotalChargeUsd belongs in Apify run options.",
+  "required": [
+    "tickers"
+  ],
+  "properties": {
+    "tickers": {
+      "title": "Ticker symbols",
+      "type": "array",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "prefill": [
+        "AAPL"
+      ],
+      "minItems": 1,
+      "maxItems": 20,
+      "sectionCaption": "Sources and result limits",
+      "description": "Yahoo ticker symbols, for example [\"AAPL\",\"MSFT\",\"BTC-USD\",\"VOD.L\"]. Up to 20; no URLs. Each successful history fetch costs $0.003 plus $0.0002 per delivered daily bar. Data retains source currency units, including GBp for pence."
+    },
+    "maxRowsPerTicker": {
+      "title": "Maximum rows per ticker",
+      "type": "integer",
+      "description": "Output ceiling per original source, for example 50. Applied after filters, exclusions and monitoring. Each delivered row costs $0.0002; source checks are separate. Fewer rows may exist. Newest daily bars are delivered first.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "range": {
+      "title": "History range",
+      "type": "string",
+      "description": "Relative daily history, for example \"1mo\" or \"1y\". Default 1mo. Ignored when both dates are provided. No intraday data. One successful history check per ticker costs $0.003; delivered bars cost $0.0002 each.",
+      "default": "1mo",
+      "enum": [
+        "1mo",
+        "3mo",
+        "6mo",
+        "1y",
+        "2y",
+        "5y",
+        "10y",
+        "ytd"
+      ],
+      "sectionCaption": "History window"
+    },
+    "startDate": {
+      "title": "Start date, inclusive",
+      "type": "string",
+      "description": "Exchange-calendar date in YYYY-MM-DD format, for example \"2020-08-01\". Set endDate too; both dates override range. Empty uses range. Maximum ten-year window. This selects daily bars, not intraday observations.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "endDate": {
+      "title": "End date, exclusive",
+      "type": "string",
+      "description": "Exchange-calendar date, for example \"2020-10-01\" includes bars before October 1. Set startDate too. Empty uses range. Maximum tomorrow. Source weekends and holidays do not create rows.",
+      "default": "",
+      "editor": "textfield"
+    },
+    "onlyNewOrChanged": {
+      "title": "Only new or changed daily bars",
+      "type": "boolean",
+      "description": "false by default. true remembers delivered ticker/date bars under monitorKey and returns new or revised values. Adjusted-close noise within one part per million is ignored; other fields compare exactly. First run returns the baseline. A successful history check costs $0.003 even with no new rows.",
+      "default": false,
+      "sectionCaption": "Monitoring and safety"
+    },
+    "monitorKey": {
+      "title": "Monitor name",
+      "type": "string",
+      "description": "Name such as \"daily-research\"; default \"default\". Reuse it for repeat runs. Targets, date window, locale and filters automatically form a separate baseline when changed. Keeps the latest 50,000 IDs per scope. Do not overlap runs with the same name and scope.",
+      "default": "default",
+      "pattern": "^[A-Za-z0-9_-]{1,60}$",
+      "editor": "textfield"
+    },
+    "excludeIds": {
+      "title": "Previously collected IDs",
+      "type": "array",
+      "description": "Optional output id values, for example [\"previous-output-id\"]. Up to 10,000. Empty [] excludes nothing. Useful for caller-managed deduplication. Excluded rows are not charged; parsed source checks are.",
+      "default": [],
+      "maxItems": 10000,
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxRequests": {
+      "title": "Maximum HTTP requests",
+      "type": "integer",
+      "description": "Hard run-wide source request cap, for example 100; range 1–200. This is not a dollar limit. Set maxTotalChargeUsd as an Apify run option for a monetary cap.",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 200
+    }
+  }
+}

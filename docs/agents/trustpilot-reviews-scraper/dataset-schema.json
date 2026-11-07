@@ -1,0 +1,513 @@
+{
+  "actorSpecification": 1,
+  "title": "Trustpilot reviews",
+  "description": "One row per Trustpilot review (charged), plus a free company context row and a free status row per company.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | company | status"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trustpilot's review id (stable across runs; also the last part of the review URL)"
+      },
+      "company_domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The domain the profile is listed under, e.g. www.booking.com"
+      },
+      "company_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Display name of the company on Trustpilot"
+      },
+      "rating": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1-5 stars"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review headline"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review body (null when the reviewer left only a rating and a title)"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO code of the language the review was written in"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "YYYY-MM-DD the review was published"
+      },
+      "experience_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "YYYY-MM-DD of the experience the reviewer is describing"
+      },
+      "updated_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "YYYY-MM-DD the reviewer last edited the review"
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Display name of the reviewer"
+      },
+      "reviewer_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trustpilot consumer id"
+      },
+      "reviewer_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Two-letter country code of the reviewer"
+      },
+      "reviewer_reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews that consumer has written in total"
+      },
+      "verified": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Trustpilot's verified badge"
+      },
+      "verification_level": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "verified | not-verified | invited …, Trustpilot's own label"
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Organic, Invitation, BusinessGeneratedLink … — how the review was collected"
+      },
+      "likes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many readers found the review useful"
+      },
+      "reply_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The company's public reply"
+      },
+      "reply_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "YYYY-MM-DD the reply was published"
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Branch or location the review is attached to, for multi-location profiles"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Permalink: the review on a review row, the profile on a company row"
+      },
+      "company_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Trustpilot business unit id"
+      },
+      "trust_score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "TrustScore, 1.0-5.0"
+      },
+      "stars": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The rounded star rating Trustpilot displays"
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Total reviews on the profile"
+      },
+      "reviews_last_12_months": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews published in the last twelve months"
+      },
+      "review_count_filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews match this run's filters, as Trustpilot counts them"
+      },
+      "ratings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Star histogram: {one, two, three, four, five} counts"
+      },
+      "review_languages": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "[{code, name, count}] — how many reviews each language holds"
+      },
+      "categories": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Trustpilot category names the company is listed in"
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The company's website as Trustpilot has it"
+      },
+      "country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Two-letter country code of the company"
+      },
+      "email": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Public contact email on the Trustpilot profile"
+      },
+      "phone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Public contact phone on the Trustpilot profile"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Public postal address on the Trustpilot profile"
+      },
+      "is_claimed": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "The company has claimed its profile"
+      },
+      "is_closed": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "The profile is closed or temporarily closed"
+      },
+      "is_collecting": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "The company actively invites customers to review it"
+      },
+      "verified_payment": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Trustpilot verified the company's payment method"
+      },
+      "verified_identity": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Trustpilot verified the company's identity"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews this run read for the company before the actor-side filters"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input this status row is about"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | error"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review rows delivered for this company"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews fetched but dropped by requireText / minRating / maxRating / verifiedOnly (never charged)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review pages read for this company"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Trustpilot's own count of reviews matching this run's filters"
+      },
+      "capped": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the walk stopped at Trustpilot's anonymous paging wall rather than at the end of the reviews"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when another input already covered this company"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why this company produced nothing"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the fetch"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "company_domain",
+          "company_name",
+          "rating",
+          "title",
+          "text",
+          "language",
+          "review_date",
+          "reviewer_country",
+          "verified",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "company_name",
+          "rating",
+          "title",
+          "text",
+          "language",
+          "review_date",
+          "experience_date",
+          "reviewer_name",
+          "reviewer_country",
+          "reviewer_reviews",
+          "verified",
+          "verification_level",
+          "source",
+          "likes",
+          "reply_text",
+          "reply_date",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "company_name",
+          "rating",
+          "title",
+          "text",
+          "review_date",
+          "experience_date",
+          "reviewer_country",
+          "reply_text",
+          "reply_date",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "companies": {
+      "title": "Companies",
+      "transformation": {
+        "fields": [
+          "company_domain",
+          "company_name",
+          "trust_score",
+          "stars",
+          "review_count",
+          "reviews_last_12_months",
+          "ratings",
+          "review_languages",
+          "categories",
+          "website",
+          "country_code",
+          "email",
+          "phone",
+          "address",
+          "is_claimed",
+          "is_closed",
+          "is_collecting",
+          "verified_payment",
+          "verified_identity",
+          "reviews_fetched"
+        ],
+        "filter": {
+          "type": "company"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "company_domain",
+          "company_name",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "capped",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

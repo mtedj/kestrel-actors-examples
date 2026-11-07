@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/shopify-products",
+  "input": {
+    "storeUrls": [
+      "https://kith.com"
+    ],
+    "maxProductsPerStore": 3,
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

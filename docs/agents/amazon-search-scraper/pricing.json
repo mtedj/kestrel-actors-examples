@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "product": {
+      "eventTitle": "Product row",
+      "eventDescription": "One product from a search page or a chart page (row keys asin, title, url, query, chart, category, position = slot on the page for a keyword search, rank = chart rank for Best Sellers and New Releases, page, price, currency, rating, ratings_count, image, sponsored, domain): $4 per 1,000 products. Measured: a search page carries about 20 organic products plus sponsored ones; a chart page 30. Price is null where the page shows none. Not charged: rows removed by skipSponsored, minRating or maxResultsPerQuery, an ASIN already delivered by another keyword, searches with no results, failed searches, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:44.632Z"
+}

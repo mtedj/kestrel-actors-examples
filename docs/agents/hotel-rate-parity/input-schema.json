@@ -1,0 +1,143 @@
+{
+  "title": "Hotel Rate Parity — input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "hotelNames": {
+      "title": "Properties by name",
+      "type": "array",
+      "description": "Hotels by name, e.g. [\"Hyatt Regency Lisbon\", \"Altis Grand Hotel Lisbon\"]: use for \"is anyone undercutting hotel X\" when you have no Google Hotels URL. One free Google search per name; the listing is kept only when its name shares at least two words and 60% of yours, so a stranger is never billed. A name that matches nothing is a free not_found status row: retry with the name as Google spells it (a city Google omits from the name counts against it), or pass the entity_id of a row in hotels.",
+      "editor": "stringList",
+      "default": [],
+      "prefill": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels"
+    },
+    "hotels": {
+      "title": "Properties (Google Hotels URLs or entity tokens)",
+      "type": "array",
+      "description": "Exact hotels by Google Hotels URL (https://www.google.com/travel/hotels/entity/ChkI…) or entity token, e.g. the entity_id of a row from an earlier run or from kestrel/google-hotels-prices. No search: one offers call per hotel and stay, nothing unrelated is ever billed. Use to check the SAME hotels every morning (your property and its comp set): resolve names once, then pass their entity_id values here. Names belong in hotelNames.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.google.com/travel/hotels/entity/ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE",
+        "https://www.google.com/travel/hotels/entity/ChkIg-b2ismUj7M1Gg0vZy8xMWg3MThreGg1EAE"
+      ],
+      "uniqueItems": true
+    },
+    "checkIn": {
+      "title": "Check-in",
+      "type": "string",
+      "description": "Check-in date: \"2026-11-02\" (YYYY-MM-DD), or relative to the day the run starts: \"30 days\", \"6 weeks\", \"+30d\", \"today\", \"tomorrow\". Use relative dates for a schedule (\"check parity daily\"): the input never needs editing and every run looks the same distance ahead. A past date is rejected before anything is charged. Required.",
+      "editor": "datepicker",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)$",
+      "dateType": "absoluteOrRelative",
+      "prefill": "30 days",
+      "sectionCaption": "Stay"
+    },
+    "nights": {
+      "title": "Nights",
+      "type": "integer",
+      "description": "Length of stay in nights, 1 to 30, e.g. 2 (default 1). Check-out = check-in + nights. Every source's rate in the row is for this exact stay and occupancy.",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 30,
+      "editor": "number"
+    },
+    "sweepDays": {
+      "title": "Sweep check-in over N more days",
+      "type": "integer",
+      "description": "0 (default) = only the stay above. N = also check the same length of stay starting on each of the next N days, e.g. 6 = 7 check-in dates per hotel, one row each. Use for \"next week\", \"the weekend\", \"a rate calendar\", \"the next 30 days\" (29). Every stay is billed as its own row, so cost × (N + 1): 5 hotels × sweepDays 6 = 35 rows = $0.35. Maximum 60.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 60,
+      "editor": "number"
+    },
+    "minSpreadPct": {
+      "title": "Only keep spreads of at least N %",
+      "type": "number",
+      "description": "0 (default) = deliver every hotel and stay. N = deliver only rows whose spread between the cheapest and dearest source is at least N %, e.g. 5: the violations-only feed. Rows under N get a free status row (status \"filtered\") and are never billed. Use for \"only parity breaches\", \"only where the gap is over 10%\". It filters on spread_pct (cheapest vs dearest source), not on undercut_pct: for \"only where an OTA undercuts the official site\" keep 0 and filter rows on undercut_by.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000,
+      "editor": "number",
+      "sectionCaption": "Parity filter"
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "description": "Adults in the room, 1 to 6, e.g. 2 (default 2). Google prices ONE room for the whole party: there is no rooms input, and above 6 adults Google returns no price at all. Rates scale with occupancy exactly as on Google, so compare like with like.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 6,
+      "editor": "number",
+      "sectionCaption": "Guests, currency and market"
+    },
+    "childrenAges": {
+      "title": "Children (ages)",
+      "type": "array",
+      "description": "Ages of the children in the same room, e.g. [5, 9] for two children aged 5 and 9. Empty (default) = no children. The price is for one room holding the adults plus these children.",
+      "editor": "json",
+      "default": [],
+      "prefill": []
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "ISO 4217 code for every price in the run, e.g. \"EUR\" (default \"USD\"): USD, EUR, GBP, JPY, THB, SGD, AUD, AED… When the user names no currency, pass the hotel's own (\"EUR\" for Lisbon). Every source's rate in the row is in this one currency.",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$",
+      "editor": "textfield",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "country": {
+      "title": "Market",
+      "type": "string",
+      "description": "Google market (gl): any 2-letter country code, e.g. \"gb\", \"pt\", \"jp\" (default \"us\"). It is the country of the person booking, NOT the hotel's: keep \"us\" unless the user wants the parity picture as seen from a market. It changes which booking sites Google lists (Klook, Traveloka, Wego in Asian markets), so keep one market across a history.",
+      "default": "us",
+      "editor": "textfield"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Google language (hl), e.g. \"en\", \"de\", \"ja\" (default \"en\"). Sets the language of hotel and source names where Google has a translation; hotelNames may be written in any language.",
+      "default": "en",
+      "editor": "textfield"
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Keep the default (Apify datacenter proxies): Google accepts them for these calls, residential is unnecessary.",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing"
+    },
+    "sessions": {
+      "title": "Parallel proxy sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions, 1 to 16, e.g. 4 (default 4); each is paced at perIp requests per second. Raise for many hotels × stays, lower if Google throttles.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per proxy session, 0.1 to 2, e.g. 0.5 (default 0.5). 0.5 is safe; raise carefully.",
+      "default": 0.5,
+      "minimum": 0.1,
+      "maximum": 2,
+      "editor": "number"
+    }
+  },
+  "required": [
+    "checkIn"
+  ],
+  "description": "Hotel rate parity checker on Google Hotels. Minimal input: {\"hotelNames\": [\"Hyatt Regency Lisbon\"], \"checkIn\": \"30 days\"}. One of hotelNames / hotels is required. One row per hotel and stay at $0.01, however many booking sites it holds; sweepDays multiplies the rows (6 = 7 stays per hotel), minSpreadPct delivers and bills only rows whose spread reaches N %."
+}

@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flight Price Tracker — Cheapest Day to Fly &amp; Fare Calendar | kestrel</title><meta name="description" content="Track Google Flights fares across 1–60 departure dates per route. One row per day: cheapest price, airline, stops and rank. Flight price calendar for one-way or round trips, with nonstop and max-price filters. Schedule snapshots for price history; threshold rows do not send notifications."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/flight-price-tracker</p><h1>Flight Price Tracker — Cheapest Day to Fly &amp; Fare Calendar</h1><p class="intro">Track Google Flights fares across 1–60 departure dates per route. One row per day: cheapest price, airline, stops and rank. Flight price calendar for one-way or round trips, with nonstop and max-price filters. Schedule snapshots for price history; threshold rows do not send notifications.</p>
+<p><a class="button" href="https://apify.com/kestrel/flight-price-tracker">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/flight-price-tracker</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-flight-price-tracker&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/flight-price-tracker&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.1.3; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/flight-price-tracker&quot;,
+  &quot;input&quot;: {
+    &quot;routes&quot;: [
+      &quot;LIS-LHR&quot;
+    ],
+    &quot;departDate&quot;: &quot;30 days&quot;,
+    &quot;days&quot;: 1,
+    &quot;currency&quot;: &quot;EUR&quot;,
+    &quot;market&quot;: &quot;pt&quot;
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>fare</code></td><td>$0.004</td><td>One route and departure day: that day&#x27;s cheapest Google Flights itinerary with price, airline, stops, times, duration, layovers, CO2 and its rank in the window (row keys route, origin, destination, depart_date, return_date, seat, price, currency, airline, stops, depart_time, arrive_time, duration_minutes, layovers, co2_kg, rank_in_window, cheapest_in_window, itineraries_seen): $4 per 1,000 days. At most one row per route and day, so a 30-day window on one route is at most 30 rows. Not charged: days with no fare, days over your maxPrice (filtered before billing), failed days, status rows, refused inputs. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/flight-price-tracker/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.1.3. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

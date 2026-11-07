@@ -1,0 +1,196 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "id"
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "type"
+      },
+      "seed": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "seed"
+      },
+      "expanded_query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "expanded query"
+      },
+      "suggestion": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "suggestion"
+      },
+      "position": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "position"
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "country"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "language"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "url"
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "change"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "fetched at"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "seed",
+          "expanded_query",
+          "suggestion",
+          "position",
+          "country",
+          "language"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "seed": {
+            "label": "Seed",
+            "format": "text"
+          },
+          "expanded_query": {
+            "label": "Expanded Query",
+            "format": "text"
+          },
+          "suggestion": {
+            "label": "Suggestion",
+            "format": "text"
+          },
+          "position": {
+            "label": "Position",
+            "format": "text"
+          },
+          "country": {
+            "label": "Country",
+            "format": "text"
+          },
+          "language": {
+            "label": "Language",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "all": {
+      "title": "All fields",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "seed",
+          "expanded_query",
+          "suggestion",
+          "position",
+          "country",
+          "language",
+          "url",
+          "change",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "seed": {
+            "label": "Seed",
+            "format": "text"
+          },
+          "expanded_query": {
+            "label": "Expanded Query",
+            "format": "text"
+          },
+          "suggestion": {
+            "label": "Suggestion",
+            "format": "text"
+          },
+          "position": {
+            "label": "Position",
+            "format": "text"
+          },
+          "country": {
+            "label": "Country",
+            "format": "text"
+          },
+          "language": {
+            "label": "Language",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

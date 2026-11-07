@@ -1,0 +1,305 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "job_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "company": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "company_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "posted_date": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "posted_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "salary_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "logo_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "seniority": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "employment_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "job_function": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "industries": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "search_location": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    }
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "job_id",
+          "title",
+          "url",
+          "company",
+          "company_url",
+          "location",
+          "posted_date",
+          "posted_text",
+          "salary_text",
+          "logo_url",
+          "description",
+          "seniority",
+          "employment_type",
+          "job_function",
+          "industries",
+          "query",
+          "search_location",
+          "source_url",
+          "fetched_at",
+          "change"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "job_id": {
+            "label": "Job Id",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "company": {
+            "label": "Company",
+            "format": "text"
+          },
+          "company_url": {
+            "label": "Company Url",
+            "format": "text"
+          },
+          "location": {
+            "label": "Location",
+            "format": "text"
+          },
+          "posted_date": {
+            "label": "Posted Date",
+            "format": "text"
+          },
+          "posted_text": {
+            "label": "Posted Text",
+            "format": "text"
+          },
+          "salary_text": {
+            "label": "Salary Text",
+            "format": "text"
+          },
+          "logo_url": {
+            "label": "Logo Url",
+            "format": "text"
+          },
+          "description": {
+            "label": "Description",
+            "format": "text"
+          },
+          "seniority": {
+            "label": "Seniority",
+            "format": "text"
+          },
+          "employment_type": {
+            "label": "Employment Type",
+            "format": "text"
+          },
+          "job_function": {
+            "label": "Job Function",
+            "format": "text"
+          },
+          "industries": {
+            "label": "Industries",
+            "format": "text"
+          },
+          "query": {
+            "label": "Query",
+            "format": "text"
+          },
+          "search_location": {
+            "label": "Search Location",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "Source Url",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "id",
+          "job_id",
+          "title",
+          "url",
+          "company",
+          "company_url",
+          "location",
+          "posted_date"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "job_id": {
+            "label": "Job Id",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "company": {
+            "label": "Company",
+            "format": "text"
+          },
+          "company_url": {
+            "label": "Company Url",
+            "format": "text"
+          },
+          "location": {
+            "label": "Location",
+            "format": "text"
+          },
+          "posted_date": {
+            "label": "Posted Date",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

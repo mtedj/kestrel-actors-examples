@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "page-parsed": {
+      "eventTitle": "Parsed page",
+      "eventDescription": "One successfully parsed source page: $5 per 1,000 pages. This fee applies even when filters, duplicates, exclusions or monitoring leave no delivered rows. Failed requests and unrecognized responses are not charged. Separate delivered-video fee applies. No start fee; proxy and compute included. Work stops before a new page when maxTotalChargeUsd cannot cover a page plus one row.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    },
+    "video": {
+      "eventTitle": "Video",
+      "eventDescription": "One delivered video row: $1 per 1,000 rows. Row keys: id, video_id, title, url, channel_id, views, duration_seconds, published_text, thumbnail_url. Filtered, duplicate, unchanged and excluded rows have no row fee. Parsed pages are billed separately at $0.005 each, even with zero rows. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option, not actor input.",
+      "eventPriceUsd": 0.001
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:16.051Z"
+}

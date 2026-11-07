@@ -1,0 +1,7 @@
+{
+  "startUrls": [
+    "https://www.iana.org/contact"
+  ],
+  "maxPagesPerSite": 3,
+  "maxResults": 3
+}

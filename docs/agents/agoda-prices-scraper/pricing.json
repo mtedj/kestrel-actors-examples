@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "hotel": {
+      "eventTitle": "Priced hotel row",
+      "eventDescription": "One Agoda property's cheapest rate for your dates and guests (row keys hotel_id, hotel_name, stars, review_score, review_count, area, country, latitude, longitude, price_nightly, price_nightly_with_taxes, price_total, price_total_with_taxes, crossed_out_price, available_rooms, cancellation, free_cancellation_until, breakfast_included): $4 per 1,000 hotels. Not charged: sold-out properties (free rows with includeSoldOut), properties maxPrice, minStars, minReviewScore or freeCancellationOnly remove, a property reached twice in one run, destinations or names that match nothing, status rows, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    },
+    "calendar_day": {
+      "eventTitle": "Calendar day row",
+      "eventDescription": "One check-in date of a named hotel's price calendar (calendarDays, up to 60 dates from checkIn): per-night and stay price at your nights and adults priced live for that date, rank_in_window (1 = the cheapest date), Agoda's Low/Normal/High trend word where it has one (row keys hotel_id, hotel_name, check_in, check_out, nights, adults, currency, price_nightly, price_total, trend, rank_in_window, cheapest_in_window): $2 per 1,000 dates. Not charged: dates Agoda has no price for (skipped), hotels from destination searches (no calendar is read for them), bad input. No start fee; the same maximum-cost stop applies.",
+      "eventPriceUsd": 0.002
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:30.835Z"
+}

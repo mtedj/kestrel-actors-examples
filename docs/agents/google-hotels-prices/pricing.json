@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "hotel": {
+      "eventTitle": "Hotel price row",
+      "eventDescription": "One hotel with its lowest nightly rate, stay total and taxes for your dates (row keys name, entity_id, hotel_id, stars, rating, reviews, lat, lng, nightly, total, taxes, fees, total_with_taxes, currency, source, check_in, check_out, google_url): $4 per 1,000 hotels. Address, phone, amenities and photos (includeDetails; keys address, phone, place_id, amenities, photos) ride on this row at no extra charge. Not charged: sold-out or unpriced hotels, duplicates, hotels your filters remove, empty or failed searches, hotel names that match nothing, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    },
+    "offer": {
+      "eventTitle": "Source rate row",
+      "eventDescription": "One booking site's rate for one hotel and stay (Booking.com, Expedia, Agoda, official site…) with free-cancellation flag and link (row keys entity_id, hotel_id, name, source, official, room, nightly, total, currency, link, partner_url, free_cancel, free_cancel_until_date, max_guests, lowest, check_in, check_out): $2 per 1,000. Measured: about 18 rows per hotel (4 to 36) with offerLevel \"sources\", about 65 (up to 150) with \"rooms\". Not charged when includeOffers is false; maxOffersPerHotel caps the rows per hotel. Failed offer lookups are free.",
+      "eventPriceUsd": 0.002
+    }
+  },
+  "effectiveAt": "2026-11-06T09:10:49.293Z"
+}

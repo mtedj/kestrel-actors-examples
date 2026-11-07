@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Flight price tracker",
+  "description": "Two row types share one dataset: fare (one per route and departure day — that day's cheapest itinerary) and status (one per route; never charged).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Cheapest fare by day",
+      "description": "One row per route and departure day with that day's cheapest fare, plus one status row per route. Fare rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the routes and days searched, fares delivered and charged, days filtered by maxPrice, the cheapest fare and its day, error counts and HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

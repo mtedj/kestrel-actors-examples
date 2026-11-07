@@ -1,0 +1,190 @@
+{
+  "title": "Trustpilot Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "companyDomains": {
+      "title": "Company domains",
+      "type": "array",
+      "description": "Companies by the domain Trustpilot lists them under — the part after trustpilot.com/review/ — e.g. [\"www.booking.com\", \"n26.com\", \"ryanair.com\"]; with or without www./https://; a website URL works too (scheme and path are stripped, then Trustpilot's own spelling is followed: monzo.com resolves to www.monzo.com). A bare company name does not: \"Monzo\" is rejected before anything is charged. Use for \"reviews of company X\": up to maxReviewsPerCompany reviews each at $0.0015 a review.",
+      "editor": "stringList",
+      "prefill": [
+        "www.booking.com"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which companies",
+      "sectionDescription": "Company domains and/or Trustpilot review-page URLs. At least one."
+    },
+    "startUrls": {
+      "title": "Trustpilot review page URLs",
+      "type": "array",
+      "description": "Trustpilot review-page URLs, e.g. [\"https://www.trustpilot.com/review/www.booking.com\"]. Any query string on the URL is ignored — set the filters below instead; a country subdomain (uk.trustpilot.com, de.trustpilot.com) is read as the same profile. A URL and its bare domain in companyDomains count once, so mixing the two never double-bills. One of companyDomains or startUrls is required.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerCompany": {
+      "title": "Max reviews per company",
+      "type": "integer",
+      "description": "Reviews to return per company, 0 to 1000, e.g. 40 (default 100 = up to $0.15 per company). The main cost control. Trustpilot's filters and sinceDate apply BEFORE this cap, so 50 with maxRating 2 = the 50 newest 1- and 2-star reviews. 0 = every review Trustpilot serves without a login: 200 per filtered view, up to 1000 per company with deepPaging; the status row says capped: true when that wall, not the end of the reviews, stopped the walk.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 1000,
+      "default": 100,
+      "prefill": 40,
+      "sectionCaption": "How many and in which order",
+      "sectionDescription": "The cap is the main cost control; filters below apply before it."
+    },
+    "sort": {
+      "title": "Order",
+      "type": "string",
+      "description": "\"most_recent\" (default) = newest first, the order a monitoring schedule and sinceDate want. \"most_relevant\" = Trustpilot's own relevance order. Applied by Trustpilot.",
+      "editor": "select",
+      "enum": [
+        "most_recent",
+        "most_relevant"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Most relevant"
+      ],
+      "default": "most_recent"
+    },
+    "minRating": {
+      "title": "Min rating (stars)",
+      "type": "integer",
+      "description": "Lowest star rating to keep, 0 to 5, e.g. 4 for \"positive reviews only\" or \"4 and 5 star reviews\". 0 (default) = any rating. Combine with maxRating for a band. This is Trustpilot's own stars filter, applied on their servers: reviews outside it are never fetched or billed.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0,
+      "sectionCaption": "Filters (applied before billing)",
+      "sectionDescription": "Stars, date range, language, verified and keyword are Trustpilot's own filters and run on their side: rows they drop are never fetched, so never billed. sinceDate and requireText run in the actor, also before billing."
+    },
+    "maxRating": {
+      "title": "Max rating (stars)",
+      "type": "integer",
+      "description": "Highest star rating to keep, 0 to 5, e.g. 2 for \"negative reviews\", \"complaints\", \"1 and 2 star reviews\". 0 (default) = any rating. Trustpilot's own stars filter, applied on their servers: on a 125,000-review brand maxRating 2 fetches and bills only the 1- and 2-star reviews. Add requireText true to drop rating-only rows.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "sinceDate": {
+      "title": "Since date",
+      "type": "string",
+      "description": "Keep only reviews published on or after this date: \"2026-09-01\" (YYYY-MM-DD) or relative to the run day — any \"N days\" / \"N weeks\" / \"N months\" / \"N years\" or \"today\" (\"1 day\" = since yesterday) — so a schedule never needs editing. Empty (default) = no date cut. Use for \"only new reviews since last run\": with most_recent order the walk stops at the first page older than the cut, so a daily run reads a page or two; older reviews are never billed. No memory between runs: dedupe on review_id.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "dateRange": {
+      "title": "Date range",
+      "type": "string",
+      "description": "Trustpilot's own date window, applied on their servers: \"all\" (default), \"last30days\", \"last3months\", \"last6months\", \"last12months\". Reviews outside it are never fetched or billed. Use for \"reviews from the last 3 months\"; sinceDate gives an exact day.",
+      "editor": "select",
+      "enum": [
+        "all",
+        "last30days",
+        "last3months",
+        "last6months",
+        "last12months"
+      ],
+      "enumTitles": [
+        "All time",
+        "Last 30 days",
+        "Last 3 months",
+        "Last 6 months",
+        "Last 12 months"
+      ],
+      "default": "all"
+    },
+    "keyword": {
+      "title": "Keyword",
+      "type": "string",
+      "description": "Only reviews whose text mentions this word or phrase, e.g. \"refund\", \"delivery\", \"chargeback\" (up to 100 characters). Empty (default) = no keyword filter. This is Trustpilot's own review search, so non-matching reviews are never fetched or billed. It searches review text, not company names: to choose a company use companyDomains.",
+      "editor": "textfield",
+      "maxLength": 100,
+      "default": ""
+    },
+    "languages": {
+      "title": "Language",
+      "type": "string",
+      "description": "\"all\" (default) = reviews in every language, each row tagged with its language code. One code — \"en\", \"de\", \"fr\", \"es\", \"it\", \"nl\", \"da\", \"sv\" — keeps that language only, applied by Trustpilot so other languages are never fetched or billed. Trustpilot's own page shows English only, which hides most reviews of a global brand; the free company row lists how many reviews each language holds. Reviews come back as written, never translated.",
+      "editor": "textfield",
+      "default": "all"
+    },
+    "verifiedOnly": {
+      "title": "Verified reviews only",
+      "type": "boolean",
+      "description": "true = only reviews Trustpilot marks verified (invited after a real transaction, or identity-checked); unverified reviews are never fetched or billed. false (default) = every review, with verified and verification_level on each row. Many companies collect few verified reviews, so true can return far fewer rows.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "requireText": {
+      "title": "Require review text",
+      "type": "boolean",
+      "description": "true = drop reviews that carry only a star rating and a title, before billing. false (default) = keep them, with text null. Use for sentiment analysis or any text corpus. Applied after the maxReviewsPerCompany cap, so 100 asked may deliver fewer than 100.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeCompanyRow": {
+      "title": "Include company row",
+      "type": "boolean",
+      "description": "true (default) = one free row per company (type \"company\"): trust_score, stars, review_count, reviews_last_12_months, ratings (the 1-5 star histogram), review_languages, categories, website, country_code, email, phone, address, is_claimed, is_closed, is_collecting, verified_payment, verified_identity, url. Use for \"what is company X's TrustScore\": there is no summary-only switch, so set maxReviewsPerCompany 1 and the run bills one review per company ($0.0015). false = no company row.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Output",
+      "sectionDescription": "What lands in the dataset besides the reviews themselves."
+    },
+    "deepPaging": {
+      "title": "Go past Trustpilot's 200-review wall",
+      "type": "boolean",
+      "description": "true (default) = when more than 200 reviews are asked for, each star rating (1 to 5) is fetched as its own 200-review view, merged and de-duplicated: up to 1000 reviews per company. The merged set is the newest 200 of each star rating, not the 1000 newest overall: for a strictly chronological sample stay at 200 or slice with sinceDate / dateRange. false = one view only, never more than 200 reviews or 10 page requests per company. No effect on the price per review.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Depth",
+      "sectionDescription": "How the actor gets past Trustpilot's 200-review wall for anonymous visitors."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) fetching pages in parallel, 1 to 8, e.g. 2 (default). Each is paced separately; raise it for a long company list.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 8,
+      "default": 2,
+      "sectionCaption": "Speed and proxy",
+      "sectionDescription": "Trustpilot answers every plain request with an AWS WAF challenge. The actor solves it once in a headless browser (5-20 seconds), then fetches every page without a browser on the token that challenge issued, refreshed every four minutes."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.2 to 2, e.g. 1 (default). 1 is what Trustpilot tolerates comfortably; higher values earn retries, not speed.",
+      "editor": "number",
+      "minimum": 0.2,
+      "maximum": 2,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, RESIDENTIAL group (the default, and required: the headless browser that solves Trustpilot's AWS WAF challenge runs through it, once per four-minute token window). Leave the default.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      },
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      }
+    }
+  },
+  "required": [],
+  "description": "Trustpilot customer reviews. Minimal input: {\"companyDomains\": [\"www.booking.com\"]} (or startUrls with a review-page URL). maxReviewsPerCompany defaults to 100 (up to $0.15 per company at $0.0015 a review): set 1000 for a full corpus, or maxRating 2 + sinceDate \"7 days\" for a daily complaints feed. Every filter runs before billing."
+}

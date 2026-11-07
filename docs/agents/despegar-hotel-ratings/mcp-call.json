@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/despegar-hotel-ratings",
+  "input": {
+    "startUrls": [
+      "https://www.despegar.com.ar/hoteles/h-265543/riu-cancun"
+    ],
+    "country": "ar",
+    "includeComments": true
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

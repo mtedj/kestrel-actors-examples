@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "study": {
+      "eventTitle": "Study snapshot",
+      "eventDescription": "One delivered study snapshot ($5 per 1,000 rows; row keys id, title, official_title, status, last_updated, start_date, completion_date, conditions, interventions, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:49.022Z"
+}

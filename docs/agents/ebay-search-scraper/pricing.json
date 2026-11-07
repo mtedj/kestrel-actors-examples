@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "item": {
+      "eventTitle": "Listing row",
+      "eventDescription": "One delivered active eBay listing: $4 per 1,000 listings ($0.004 each; up to 60 search rows/page). Item-page details are currently unreliable; search rows do not include item specifics, and successful search does not guarantee detail rows. Blocked item pages are not charged. Search row keys: item_id, title, url, price, currency, list_price, discount_pct, shipping_cost, condition, buying_format = buy_it_now or auction, bids, time_left, best_offer, units_sold, watchers, seller, seller_feedback_pct, location, image. Active listings only; UK and sold/completed modes are unsupported. Not charged: empty searches, listings outside minPrice/maxPrice, duplicate item IDs within one run, status rows, refused pages, bad input. No start fee; proxy and compute are included in the event price. If a separate item-URL run delivers a detail row, it is charged again at $0.004; failed attempts are free. The run stops at the Apify run option maxTotalChargeUsd, never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:50.663Z"
+}

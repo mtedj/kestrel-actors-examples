@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Google Patents Search - Inventors, Assignees &amp; PDF Links | kestrel</title><meta name="description" content="Search Google Patents by keywords and patent office. One row per patent: publication number, title, inventor, assignee, priority, filing and publication dates, snippet and PDF link when available. Free text filters and ID/hash exclusions. Search metadata only; full claims are not extracted. 专利检索。"><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/google-patents-search</p><h1>Google Patents Search - Inventors, Assignees &amp; PDF Links</h1><p class="intro">Search Google Patents by keywords and patent office. One row per patent: publication number, title, inventor, assignee, priority, filing and publication dates, snippet and PDF link when available. Free text filters and ID/hash exclusions. Search metadata only; full claims are not extracted. 专利检索。</p>
+<p><a class="button" href="https://apify.com/kestrel/google-patents-search">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-patents-search</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-google-patents-search&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-patents-search&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.0.4; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/google-patents-search&quot;,
+  &quot;input&quot;: {
+    &quot;searchQueries&quot;: [
+      &quot;solar battery&quot;
+    ],
+    &quot;country&quot;: &quot;&quot;,
+    &quot;maxResults&quot;: 3,
+    &quot;maxPages&quot;: 1
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>patent</code></td><td>$0.005</td><td>One delivered patent snapshot ($5 per 1,000 rows; row keys id, title, snippet, inventor, assignee, priority_date, filing_date, publication_date, grant_date, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/google-patents-search/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.0.4. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

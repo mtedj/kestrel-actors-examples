@@ -1,0 +1,11 @@
+{
+  "locationQueries": [
+    "Lisbon, Portugal"
+  ],
+  "checkIn": "30 days",
+  "checkOut": "33 days",
+  "adults": 2,
+  "currency": "EUR",
+  "maxListingsPerQuery": 3,
+  "calendarMonths": 0
+}

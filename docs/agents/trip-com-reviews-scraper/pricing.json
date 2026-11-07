@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One guest review of a Trip.com or Ctrip hotel: 0-10 rating (and out of 5) with four sub-scores, rating word, review text as written, language, recommend flag, review and check-in dates, room, travel type, reviewer name, country, level and review count, helpful votes, photos, source (Trip.com, Ctrip, Expedia, Hotels.com) and the hotel's reply with date (row keys rating, rating_5, rating_location, rating_facility, rating_service, rating_room, rating_text, text, language, recommend, review_date, check_in, room_type, travel_type, reviewer_name, reviewer_country, reviewer_level, reviewer_reviews, helpful_votes, images, source, response, response_date): $4 per 1,000 reviews. Not charged: hotel rows, status rows, reviews removed by maxRating or requireText, reviews Trip.com's language filter skips (never fetched), a hotel given twice (URL and id of one hotel are read once), hotels with no reviews, unknown ids, bad input. No start fee; proxy and compute are included in the event price. Trip.com pages 100 reviews at a time. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:10.289Z"
+}

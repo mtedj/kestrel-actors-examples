@@ -1,0 +1,766 @@
+{
+  "actorSpecification": 1,
+  "title": "AliExpress reviews",
+  "description": "One row per AliExpress buyer review (charged), plus a free product context row and a free status row per target.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | product | status | insights (insights rows only with Analyze reviews on)"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input value (product URL or item id) this row came from"
+      },
+      "product_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "AliExpress's numeric item id (the number in /item/<id>.html)"
+      },
+      "product_title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Product title as AliExpress lists it"
+      },
+      "product_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The product's page on aliexpress.com"
+      },
+      "product_image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Main product image URL (product rows)"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "AliExpress's numeric evaluation id, unique per review"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publication date, YYYY-MM-DD, parsed back from the language the review was requested in"
+      },
+      "review_date_raw": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The date exactly as AliExpress wrote it, e.g. \"02 Mar 2026\" or \"02 мар 2026\""
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Star rating, 1-5 (on product rows, the product's average as a decimal such as 4.2)"
+      },
+      "rating_100": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "AliExpress's own 0-100 score behind the stars: 100 = 5 stars, 80 = 4 stars, and so on"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review exactly as the buyer wrote it; null when they left stars only"
+      },
+      "text_translated": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "AliExpress's machine translation of the review into the language the run asked for"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language code of the served text, e.g. en, ru, es"
+      },
+      "buyer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Buyer display name, masked by AliExpress (\"S***l\") or \"AliExpress Shopper\" when they stayed anonymous"
+      },
+      "buyer_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Buyer country as an ISO-2 code, e.g. US, BR, PL"
+      },
+      "buyer_gender": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Buyer gender when AliExpress publishes it"
+      },
+      "buyer_anonymous": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true when the buyer hid their identity"
+      },
+      "buyer_avatar": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Buyer avatar image URL, when there is one"
+      },
+      "sku_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "AliExpress's numeric id of the exact variant the buyer bought"
+      },
+      "sku_info": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The variant in words, e.g. \"Color:LP40 white\" — which colour or size the review is actually about"
+      },
+      "images": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Full-size URLs of the photos the buyer attached to the review"
+      },
+      "image_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many photos the review carries"
+      },
+      "logistics": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The shipping method the order used, e.g. \"AliExpress Selection Standard Shipping\""
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many shoppers marked the review helpful"
+      },
+      "unhelpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many shoppers marked the review unhelpful"
+      },
+      "attributes": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "The structured attributes AliExpress asked this buyer to rate, e.g. {\"Quality of sound\": \"Good\", \"Durability\": \"Fits ok\"}"
+      },
+      "follow_up_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The follow-up review the buyer added later, in their own words"
+      },
+      "follow_up_translated": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Machine translation of the follow-up review"
+      },
+      "follow_up_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date of the follow-up review, YYYY-MM-DD"
+      },
+      "follow_up_days": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many days after the first review the follow-up was written — the durability signal"
+      },
+      "follow_up_images": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Photos attached to the follow-up review"
+      },
+      "featured": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true when AliExpress promotes this review to the top of the product page"
+      },
+      "ai_generated": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "AliExpress's own flag for a review it believes was written by AI"
+      },
+      "sentiment": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "With Analyze reviews on: positive, neutral or negative — the star rating pulled toward what the words of the review say (review rows)"
+      },
+      "sentiment_score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "With Analyze reviews on: -1 (angry) to 1 (delighted); the stars on that scale, averaged with the balance of praise and complaint words when the review has any (review rows)"
+      },
+      "rating_text_mismatch": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "With Analyze reviews on: true when a 4 or 5 star review reads as a complaint — the AliExpress habit an average rating hides (review rows)"
+      },
+      "topics": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "With Analyze reviews on. Review rows: which of quality, delivery, packaging, size_fit, description_match, value, durability, functionality, seller_service, authenticity, damaged_or_missing the review talks about. Insights rows: every topic with how many reviews raise it, how many of those are positive and negative, and their average rating"
+      },
+      "reviews_analyzed": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many delivered reviews the insights row summarises (insights rows)"
+      },
+      "avg_rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Average star rating of the analysed reviews — of the reviews this run delivered, after your filters, not of the whole product (insights rows)"
+      },
+      "sentiment_positive": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Analysed reviews that read positive (insights rows)"
+      },
+      "sentiment_neutral": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Analysed reviews that read neutral (insights rows)"
+      },
+      "sentiment_negative": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Analysed reviews that read negative (insights rows)"
+      },
+      "avg_sentiment_score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Average sentiment score, -1 to 1 (insights rows)"
+      },
+      "rating_text_mismatches": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many 4-5 star reviews read as complaints (insights rows)"
+      },
+      "top_complaints": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Up to five topics with the most negative reviews, worst first (insights rows)"
+      },
+      "top_praise": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Up to five topics with the most positive reviews (insights rows)"
+      },
+      "by_variant": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The ten most-reviewed SKU variants with review count, average rating and negative reviews each — which colour, size or plug is the bad one (insights rows)"
+      },
+      "by_country": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The ten biggest buyer countries with review count, average rating and negative reviews each (insights rows)"
+      },
+      "by_month": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Review count, average rating and negative reviews per calendar month, oldest first — is the product getting better or worse (insights rows)"
+      },
+      "with_photos": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Analysed reviews carrying buyer photos (insights rows)"
+      },
+      "follow_ups": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Analysed reviews with a follow-up review (insights rows)"
+      },
+      "follow_ups_negative": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Follow-up reviews whose own words are more complaint than praise — the durability signal (insights rows)"
+      },
+      "rating_percent": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The product's average rating as a percentage, AliExpress's own number (product rows)"
+      },
+      "reviews_total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews AliExpress says the product has (product rows)"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews read in this run for the product, before filters (product rows)"
+      },
+      "five_star": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of 5-star reviews (product rows)"
+      },
+      "four_star": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of 4-star reviews (product rows)"
+      },
+      "three_star": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of 3-star reviews (product rows)"
+      },
+      "two_star": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of 2-star reviews (product rows)"
+      },
+      "one_star": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of 1-star reviews (product rows)"
+      },
+      "positive_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews AliExpress counts as positive, 4-5 stars (product rows)"
+      },
+      "neutral_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews AliExpress counts as neutral, 3 stars (product rows)"
+      },
+      "negative_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews AliExpress counts as negative, 1-2 stars (product rows)"
+      },
+      "positive_rate": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of positive reviews as a percentage (product rows)"
+      },
+      "negative_rate": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of negative reviews as a percentage (product rows)"
+      },
+      "with_photos_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many of the product's reviews carry buyer photos (product rows)"
+      },
+      "with_follow_up_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many carry a follow-up review written later (product rows)"
+      },
+      "same_country_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many were written by buyers in the country the run asked as (product rows)"
+      },
+      "product_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "AliExpress's own product classification, e.g. ORDINARY (product rows)"
+      },
+      "review_attributes": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The structured attributes buyers rated the product on, with how many said each thing — the fastest read on what people love and hate (product rows)"
+      },
+      "review_topics": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "The topics AliExpress itself mined from the review texts — 'poor sound quality', 'fast delivery' — each with its sentiment (positive, negative or neutral) and how many reviews raise it: the product's praise and complaints at a glance (product rows)"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | duplicate | error (status rows)"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews delivered and charged for this target (status rows)"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by the filters, never charged (status rows)"
+      },
+      "already_seen": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "With Only new reviews on: how many reviews passed the filters but were already delivered by an earlier run, so were skipped and not charged (status rows)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Requests made for this target (status rows)"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews AliExpress lists for the product (status rows)"
+      },
+      "repeats": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews AliExpress served twice across its shuffled result shards and this run dropped (status rows)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this target resolved to a product another target already covers (status rows)"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a target failed (status rows)"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "product_title",
+          "rating",
+          "review_date",
+          "text",
+          "buyer_country",
+          "sku_info",
+          "image_count",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "product_title",
+          "review_id",
+          "rating",
+          "review_date",
+          "text",
+          "text_translated",
+          "sku_info",
+          "buyer_name",
+          "buyer_country",
+          "images",
+          "logistics",
+          "helpful_votes",
+          "attributes",
+          "product_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "product_title",
+          "rating",
+          "review_date",
+          "text",
+          "text_translated",
+          "sku_info",
+          "buyer_country",
+          "images",
+          "logistics",
+          "follow_up_text",
+          "follow_up_days",
+          "attributes",
+          "product_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "photos": {
+      "title": "Photo reviews",
+      "transformation": {
+        "fields": [
+          "product_title",
+          "rating",
+          "review_date",
+          "images",
+          "image_count",
+          "follow_up_images",
+          "sku_info",
+          "buyer_country",
+          "text",
+          "product_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "products": {
+      "title": "Products",
+      "transformation": {
+        "fields": [
+          "product_id",
+          "product_title",
+          "rating",
+          "rating_percent",
+          "reviews_total",
+          "reviews_fetched",
+          "five_star",
+          "four_star",
+          "three_star",
+          "two_star",
+          "one_star",
+          "positive_count",
+          "neutral_count",
+          "negative_count",
+          "positive_rate",
+          "negative_rate",
+          "with_photos_count",
+          "with_follow_up_count",
+          "same_country_count",
+          "review_attributes",
+          "review_topics",
+          "product_type",
+          "product_image",
+          "product_url"
+        ],
+        "filter": {
+          "type": "product"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "insights": {
+      "title": "Insights",
+      "description": "One row per product when Analyze reviews is on: sentiment split, complaint and praise topics, ratings by variant, country and month. Free.",
+      "transformation": {
+        "fields": [
+          "product_title",
+          "reviews_analyzed",
+          "avg_rating",
+          "sentiment_positive",
+          "sentiment_neutral",
+          "sentiment_negative",
+          "avg_sentiment_score",
+          "rating_text_mismatches",
+          "top_complaints",
+          "top_praise",
+          "topics",
+          "by_variant",
+          "by_country",
+          "by_month",
+          "with_photos",
+          "follow_ups",
+          "follow_ups_negative",
+          "product_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "product_id",
+          "product_title",
+          "status",
+          "reviews",
+          "filtered",
+          "already_seen",
+          "pages",
+          "total",
+          "repeats",
+          "duplicates",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/image-to-text-ocr",
+  "input": {
+    "imageUrls": [
+      "https://raw.githubusercontent.com/tesseract-ocr/test/main/testing/phototest.tif"
+    ],
+    "language": "eng",
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

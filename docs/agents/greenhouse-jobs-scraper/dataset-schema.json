@@ -1,0 +1,301 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "job (charged) or status (free)."
+      },
+      "platform": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source platform."
+      },
+      "board": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Company board token."
+      },
+      "job_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source job post ID."
+      },
+      "job_key": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Platform:board:id; use for deduplication."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Employer's job title."
+      },
+      "company": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source company_name or board token; Ashby returns the token."
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Primary location, unchanged."
+      },
+      "locations": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "All source locations."
+      },
+      "departments": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Source department names."
+      },
+      "team": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source team when available."
+      },
+      "employment_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source employment type, or null."
+      },
+      "workplace_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "remote, hybrid, on_site, unknown."
+      },
+      "source_is_remote": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Ashby raw isRemote flag; may include hybrid."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source job page."
+      },
+      "apply_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Employer's application link; no applications submitted."
+      },
+      "description_text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full readable job description."
+      },
+      "description_html": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source description HTML; sanitize before rendering."
+      },
+      "published_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source publication timestamp, or null."
+      },
+      "updated_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source edit timestamp, or null."
+      },
+      "salary_ranges": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Published ranges: min, max, currency, interval, kind, label, description."
+      },
+      "compensation_raw": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Original published compensation structure."
+      },
+      "compensation_status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "published, not_published, or not_requested."
+      },
+      "requisition_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source requisition identifier, or null."
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source language, or null."
+      },
+      "application_deadline": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source application deadline, or null."
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "SHA-256 of normalized content excluding fetch timestamp."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC fetch timestamp."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok, no_jobs, no_matches, error, partial_error, budget_reached."
+      },
+      "jobs": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Jobs delivered for the board."
+      },
+      "source_jobs": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of source jobs before filters."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Jobs removed by filters."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Excluded or repeated jobs."
+      },
+      "errors": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Source/parser failures."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Error explanation; null on success."
+      },
+      "cap_reached": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "A count cap stopped the board walk."
+      }
+    }
+  },
+  "views": {
+    "jobs": {
+      "title": "Jobs",
+      "transformation": {
+        "fields": [
+          "type",
+          "job_id",
+          "title",
+          "company",
+          "location",
+          "workplace_type",
+          "departments",
+          "salary_ranges",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "type",
+          "board",
+          "status",
+          "jobs",
+          "source_jobs",
+          "filtered",
+          "duplicates",
+          "errors",
+          "error",
+          "cap_reached"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

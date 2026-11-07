@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "fare": {
+      "eventTitle": "Fare row (cheapest of the day)",
+      "eventDescription": "One route and departure day: that day's cheapest Google Flights itinerary with price, airline, stops, times, duration, layovers, CO2 and its rank in the window (row keys route, origin, destination, depart_date, return_date, seat, price, currency, airline, stops, depart_time, arrive_time, duration_minutes, layovers, co2_kg, rank_in_window, cheapest_in_window, itineraries_seen): $4 per 1,000 days. At most one row per route and day, so a 30-day window on one route is at most 30 rows. Not charged: days with no fare, days over your maxPrice (filtered before billing), failed days, status rows, refused inputs. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:51.477Z"
+}

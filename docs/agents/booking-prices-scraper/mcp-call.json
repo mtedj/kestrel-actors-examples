@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/booking-prices-scraper",
+  "input": {
+    "locationQueries": [
+      "Lisbon"
+    ],
+    "maxHotelsPerQuery": 3,
+    "checkIn": "30 days",
+    "nights": 1,
+    "adults": 2,
+    "currency": "USD",
+    "sortBy": "price"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

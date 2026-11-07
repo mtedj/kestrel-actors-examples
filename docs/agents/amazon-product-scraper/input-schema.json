@@ -1,0 +1,75 @@
+{
+  "title": "Amazon Product Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "asins": {
+      "title": "ASINs or product URLs",
+      "type": "array",
+      "description": "Amazon ASINs or product URLs, e.g. [\"B0CHWRXH8B\", \"https://www.amazon.de/dp/B09B8V1LZ3\"]. A URL's marketplace is used as is; a bare ASIN uses `domain`. Each ASIN + marketplace is fetched (one page) and billed once per run, $0.004. Use for \"price, stock and details of these ASINs\", \"is this in stock\", \"price history\" (schedule the same list daily and keep the rows). An unknown ASIN (404) or a page Amazon blocks costs nothing and is reported in a status row.",
+      "editor": "stringList",
+      "prefill": [
+        "B0CHWRXH8B",
+        "B09B8V1LZ3",
+        "B0BSHF7WHW"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "What to scrape"
+    },
+    "domain": {
+      "title": "Marketplace",
+      "type": "string",
+      "description": "Marketplace for bare ASINs, e.g. \"co.uk\" for amazon.co.uk. Default \"com\". One of: com, co.uk, de, fr, it, es, ca, com.au, co.jp, in, com.mx, com.br, nl, se, pl, sa, ae, sg, com.tr, com.be. Prices come in that marketplace's currency; the same ASIN on two marketplaces is two products. Outside \"com\" choose RESIDENTIAL in proxyConfiguration so the buybox price and stock line appear (the run routes through the marketplace's country by itself). Ignored for full URLs.",
+      "editor": "textfield",
+      "default": "com"
+    },
+    "inStockOnly": {
+      "title": "Only products in stock",
+      "type": "boolean",
+      "description": "true = keep only products whose page says they are in stock; unavailable products and products whose stock cannot be read are dropped before billing. Default false (every product is delivered, with in_stock true, false or null). Use for \"which of these are in stock\" and stock checks across a catalogue: dead listings cost nothing.",
+      "editor": "checkbox",
+      "default": false,
+      "sectionCaption": "Which products (filters run before billing)"
+    },
+    "maxPrice": {
+      "title": "Only products priced at or below",
+      "type": "number",
+      "description": "Keep only products whose buybox price is at or below this number in the marketplace's currency, e.g. 100. 0 (default) = no price filter. Products with no visible price are dropped too, so it also skips paying for rows without a price. Filtered products are never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10000000,
+      "default": 0
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (one egress IP each), 1 to 16, e.g. 4 (default 4). More is faster for long ASIN lists; each session is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2 (default 0.5). Amazon tolerates about 0.5/s per IP; faster causes captchas, not speed. Leave the default.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true} (datacentre), enough for amazon.com. For any other marketplace pass {\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]}: the run routes it through the marketplace's own country, which is what makes the buybox price and stock line appear. A captcha or 503 rotates the IP (up to 8 tries per product); after two refusals in a row the run moves to residential proxies by itself.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Amazon product details. Minimal input: {\"asins\": [\"B0CHWRXH8B\"]}. One row per product at $0.004, nothing else is charged; inStockOnly and maxPrice drop products before billing. Outside amazon.com pass RESIDENTIAL in proxyConfiguration so the buybox price appears (the run routes it through the marketplace's country by itself)."
+}

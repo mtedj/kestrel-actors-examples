@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/trip-com-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.trip.com/hotels/lisbon-hotel-detail-2561632/valverde-hotel/"
+    ],
+    "maxReviewsPerHotel": 3,
+    "reviewsSort": "most_recent"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

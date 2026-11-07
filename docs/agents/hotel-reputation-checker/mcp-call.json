@@ -1,0 +1,13 @@
+{
+  "actor": "kestrel/hotel-reputation-checker",
+  "input": {
+    "hotelNames": [
+      "Altis Grand Hotel, Lisbon"
+    ],
+    "sources": []
+  },
+  "callOptions": {
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

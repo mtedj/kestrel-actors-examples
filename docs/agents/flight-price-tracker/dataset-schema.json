@@ -1,0 +1,363 @@
+{
+  "actorSpecification": 1,
+  "title": "Flight price tracker",
+  "description": "Two row types share one dataset: fare (one per route and departure day — that day's cheapest itinerary) and status (one per route; never charged).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "fare",
+          "status"
+        ],
+        "description": "Row type: fare or status."
+      },
+      "route": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The route as given, e.g. \"LIS-LHR\"."
+      },
+      "origin": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Origin airport code on the itinerary."
+      },
+      "destination": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Destination airport code on the itinerary."
+      },
+      "trip": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "one_way or round_trip."
+      },
+      "depart_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Departure day, YYYY-MM-DD. On status rows: the first day of the window."
+      },
+      "return_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Return day for round trips, null for one-way."
+      },
+      "seat": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Cabin priced: economy, premium_economy, business or first."
+      },
+      "adults": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Adults the price covers."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency of the price (ISO code), as Google actually priced it."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The day's cheapest fare for all passengers. For round trips this is the total for both legs."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Price exactly as Google states it, e.g. \"127 US dollars\"."
+      },
+      "round_trip_total": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the price covers both legs of a round trip."
+      },
+      "airline": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Operating airline of the cheapest itinerary; the first when several operate it."
+      },
+      "airlines": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Every airline operating the cheapest itinerary."
+      },
+      "stops": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Stops on the cheapest itinerary; 0 is nonstop."
+      },
+      "depart_time": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Departure time, local to the origin."
+      },
+      "arrive_time": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Arrival time, local to the destination."
+      },
+      "depart_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Departure day as Google states it."
+      },
+      "arrive_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Arrival day as Google states it — later than the departure day on overnight itineraries."
+      },
+      "duration": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Total travel time as Google states it, e.g. \"2 hr 55 min\"."
+      },
+      "duration_minutes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Total travel time in minutes — the sortable form."
+      },
+      "layovers": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Each layover: index, of, minutes, airport, city. Null on nonstop itineraries."
+      },
+      "layover_airports": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Layover airport names, in order."
+      },
+      "overnight_layover": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when Google flags an overnight layover."
+      },
+      "co2_kg": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Google's carbon estimate for the itinerary, in kilograms."
+      },
+      "google_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Google Flights URL for that day's search — opens the same results."
+      },
+      "itineraries_seen": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many itineraries Google listed for that day; the fare row is the cheapest of them."
+      },
+      "cheapest_in_window": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True on the one day of the route's window with the lowest fare — the cheapest day to fly."
+      },
+      "rank_in_window": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 = the cheapest day of the window, 2 = the next, and so on. Ranked over every day searched, before the maxPrice filter."
+      },
+      "days_searched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: departure days searched for this route."
+      },
+      "fares": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: fare rows delivered (and billed) for this route."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: days dropped by maxPrice — never billed."
+      },
+      "no_results": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: days on which Google listed no itinerary."
+      },
+      "errors": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: days whose search failed."
+      },
+      "cheapest": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Status rows: the lowest fare found across the window."
+      },
+      "cheapest_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the day that lowest fare departs."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_results or error."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the first failure message, null when every day succeeded."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "route",
+          "depart_date",
+          "return_date",
+          "price",
+          "currency",
+          "airline",
+          "stops",
+          "rank_in_window",
+          "cheapest_in_window",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "fares": {
+      "title": "Cheapest fare by day",
+      "transformation": {
+        "fields": [
+          "route",
+          "depart_date",
+          "return_date",
+          "price",
+          "currency",
+          "rank_in_window",
+          "cheapest_in_window",
+          "airline",
+          "stops",
+          "depart_time",
+          "arrive_time",
+          "duration_minutes",
+          "itineraries_seen",
+          "google_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "route",
+          "trip",
+          "depart_date",
+          "days_searched",
+          "fares",
+          "filtered",
+          "no_results",
+          "errors",
+          "cheapest",
+          "cheapest_date",
+          "status",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review",
+      "eventDescription": "One Google Play review (row keys review_id, app_id, language, country, rating = 1-5, text, author, thumbs_up, app_version, review_date, reply_text = developer reply, reply_date, url): $4 per 1,000 reviews. Not charged: app rows (Google Play rating, rating count, category, price), status rows, reviews removed by minRating, maxRating, sinceDate or requireText, reviews Google itself skips when one star value is asked (never fetched), a review listed under two languages or countries (delivered once), apps with no reviews, unknown packages, failed jobs, bad input. No start fee; proxy and compute are included in the event price. Google answers up to 100 reviews per request. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:56.902Z"
+}

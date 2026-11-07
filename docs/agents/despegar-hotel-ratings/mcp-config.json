@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-despegar-hotel-ratings": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/despegar-hotel-ratings"
+    }
+  }
+}

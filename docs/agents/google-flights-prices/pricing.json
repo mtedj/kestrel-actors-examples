@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "flight": {
+      "eventTitle": "Itinerary row",
+      "eventDescription": "One flight itinerary for your route, dates, cabin and passengers: price for all passengers, airline, departure and arrival times, duration, stops, layovers, CO2 (row keys route, origin, destination, depart_date, return_date, seat, adults, price, currency, airline, stops, depart_time, arrive_time, duration_minutes, layovers, co2_kg, rank, google_url): $5 per 1,000 itineraries. Usually 10 to 35 rows per route and date; maxResultsPerSearch caps them. Not charged: empty or failed searches, duplicates (an itinerary two overlapping searches both return is billed once), status rows, refused inputs. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:52.281Z"
+}

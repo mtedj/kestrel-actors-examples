@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-news-monitoring": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-news,kestrel/rss-atom-feed-reader,kestrel/sitemap-url-extractor"
+    }
+  }
+}

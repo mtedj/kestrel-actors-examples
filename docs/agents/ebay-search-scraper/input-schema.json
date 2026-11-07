@@ -1,0 +1,184 @@
+{
+  "title": "eBay Search & Listings",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "queries": {
+      "title": "Search keywords",
+      "type": "array",
+      "description": "Keywords, e.g. [\"mechanical keyboard\"]. Each searches the domain marketplace for pages result pages (up to 60 listings/page, $0.004 each). Returns active search-card rows, without item specifics. Item-page details are currently unreliable; successful search does not guarantee detail rows in another run. For cheapest results, use sortBy \"price_low\". Sold/completed listings are unsupported. One of queries or startUrls is required.",
+      "editor": "stringList",
+      "prefill": [
+        "mechanical keyboard"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "What to scrape",
+      "sectionDescription": "Keywords and/or eBay URLs. At least one of the two."
+    },
+    "startUrls": {
+      "title": "eBay URLs",
+      "type": "array",
+      "description": "Item-page details are currently unreliable; do not rely on item specifics. Prefer active search URLs, e.g. [\"https://www.ebay.com/sch/i.html?_nkw=gpu\"]. Item URLs remain accepted but may return only error status rows (free); each delivered listing costs $0.004. Search success does not guarantee item-page access. URLs select the marketplace; see domain for supported hosts (UK unsupported). Supported search filters are kept; sold/completed flags are stripped and those modes are unsupported.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "domain": {
+      "title": "Marketplace",
+      "type": "string",
+      "description": "Marketplace for keyword searches: \"com\" (default), \"de\", \"fr\", \"it\", \"es\", \"nl\", \"pl\", \"com.au\", \"com.sg\", \"com.my\". These are the 10 supported hosts. UK, Ireland, Canada, Switzerland, Hong Kong and Austria are unsupported; passing their URLs does not make them supported. Prices use the currency rendered by eBay, recorded in each row. startUrls chooses the marketplace from each URL instead of this field.",
+      "editor": "textfield",
+      "default": "com"
+    },
+    "pages": {
+      "title": "Pages per keyword or URL",
+      "type": "integer",
+      "description": "Result pages per keyword or search URL, 1 to 34, e.g. 2 (default 1). Up to 60 listings/page at $0.004 each: at most $0.24/page per keyword or search URL. Set maxResultsPerQuery for a smaller cap. eBay stops paginating at about 2,000 listings. pages does not fetch item-detail pages. Item-page details are currently unreliable; more search pages do not provide item specifics.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 34,
+      "default": 1,
+      "sectionCaption": "How many listings",
+      "sectionDescription": "Depth and the cost control: 60 listings a page, $0.004 each."
+    },
+    "maxResultsPerQuery": {
+      "title": "Max listings per keyword or URL",
+      "type": "integer",
+      "description": "Listings to deliver per keyword or URL, e.g. 100. 0 (default) = everything the pages returned (60 × pages). N = the first N in eBay's order; fetching stops as soon as a job has N, so 100 with pages 5 reads two pages and bills 100. Use for \"give me 50 listings of X\". eBay applies minPrice/maxPrice before this count; the actor's own re-check can drop a few more, never charging them.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 2000,
+      "default": 0
+    },
+    "buyingFormat": {
+      "title": "Buying format",
+      "type": "string",
+      "description": "\"all\" (default) = every listing. \"buy_it_now\" = fixed-price listings only (eBay's LH_BIN filter; rows carry units sold, watchers, best offer). \"auction\" = auctions only (LH_Auction; rows carry bids and time left). Applied by eBay, so excluded listings are never fetched or billed. Use \"auction\" with sortBy \"ending_soonest\" for \"eBay auctions ending soon\".",
+      "enum": [
+        "all",
+        "buy_it_now",
+        "auction"
+      ],
+      "enumTitles": [
+        "All listings",
+        "Buy It Now only",
+        "Auctions only"
+      ],
+      "default": "all",
+      "editor": "select",
+      "sectionCaption": "Filters (applied by eBay before billing)",
+      "sectionDescription": "Buying format, condition, category and sort are eBay's own URL filters; the price bounds are sent to eBay too and re-checked before billing. A filtered search costs the pages it returns and nothing more."
+    },
+    "conditions": {
+      "title": "Item condition",
+      "type": "array",
+      "description": "Keep only these conditions, e.g. [\"new\"] or [\"used\", \"open_box\"]. Allowed: new, open_box, certified_refurbished, excellent_refurbished, very_good_refurbished, good_refurbished, seller_refurbished, used, for_parts. Empty (default) = every condition. eBay grades refurbished in four tiers, so list each tier you accept. Applied by eBay (LH_ItemCondition): excluded listings are never fetched or billed.",
+      "editor": "select",
+      "default": [],
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "new",
+          "open_box",
+          "certified_refurbished",
+          "excellent_refurbished",
+          "very_good_refurbished",
+          "good_refurbished",
+          "seller_refurbished",
+          "used",
+          "for_parts"
+        ],
+        "enumTitles": [
+          "New",
+          "Open box",
+          "Certified refurbished",
+          "Excellent - refurbished",
+          "Very good - refurbished",
+          "Good - refurbished",
+          "Seller refurbished",
+          "Used / pre-owned",
+          "For parts or not working"
+        ]
+      }
+    },
+    "minPrice": {
+      "title": "Minimum price",
+      "type": "integer",
+      "description": "Lowest price to keep, in the marketplace's own currency, e.g. 50. 0 (default) = no minimum. Sent to eBay (_udlo) so the results arrive already filtered, then checked again before billing: a listing under it is never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10000000,
+      "default": 0
+    },
+    "maxPrice": {
+      "title": "Maximum price",
+      "type": "integer",
+      "description": "Highest price to keep, in the marketplace's own currency, e.g. 200. 0 (default) = no maximum. Sent to eBay (_udhi) and checked again before billing: a listing over it is never charged. Use for \"eBay listings under $200\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 10000000,
+      "default": 0
+    },
+    "category": {
+      "title": "Category id",
+      "type": "string",
+      "description": "eBay numeric category id to search inside, e.g. \"175672\" (computer components) — the _sacat number in any eBay category URL. Empty (default) = all of eBay. Use for \"X in the Y category\". This filters search results; it does not populate item-page category or breadcrumbs, which are currently unreliable.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "sortBy": {
+      "title": "Sort order",
+      "type": "string",
+      "description": "eBay's own order: \"best_match\" (default), \"ending_soonest\" (auctions), \"newly_listed\" (new listings first, for monitoring), \"price_low\", \"price_high\" (both price plus shipping, what a shopper compares). Use \"price_low\" with maxResultsPerQuery for \"the 20 cheapest X\".",
+      "enum": [
+        "best_match",
+        "ending_soonest",
+        "newly_listed",
+        "price_low",
+        "price_high"
+      ],
+      "enumTitles": [
+        "Best match",
+        "Ending soonest",
+        "Newly listed",
+        "Price + shipping: lowest",
+        "Price + shipping: highest"
+      ],
+      "default": "best_match",
+      "editor": "select"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Proxy sessions (egress IPs) in parallel, 1 to 16, e.g. 4 (default). More is faster; each is paced separately and warmed on eBay's homepage before its first request. Raise it for long keyword lists.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Performance and proxy",
+      "sectionDescription": "eBay sits behind Akamai and refuses repeat callers; the run detects every refusal, rotates IP and moves to residential proxies on its own."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2, e.g. 0.5 (default). eBay tolerates about 0.5/s per IP; faster earns interstitials, not speed.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, required — {\"useApifyProxy\": true} (the default): eBay answers unproxied and unrotated callers with an Akamai interstitial. The run starts on datacentre proxies and switches to RESIDENTIAL by itself when eBay pushes back. Leave the default.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "eBay active listings. Minimal input: {\"queries\": [\"mechanical keyboard\"]} = the first page of ebay.com, up to 60 listings at $0.004 each ($0.24). pages (default 1) decides the bill: pages × 60 × $0.004 per keyword; maxResultsPerQuery caps it exactly. Sold or completed listings are not available (eBay sign-in wall)."
+}

@@ -1,0 +1,14 @@
+{
+  "actor": "kestrel/rss-atom-feed-reader",
+  "input": {
+    "feedUrls": [
+      "https://blog.python.org/feeds/posts/default?alt=rss"
+    ],
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

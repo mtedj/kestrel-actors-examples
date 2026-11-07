@@ -1,0 +1,22 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "page-parsed": {
+      "eventTitle": "Parsed search page",
+      "eventDescription": "One successfully parsed search page: $5 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    },
+    "job": {
+      "eventTitle": "Job",
+      "eventDescription": "One delivered job: $1 per 1,000 rows. Row keys: id, job_id, title, url, company, company_url, location, posted_date, posted_text, salary_text, logo_url, description. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.005 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget. With includeDetails=true this event is replaced by job-with-description, not added to it.",
+      "eventPriceUsd": 0.001
+    },
+    "job-with-description": {
+      "eventTitle": "Job with description",
+      "eventDescription": "One delivered job with a successfully fetched full description: $4 per 1,000 enriched jobs. Replaces the $0.001 job event, not an add-on. Row keys include description, seniority, employment_type, job_function and industries; unavailable criteria stay null. Failed descriptions have no job fee. Parsed search pages cost $0.005 each, including filtered or unchanged checks. No start fee; proxy and compute included. maxTotalChargeUsd is a run option, not input.",
+      "eventPriceUsd": 0.004
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:05.595Z"
+}

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-google-ads-transparency-scraper": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/google-ads-transparency-scraper"
+    }
+  }
+}

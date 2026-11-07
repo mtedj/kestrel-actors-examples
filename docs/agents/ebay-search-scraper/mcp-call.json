@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/ebay-search-scraper",
+  "input": {
+    "queries": [
+      "mechanical keyboard"
+    ],
+    "pages": 1,
+    "maxResultsPerQuery": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

@@ -1,0 +1,21 @@
+{
+  "actor": "kestrel/hrs-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.hrs.com/en/hotel/10520"
+    ],
+    "maxReviewsPerHotel": 3,
+    "reviewsSort": "most_recent",
+    "proxyConfiguration": {
+      "useApifyProxy": true,
+      "apifyProxyGroups": [
+        "RESIDENTIAL"
+      ]
+    }
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

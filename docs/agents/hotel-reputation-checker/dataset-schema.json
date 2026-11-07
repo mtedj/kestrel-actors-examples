@@ -1,0 +1,535 @@
+{
+  "actorSpecification": 1,
+  "title": "Hotel reputation across six review sites",
+  "description": "One row per hotel per review site (rating, review count, ranking, sub-scores), one summary row per hotel across sites, one status row per check. Everything is free — this actor never charges.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "reputation | summary | status"
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The text this row was resolved from: the hotel name you gave, or the name the start URL's own site returned."
+      },
+      "hotel": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The run's label for the hotel — the name you typed, or the name the start URL's site publishes."
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "google | tripadvisor | booking | agoda | hostelworld | despegar"
+      },
+      "source_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The site's own name: Google Hotels, Tripadvisor, Booking.com, Agoda, Hostelworld, Despegar."
+      },
+      "source_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property's id on that site (Google entity token, Tripadvisor location id, Booking hotel id, Agoda hotel id, Hostelworld property id, Despegar hotel id)."
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property page on that site — where the reviews behind these numbers live."
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property name exactly as that site spells it, so you can see what was matched."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The headline guest score on the site's own scale (see rating_scale)."
+      },
+      "rating_scale": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "5 (Google Hotels, Tripadvisor), 10 (Booking.com, Agoda, Despegar) or 100 (Hostelworld)."
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same score converted to a 0-5 scale so the six sites can be compared in one column."
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many guest reviews or ratings that site counts for the property."
+      },
+      "ranking": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The site's own ranking sentence, e.g. \"#33 of 372 hotels in Lisbon\" (Tripadvisor publishes one; the other five do not)."
+      },
+      "ranking_position": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The number before the \"of\" in `ranking`."
+      },
+      "ranking_of": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The number after the \"of\" in `ranking` — how many properties the ranking covers."
+      },
+      "sub_scores": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "The category scores the site publishes for free, on the site's own scale: Tripadvisor's cleanliness/location/rooms/service/sleep_quality/value, Hostelworld's seven, Despegar's six. Google Hotels, Booking.com and Agoda publish none on the cheap path."
+      },
+      "stars": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The property's star classification where the site states one."
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City as that site files the property under."
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country as that site files the property under."
+      },
+      "matched_by": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "url (you gave the property page, so the identity is exact) or name (matched through the site's own search)."
+      },
+      "matched_confidence": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "0-1: the share of your query's meaningful words the matched property name carries. 1.0 for a URL. A name match below 0.6 is reported not_found instead of guessed at."
+      },
+      "reviews_scraper": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Apify actor that returns the full review text behind this row's numbers for this site."
+      },
+      "sources_checked": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Which sites this hotel was checked on (summary rows)."
+      },
+      "sources_found": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Which of them answered with a rating or a review count (summary rows)."
+      },
+      "sources_missing": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Which of them had nothing for this hotel (summary rows)."
+      },
+      "rating_mean_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Mean of every site's score after converting each to the 0-5 scale (summary rows)."
+      },
+      "rating_best_source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The kindest site (summary rows)."
+      },
+      "rating_best_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Its score on the 0-5 scale (summary rows)."
+      },
+      "rating_worst_source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The harshest site (summary rows)."
+      },
+      "rating_worst_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Its score on the 0-5 scale (summary rows)."
+      },
+      "rating_spread_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "rating_best_5 minus rating_worst_5 — how far apart the sites are about this hotel (summary rows)."
+      },
+      "review_total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Every review count added up across the sites that answered (summary rows)."
+      },
+      "ratings_by_source": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "{source: rating_5} for the sites that answered (summary rows)."
+      },
+      "review_counts_by_source": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "{source: review_count} for the sites that answered (summary rows)."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | not_found | unsupported | skipped | error (status rows)."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a site returned nothing: no match, no name search on that site, the free-run cap, or the failure (status rows)."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel",
+          "source_label",
+          "rating",
+          "rating_5",
+          "rating_scale",
+          "review_count",
+          "ranking",
+          "status",
+          "source_url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reputation": {
+      "title": "Every site",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "source_label",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "matched_confidence",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "type": "reputation"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "summary": {
+      "title": "Across sites",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "sources_found",
+          "sources_missing",
+          "rating_mean_5",
+          "rating_best_source",
+          "rating_best_5",
+          "rating_worst_source",
+          "rating_worst_5",
+          "rating_spread_5",
+          "review_total",
+          "ratings_by_source",
+          "review_counts_by_source",
+          "sources_checked"
+        ],
+        "filter": {
+          "type": "summary"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "google": {
+      "title": "Google Hotels",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "stars",
+          "city",
+          "country",
+          "matched_by",
+          "matched_confidence",
+          "source_id",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "source": "google"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "tripadvisor": {
+      "title": "Tripadvisor",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "stars",
+          "city",
+          "country",
+          "matched_by",
+          "matched_confidence",
+          "source_id",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "source": "tripadvisor"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "booking": {
+      "title": "Booking.com",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "stars",
+          "city",
+          "country",
+          "matched_by",
+          "matched_confidence",
+          "source_id",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "source": "booking"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "agoda": {
+      "title": "Agoda",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "stars",
+          "city",
+          "country",
+          "matched_by",
+          "matched_confidence",
+          "source_id",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "source": "agoda"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "hostelworld": {
+      "title": "Hostelworld",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "stars",
+          "city",
+          "country",
+          "matched_by",
+          "matched_confidence",
+          "source_id",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "source": "hostelworld"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "despegar": {
+      "title": "Despegar",
+      "transformation": {
+        "fields": [
+          "hotel",
+          "hotel_name",
+          "rating",
+          "rating_scale",
+          "rating_5",
+          "review_count",
+          "ranking",
+          "sub_scores",
+          "stars",
+          "city",
+          "country",
+          "matched_by",
+          "matched_confidence",
+          "source_id",
+          "source_url",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "source": "despegar"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "query",
+          "hotel",
+          "source_label",
+          "status",
+          "matched_confidence",
+          "hotel_name",
+          "source_url",
+          "error",
+          "reviews_scraper"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

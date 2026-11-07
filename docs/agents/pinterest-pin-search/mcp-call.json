@@ -1,0 +1,16 @@
+{
+  "actor": "kestrel/pinterest-pin-search",
+  "input": {
+    "queries": [
+      "home office"
+    ],
+    "maxPinsPerQuery": 3,
+    "maxPagesPerQuery": 3,
+    "maxRequests": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

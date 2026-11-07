@@ -1,0 +1,99 @@
+{
+  "title": "Greenhouse jobs",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input: {\"boards\": [\"anthropic\"], \"maxJobsPerBoard\": 10}. $3 per 1000 delivered jobs, full descriptions and published compensation included. No start fee.",
+  "required": [
+    "boards"
+  ],
+  "properties": {
+    "boards": {
+      "title": "Company job boards",
+      "type": "array",
+      "description": "Required: company board tokens such as [\"anthropic\"] or HTTPS board URLs. Up to 20 boards. Individual job URLs and arbitrary company names are not supported. Searches only these boards, not a global jobs index. One returned job = one charge.",
+      "editor": "stringList",
+      "prefill": [
+        "anthropic"
+      ],
+      "sectionCaption": "Choose company boards"
+    },
+    "maxJobsPerBoard": {
+      "title": "Maximum jobs per board",
+      "type": "integer",
+      "description": "100 by default; 1-5000. Applied AFTER all filters and excluded IDs. For the newest 20 matching jobs from each company, pass 20. Fewer may exist. Sorted by source date descending.",
+      "minimum": 1,
+      "maximum": 5000,
+      "default": 100
+    },
+    "maxResults": {
+      "title": "Maximum jobs in the run",
+      "type": "integer",
+      "description": "1000 by default; 1-10000 across all boards. Stops early even if boards remain. With 10 here, the bill is at most $0.03. Use Apify run option maxTotalChargeUsd for a monetary cap.",
+      "minimum": 1,
+      "maximum": 10000,
+      "default": 1000
+    },
+    "titleKeywords": {
+      "title": "Job title keywords",
+      "type": "array",
+      "description": "[\"engineer\", \"developer\"] matches either phrase in the job title, case-insensitively. Empty = all titles. Different filter fields combine with AND. Filtered jobs are free and do not use up the result cap.",
+      "editor": "stringList",
+      "sectionCaption": "Filter before billing",
+      "default": []
+    },
+    "locationKeywords": {
+      "title": "Location keywords",
+      "type": "array",
+      "description": "[\"London\", \"New York\"] matches either phrase in any listed location, case-insensitively. Empty = anywhere. This is text matching, not a country boundary or eligibility check. Free filter applied before the cap.",
+      "editor": "stringList",
+      "default": []
+    },
+    "departmentKeywords": {
+      "title": "Department keywords",
+      "type": "array",
+      "description": "[\"Engineering\"] matches any department containing that phrase. Empty = all departments; multiple phrases use OR. Free filter before the cap.",
+      "editor": "stringList",
+      "default": []
+    },
+    "workplaceType": {
+      "title": "Workplace type",
+      "type": "string",
+      "description": "\"any\" (default) keeps all jobs. \"remote\", \"hybrid\" or \"on_site\" keeps only that classification. Hybrid is not treated as remote. Unknown classifications are excluded when a specific type is requested. Remote does not mean work from any country. Free filter.",
+      "editor": "select",
+      "enum": [
+        "any",
+        "remote",
+        "hybrid",
+        "on_site"
+      ],
+      "default": "any"
+    },
+    "sinceDate": {
+      "title": "Source date on or after",
+      "type": "string",
+      "description": "Empty = no date filter. Example \"2026-10-01\" includes jobs with updated_at (last edit, NOT first publication) on or after midnight UTC. Jobs without this source date are excluded. This does not detect first-seen jobs; use excludeJobIds for repeat runs. Free filter.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "includeCompensation": {
+      "title": "Include published compensation",
+      "type": "boolean",
+      "description": "true (default) includes published salary_ranges and compensation_raw at no extra charge. Missing pay is never estimated. false returns salary_ranges=[], compensation_raw=null and compensation_status=\"not_requested\". true fetches one public detail page per matching job; false skips those requests.",
+      "sectionCaption": "Compensation and repeat runs",
+      "default": true
+    },
+    "onlyWithCompensation": {
+      "title": "Only jobs with published pay",
+      "type": "boolean",
+      "description": "false (default) includes jobs whether or not pay is published. true keeps only jobs with a numeric published pay range, requires includeCompensation=true, and filters BEFORE the cap. No extra charge; excluded jobs are free. Pay ranges may include OTE; inspect their labels and descriptions.",
+      "default": false
+    },
+    "excludeJobIds": {
+      "title": "Previously delivered job IDs",
+      "type": "array",
+      "description": "[\"4461450008\"] excludes known job_id values. For multiple boards, prefer full job_key values from earlier output to avoid ID collisions. Maximum 10000. Empty = no exclusions. Excluded jobs cost nothing. Your workflow must save/pass this list; the actor does not schedule itself or retain monitoring state.",
+      "editor": "stringList",
+      "default": []
+    }
+  }
+}

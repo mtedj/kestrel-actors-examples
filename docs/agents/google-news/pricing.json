@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "article": {
+      "eventTitle": "Article",
+      "eventDescription": "One delivered article (row keys article_id, title, publisher, publisher_url, publisher_domain, google_news_url, published_at, feed_description, query, language, country): $1 per 1,000 rows. RSS metadata only: Google News link and publisher homepage, not full text or a direct article URL. No charge for filters, excluded IDs, duplicates, empty results, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at Apify run option maxTotalChargeUsd (not an input field). 10 rows cost $0.01; maxResults caps rows across all sources.",
+      "eventPriceUsd": 0.001,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:55.330Z"
+}

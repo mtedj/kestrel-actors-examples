@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review snapshot",
+      "eventDescription": "One delivered review snapshot ($1 per 1,000 rows; row keys id, app_id, review_text, language, recommended, created_at, updated_at, helpful_votes, funny_votes, content_hash, fetched_at). No start fee; proxy and compute included. Filters, duplicates, excluded rows and failures without delivered rows are free. Stops at maxTotalChargeUsd (Apify run option, not input). Nested data included; partial errors retain paid rows already delivered. Inspect free SUMMARY for page limits and source errors.",
+      "eventPriceUsd": 0.001,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:09.446Z"
+}

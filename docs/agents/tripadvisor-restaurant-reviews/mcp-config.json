@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-tripadvisor-restaurant-reviews": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tripadvisor-restaurant-reviews"
+    }
+  }
+}

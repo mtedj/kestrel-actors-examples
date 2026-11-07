@@ -1,0 +1,525 @@
+{
+  "actorSpecification": 1,
+  "title": "Despegar hotel ratings",
+  "description": "One row per hotel with its guest rating, category scores and Despegar's own AI summary (charged), plus the up-to-four published comments and a status row per target (both free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "hotel | review | status"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input value (URL or hotel id) this row came from"
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Despegar's numeric hotel id (the number in /h-<id>/); the same id on every Despegar country domain"
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel name as the chosen Despegar site writes it"
+      },
+      "hotel_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Canonical hotel page URL on the domain that was read"
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City, from the location line under the hotel name (hotel rows)"
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country of the hotel, in the page's language (hotel rows)"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street address as printed in the map section (hotel rows)"
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Latitude of the hotel marker (hotel rows)"
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Longitude of the hotel marker (hotel rows)"
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Star rating, counted from the stars printed above the hotel name (hotel rows)"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Overall guest rating on Despegar's 0-10 scale, e.g. 8.4"
+      },
+      "rating_scale": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The scale the rating is on: always 10 (hotel rows)"
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same score converted to the 0-5 star scale, e.g. 8.4 -> 4.2"
+      },
+      "rating_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Despegar's word for the score, e.g. \"Muy bueno\" / \"Very good\" (hotel rows)"
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many guest reviews the rating is based on, as Despegar counts them (e.g. 4511) — not how many this actor can deliver (hotel rows)"
+      },
+      "reviews_shown": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many individual comments the page actually publishes: at most four (hotel rows)"
+      },
+      "score_service": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Category score 0-10: services and installations (hotel rows)"
+      },
+      "score_staff": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Category score 0-10: accommodation staff (hotel rows)"
+      },
+      "score_location": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Category score 0-10: location (hotel rows)"
+      },
+      "score_internet": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Category score 0-10: internet / Wi-Fi (hotel rows)"
+      },
+      "score_cleanliness": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Category score 0-10: cleaning (hotel rows)"
+      },
+      "score_value": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Category score 0-10: price/quality (hotel rows)"
+      },
+      "category_scores": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "The same six scores keyed by Despegar's own codes: service, servicePersonal, location, internetAccessAndQuality, cleaning, qualityprice (hotel rows)"
+      },
+      "summary": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Despegar's own AI-written summary of what guests say about the hotel, generated by Despegar from all its reviews and published on the page — their text, not ours (hotel rows)"
+      },
+      "verified_note": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Despegar's provenance note for the sample, e.g. \"Clientes verificados por Grupo Despegar.\" (hotel rows)"
+      },
+      "providers": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Which review providers the published comments come from; DESPEGAR on every hotel we have seen (hotel rows)"
+      },
+      "trip_types": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Traveller profiles Despegar offers to filter the comments by: couple, friends, singles, family (hotel rows)"
+      },
+      "page_language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the domain served, e.g. es or en (hotel rows)"
+      },
+      "page_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country code of the Despegar site that was read, e.g. AR (hotel rows)"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Despegar's id for the comment (review rows)"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The month the guest wrote the comment, in the page's language, e.g. \"Agosto 2023\" — Despegar publishes no day (review rows)"
+      },
+      "review_month": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The same date normalised to YYYY-MM (review rows)"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The comment: the good half and the bad half joined; Despegar reviews have no title (review rows)"
+      },
+      "good": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest liked (review rows)"
+      },
+      "bad": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest disliked; absent when they only wrote praise (review rows)"
+      },
+      "reviewer": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Guest's first name, when they published one (review rows)"
+      },
+      "reviewer_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Guest's country, when published (review rows)"
+      },
+      "reviewer_country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Two-letter code for that country (review rows)"
+      },
+      "trip_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Who was travelling: couple | friends | singles | family (review rows)"
+      },
+      "trip_type_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The same, as the page words it, e.g. \"En familia\" (review rows)"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the comment was written in (review rows)"
+      },
+      "provider": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Which provider supplied the comment, e.g. DESPEGAR (review rows)"
+      },
+      "provider_label": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Despegar's badge for that provider, e.g. \"Huésped verificado\" (review rows)"
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many readers marked the comment useful (review rows)"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | filtered | duplicate | blocked | limited | error (status rows)"
+      },
+      "hotels": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when a hotel row was delivered and charged for this target (status rows)"
+      },
+      "comments": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many published comments were delivered for this target, free (status rows)"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when minRating dropped this hotel before billing (status rows)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this target is the same hotel as an earlier one (status rows)"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a target produced nothing (status rows)"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_name",
+          "city",
+          "rating",
+          "rating_5",
+          "review_count",
+          "reviews_shown",
+          "summary",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "ratings": {
+      "title": "Hotel ratings",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "city",
+          "country",
+          "stars",
+          "rating",
+          "rating_5",
+          "rating_label",
+          "review_count",
+          "score_service",
+          "score_staff",
+          "score_location",
+          "score_internet",
+          "score_cleanliness",
+          "score_value",
+          "summary",
+          "hotel_url"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "scores": {
+      "title": "Category scores",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "rating",
+          "score_service",
+          "score_staff",
+          "score_location",
+          "score_internet",
+          "score_cleanliness",
+          "score_value",
+          "category_scores",
+          "rating_scale",
+          "verified_note",
+          "page_language",
+          "page_country"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "comments": {
+      "title": "Comments",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "review_id",
+          "rating",
+          "rating_5",
+          "review_date",
+          "review_month",
+          "text",
+          "good",
+          "bad",
+          "reviewer",
+          "reviewer_country",
+          "reviewer_country_code",
+          "trip_type",
+          "trip_type_label",
+          "language",
+          "provider",
+          "provider_label",
+          "helpful_votes",
+          "hotel_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "map": {
+      "title": "Map",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "city",
+          "country",
+          "address",
+          "latitude",
+          "longitude",
+          "stars",
+          "rating",
+          "trip_types",
+          "providers",
+          "hotel_url"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "hotel_id",
+          "hotel_name",
+          "status",
+          "hotels",
+          "comments",
+          "filtered",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

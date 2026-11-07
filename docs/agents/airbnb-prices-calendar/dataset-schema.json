@@ -1,0 +1,1056 @@
+{
+  "actorSpecification": 1,
+  "title": "Airbnb prices and calendars",
+  "description": "Row types in one dataset: listing (price for the dates, rating, location, optional details), calendar (day-by-day availability with an occupancy summary), review, status (per place or listing; never charged).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "listing",
+          "calendar",
+          "review",
+          "status"
+        ]
+      },
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Numeric Airbnb listing id."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing URL."
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The place search that produced the row."
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing name as shown in search."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Search title, e.g. 'Apartment in Graça' (or the listing page title with details)."
+      },
+      "property_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "area": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "subtitle": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "check_in": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "check_out": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "nights": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "adults": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "children": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "infants": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "pets": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "lat": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "lng": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "location_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "reviews_count": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "rating_breakdown": {
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "bedrooms": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "beds": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bathrooms": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "summary": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "price_total": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total for the stay as Airbnb displays it (after discounts)."
+      },
+      "price_total_display": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price_original": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total before discounts, when discounted."
+      },
+      "price_nightly": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Base nightly rate from Airbnb's breakdown ('3 nights x $140.87')."
+      },
+      "price_nightly_effective": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total ÷ nights (what the stay costs per night after discounts)."
+      },
+      "price_nights": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "price_breakdown": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Airbnb's price lines: label, amount (discounts negative), original."
+      },
+      "badges": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "is_guest_favorite": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "is_superhost": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "free_cancellation": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "pictures": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "details": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the listing page was fetched (description, amenities, policies, host, exact breakdown)."
+      },
+      "room_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "person_capacity": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "available": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the listing can be booked for the dates (details only)."
+      },
+      "unavailable_message": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "cancellation_policy": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "house_rules": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "amenities": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "amenities_count": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "sleeping": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "highlights": {
+        "type": [
+          "array",
+          "null"
+        ]
+      },
+      "host": {
+        "type": [
+          "object",
+          "null"
+        ]
+      },
+      "months": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "days": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Calendar rows: one object per day (date, available, available_for_checkin, available_for_checkout, min_nights, max_nights, price)."
+      },
+      "nights_30": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "available_30": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "occupancy_30": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of the next 30 nights not available (blocked or booked)."
+      },
+      "nights_90": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "available_90": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "occupancy_90": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "nights_365": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "available_365": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "occupancy_365": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "next_available": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "min_nights_typical": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "first_day": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "last_day": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text_localized": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "created_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "date_label": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_location": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_is_superhost": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "host_reply": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "host_reply_date": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "highlight": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "stay_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviews_total": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "listing_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "ok",
+          "unknown_area",
+          "no_results",
+          "error",
+          null
+        ]
+      },
+      "resolved_place": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The place Airbnb actually searched (from its canonical URL)."
+      },
+      "canonical_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "listings": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "priced": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "calendars": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "calendar_months": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "detail_errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "calendar_errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "review_errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "type",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "Every row type.",
+      "transformation": {
+        "fields": [
+          "type",
+          "name",
+          "title",
+          "check_in",
+          "check_out",
+          "price_total",
+          "price_nightly_effective",
+          "currency",
+          "rating",
+          "reviews_count",
+          "occupancy_90",
+          "status",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Row",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "check_in": {
+            "label": "Check-in",
+            "format": "text"
+          },
+          "check_out": {
+            "label": "Check-out",
+            "format": "text"
+          },
+          "price_total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "price_nightly_effective": {
+            "label": "Per night",
+            "format": "number"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "reviews_count": {
+            "label": "Reviews",
+            "format": "number"
+          },
+          "occupancy_90": {
+            "label": "Occupancy 90d",
+            "format": "number"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "url": {
+            "label": "Airbnb",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "listings": {
+      "title": "Listings",
+      "description": "Listing rows: price for the dates, rating, location.",
+      "transformation": {
+        "fields": [
+          "id",
+          "name",
+          "title",
+          "price_total",
+          "price_nightly",
+          "price_nightly_effective",
+          "price_original",
+          "currency",
+          "nights",
+          "rating",
+          "reviews_count",
+          "bedrooms",
+          "beds",
+          "bathrooms",
+          "is_guest_favorite",
+          "is_superhost",
+          "free_cancellation",
+          "lat",
+          "lng",
+          "query",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "title": {
+            "label": "Type · area",
+            "format": "text"
+          },
+          "price_total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "price_nightly": {
+            "label": "Nightly (base)",
+            "format": "number"
+          },
+          "price_nightly_effective": {
+            "label": "Per night",
+            "format": "number"
+          },
+          "price_original": {
+            "label": "Before discount",
+            "format": "number"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "nights": {
+            "label": "Nights",
+            "format": "number"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "reviews_count": {
+            "label": "Reviews",
+            "format": "number"
+          },
+          "bedrooms": {
+            "label": "Bedrooms",
+            "format": "number"
+          },
+          "beds": {
+            "label": "Beds",
+            "format": "number"
+          },
+          "bathrooms": {
+            "label": "Baths",
+            "format": "number"
+          },
+          "is_guest_favorite": {
+            "label": "Guest favorite",
+            "format": "boolean"
+          },
+          "is_superhost": {
+            "label": "Superhost",
+            "format": "boolean"
+          },
+          "free_cancellation": {
+            "label": "Free cancellation",
+            "format": "boolean"
+          },
+          "lat": {
+            "label": "Lat",
+            "format": "number"
+          },
+          "lng": {
+            "label": "Lng",
+            "format": "number"
+          },
+          "query": {
+            "label": "Search",
+            "format": "text"
+          },
+          "url": {
+            "label": "Airbnb",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "title": "Calendar",
+      "description": "One row per listing: occupancy summary; the days array holds the day-by-day availability.",
+      "transformation": {
+        "fields": [
+          "id",
+          "name",
+          "months",
+          "first_day",
+          "last_day",
+          "occupancy_30",
+          "occupancy_90",
+          "occupancy_365",
+          "available_30",
+          "available_90",
+          "available_365",
+          "next_available",
+          "min_nights_typical",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "months": {
+            "label": "Months",
+            "format": "number"
+          },
+          "first_day": {
+            "label": "From",
+            "format": "text"
+          },
+          "last_day": {
+            "label": "To",
+            "format": "text"
+          },
+          "occupancy_30": {
+            "label": "Occupancy 30d",
+            "format": "number"
+          },
+          "occupancy_90": {
+            "label": "Occupancy 90d",
+            "format": "number"
+          },
+          "occupancy_365": {
+            "label": "Occupancy 365d",
+            "format": "number"
+          },
+          "available_30": {
+            "label": "Free nights 30d",
+            "format": "number"
+          },
+          "available_90": {
+            "label": "Free nights 90d",
+            "format": "number"
+          },
+          "available_365": {
+            "label": "Free nights 365d",
+            "format": "number"
+          },
+          "next_available": {
+            "label": "Next available",
+            "format": "text"
+          },
+          "min_nights_typical": {
+            "label": "Min nights",
+            "format": "number"
+          },
+          "url": {
+            "label": "Airbnb",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "id",
+          "name",
+          "rating",
+          "created_at",
+          "reviewer_name",
+          "reviewer_location",
+          "text",
+          "host_reply",
+          "language",
+          "reviews_total"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Listing id",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "created_at": {
+            "label": "Date",
+            "format": "date"
+          },
+          "reviewer_name": {
+            "label": "Reviewer",
+            "format": "text"
+          },
+          "reviewer_location": {
+            "label": "From",
+            "format": "text"
+          },
+          "text": {
+            "label": "Review",
+            "format": "text"
+          },
+          "host_reply": {
+            "label": "Host reply",
+            "format": "text"
+          },
+          "language": {
+            "label": "Language",
+            "format": "text"
+          },
+          "reviews_total": {
+            "label": "Total reviews",
+            "format": "number"
+          }
+        }
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "description": "Per place, URL or listing: what was found and charged. Never charged.",
+      "transformation": {
+        "fields": [
+          "query",
+          "url",
+          "listing_id",
+          "status",
+          "resolved_place",
+          "pages",
+          "listings",
+          "priced",
+          "duplicates",
+          "calendars",
+          "calendar_months",
+          "reviews",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "query": {
+            "label": "Search",
+            "format": "text"
+          },
+          "url": {
+            "label": "URL",
+            "format": "link"
+          },
+          "listing_id": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "resolved_place": {
+            "label": "Airbnb searched",
+            "format": "text"
+          },
+          "pages": {
+            "label": "Pages",
+            "format": "number"
+          },
+          "listings": {
+            "label": "Listings",
+            "format": "number"
+          },
+          "priced": {
+            "label": "Priced (charged)",
+            "format": "number"
+          },
+          "duplicates": {
+            "label": "Duplicates",
+            "format": "number"
+          },
+          "calendars": {
+            "label": "Calendars",
+            "format": "number"
+          },
+          "calendar_months": {
+            "label": "Months",
+            "format": "number"
+          },
+          "reviews": {
+            "label": "Reviews",
+            "format": "number"
+          },
+          "error": {
+            "label": "Error",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

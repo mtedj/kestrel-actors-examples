@@ -1,0 +1,178 @@
+{
+  "title": "Google Flights Prices",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "routes": {
+      "title": "Routes",
+      "type": "array",
+      "description": "Routes as airport codes, e.g. [\"JFK-LHR\", \"LIS-CDG\"]; written \"LIS-LHR\", \"lis > lhr\" or \"JFK to LAX\". Google city codes work too: \"NYC-LON\" searches every New York and London airport. Required, with departDate. Every route is searched for every date, so 3 routes with sweepDays 6 = 21 searches of about 10 to 35 billed itineraries each. Same origin and destination, or a code that is not three letters, is refused before anything is charged.",
+      "editor": "stringList",
+      "prefill": [
+        "LIS-LHR"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "What to price",
+      "sectionDescription": "Routes and a departure date; add a return date for round trips."
+    },
+    "departDate": {
+      "title": "Departure date",
+      "type": "string",
+      "description": "Departure date: \"2026-11-20\" (YYYY-MM-DD), or relative to the day the run starts: \"30 days\", \"6 weeks\", \"tomorrow\". Use relative dates for scheduled runs (\"track this fare daily\"): the input never needs editing and always looks the same distance ahead. Required. A past date is refused before anything is charged.",
+      "editor": "textfield",
+      "prefill": "30 days"
+    },
+    "returnDate": {
+      "title": "Return date",
+      "type": "string",
+      "description": "Empty (default) = one-way fares. A date = round trip: \"2026-11-27\", or relative \"37 days\". Every row then prices the outbound with its return, and price is the total for both legs (round_trip_total true). Use for \"round trip flight prices\". Must be on or after departDate.",
+      "editor": "textfield",
+      "prefill": ""
+    },
+    "sweepDays": {
+      "title": "Also price the next N departure days",
+      "type": "integer",
+      "description": "0 (default) = only the departure date above. N = the same trip also departing on each of the next N days, e.g. departDate \"30 days\", sweepDays 6 = 7 departure days = 7 searches per route; a returnDate shifts with each day so the trip length stays. Use for a price calendar or \"which day is cheapest\": sort flight rows by price, or read `cheapest` on each status row. Cost multiplies by N + 1; cap it with maxResultsPerSearch. Maximum 60. One row per day instead: kestrel/flight-price-tracker.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 60,
+      "default": 0,
+      "sectionCaption": "Price calendar and cost",
+      "sectionDescription": "More departure days per route, and the cap on rows per search that decides the bill."
+    },
+    "maxResultsPerSearch": {
+      "title": "Max itineraries per search",
+      "type": "integer",
+      "description": "0 (default) = every itinerary Google lists for a route and date, usually 10 to 35 rows at $0.005 each. N = only the first N in Google's own order (its \"best\" ranking, not strictly the cheapest), e.g. 5: the main cost cap, at most N × $0.005 per route and date. Use 1 to 5 for \"the cheapest fare\" or \"a few options\", 0 for the whole market. Maximum 200.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 200,
+      "default": 0
+    },
+    "seat": {
+      "title": "Cabin",
+      "type": "string",
+      "description": "Cabin: \"economy\" (default), \"premium_economy\", \"business\" or \"first\". Business and first class fares are a different, smaller set of itineraries than economy, usually fewer rows. Use \"business\" for \"business class fares\".",
+      "enum": [
+        "economy",
+        "premium_economy",
+        "business",
+        "first"
+      ],
+      "enumTitles": [
+        "Economy",
+        "Premium economy",
+        "Business",
+        "First"
+      ],
+      "default": "economy",
+      "editor": "select",
+      "sectionCaption": "Cabin, stops and passengers",
+      "sectionDescription": "Each of these changes the fares Google returns."
+    },
+    "maxStops": {
+      "title": "Stops",
+      "type": "string",
+      "description": "\"any\" (default) = every itinerary Google lists. \"nonstop\" = nonstop flights only; \"one_or_fewer\"; \"two_or_fewer\". Google applies it before the results are listed, so nonstop-only returns fewer rows and costs less. Use \"nonstop\" for \"direct flights only\".",
+      "enum": [
+        "any",
+        "nonstop",
+        "one_or_fewer",
+        "two_or_fewer"
+      ],
+      "enumTitles": [
+        "Any",
+        "Nonstop only",
+        "1 stop or fewer",
+        "2 stops or fewer"
+      ],
+      "default": "any",
+      "editor": "select"
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "description": "Adult passengers, 1 to 9, e.g. 2 (default 1). Every price is the total for all passengers on the row, not per person. Adults + children + infants is at most 9.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 9,
+      "default": 1
+    },
+    "children": {
+      "title": "Children (2-11)",
+      "type": "integer",
+      "description": "Children aged 2 to 11 in their own seat, 0 to 8, e.g. 2 (default 0). Prices include them. For \"flight prices for a family of four\" pass adults 2, children 2.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 8,
+      "default": 0
+    },
+    "infantsSeat": {
+      "title": "Infants in seat",
+      "type": "integer",
+      "description": "Infants under 2 in their own seat, 0 to 8, e.g. 1 (default 0). Prices include them.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 8,
+      "default": 0
+    },
+    "infantsLap": {
+      "title": "Infants on lap",
+      "type": "integer",
+      "description": "Infants under 2 on an adult's lap, 0 to 8, e.g. 1 (default 0); at most one per adult. Prices include them.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 8,
+      "default": 0
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "ISO 4217 code for every price, e.g. \"EUR\" (default \"USD\"). When the user names no currency, pass the one their market uses. A search Google prices in another currency (some markets ignore the request) is reported as an error on its status row and never billed in the wrong currency.",
+      "editor": "textfield",
+      "default": "USD",
+      "sectionCaption": "Currency and market",
+      "sectionDescription": "The two inputs that change the prices themselves."
+    },
+    "market": {
+      "title": "Market (country)",
+      "type": "string",
+      "description": "Google market (gl) as a 2-letter country code, e.g. \"de\", \"gb\", \"in\" (default \"us\"). It is the country of the person searching, not the destination: fares, airlines and the currency Google accepts differ by market. Keep \"us\" unless the user wants fares as seen from a country. Results are read in English whatever the market (there is no language input).",
+      "editor": "textfield",
+      "default": "us"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (one egress IP each), 1 to 16, e.g. 4 (default 4). More = faster; each is paced separately. Leave at 4 unless a run is throttled.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2, e.g. 0.5 (default 0.5). Google tolerates about 0.5 per second per IP; raising it causes retries, not speed.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, required: Google blocks datacentre traffic that is not rotated. The default (Apify Proxy, automatic group) works; leave it.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [
+    "departDate"
+  ],
+  "description": "Google Flights prices. Minimal input: {\"routes\": [\"LIS-LHR\"], \"departDate\": \"30 days\"}; routes and departDate are both required. maxResultsPerSearch defaults to 0 = every itinerary Google lists, usually 10 to 35 rows per route and date at $0.005 each: set 5 for \"the cheapest few\", and remember sweepDays multiplies the searches."
+}

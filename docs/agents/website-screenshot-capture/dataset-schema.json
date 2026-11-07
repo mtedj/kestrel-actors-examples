@@ -1,0 +1,136 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "source_url": {
+        "type": "string",
+        "description": "source url"
+      },
+      "title": {
+        "description": "title"
+      },
+      "viewport_width": {
+        "description": "viewport width"
+      },
+      "viewport_height": {
+        "description": "viewport height"
+      },
+      "full_page": {
+        "description": "full page"
+      },
+      "height_capped": {
+        "description": "height capped"
+      },
+      "blocked_requests": {
+        "description": "blocked requests"
+      },
+      "id": {
+        "type": "string",
+        "description": "id"
+      },
+      "content_hash": {
+        "type": "string",
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "fetched at"
+      },
+      "download_url": {
+        "description": "download url"
+      },
+      "artifact_key": {
+        "description": "artifact key"
+      },
+      "artifact_bytes": {
+        "description": "artifact bytes"
+      },
+      "artifact_sha256": {
+        "description": "artifact sha256"
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "source_url",
+          "title",
+          "viewport_width",
+          "viewport_height",
+          "full_page",
+          "height_capped"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "title": {
+            "label": "title",
+            "format": "text"
+          },
+          "viewport_width": {
+            "label": "viewport_width",
+            "format": "text"
+          },
+          "viewport_height": {
+            "label": "viewport_height",
+            "format": "text"
+          },
+          "full_page": {
+            "label": "full_page",
+            "format": "text"
+          },
+          "height_capped": {
+            "label": "height_capped",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "title": "Evidence",
+      "transformation": {
+        "fields": [
+          "id",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source_url",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content_hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched_at",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

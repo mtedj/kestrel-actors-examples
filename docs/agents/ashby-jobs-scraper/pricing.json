@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "job": {
+      "eventTitle": "Job",
+      "eventDescription": "One delivered Ashby job (row keys job_id, job_key, title, company, location, departments, description_text, url, apply_url, published_at, updated_at, workplace_type, salary_ranges, compensation_status): $2 per 1,000 jobs. Full descriptions and published pay included; missing pay is not estimated. Not charged: filtered jobs, excluded IDs, duplicates, empty boards, failed requests, invalid input or status rows. No start fee; proxy and compute are included in the event price. Stops at the caller's Apify run option maxTotalChargeUsd. 10 jobs cost $0.02; maxResults caps jobs across all boards.",
+      "eventPriceUsd": 0.002,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:46.432Z"
+}

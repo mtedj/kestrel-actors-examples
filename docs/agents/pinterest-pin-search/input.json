@@ -1,0 +1,8 @@
+{
+  "queries": [
+    "home office"
+  ],
+  "maxPinsPerQuery": 3,
+  "maxPagesPerQuery": 3,
+  "maxRequests": 3
+}

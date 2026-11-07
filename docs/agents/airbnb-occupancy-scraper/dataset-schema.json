@@ -1,0 +1,749 @@
+{
+  "actorSpecification": 1,
+  "title": "Airbnb occupancy rate",
+  "description": "Row types in one dataset: occupancy (one per listing and calendar month — days available vs blocked or booked, occupancy %, minimum stay, a sampled nightly rate), listing (optional, free), status (per place, URL or listing id; never charged).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "occupancy",
+          "listing",
+          "status"
+        ],
+        "description": "Row type."
+      },
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Numeric Airbnb listing id."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing URL."
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing name as Airbnb shows it."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Search title, e.g. 'Apartment in Lisbon', or the listing page title."
+      },
+      "property_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Apartment, House, Condo … (search rows)."
+      },
+      "room_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Entire home/apt, Private room, Shared room, Hotel room (listing page)."
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Area from search or location text from the listing page."
+      },
+      "lat": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "lng": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "reviews_count": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bedrooms": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "beds": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "bathrooms": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "person_capacity": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "is_superhost": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "is_guest_favorite": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The place search that produced the row; null for listing ids."
+      },
+      "month": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Calendar month, YYYY-MM."
+      },
+      "days_in_month": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Calendar days in the month (28–31)."
+      },
+      "days_total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Days of the month counted: today onward. Past days are never counted, so the current month is partial."
+      },
+      "days_available": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Days of the month a guest could still book."
+      },
+      "days_unavailable": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Days not available — booked by a guest or blocked by the host; the calendar does not distinguish."
+      },
+      "occupancy_pct": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "days_unavailable / days_total × 100, one decimal. An occupancy proxy: blocked nights count as occupied."
+      },
+      "checkin_days": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Available days on which a stay may also start."
+      },
+      "nights_min": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The most common minimum stay across the month's days."
+      },
+      "next_available": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "First available day of the month, null when fully unavailable."
+      },
+      "first_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "First day counted for the month."
+      },
+      "last_day": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Last day counted for the month."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency of the sampled rate."
+      },
+      "rate_status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok = priced; no_stay = no bookable stay in the month; unavailable = the page refused the stay (usually `adults` exceeds the listing's capacity); unpriced = no price came back; error = the request failed; skipped = includeRates off."
+      },
+      "rate_check_in": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-in of the sampled stay (first bookable stay of the month)."
+      },
+      "rate_check_out": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-out of the sampled stay."
+      },
+      "rate_nights": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Nights in the sampled stay — the listing's minimum stay, capped at 7."
+      },
+      "rate_total": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Total price of the sampled stay for `adults` guests, as Airbnb displays it."
+      },
+      "rate_nightly": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "rate_total ÷ rate_nights — the month's nightly rate sample, an ADR proxy."
+      },
+      "listing_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the listing id the job was for."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "enum": [
+          "ok",
+          "unknown_area",
+          "no_results",
+          "error",
+          null
+        ],
+        "description": "Status rows."
+      },
+      "resolved_place": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the place Airbnb actually searched (from its canonical URL)."
+      },
+      "canonical_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: search pages read."
+      },
+      "listings": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: listings whose calendar was read."
+      },
+      "months": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: occupancy rows delivered (and billed)."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: months dropped by minOccupancyPct — never billed."
+      },
+      "rates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: months whose rate sample was priced."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: listings already handled by another job in this run."
+      },
+      "calendar_errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "rate_errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "detail_errors": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the failure message, null when the job succeeded."
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "UTC timestamp when the row was fetched."
+      }
+    },
+    "required": [
+      "type",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "Every row type.",
+      "transformation": {
+        "fields": [
+          "type",
+          "name",
+          "month",
+          "occupancy_pct",
+          "days_available",
+          "days_unavailable",
+          "rate_nightly",
+          "currency",
+          "nights_min",
+          "rating",
+          "status",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Row",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "month": {
+            "label": "Month",
+            "format": "text"
+          },
+          "occupancy_pct": {
+            "label": "Occupancy %",
+            "format": "number"
+          },
+          "days_available": {
+            "label": "Free days",
+            "format": "number"
+          },
+          "days_unavailable": {
+            "label": "Booked/blocked",
+            "format": "number"
+          },
+          "rate_nightly": {
+            "label": "Nightly rate",
+            "format": "number"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "nights_min": {
+            "label": "Min nights",
+            "format": "number"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "url": {
+            "label": "Airbnb",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "occupancy": {
+      "title": "Occupancy by month",
+      "description": "One row per listing and month.",
+      "transformation": {
+        "fields": [
+          "id",
+          "name",
+          "room_type",
+          "location",
+          "month",
+          "days_total",
+          "days_available",
+          "days_unavailable",
+          "occupancy_pct",
+          "checkin_days",
+          "nights_min",
+          "next_available",
+          "rate_nightly",
+          "rate_total",
+          "rate_nights",
+          "rate_check_in",
+          "rate_status",
+          "currency",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "room_type": {
+            "label": "Type",
+            "format": "text"
+          },
+          "location": {
+            "label": "Location",
+            "format": "text"
+          },
+          "month": {
+            "label": "Month",
+            "format": "text"
+          },
+          "days_total": {
+            "label": "Days counted",
+            "format": "number"
+          },
+          "days_available": {
+            "label": "Free days",
+            "format": "number"
+          },
+          "days_unavailable": {
+            "label": "Booked/blocked",
+            "format": "number"
+          },
+          "occupancy_pct": {
+            "label": "Occupancy %",
+            "format": "number"
+          },
+          "checkin_days": {
+            "label": "Check-in days",
+            "format": "number"
+          },
+          "nights_min": {
+            "label": "Min nights",
+            "format": "number"
+          },
+          "next_available": {
+            "label": "Next free",
+            "format": "text"
+          },
+          "rate_nightly": {
+            "label": "Nightly rate",
+            "format": "number"
+          },
+          "rate_total": {
+            "label": "Stay total",
+            "format": "number"
+          },
+          "rate_nights": {
+            "label": "Stay nights",
+            "format": "number"
+          },
+          "rate_check_in": {
+            "label": "Sampled check-in",
+            "format": "text"
+          },
+          "rate_status": {
+            "label": "Rate",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "url": {
+            "label": "Airbnb",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "listings": {
+      "title": "Listings",
+      "description": "Free listing rows (includeListingRow).",
+      "transformation": {
+        "fields": [
+          "id",
+          "name",
+          "title",
+          "property_type",
+          "room_type",
+          "location",
+          "rating",
+          "reviews_count",
+          "bedrooms",
+          "beds",
+          "bathrooms",
+          "person_capacity",
+          "is_superhost",
+          "is_guest_favorite",
+          "lat",
+          "lng",
+          "query",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "name": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "property_type": {
+            "label": "Property",
+            "format": "text"
+          },
+          "room_type": {
+            "label": "Room type",
+            "format": "text"
+          },
+          "location": {
+            "label": "Location",
+            "format": "text"
+          },
+          "rating": {
+            "label": "Rating",
+            "format": "number"
+          },
+          "reviews_count": {
+            "label": "Reviews",
+            "format": "number"
+          },
+          "bedrooms": {
+            "label": "Bedrooms",
+            "format": "number"
+          },
+          "beds": {
+            "label": "Beds",
+            "format": "number"
+          },
+          "bathrooms": {
+            "label": "Baths",
+            "format": "number"
+          },
+          "person_capacity": {
+            "label": "Guests",
+            "format": "number"
+          },
+          "is_superhost": {
+            "label": "Superhost",
+            "format": "boolean"
+          },
+          "is_guest_favorite": {
+            "label": "Guest favorite",
+            "format": "boolean"
+          },
+          "lat": {
+            "label": "Lat",
+            "format": "number"
+          },
+          "lng": {
+            "label": "Lng",
+            "format": "number"
+          },
+          "query": {
+            "label": "Search",
+            "format": "text"
+          },
+          "url": {
+            "label": "Airbnb",
+            "format": "link"
+          }
+        }
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "description": "Per place, URL or listing id: what was found and charged. Never charged.",
+      "transformation": {
+        "fields": [
+          "query",
+          "url",
+          "listing_id",
+          "status",
+          "resolved_place",
+          "pages",
+          "listings",
+          "months",
+          "filtered",
+          "rates",
+          "duplicates",
+          "calendar_errors",
+          "rate_errors",
+          "detail_errors",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "query": {
+            "label": "Search",
+            "format": "text"
+          },
+          "url": {
+            "label": "URL",
+            "format": "link"
+          },
+          "listing_id": {
+            "label": "Listing",
+            "format": "text"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "resolved_place": {
+            "label": "Airbnb searched",
+            "format": "text"
+          },
+          "pages": {
+            "label": "Pages",
+            "format": "number"
+          },
+          "listings": {
+            "label": "Listings",
+            "format": "number"
+          },
+          "months": {
+            "label": "Rows (charged)",
+            "format": "number"
+          },
+          "filtered": {
+            "label": "Filtered",
+            "format": "number"
+          },
+          "rates": {
+            "label": "Rates",
+            "format": "number"
+          },
+          "duplicates": {
+            "label": "Duplicates",
+            "format": "number"
+          },
+          "calendar_errors": {
+            "label": "Calendar errors",
+            "format": "number"
+          },
+          "rate_errors": {
+            "label": "Rate errors",
+            "format": "number"
+          },
+          "detail_errors": {
+            "label": "Page errors",
+            "format": "number"
+          },
+          "error": {
+            "label": "Error",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

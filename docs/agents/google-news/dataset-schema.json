@@ -1,0 +1,227 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "article_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Article id"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Title"
+      },
+      "publisher": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publisher"
+      },
+      "publisher_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publisher url"
+      },
+      "publisher_domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publisher domain"
+      },
+      "google_news_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Google news url"
+      },
+      "published_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Published at"
+      },
+      "feed_description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Feed description"
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Query"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language"
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country"
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Type"
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Content hash"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Fetched at"
+      },
+      "source": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Source"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status"
+      },
+      "rows": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Rows"
+      },
+      "source_rows": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Source rows"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Filtered"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Duplicates"
+      },
+      "errors": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Errors"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Error"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Pages"
+      },
+      "cap_reached": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Cap reached"
+      },
+      "currency_warning": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency warning"
+      }
+    }
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "type",
+          "article_id",
+          "title",
+          "publisher",
+          "publisher_url",
+          "publisher_domain",
+          "google_news_url",
+          "published_at",
+          "feed_description",
+          "query",
+          "language",
+          "country"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "type",
+          "source",
+          "status",
+          "rows",
+          "source_rows",
+          "filtered",
+          "duplicates",
+          "errors",
+          "error",
+          "cap_reached"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review",
+      "eventDescription": "One App Store customer review (row keys review_id, app_id, country, rating = 1-5, title, text, author, review_date, is_edited, developer_response, developer_response_date, url): $4 per 1,000 reviews. Not charged: app rows (App Store rating, rating count, star histogram), status rows, reviews removed by minRating, maxRating, sinceDate or requireText, a review Apple lists on two storefronts (delivered once), apps with no reviews, ids or names that match nothing, failed jobs, bad input. No start fee; proxy and compute are included in the event price. Apple answers 10 reviews per request; every delivered review is a written review. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:45.660Z"
+}

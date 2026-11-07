@@ -1,0 +1,522 @@
+{
+  "actorSpecification": 1,
+  "title": "Hostelworld reviews",
+  "description": "One row per hostel guest review (charged), plus a free hostel context row and a free status row per target.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | property | status"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input value (URL or property id) this row came from"
+      },
+      "property_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hostelworld's numeric property id (the number in /hostels/p/<id>/)"
+      },
+      "property_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hostel name as Hostelworld lists it"
+      },
+      "property_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The hostel's page on hostelworld.com"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hostelworld's numeric review id"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Publication date, YYYY-MM-DD"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The review text (Hostelworld's notes field); null when the guest scored without writing"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language code of the text Hostelworld serves (always en today)"
+      },
+      "machine_translated": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true when Hostelworld machine-translated the review into the served language"
+      },
+      "rating": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Overall score on Hostelworld's 0-100 scale (100 = perfect); on property rows, the hostel's aggregate score"
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same score converted to the 0-5 star scale, e.g. 94 -> 4.7"
+      },
+      "sub_ratings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "The seven 0-100 sub-scores: value, safety, location, staff, atmosphere, cleanliness, facilities"
+      },
+      "liked": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest liked, when Hostelworld splits the review that way (legacy field, usually null)"
+      },
+      "disliked": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest disliked, when Hostelworld splits the review that way (legacy field, usually null)"
+      },
+      "recommended": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether the guest recommends the hostel (legacy field, usually null)"
+      },
+      "owner_comment": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The hostel's public reply to the review, if any"
+      },
+      "group_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "MALE | FEMALE (solo travellers) | COUPLE | ALLFEMALEGROUP | ALLMALEGROUP | MIXEDGROUP | FAMILY"
+      },
+      "age_group": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer age band: 18-24, 25-30, 31-40 or 41+"
+      },
+      "trip_types": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Why they were travelling: REGULARVACATION, WEEKENDAWAY, GAPYEAR, RTWTRIP, COLLEGEBREAK, OTHER"
+      },
+      "reviewer_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hostelworld's numeric user id"
+      },
+      "reviewer_nickname": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer display name (\"Anonymous\" when they hid it)"
+      },
+      "reviewer_gender": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Male | Female when the reviewer published it"
+      },
+      "reviewer_country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer nationality, e.g. \"Ireland\""
+      },
+      "reviewer_country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hostelworld's nationality code, e.g. IE"
+      },
+      "reviewer_reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many reviews this guest has written on Hostelworld"
+      },
+      "reviewer_image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer avatar URL, when there is one"
+      },
+      "property_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "HOSTEL | GUESTHOUSE | HOTEL | APARTMENT | CAMPSITE (property rows)"
+      },
+      "star_rating": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Star rating where the property has one, else 0 (property rows)"
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City (property rows)"
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Country (property rows)"
+      },
+      "region": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Region or district Hostelworld files the property under (property rows)"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street address (property rows)"
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Latitude (property rows)"
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Longitude (property rows)"
+      },
+      "total_ratings": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many guests have rated the hostel in total, scores without text included (property rows)"
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency the hostel prices in (property rows)"
+      },
+      "lowest_price_per_night": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Hostelworld's lowest advertised nightly price (property rows)"
+      },
+      "best_for": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "What Hostelworld says the hostel is best for, e.g. [\"Home Cooking\", \"Meeting People\"] (property rows)"
+      },
+      "facilities": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Every facility Hostelworld lists for the hostel (property rows)"
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hostelworld's own write-up of the hostel, else the hostel's description (property rows)"
+      },
+      "positive_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews Hostelworld counts as positive (property rows)"
+      },
+      "negative_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews Hostelworld counts as negative (property rows)"
+      },
+      "solo_percentage": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of reviewers travelling solo (property rows)"
+      },
+      "couples_percentage": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of reviewers travelling as a couple (property rows)"
+      },
+      "groups_percentage": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of reviewers travelling in a group (property rows)"
+      },
+      "reviews_listed": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews Hostelworld lists for the hostel (property rows)"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews read in this run for the hostel before filters (property rows)"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | duplicate | error (status rows)"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews delivered and charged for this target (status rows)"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by the filters, never charged (status rows)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review pages read (status rows)"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews Hostelworld lists for the hostel (status rows)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this target resolved to a hostel another target already covers (status rows)"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a target failed (status rows)"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "property_name",
+          "rating",
+          "rating_5",
+          "review_date",
+          "text",
+          "group_type",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "property_name",
+          "review_id",
+          "rating",
+          "rating_5",
+          "sub_ratings",
+          "review_date",
+          "text",
+          "owner_comment",
+          "group_type",
+          "age_group",
+          "trip_types",
+          "reviewer_nickname",
+          "reviewer_country",
+          "property_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "property_name",
+          "rating",
+          "sub_ratings",
+          "review_date",
+          "text",
+          "disliked",
+          "owner_comment",
+          "group_type",
+          "reviewer_country",
+          "property_url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "properties": {
+      "title": "Hostels",
+      "transformation": {
+        "fields": [
+          "property_id",
+          "property_name",
+          "property_type",
+          "star_rating",
+          "city",
+          "country",
+          "rating",
+          "rating_5",
+          "sub_ratings",
+          "total_ratings",
+          "reviews_listed",
+          "reviews_fetched",
+          "positive_count",
+          "negative_count",
+          "solo_percentage",
+          "couples_percentage",
+          "groups_percentage",
+          "lowest_price_per_night",
+          "currency",
+          "property_url"
+        ],
+        "filter": {
+          "type": "property"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "property_id",
+          "property_name",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "duplicates",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

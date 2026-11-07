@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Airbnb occupancy rate",
+  "description": "Three row types share one dataset: occupancy (one per listing and calendar month — availability, occupancy % and a sampled nightly rate), listing (one per listing, optional, never charged) and status (one per place, URL or listing id; never charged).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Occupancy by listing and month",
+      "description": "One row per listing and month with days available, days blocked or booked, occupancy %, minimum stay and the month's sampled nightly rate; plus optional listing rows and one status row per job. Occupancy rows are billed as delivered; listing and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with jobs, listings, occupancy rows delivered and charged, months filtered by minOccupancyPct, rate samples taken, error counts and request stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

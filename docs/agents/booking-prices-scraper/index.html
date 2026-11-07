@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Booking.com Scraper — Hotel Prices &amp; Availability by Date | kestrel</title><meta name="description" content="Booking.com prices and availability by date for destinations or hotels by URL, name or id. One row per hotel: stay total, nightly rate, taxes, free cancellation, breakfast, stars, review score, sold out. Optional room rates. Filters before billing: max price, star class. Price tracking, comp sets."><link rel="canonical" href="https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/"><link rel="stylesheet" href="../style.css"></head><body><main><nav><a href="https://mtedj.github.io/kestrel-actors-examples/agents/">Agent tools</a><a href="https://mtedj.github.io/kestrel-actors-examples/">Documentation</a><a href="https://apify.com/kestrel">Apify Store</a><a href="https://mtedj.github.io/kestrel-actors-examples/llms.txt">LLM index</a></nav><p class="eyebrow">MCP + API · kestrel/booking-prices-scraper</p><h1>Booking.com Scraper — Hotel Prices &amp; Availability by Date</h1><p class="intro">Booking.com prices and availability by date for destinations or hotels by URL, name or id. One row per hotel: stay total, nightly rate, taxes, free cancellation, breakfast, stars, review score, sold out. Optional room rates. Filters before billing: max price, star class. Price tracking, comp sets.</p>
+<p><a class="button" href="https://apify.com/kestrel/booking-prices-scraper">Open Actor</a> <a class="button" href="mcp-config.json">Download MCP config</a></p>
+<h2>Connect this tool</h2><p>Add this URL as a remote MCP server in your client, then sign in to Apify. For a client-specific setup, use <a href="https://mcp.apify.com">Apify's configurator</a>.</p><button type="button" data-copy="url">Copy</button><pre id="url"><code>https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/booking-prices-scraper</code></pre>
+<details><summary>Generic MCP client configuration</summary><button type="button" data-copy="config">Copy</button><pre id="config"><code>{
+  &quot;mcpServers&quot;: {
+    &quot;kestrel-booking-prices-scraper&quot;: {
+      &quot;url&quot;: &quot;https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/booking-prices-scraper&quot;
+    }
+  }
+}
+</code></pre></details>
+<h2>Start with a small sample</h2><p>Use <code>call-actor</code> with the JSON below. The $0.25 run ceiling is separate from the Actor input and may stop the sample early. Change the target to match your request. This input validates against build 1.2.2; it is not a promise that the source has matching rows today.</p><button type="button" data-copy="call">Copy</button><pre id="call"><code>{
+  &quot;actor&quot;: &quot;kestrel/booking-prices-scraper&quot;,
+  &quot;input&quot;: {
+    &quot;locationQueries&quot;: [
+      &quot;Lisbon&quot;
+    ],
+    &quot;maxHotelsPerQuery&quot;: 3,
+    &quot;checkIn&quot;: &quot;30 days&quot;,
+    &quot;nights&quot;: 1,
+    &quot;adults&quot;: 2,
+    &quot;currency&quot;: &quot;USD&quot;,
+    &quot;sortBy&quot;: &quot;price&quot;
+  },
+  &quot;callOptions&quot;: {
+    &quot;maxTotalChargeUsd&quot;: 0.25,
+    &quot;timeout&quot;: 300
+  },
+  &quot;waitSecs&quot;: 30
+}
+</code></pre>
+<p>After completion, use <code>get-dataset-items</code> with <code>storages.datasets.default.id</code>. If still running, poll <code>get-actor-run</code> using the returned <code>runId</code>. Check status rows and errors before treating an empty dataset as no matches.</p>
+<h2>Pricing and limits</h2><p>Current listed event prices in USD. Some Actors charge for successful source checks even when no output rows match. The event descriptions below define those differences.</p><div class="table"><table><thead><tr><th>Event</th><th>USD each</th><th>What is charged</th></tr></thead><tbody><tr><td><code>hotel</code></td><td>$0.004</td><td>One Booking.com property priced for your dates and guests: its lowest stay price, flags, rating and location (row keys hotel_id, name, url, stars, review_score, review_count, address, latitude, longitude, distance_from_center, price_total, price_nightly, currency, taxes_fees_excluded, free_cancellation, no_prepayment, breakfast_included, room_name): $4 per 1,000 hotels. Not charged: sold-out or unpriced properties (delivered free with Booking&#x27;s alternative dates), properties maxPrice or minStars remove, a property reached twice in one run, destinations or names that match nothing, status rows, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.</td></tr><tr><td><code>room</code></td><td>$0.002</td><td>One room and rate combination Booking.com matched to your stay, only when includeRooms is true: room name, occupancy, meal plan, stay total and nightly rate, hotel-currency price, free-cancellation deadline, &quot;only X left&quot; message (row keys hotel_id, hotel_name, room_id, room_name, occupancy, meal_plan, price_total, price_nightly, currency, price_original, original_currency, free_cancellation, free_cancellation_until, only_x_left, check_in, check_out): $2 per 1,000 rows. Not charged when includeRooms is false (default), and never for sold-out properties. The hotel row&#x27;s rooms_listed is the number of room rows that property adds. No start fee; proxy and compute are included in the event price.</td></tr></tbody></table></div>
+<h2>Contracts for agents</h2><ul><li><a href="input-schema.json">Input schema</a> and <a href="input.json">sample input</a></li><li><a href="mcp-call.json">Prepared MCP call</a> and <a href="pricing.json">pricing events</a></li><li><a href="README.md">Full Actor instructions and limits</a></li><li><a href="https://apify.com/kestrel/booking-prices-scraper/api">REST API</a></li></ul><p class="fine">Public contract checked 2026-11-07. Active build: 1.2.2. Refresh live details before a large or recurring run.</p><footer class="fine">Published by kestrel. Uses Apify's hosted MCP server; no extra server installation. Prices and availability can change: read the live Actor details before starting a run.</footer></main><script src="../site.js" defer></script></body></html>

@@ -1,0 +1,413 @@
+{
+  "actorSpecification": 1,
+  "title": "Trip.com reviews",
+  "description": "One row per guest review (charged), plus a free hotel context row and a free status row per property.",
+  "fields": {
+    "title": "HRS reviews",
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | hotel | status"
+      },
+      "hotel_id": {
+        "type": "string",
+        "description": "HRS hotel id (the number in the hotel URL)"
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel name from the hotel page (empty when includeHotelRow is off)"
+      },
+      "url": {
+        "type": "string",
+        "description": "Hotel page URL"
+      },
+      "review_id": {
+        "type": "string",
+        "description": "Stable id of the rating (HRS booking id)"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Guest score 0-10"
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Same score on the 5-star scale"
+      },
+      "recommends": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Guest recommends the hotel"
+      },
+      "comfort": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "HRS comfort word, e.g. NICE"
+      },
+      "positives": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest liked"
+      },
+      "negatives": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest disliked"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Positives and negatives joined"
+      },
+      "hotel_reply": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The hotel's replies"
+      },
+      "traveller_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "BUSINESS, PRIVATE, YOUNG_COUPLE, MATURE_COUPLE, FAMILY_SMALL_CHILDREN, FAMILY_OLDER_CHILDREN, GROUP, CONFERENCE"
+      },
+      "age_group": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UP_TO_59 or OVER_59"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO 639-2 code of the comment (deu, eng, …)"
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Two-letter site locale the guest used"
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Guest display name as HRS shows it"
+      },
+      "arrival_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-in date"
+      },
+      "departure_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Check-out date"
+      },
+      "nights": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Length of stay"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "When the rating was written (ISO 8601)"
+      },
+      "votes": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Twelve category votes 0-10: FRIENDLINESS_OF_RECEPTION, SERVICE_OF_HOTEL_EMPLOYEES, HOTEL_AMBIANCE, ROOM_CONFIGURATION, HOTEL_TIDINESS, SANITARY_FACILITIES, ROOM_SIZE, BREAKFAST_SERVICE, RESTAURANT_SERVICE, PRICE_PERFORMANCE_RATIO, WELLNESS_RANKING, QUALITY_OF_BEDS"
+      },
+      "stars": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "HRS star category"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street address"
+      },
+      "postal_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Postal code"
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City"
+      },
+      "rating_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "All ratings HRS counts for the property, commented or not"
+      },
+      "comment_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Ratings with a written comment (what can be delivered)"
+      },
+      "recommendation_pct": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Share of guests who recommend the hotel"
+      },
+      "ratings_by_traveller_type": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Per traveller type: count, rating, recommendation_pct"
+      },
+      "avg_by_category": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Average 0-10 per category"
+      },
+      "avg_by_super_category": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Average per super category (HOTEL_GENERAL_ASPECTS, ROOM, STAFF_AND_GASTRONOMY)"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Commented ratings read for this hotel"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input this status row is for"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | duplicate | error"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review rows delivered"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by a filter (never billed)"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "HRS's rating count for the hotel"
+      },
+      "comments": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Commented ratings available"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this input repeats a hotel already harvested"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why the hotel failed"
+      },
+      "fetched_at": {
+        "type": "string",
+        "description": "UTC timestamp of the row"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_id",
+          "hotel_name",
+          "rating",
+          "traveller_type",
+          "positives",
+          "negatives",
+          "language",
+          "review_date",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "review_id",
+          "rating",
+          "rating_5",
+          "recommends",
+          "positives",
+          "negatives",
+          "hotel_reply",
+          "traveller_type",
+          "age_group",
+          "language",
+          "arrival_date",
+          "departure_date",
+          "nights",
+          "review_date",
+          "reviewer_name",
+          "votes",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "rating",
+          "negatives",
+          "hotel_reply",
+          "traveller_type",
+          "review_date",
+          "language"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "stars",
+          "city",
+          "address",
+          "postal_code",
+          "rating",
+          "rating_count",
+          "comment_count",
+          "recommendation_pct",
+          "ratings_by_traveller_type",
+          "avg_by_category",
+          "avg_by_super_category",
+          "reviews_fetched",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "hotel_id",
+          "hotel_name",
+          "status",
+          "reviews",
+          "filtered",
+          "total",
+          "comments",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

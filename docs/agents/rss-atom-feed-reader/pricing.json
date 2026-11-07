@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "feed-parsed": {
+      "eventTitle": "Parsed feed",
+      "eventDescription": "One successfully parsed feed file: $2.5 per 1,000 files. Includes up to maxItemsPerFeed matching entry rows (keys id, title, url, text, author, published_at, updated_at, categories, feed_url). No per-entry fee. Empty sources and sources with no matching or new rows ARE charged for parsing. Invalid input, HTTP failures, malformed XML and duplicate source URLs are not charged. No start fee; compute and transfer are included. maxTotalChargeUsd is an Apify run option, not an input field. Work stops when the remaining budget cannot cover the next event.",
+      "eventPriceUsd": 0.0025,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-10-30T03:14:16.821Z"
+}

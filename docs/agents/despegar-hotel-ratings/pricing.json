@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "hotel": {
+      "eventTitle": "Hotel",
+      "eventDescription": "One Despegar hotel: the 0-10 guest rating with its review count, six category scores (service, staff, location, Wi-Fi, cleanliness, value), Despegar's AI summary of what guests say, stars, city, country and coordinates (row keys hotel_id, rating, review_count, score_service, score_staff, score_location, score_internet, score_cleanliness, score_value, summary, stars, city, country, latitude, longitude): $4 per 1,000 hotels. Free: the up-to-four comments the page publishes (whatever the review count says; there is no full review list), hotels with no rating, unknown ids, hotels below minRating, duplicates, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.004,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:49.843Z"
+}

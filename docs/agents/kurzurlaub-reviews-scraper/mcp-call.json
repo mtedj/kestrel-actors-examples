@@ -1,0 +1,14 @@
+{
+  "actor": "kestrel/kurzurlaub-reviews-scraper",
+  "input": {
+    "startUrls": [
+      "https://www.kurzurlaub.de/hotel/rhein_lahn_taunus/hachenburg/parkhotel-hachenburg.html"
+    ],
+    "maxReviewsPerHotel": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

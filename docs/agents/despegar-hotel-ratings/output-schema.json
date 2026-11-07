@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Despegar hotel ratings",
+  "description": "Three row types share one dataset: hotel (the ratings payload, charged), review (the up-to-four published comments, free) and status (one per target, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Despegar hotel ratings",
+      "description": "One row per hotel with its score, category scores and AI summary, plus the comments the page publishes and a status row per target. Charged rows are billed as delivered; review and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its filtered, not-found and error tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

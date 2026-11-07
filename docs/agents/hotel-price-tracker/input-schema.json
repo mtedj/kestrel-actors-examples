@@ -1,0 +1,144 @@
+{
+  "title": "Hotel Price Tracker — input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "hotelNames": {
+      "title": "Properties by name",
+      "type": "array",
+      "description": "Hotels by name, e.g. [\"Hyatt Regency Lisbon\", \"Altis Grand Hotel Lisbon\"]: use for \"track the price of hotel X\" when you have no Google Hotels URL. One free Google search per name; the listing is kept only when its name shares at least two words and 60% of the words you typed, so a stranger is never billed. A name that matches nothing is a free not_found status row: retry with the name as Google spells it, or pass the entity_id of any row in hotels. Add the city to a generic name.",
+      "editor": "stringList",
+      "default": [],
+      "prefill": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels"
+    },
+    "hotels": {
+      "title": "Properties (Google Hotels URLs or entity tokens)",
+      "type": "array",
+      "description": "Exact hotels by Google Hotels URL (https://www.google.com/travel/hotels/entity/ChkI…) or entity token, e.g. the entity_id of a row from an earlier run or from kestrel/google-hotels-prices. No search: one offers call per hotel and date, nothing unrelated is ever billed. Use to track the SAME hotels every day: resolve names once, then pass their entity_id values here. Names belong in hotelNames.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.google.com/travel/hotels/entity/ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE",
+        "https://www.google.com/travel/hotels/entity/ChkIg-b2ismUj7M1Gg0vZy8xMWg3MThreGg1EAE"
+      ],
+      "uniqueItems": true
+    },
+    "checkIn": {
+      "title": "First check-in date",
+      "type": "string",
+      "description": "First check-in date of the window: \"2026-11-02\" (YYYY-MM-DD), or relative to the day the run starts: \"30 days\", \"6 weeks\", \"+30d\", \"today\", \"tomorrow\". Use relative dates for a schedule (\"track prices daily\"): the input never needs editing and every run looks the same distance ahead. A past date is rejected before anything is charged. Required.",
+      "editor": "datepicker",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)$",
+      "dateType": "absoluteOrRelative",
+      "prefill": "30 days",
+      "sectionCaption": "Stay window"
+    },
+    "days": {
+      "title": "Check-in dates to cover",
+      "type": "integer",
+      "description": "How many consecutive check-in dates to price from checkIn, 1 to 60, e.g. 30 (default 7). One row per hotel and date, so 2 hotels × days 30 = at most 60 rows ($0.24). 1 = one stay, 7 = a week, 30 = a month-long price calendar. Use for \"which day is cheapest\", \"price calendar\", \"cheapest date to stay\": rank_in_window ranks the dates and cheapest_in_window marks the winner. Each date is one offers call.",
+      "default": 7,
+      "prefill": 3,
+      "minimum": 1,
+      "maximum": 60,
+      "editor": "number"
+    },
+    "nights": {
+      "title": "Nights",
+      "type": "integer",
+      "description": "Length of stay in nights for every check-in date, 1 to 30, e.g. 2 (default 1). Check-out = check-in + nights: checkIn \"2026-11-02\", nights 2, days 3 = three 2-night stays checking in on 2, 3 and 4 Nov.",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 30,
+      "editor": "number"
+    },
+    "maxPrice": {
+      "title": "Only keep dates at or under this nightly rate",
+      "type": "number",
+      "description": "0 (default) = deliver every date. N = deliver only the check-in dates whose lowest nightly rate is at or under N in `currency`, e.g. 180: the price drop alert. Dates over N are never billed; a run that delivers nothing means nothing is under target yet, and the status row still reports the cheapest rate and date it saw. rank_in_window is computed over the whole window before this filter. Use for \"alert me when hotel X drops under 180\", \"only dates under budget\".",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 10000000,
+      "editor": "number",
+      "sectionCaption": "Price alert"
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "description": "Adults in the room, 1 to 6, e.g. 2 (default 2). Google prices ONE room for the whole party: there is no rooms input, and above 6 adults Google returns no price at all. Rates scale with occupancy exactly as on Google, so track the occupancy you will book.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 6,
+      "editor": "number",
+      "sectionCaption": "Guests, currency and market"
+    },
+    "childrenAges": {
+      "title": "Children (ages)",
+      "type": "array",
+      "description": "Ages of the children in the same room, e.g. [5, 9] for two children aged 5 and 9. Empty (default) = no children. The price is for one room holding the adults plus these children.",
+      "editor": "json",
+      "default": [],
+      "prefill": []
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "ISO 4217 code for every price in the run, e.g. \"EUR\" (default \"USD\"): USD, EUR, GBP, JPY, THB, SGD, AUD, AED… When the user names no currency, pass the destination's (\"EUR\" for Lisbon). maxPrice is read in this currency.",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$",
+      "editor": "textfield",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "country": {
+      "title": "Market",
+      "type": "string",
+      "description": "Google market (gl): any 2-letter country code, e.g. \"gb\", \"pt\", \"jp\" (default \"us\"). It is the country of the person booking, NOT the destination: keep \"us\" unless the user wants prices as seen from a country. It changes which booking sites Google lists (Klook, Traveloka, Wego in Asian markets), so keep one market across a price history.",
+      "default": "us",
+      "editor": "textfield"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Google language (hl), e.g. \"en\", \"de\", \"ja\" (default \"en\"). Sets the language of hotel and source names where Google has a translation; hotelNames may be written in any language.",
+      "default": "en",
+      "editor": "textfield"
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Keep the default (Apify datacenter proxies): Google accepts them for these calls, residential is unnecessary.",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing"
+    },
+    "sessions": {
+      "title": "Parallel proxy sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions, 1 to 16, e.g. 4 (default 4); each is paced at perIp requests per second. Raise for many hotels × dates, lower if Google throttles.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per proxy session, 0.1 to 2, e.g. 0.5 (default 0.5). 0.5 is safe; raise carefully.",
+      "default": 0.5,
+      "minimum": 0.1,
+      "maximum": 2,
+      "editor": "number"
+    }
+  },
+  "required": [
+    "checkIn"
+  ],
+  "description": "Hotel price tracker on Google Hotels. Minimal input: {\"hotelNames\": [\"Hyatt Regency Lisbon\"], \"checkIn\": \"30 days\", \"days\": 7}. One of hotelNames / hotels is required. days decides the bill: one row per hotel and check-in date at $0.004 (7 dates = $0.028 per hotel); maxPrice delivers and bills only the dates at or under your target."
+}

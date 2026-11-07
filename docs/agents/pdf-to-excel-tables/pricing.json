@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "result": {
+      "eventTitle": "Pdf page with tables",
+      "eventDescription": "One delivered PDF page with tables: $20 per 1,000 rows. Row keys page, total_pages, source_url, extraction, tables, table_count, table_strategy. No start fee; compute and network included. Nested data and any documented file included. Empty extractions, duplicates, exclusions and failures without delivered rows are free. Invalid-syntax email, DNS NXDOMAIN and RDAP not-found diagnostic rows are billed where applicable. Stops at maxTotalChargeUsd (run option, not input); partial failures retain delivered row charges.",
+      "eventPriceUsd": 0.02,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:06.353Z"
+}

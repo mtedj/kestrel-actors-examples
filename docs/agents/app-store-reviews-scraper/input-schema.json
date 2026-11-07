@@ -1,0 +1,152 @@
+{
+  "title": "App Store Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "appIds": {
+      "title": "App ids",
+      "type": "array",
+      "description": "Apple numeric app ids, e.g. [\"310633997\"] (the digits after /id in any App Store link) — the fastest input, and what an earlier run's app_id gives you. Each id is read on every storefront in countries. An id that is not an app on a storefront costs nothing: its status row says not_found. Use for \"reviews of app id 310633997\".",
+      "editor": "stringList",
+      "prefill": [
+        "310633997"
+      ],
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which apps",
+      "sectionDescription": "App ids, App Store URLs and/or plain app names — at least one. Every app is read on every storefront in countries."
+    },
+    "startUrls": {
+      "title": "App Store URLs",
+      "type": "array",
+      "description": "App Store app pages, e.g. [\"https://apps.apple.com/us/app/whatsapp-messenger/id310633997\"]. Only the id is read from the URL; the country in the URL is NOT used — countries decides which storefronts are read. A URL from another site ends the run before anything is charged. A URL and its id are the same app and are read once.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "appNames": {
+      "title": "App names",
+      "type": "array",
+      "description": "App names as typed into App Store search, e.g. [\"Duolingo\", \"Babbel\"]: each is resolved to Apple's top search hit on each storefront, no id hunting. Use for \"reviews of the Duolingo app\". An ambiguous name (\"Weather\") takes the top hit: check app_name on the app row, or pass the id. A name that matches nothing costs nothing; its status row carries the reason.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "countries": {
+      "title": "Countries (storefronts)",
+      "type": "array",
+      "description": "Storefront codes, e.g. [\"us\", \"gb\", \"de\", \"jp\"]; default [\"us\"]. Reviews live per storefront, so a global app needs several: each app is read on each one and every row carries country. Known (48): us gb ca au de fr it es nl se no dk fi ch at be ie pt pl cz ru tr il ae sa eg za ng ke br mx ar cl co pe jp kr cn tw hk sg in nz ph id my th vn; any other code ends the run before anything is charged. A review Apple lists on two storefronts is delivered and billed once.",
+      "editor": "stringList",
+      "prefill": [
+        "us"
+      ],
+      "default": [
+        "us"
+      ],
+      "uniqueItems": true
+    },
+    "maxReviewsPerApp": {
+      "title": "Max reviews per app per country",
+      "type": "integer",
+      "description": "Reviews to read per app AND per storefront, e.g. 200; default 100; 0 = every review Apple pages out (tens of thousands for big apps: cap the run with maxTotalChargeUsd). The main cost control: at most N × $0.004 per app and country. The filters (minRating, maxRating, sinceDate, requireText) apply to these N reads, so 300 with maxRating 2 delivers the 1-2 star reviews among the 300 read — pair it with sort \"most_critical\" so the N read are the critical ones. Apple pages 10 reviews per request.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 100000,
+      "default": 100,
+      "prefill": 50,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per app and storefront, in what order, and which ones are worth paying for. The filters run before billing."
+    },
+    "sort": {
+      "title": "Order",
+      "type": "string",
+      "description": "\"most_recent\" (default; schedule this), \"most_helpful\" (the App Store's own order), \"most_critical\" (1-star first: the cheap way to a complaints feed), \"most_favorable\" (5-star first). Applied by Apple before maxReviewsPerApp: \"most_critical\" with maxReviewsPerApp 100 reads the 100 most critical reviews of each storefront.",
+      "enum": [
+        "most_recent",
+        "most_helpful",
+        "most_critical",
+        "most_favorable"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Most helpful",
+        "Most critical",
+        "Most favorable"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "minRating": {
+      "title": "Only reviews rated at least",
+      "type": "integer",
+      "description": "0 (default) = no lower bound. 1-5 = keep only reviews with at least this many stars, e.g. 4 for praise only. Applied after the reviews are read and before billing: reviews below it are never charged (the status row counts them in filtered). Pair with sort \"most_favorable\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "maxRating": {
+      "title": "Only reviews rated at most",
+      "type": "integer",
+      "description": "0 (default) = no upper bound. 1-5 = keep only reviews with at most this many stars, e.g. 2 for a complaints feed that pays nothing for the happy ones (pair with sort \"most_critical\" so the N read are the critical ones). Applied before billing; must be at least minRating. Use for \"negative reviews\", \"1-star reviews\", \"complaints\".",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "sinceDate": {
+      "title": "Only reviews on or after",
+      "type": "string",
+      "description": "Empty (default) = all dates. Keep only reviews on or after this day: \"2026-09-01\", or relative to the run day so a schedule never goes stale: \"7 days\", \"2 weeks\", \"3 months\", \"yesterday\". For a daily new-reviews feed pass \"1 day\" with sort \"most_recent\". Applied before billing; older reviews that were read are not charged. There is no end date and no \"since last run\" memory: dedupe on review_id downstream.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "requireText": {
+      "title": "Only reviews with written text",
+      "type": "boolean",
+      "description": "false (default) = keep every review. true = drop reviews with no written text before billing. Apple's reviews endpoint returns written reviews only (60 of 60 reviews in the recorded pages had text), so this rarely removes anything here; it exists for parity with the Google Play actor.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeAppRow": {
+      "title": "Include an app row",
+      "type": "boolean",
+      "description": "true (default) = one free app row per app and storefront: app_name, developer, genre, price, version, age_rating, rating_avg, rating_count, the 1-5 star histogram (hist_1 … hist_5) and written_reviews. Never charged. Use for \"App Store rating of app X\" or a daily rating history; false = review rows only.",
+      "editor": "checkbox",
+      "default": true,
+      "sectionCaption": "Output",
+      "sectionDescription": "What else goes into the dataset besides the review rows."
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1-16; default 4. Apple allows about one request a second per IP and answers 10 reviews per request, so 4 sessions read about 40 reviews a second. Raise it for large runs; it changes speed, not cost.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Performance",
+      "sectionDescription": "Leave these alone unless a run is being throttled; they change speed, not cost."
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1-3; default 1. Apple answers 429 above about 1 per second per IP and the fetcher then backs off, so a higher value earns retries, not speed.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Default: Apify Proxy, datacentre group. Apple's endpoints need no login, but each IP is capped at about one request a second, so a run of more than a few hundred reviews needs several IPs. Small runs work without a proxy.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [],
+  "description": "Apple App Store reviews. Minimal input: {\"appIds\": [\"310633997\"]} or {\"appNames\": [\"Duolingo\"]} or {\"startUrls\": [\"https://apps.apple.com/us/app/whatsapp-messenger/id310633997\"]} — at least one of the three. countries defaults to [\"us\"]: name every storefront you want, each is read separately. maxReviewsPerApp defaults to 100 per app and storefront (up to $0.40 per app and country at $0.004 a review); 0 = every review Apple pages out."
+}

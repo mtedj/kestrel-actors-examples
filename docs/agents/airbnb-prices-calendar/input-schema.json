@@ -1,0 +1,261 @@
+{
+  "title": "Airbnb Prices & Availability Calendar — input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "locationQueries": {
+      "title": "Places",
+      "type": "array",
+      "description": "Places as typed on Airbnb, e.g. [\"Lisbon, Portugal\"], [\"Brooklyn, NY\"], [\"Algarve\"]. Each returns up to maxListingsPerQuery listings with a price for the stay. A place Airbnb does not recognise is reported as an unknown_area status row and costs nothing (Airbnb would otherwise answer with listings from all over the world): write it as Airbnb spells it, with the country when ambiguous. Use for \"Airbnb prices in <city>\" and market runs; for exact listings use listingIds.",
+      "editor": "stringList",
+      "prefill": [
+        "Lisbon, Portugal"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "What to price",
+      "sectionDescription": "Search places and/or paste Airbnb URLs (search results pages, listing pages) and/or listing ids. At least one."
+    },
+    "startUrls": {
+      "title": "Airbnb URLs",
+      "type": "array",
+      "description": "Airbnb search URLs (https://www.airbnb.com/s/Paris--France/homes?checkin=2026-11-10&checkout=2026-11-14&price_max=200) or listing URLs (https://www.airbnb.com/rooms/12345678). A search URL keeps every filter it carries: dates, guests, price band, room type, bedrooms, amenities, map bounds; checkIn/checkOut given here override its dates. Use for \"price the listings from this search\" or \"this listing\". A URL from another site is rejected before anything is charged. Default empty.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "listingIds": {
+      "title": "Listing ids",
+      "type": "array",
+      "description": "Numeric Airbnb listing ids, e.g. [\"11562247\", \"45307024\"] (the number in /rooms/<id>). Each is priced for the stay straight from its page and the row carries the full details (amenities, house rules, cancellation policy, host, price breakdown, available flag) at no extra charge. Use for \"track these listings\", your own portfolio or a comp set; filters and maxListingsPerQuery do not apply. Default empty.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "checkIn": {
+      "title": "Check-in",
+      "type": "string",
+      "description": "Check-in date: \"2026-11-07\" (YYYY-MM-DD) or relative to the run date: \"30 days\", \"tomorrow\". Relative dates make a schedule that never needs editing; they count from the run day, so for a fixed weekday stay (Friday to Sunday) run weekly on that weekday with multiples of 7 (\"28 days\", \"30 days\"). Empty (default) = no stay: each listing row carries Airbnb's default displayed price and is billed. A past date is rejected before anything is charged; give both checkIn and checkOut or neither.",
+      "editor": "datepicker",
+      "dateType": "absoluteOrRelative",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)?$",
+      "prefill": "30 days",
+      "sectionCaption": "Stay, guests, currency and language",
+      "sectionDescription": "Dates decide the price: with dates every listing row carries the nightly rate and total for exactly that stay and is billed only when Airbnb priced it; without dates every listing row carries Airbnb's default displayed price and is billed."
+    },
+    "checkOut": {
+      "title": "Check-out",
+      "type": "string",
+      "description": "Check-out date after checkIn: \"2026-11-10\" or relative: \"33 days\". Nights = checkOut minus checkIn, so checkIn \"30 days\" + checkOut \"33 days\" = a 3-night stay starting 30 days after each run. Every price in the run is for exactly this stay.",
+      "editor": "datepicker",
+      "dateType": "absoluteOrRelative",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)?$",
+      "prefill": "33 days"
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "description": "Adults in the party, 1 to 16, e.g. 2 (default 2). Passed to Airbnb as in the site's guest picker: prices depend on the guest count and the results are those the site shows for that party.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "children": {
+      "title": "Children",
+      "type": "integer",
+      "description": "Children aged 2 to 12, 0 to 10, e.g. 1 (default 0). Counted as guests for price and capacity, as on the site.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 10,
+      "editor": "number"
+    },
+    "infants": {
+      "title": "Infants",
+      "type": "integer",
+      "description": "Infants under 2, 0 to 5, e.g. 1 (default 0). Passed to Airbnb exactly as the site's guest picker does.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5,
+      "editor": "number"
+    },
+    "pets": {
+      "title": "Pets",
+      "type": "integer",
+      "description": "Pets, 0 to 5, e.g. 1 (default 0). Passed to Airbnb as in the site's guest picker, so the results and prices are those a guest travelling with a pet sees. Use for \"pet-friendly Airbnb in <city>\".",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5,
+      "editor": "number"
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "ISO 4217 code for every price in the run, e.g. \"EUR\" (default \"USD\"). Any currency Airbnb supports: USD, EUR, GBP, JPY, AUD, CAD, BRL, MXN, CHF, SGD, INR, THB, AED, … Echoed on every row. When the user names no currency, pass the destination's (\"EUR\" for Lisbon, \"MXN\" for Mexico City).",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$",
+      "minLength": 3,
+      "maxLength": 3,
+      "editor": "textfield"
+    },
+    "locale": {
+      "title": "Language",
+      "type": "string",
+      "description": "Airbnb locale for listing names, descriptions and reviews, e.g. \"en\" (default), \"fr\", \"de\", \"es\", \"pt\", \"it\", \"ja\". Prices and availability are not affected.",
+      "default": "en",
+      "editor": "textfield"
+    },
+    "maxListingsPerQuery": {
+      "title": "Max listings per place",
+      "type": "integer",
+      "description": "Listings to return per place or search URL, 1 to 280, e.g. 50 (default 40). The main cost control: at most maxListingsPerQuery × $0.005 per place and stay (calendar and review rows only if asked). Airbnb applies filters before this cap, so 30 asked = the first 30 matching listings in Airbnb's relevance order — not by price: for \"the N cheapest\" set priceMax, or raise the cap and sort price_total at your end. About 280 is Airbnb's ceiling per search. Ignored for listingIds.",
+      "default": 40,
+      "minimum": 1,
+      "maximum": 280,
+      "editor": "number",
+      "sectionCaption": "How many listings, which rows",
+      "sectionDescription": "Listing rows are always returned. Details are free; calendar months and reviews are priced per row and off by default."
+    },
+    "includeDetails": {
+      "title": "Listing details",
+      "type": "boolean",
+      "description": "true = each listing row also gets description, amenities (name, group, available flag), house rules, cancellation policy, rating breakdown (cleanliness, accuracy, …), host (name, Superhost, verified, years hosting), person capacity, sleeping arrangement, highlights, the exact price breakdown for the stay, and an available flag with Airbnb's message when the dates are not available. No extra charge, one extra request per listing. Default false. Rows from listingIds always carry these.",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "calendarMonths": {
+      "title": "Calendar months",
+      "type": "integer",
+      "description": "0 (default) = no calendar. N = one calendar row per listing with day-by-day availability for the next N months (1 to 24): available, check-in and check-out allowed, minimum and maximum nights per day, plus occupancy for the next 30, 90 and 365 nights and the next available date. $0.002 per month, so 12 = $0.024 per listing. Availability only: Airbnb's calendar carries no price per day (price one-night stays for that). Blocked and booked nights look the same; occupancy counts both.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 24,
+      "editor": "number"
+    },
+    "maxReviewsPerListing": {
+      "title": "Max reviews per listing",
+      "type": "integer",
+      "description": "0 (default) = no reviews. N = up to N reviews per listing (maximum 200) as review rows at $0.003 each: rating, text, Airbnb's translation and original language, date, reviewer name and location, stay type, host reply. Use for \"prices and the latest reviews together\". For a rating filter, every review of a listing or more than 200, use kestrel/airbnb-reviews-scraper.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 200,
+      "editor": "number"
+    },
+    "reviewsSort": {
+      "title": "Reviews order",
+      "type": "string",
+      "description": "Which reviews come first when maxReviewsPerListing is set: \"most_recent\" (default), \"highest_rated\", \"lowest_rated\" (complaints first), \"most_relevant\" (Airbnb's own order). Ignored when maxReviewsPerListing is 0.",
+      "enum": [
+        "most_recent",
+        "highest_rated",
+        "lowest_rated",
+        "most_relevant"
+      ],
+      "enumTitles": [
+        "Most recent",
+        "Highest rated",
+        "Lowest rated",
+        "Most relevant"
+      ],
+      "default": "most_recent",
+      "editor": "select"
+    },
+    "priceMin": {
+      "title": "Min price per night",
+      "type": "integer",
+      "description": "Lowest nightly price in `currency`, e.g. 80. 0 (default) = no minimum. Applied by Airbnb before maxListingsPerQuery, so filtered listings are never returned or billed. Place searches only; a pasted search URL keeps its own filters.",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0,
+      "sectionCaption": "Filters (place searches)",
+      "sectionDescription": "Filters apply to place searches; pasted search URLs bring their own."
+    },
+    "priceMax": {
+      "title": "Max price per night",
+      "type": "integer",
+      "description": "Highest nightly price in `currency`, e.g. 200. 0 (default) = no maximum. Applied by Airbnb before maxListingsPerQuery, so listings above it are never returned or billed. Place searches only. Use for \"Airbnb under 200 a night in <city>\". Must be at least priceMin.",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0
+    },
+    "roomTypes": {
+      "title": "Room types",
+      "type": "array",
+      "description": "Only these room types, e.g. [\"entire_home\"] for whole places. Allowed: \"entire_home\", \"private_room\", \"shared_room\", \"hotel_room\". Empty (default) = any. Place searches only. Use for \"entire homes in <city>\", \"private rooms in <city>\".",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "entire_home",
+          "private_room",
+          "shared_room",
+          "hotel_room"
+        ],
+        "enumTitles": [
+          "Entire home",
+          "Private room",
+          "Shared room",
+          "Hotel room"
+        ]
+      },
+      "default": []
+    },
+    "minBedrooms": {
+      "title": "Min bedrooms",
+      "type": "integer",
+      "description": "Minimum bedrooms, e.g. 2. 0 (default) = any. Applied by Airbnb before the cap; place searches only. Use for \"2-bedroom Airbnbs in <city>\".",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0
+    },
+    "minBeds": {
+      "title": "Min beds",
+      "type": "integer",
+      "description": "Minimum beds, e.g. 3. 0 (default) = any. Applied by Airbnb before the cap; place searches only.",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0
+    },
+    "minBathrooms": {
+      "title": "Min bathrooms",
+      "type": "integer",
+      "description": "Minimum bathrooms, e.g. 2. 0 (default) = any. Applied by Airbnb before the cap; place searches only.",
+      "editor": "number",
+      "minimum": 0,
+      "default": 0
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy settings. Airbnb accepts datacenter proxies for these calls: keep the default {\"useApifyProxy\": true}.",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Defaults work."
+    },
+    "sessions": {
+      "title": "Parallel proxy sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, e.g. 4 (default 4). Each is paced at perIp requests per second; more sessions = a faster run at the same cost.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3, e.g. 1 (default 1). Airbnb tolerated 1 per second in tests; raise it only when a run is slow and not being throttled.",
+      "default": 1,
+      "minimum": 0.1,
+      "maximum": 3,
+      "editor": "number"
+    }
+  },
+  "required": [],
+  "description": "Airbnb prices. Minimal input: {\"locationQueries\": [\"Lisbon, Portugal\"], \"checkIn\": \"30 days\", \"checkOut\": \"33 days\"}. One of locationQueries / startUrls / listingIds is required. Only listing rows are billed unless you set calendarMonths (per month) or maxReviewsPerListing (per review), both 0 by default; includeDetails is free. Without dates each listing row is billed at its default displayed price. Listing row keys: price_total (the stay total Airbnb displays for the dates, after discounts), price_nightly, price_nightly_effective (total ÷ nights), price_breakdown (with includeDetails: Airbnb's checkout line items), currency, rating, reviews_count, is_superhost, url."
+}

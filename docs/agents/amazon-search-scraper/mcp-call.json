@@ -1,0 +1,16 @@
+{
+  "actor": "kestrel/amazon-search-scraper",
+  "input": {
+    "queries": [
+      "wireless earbuds"
+    ],
+    "pages": 1,
+    "skipSponsored": true,
+    "maxResultsPerQuery": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

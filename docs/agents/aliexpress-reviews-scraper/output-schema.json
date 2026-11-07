@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "AliExpress reviews",
+  "description": "Three row types share one dataset: review (one buyer review, charged), product (context and rating statistics for a product, free) and status (one per target, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "AliExpress reviews",
+      "description": "One row per buyer review, plus per-product context and status rows. Charged rows are billed as delivered; product and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error, duplicate and repeat tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

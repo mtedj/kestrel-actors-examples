@@ -1,0 +1,121 @@
+{
+  "title": "Google news",
+  "schemaVersion": 1,
+  "type": "object",
+  "description": "Minimal input: {\"queries\": [\"artificial intelligence\"], \"maxArticlesPerQuery\": 3, \"maxResults\": 3}. $1 per 1000 delivered article rows; no start fee.",
+  "required": [
+    "queries"
+  ],
+  "properties": {
+    "queries": {
+      "title": "Queries",
+      "type": "array",
+      "description": "Required: 1-10 keyword searches, e.g. [\"artificial intelligence\"]. Google operators such as quotes, OR and site: work in queries. Returns recent RSS metadata, not full article text or direct publisher article URLs. At most about 100 source entries per query; no exhaustive historical archive.",
+      "editor": "stringList",
+      "prefill": [
+        "artificial intelligence"
+      ],
+      "sectionCaption": "Searches and limits"
+    },
+    "maxArticlesPerQuery": {
+      "title": "Max articles per query",
+      "type": "integer",
+      "description": "20 by default; 1-100. Maximum matching articles per query AFTER dates, publishers and exclusions. Newest publication first within the returned feed; RSS may contain fewer matches and has no pagination. 10 articles cost $0.01.",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 20
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "100 by default. Maximum delivered article rows across all inputs, after filters and deduplication. Stops early even if sources remain. Free status rows do not count. Cost is at most maxResults × $0.001; use Apify run option maxTotalChargeUsd for a dollar cap.",
+      "minimum": 1,
+      "maximum": 1000,
+      "default": 100
+    },
+    "country": {
+      "title": "Country",
+      "type": "string",
+      "description": "\"US\" default. Two-letter Google News edition, not the location of every story. 中文示例: \"CN\" + language=\"zh-CN\" (简体); \"TW\" + \"zh-TW\" (繁體). Keep US if no region is requested. country and language select a feed, not a translation. No extra charge.",
+      "editor": "textfield",
+      "sectionCaption": "Edition and date filters",
+      "default": "US"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "\"en\" default. Feed language, not translation. For 简体中文 use \"zh-CN\" with country=\"CN\"; for 繁體中文 use \"zh-TW\" with country=\"TW\". \"es\" pairs with \"ES\". Keep en if unspecified. Some edition pairs may return few or no articles. No extra charge.",
+      "editor": "select",
+      "enum": [
+        "en",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt",
+        "nl",
+        "pl",
+        "tr",
+        "ar",
+        "hi",
+        "ja",
+        "ko",
+        "id",
+        "vi",
+        "th",
+        "zh-CN",
+        "zh-TW"
+      ],
+      "default": "en",
+      "enumTitles": [
+        "English",
+        "Español",
+        "Français",
+        "Deutsch",
+        "Italiano",
+        "Português",
+        "Nederlands",
+        "Polski",
+        "Türkçe",
+        "العربية",
+        "हिन्दी",
+        "日本語",
+        "한국어",
+        "Bahasa Indonesia",
+        "Tiếng Việt",
+        "ไทย",
+        "简体中文",
+        "繁體中文"
+      ]
+    },
+    "sinceDate": {
+      "title": "Since date",
+      "type": "string",
+      "description": "Empty = no lower date bound. \"2026-10-01\" includes publication dates on or after midnight UTC. Free filter before caps; entries without a publication date are excluded. Narrowing the query does not guarantee an exhaustive historical archive.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "untilDate": {
+      "title": "Until date",
+      "type": "string",
+      "description": "Empty = no upper bound. \"2026-10-16\" excludes publication dates on/after midnight UTC on October 16; this bound is exclusive. Must be later than sinceDate. Free filter before caps. For all of October 15, use sinceDate=\"2026-10-15\", untilDate=\"2026-10-16\".",
+      "editor": "textfield",
+      "default": ""
+    },
+    "publisherDomains": {
+      "title": "Publisher domains",
+      "type": "array",
+      "description": "[\"reuters.com\", \"bbc.com\"] keeps either publisher domain or its subdomains. Empty = any publisher. Bare domains only, no URLs. Narrows the Google query and filters source publisher metadata before billing. publisher_url is the publisher homepage, not the original article URL.",
+      "editor": "stringList",
+      "sectionCaption": "Publishers and repeat runs",
+      "default": []
+    },
+    "excludeArticleIds": {
+      "title": "Exclude article ids",
+      "type": "array",
+      "description": "article_id or google_news_url values from earlier output; up to 10000 strings. Empty = no exclusions. Duplicate IDs across queries are billed only once. Distinct publishers covering the same story remain separate articles. Save/pass IDs externally; the actor does not remember prior runs or schedule itself.",
+      "editor": "stringList",
+      "default": []
+    }
+  }
+}

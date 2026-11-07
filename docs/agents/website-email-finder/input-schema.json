@@ -1,0 +1,63 @@
+{
+  "title": "Email Finder - Website Contacts, Source Pages & 邮箱提取",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input: {\"startUrls\": [\"https://www.iana.org/contact\"], \"maxPagesPerSite\": 3}. One paid row per site/email contact.",
+  "properties": {
+    "startUrls": {
+      "title": "startUrls",
+      "type": "array",
+      "description": "Public HTTP(S) website URLs, e.g. [\"https://example.com\"]. Up to 100. No credentials or private-network URLs. One target may yield multiple contacts only in Email Finder.",
+      "default": [
+        "https://www.iana.org/contact"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 100,
+      "sectionCaption": "Targets / 目标"
+    },
+    "maxPagesPerSite": {
+      "title": "maxPagesPerSite",
+      "type": "integer",
+      "description": "Maximum pages inspected per website, including the start page, 1–10. Default 3. Follows same-site contact/about/team links; not a whole-site crawl.",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 10
+    },
+    "maxResults": {
+      "title": "maxResults",
+      "type": "integer",
+      "description": "Maximum paid rows across the run, 1–1000, default 20. Example: 3 for a sample. Exclusions and empty results apply before the cap.",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "sectionCaption": "Limits / 数量限制"
+    },
+    "excludeIds": {
+      "title": "excludeIds",
+      "type": "array",
+      "description": "Prior output id values to skip before billing, up to 5,000. Empty [] disables. Suppresses that identity even if content changed.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000,
+      "sectionCaption": "Repeat runs / 去重"
+    },
+    "excludeContentHashes": {
+      "title": "excludeContentHashes",
+      "type": "array",
+      "description": "Prior output content_hash values (64 lowercase hex characters), up to 5,000. Empty [] disables. Matching snapshots are skipped before billing.",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5000
+    }
+  },
+  "additionalProperties": false
+}

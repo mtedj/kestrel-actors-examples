@@ -1,0 +1,524 @@
+{
+  "actorSpecification": 1,
+  "title": "TripAdvisor reviews",
+  "description": "One row per guest review (charged), plus a free hotel context row and a free status row per hotel and language.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | hotel | status"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input value (URL, id or name) this row came from"
+      },
+      "location_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's numeric location id (the d<number> in its URLs)"
+      },
+      "geo_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's numeric geo id of the hotel's city (the g<number> in its URLs)"
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Hotel name as the review page shows it"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Site language the row was read in (en = tripadvisor.com, de = tripadvisor.de, …)"
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's numeric review id"
+      },
+      "original_language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language the review was written in"
+      },
+      "translated": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "true when the text is a machine translation into the site language"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Review title"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full review text"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "1-5 bubbles on review rows; the hotel's overall bubble rating (e.g. 4.7) on hotel rows"
+      },
+      "sub_ratings": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Bubbles per aspect the reviewer rated: value, rooms, location, cleanliness, service, sleep_quality"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date the review was posted, YYYY-MM-DD"
+      },
+      "created_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date the review was written, YYYY-MM-DD"
+      },
+      "stay_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Month of the stay as TripAdvisor records it, YYYY-MM-DD"
+      },
+      "trip_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "FAMILY | COUPLES | SOLO | BUSINESS | FRIENDS | null"
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Helpful votes the review received"
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer display name"
+      },
+      "reviewer_username": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer profile handle"
+      },
+      "reviewer_verified": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "Whether TripAdvisor marks the reviewer as verified"
+      },
+      "reviewer_contributions": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviewer's total contributions on TripAdvisor"
+      },
+      "reviewer_helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Helpful votes across all of the reviewer's contributions"
+      },
+      "reviewer_hometown": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Reviewer hometown as shown, e.g. \"Brooklyn, New York\""
+      },
+      "photos": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Photo URLs attached to the review (1200 px renditions)"
+      },
+      "photo_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many photos the review carries"
+      },
+      "response": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property's management response text, if any"
+      },
+      "response_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date of the management response, YYYY-MM-DD"
+      },
+      "response_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor's id of the management response"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Direct URL of the review page (review rows) or of the hotel review page (hotel rows)"
+      },
+      "hotel_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The hotel's canonical review page on the site the row was read from"
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Total reviews the hotel has across all languages"
+      },
+      "rating_counts": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Reviews per bubble rating, keys \"1\"…\"5\""
+      },
+      "reviews_by_language": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Reviews per language, e.g. {\"en\": 1393, \"fr\": 220}"
+      },
+      "ranking": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor ranking sentence, e.g. \"#33 of 372 hotels in Lisbon\""
+      },
+      "ranking_position": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Rank position in the city"
+      },
+      "ranking_of": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Number of hotels ranked in the city"
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Street address"
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "City"
+      },
+      "postal_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Postal code"
+      },
+      "country_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ISO country code"
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Latitude"
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Longitude"
+      },
+      "phone": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Phone as listed"
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Official website as listed"
+      },
+      "price_range": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "TripAdvisor price band, e.g. \"$$\""
+      },
+      "amenities": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Amenity names TripAdvisor lists"
+      },
+      "reviews_listed": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews the site lists for the hotel in this language (translations included)"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews read in this run for the hotel and language before filters"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | not_found | duplicate | error (status rows)"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews delivered for this hotel and language (status rows)"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews dropped by the filters, never charged (status rows)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review pages read (status rows)"
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews the site lists in this language (status rows)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when this target resolved to a hotel another target already covers (status rows)"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why a target failed (status rows)"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp of the request"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_name",
+          "language",
+          "rating",
+          "title",
+          "text",
+          "review_date",
+          "trip_type",
+          "status"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "language",
+          "rating",
+          "title",
+          "text",
+          "sub_ratings",
+          "review_date",
+          "stay_date",
+          "trip_type",
+          "original_language",
+          "translated",
+          "reviewer_name",
+          "helpful_votes",
+          "response",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "title",
+          "text",
+          "sub_ratings",
+          "review_date",
+          "trip_type",
+          "response",
+          "url"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "transformation": {
+        "fields": [
+          "location_id",
+          "hotel_name",
+          "language",
+          "rating",
+          "review_count",
+          "rating_counts",
+          "reviews_by_language",
+          "sub_ratings",
+          "ranking",
+          "city",
+          "country_code",
+          "reviews_listed",
+          "reviews_fetched"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "location_id",
+          "hotel_name",
+          "language",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "duplicates",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

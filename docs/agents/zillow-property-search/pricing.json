@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "page-parsed": {
+      "eventTitle": "Parsed search page",
+      "eventDescription": "One successfully parsed search page: $20 per 1,000 pages. Billed even when filters, duplicates or monitoring leave zero rows. Failed requests and unrecognized pages are not charged. Separate delivered-row fee applies. No start fee; proxy and compute included. maxTotalChargeUsd is an Apify run option; before another page the budget must cover a page plus one row.",
+      "eventPriceUsd": 0.02,
+      "isPrimaryEvent": true
+    },
+    "property": {
+      "eventTitle": "Property",
+      "eventDescription": "One delivered property: $2 per 1,000 rows. Row keys: id, zpid, listing_type, title, url, address, street, city, state, zipcode, price, price_text. Filtered, duplicate, unchanged or excluded rows have no row fee. Parsed pages cost $0.02 each, even with no delivered rows. No start fee; proxy and compute included. Stops at the maxTotalChargeUsd run-option budget.",
+      "eventPriceUsd": 0.002
+    }
+  },
+  "effectiveAt": "2026-11-06T09:25:16.790Z"
+}

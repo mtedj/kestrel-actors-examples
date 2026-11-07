@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Agoda prices",
+  "description": "Three row types share one dataset: hotel (one property with its cheapest rate for the stay, charged when priced), calendar (one check-in date of a property's price calendar, charged when priced) and status (per destination or property, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Agoda prices",
+      "description": "One row per priced hotel, optional calendar rows per property, plus per-search status rows. Charged rows are billed as delivered; sold-out, filtered and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its sold-out, filtered, duplicate and error tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

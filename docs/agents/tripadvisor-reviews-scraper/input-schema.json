@@ -1,0 +1,138 @@
+{
+  "title": "TripAdvisor Reviews",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "hotelNames": {
+      "title": "Hotel names",
+      "type": "array",
+      "description": "Hotel names, ideally with the city, e.g. [\"Memmo Alfama Hotel, Lisbon\", \"The Savoy London\"]. Use for \"reviews of hotel X\". Resolved through TripAdvisor's own typeahead; a hit must share at least half of your words, so a name TripAdvisor does not know ends as a free error row, never as a random hotel — check hotel_name in the hotel and status rows. Empty (default) = none; one of hotelNames, startUrls or locationIds is required.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true,
+      "sectionCaption": "Which hotels",
+      "sectionDescription": "Hotel names, TripAdvisor hotel URLs and/or location ids (the d<number> in a URL). At least one; a URL, its id and its name are read and billed once."
+    },
+    "startUrls": {
+      "title": "TripAdvisor hotel URLs",
+      "type": "array",
+      "description": "TripAdvisor hotel pages on any TripAdvisor country site, e.g. [\"https://www.tripadvisor.com/Hotel_Review-g189158-d4509998-Reviews-Memmo_Alfama_Hotel-Lisbon.html\"]. Only the numeric d<id> matters: a wrong geo id or slug still resolves. Restaurant and attraction URLs are rejected before anything is charged (use kestrel/tripadvisor-restaurant-reviews for those). Empty (default) = none.",
+      "editor": "stringList",
+      "prefill": [
+        "https://www.tripadvisor.com/Hotel_Review-g189158-d4509998-Reviews-Memmo_Alfama_Hotel-Lisbon_Lisbon_District_Central_Portugal.html"
+      ],
+      "default": [],
+      "uniqueItems": true
+    },
+    "locationIds": {
+      "title": "TripAdvisor location ids",
+      "type": "array",
+      "description": "TripAdvisor location ids, the number after \"d\" in a hotel URL, e.g. [\"4509998\", \"d188150\"] — what an earlier run's location_id gives you. The fastest path (no lookup) and the way to re-read the same hotels on a schedule. An unknown id ends as status not_found and costs nothing. Empty (default) = none.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "maxReviewsPerHotel": {
+      "title": "Max reviews per hotel and language",
+      "type": "integer",
+      "description": "The main cost control: the newest N reviews per hotel and language are read, e.g. 50 (default 100, maximum 20000), at most N × $0.005 ($0.50 at the default). 0 = every review the site lists (10 per page; popular hotels run into the thousands). Filters apply AFTER this cap: 100 with maxRating 2 delivers only the low-rated reviews among the newest 100, so pair a filter with 0 or with sinceDate when the user wants all of them.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 20000,
+      "default": 100,
+      "sectionCaption": "Which reviews",
+      "sectionDescription": "How many reviews per hotel and language, and which ones. TripAdvisor lists reviews newest first; every filter here runs before billing, after the maxReviewsPerHotel cap."
+    },
+    "sinceDate": {
+      "title": "Only reviews published on or after",
+      "type": "string",
+      "description": "Only reviews published on or after this date: \"2026-06-01\", or relative so a schedule never goes stale: \"30 days\", \"2 weeks\", \"6 months\". Reviews come newest first, so reading stops once a whole page is older — a daily run with \"2 days\" reads one or two pages per hotel and bills only the new reviews. Empty (default) = no date limit. Use for \"new reviews only\" and review monitoring.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "maxRating": {
+      "title": "Only reviews at or below this rating",
+      "type": "number",
+      "description": "0 (default) = every rating. 1-5 = keep only reviews with that many bubbles or fewer, e.g. 2 for a complaints feed (\"negative reviews only\"), 3 to include the middling ones. Filtered reviews are never billed; the pages are still read. Applied to the reviews read under maxReviewsPerHotel, so use maxReviewsPerHotel 0 or a sinceDate for a complete list of negative reviews.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "tripTypes": {
+      "title": "Trip types",
+      "type": "array",
+      "description": "Keep only reviews from these trip types, e.g. [\"business\"] or [\"family\", \"couples\"]; allowed: family, couples, solo, business, friends. Empty (default) = all trip types. Filtered reviews are never billed. Use for \"what do business travellers say about hotel X\".",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "languages": {
+      "title": "Review languages",
+      "type": "array",
+      "description": "Availability: the zh site failed live checks on 2026-10-16; Chinese collection is currently unverified. Use [\"en\"] for the tested example. Each language selects a TripAdvisor country site, not a translation target. includeTranslated=false keeps original reviews; filters apply after maxReviewsPerHotel. Each language is a separate job and bill, and translated duplicates can recur across languages. See README for supported site codes.",
+      "editor": "stringList",
+      "default": [
+        "en"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "Languages",
+      "sectionDescription": "Each TripAdvisor country site serves the reviews in its own language, machine translations included."
+    },
+    "includeTranslated": {
+      "title": "Include machine-translated reviews",
+      "type": "boolean",
+      "description": "true (default) = keep the machine-translated reviews each site shows (rows carry translated: true and original_language). false = only reviews written in that site's language — with several languages this also stops one review being billed once per language. Use false for \"French reviews written by French guests\".",
+      "editor": "checkbox",
+      "default": true
+    },
+    "requireText": {
+      "title": "Only reviews with a written text",
+      "type": "boolean",
+      "description": "true = drop rating-only reviews before billing. false (default) = keep them. TripAdvisor reviews almost always carry text, so this rarely removes much.",
+      "editor": "checkbox",
+      "default": false
+    },
+    "includeHotelRow": {
+      "title": "Include a hotel row",
+      "type": "boolean",
+      "description": "true (default) = also emit one free row per hotel and language (type \"hotel\"): bubble rating, review count, reviews per rating and per language, six sub-rating averages, city ranking (\"#33 of 372 hotels in Lisbon\"), address, coordinates, phone, website, amenities. Never charged. false = review and status rows only.",
+      "editor": "checkbox",
+      "default": true
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Residential proxy sessions (egress IPs) reading in parallel, 1 to 16, e.g. 4 (default 2). More is faster for many hotels; each session is paced separately. Does not change the bill.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 2,
+      "sectionCaption": "Performance and proxy",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3 (default 1). TripAdvisor serves about 1 page per second per IP; raising it causes IP rotations, not speed. Leave the default.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 3,
+      "default": 1
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Keep the default: Apify Proxy, RESIDENTIAL group ({\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]}). TripAdvisor's bot gate refuses every datacenter IP, so any other proxy fails every page before anything is charged.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ]
+      }
+    }
+  },
+  "required": [],
+  "description": "TripAdvisor hotel reviews. Minimal input: {\"hotelNames\": [\"Memmo Alfama Hotel, Lisbon\"]} — or startUrls / locationIds. Default = the newest 100 English reviews per hotel at $0.005 each (at most $0.50 per hotel) plus a free hotel row. maxReviewsPerHotel 0 = every review; sinceDate = new reviews only; maxRating 2 = complaints only (filtered reviews are free)."
+}

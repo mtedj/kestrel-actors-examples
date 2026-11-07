@@ -1,0 +1,142 @@
+{
+  "title": "Airbnb Occupancy Rate Scraper — input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "locationQueries": {
+      "title": "Places",
+      "type": "array",
+      "description": "Places as typed on Airbnb, e.g. [\"Lisbon, Portugal\"], [\"Alfama, Lisbon\"], [\"Brooklyn, NY\"]. Every listing Airbnb returns for the place (up to maxListingsPerQuery) gets one occupancy row per month. A place Airbnb does not recognise is reported as an unknown_area status row and costs nothing: write it as Airbnb spells it, with the country when ambiguous. Use for \"Airbnb occupancy rate in <city>\" and market runs; for exact listings use listingIds.",
+      "editor": "stringList",
+      "prefill": [
+        "Lisbon, Portugal"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "What to measure",
+      "sectionDescription": "Search places and/or paste Airbnb URLs (search results pages, listing pages) and/or listing ids. At least one."
+    },
+    "startUrls": {
+      "title": "Airbnb URLs",
+      "type": "array",
+      "description": "Airbnb search URLs (https://www.airbnb.com/s/Porto--Portugal/homes?room_types[]=Entire home/apt&min_bedrooms=2) or listing URLs (https://www.airbnb.com/rooms/12345678). A search URL keeps its filters: room type, price band, bedrooms, amenities, map bounds. Use for \"occupancy of the listings in this search\". A URL from another site is rejected before anything is charged. Default empty.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "listingIds": {
+      "title": "Listing ids",
+      "type": "array",
+      "description": "Numeric Airbnb listing ids, e.g. [\"17088279\", \"34832567\"] (the number in /rooms/<id>): your portfolio or a competitive set. One occupancy row per id and month, no search needed; name, location and rating are read from the listing page at no charge. maxListingsPerQuery does not apply. Default empty.",
+      "editor": "stringList",
+      "default": [],
+      "uniqueItems": true
+    },
+    "months": {
+      "title": "Months",
+      "type": "integer",
+      "description": "Calendar months to read per listing, 1 to 12, starting with the current month, e.g. 6 (default 3). One row per listing and month, so the bill is delivered listings × months × $0.003. The current month counts only the days from today; the calendar covers 12 months ahead, so 12 is the maximum.",
+      "default": 3,
+      "prefill": 2,
+      "minimum": 1,
+      "maximum": 12,
+      "editor": "number",
+      "sectionCaption": "Calendar months, rate sample and filter",
+      "sectionDescription": "Occupancy comes from the listing's public availability calendar. The calendar does not say whether a night is booked or blocked by the host, so occupancy is a proxy; the nightly rate is sampled from the first bookable stay of each month."
+    },
+    "maxListingsPerQuery": {
+      "title": "Max listings per place",
+      "type": "integer",
+      "description": "Listings per place or search URL, 1 to 280, e.g. 100 (default 40). The main cost control for a market run: at most maxListingsPerQuery × months rows per place. Airbnb caps one search at about 280; split a big city into neighbourhoods for more. Ignored for listingIds.",
+      "default": 40,
+      "prefill": 3,
+      "minimum": 1,
+      "maximum": 280,
+      "editor": "number"
+    },
+    "includeRates": {
+      "title": "Sample a nightly rate per month",
+      "type": "boolean",
+      "description": "true (DEFAULT) prices the first bookable stay found per month: an available check-in, minimum nights capped at 7, for adults guests. rate_nightly is the quoted total divided by nights, not monthly or realized ADR. Sampled dates are included. One extra request, no extra charge. false leaves rate fields null and rate_status \"skipped\". No bookable stay: \"no_stay\"; calendar counts remain.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "adults": {
+      "title": "Adults (for the rate sample)",
+      "type": "integer",
+      "description": "Guests the sampled stay is priced for, 1 to 16, e.g. 2 (default 2). Airbnb prices depend on the guest count; a listing that cannot sleep the party answers rate_status \"unavailable\" and its occupancy row is still delivered.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "minOccupancyPct": {
+      "title": "Min occupancy % (filter)",
+      "type": "number",
+      "description": "0 (default) delivers every month. N keeps months with at least N% unavailable nights, e.g. 80. Unavailable combines host-blocked and guest-booked nights; it is not verified booked occupancy. Months below N are dropped before billing and rate sampling, and counted in filtered. No matching delivered rows means no row charge.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 100,
+      "editor": "number"
+    },
+    "includeListingRow": {
+      "title": "Listing rows",
+      "type": "boolean",
+      "description": "true = also emit one free listing row per listing (name, room type, location, rating, reviews count, bedrooms) for sheets that want one line per property. Default false. Never charged.",
+      "default": false,
+      "editor": "checkbox"
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "description": "ISO 4217 code for the sampled rates, e.g. \"EUR\" (default \"USD\"). Echoed on every occupancy row. When the user names no currency, pass the destination's (\"EUR\" for Lisbon).",
+      "default": "USD",
+      "pattern": "^[A-Z]{3}$",
+      "minLength": 3,
+      "maxLength": 3,
+      "editor": "textfield",
+      "sectionCaption": "Currency and language",
+      "sectionDescription": "Defaults work."
+    },
+    "locale": {
+      "title": "Language",
+      "type": "string",
+      "description": "Airbnb locale for listing names, e.g. \"en\" (default), \"fr\", \"de\", \"es\", \"pt\", \"ja\". Occupancy and rates are not affected.",
+      "default": "en",
+      "editor": "textfield"
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy settings. Airbnb accepts datacenter proxies for these calls: keep the default {\"useApifyProxy\": true}.",
+      "editor": "proxy",
+      "prefill": {
+        "useApifyProxy": true
+      },
+      "default": {
+        "useApifyProxy": true
+      },
+      "sectionCaption": "Proxy and pacing",
+      "sectionDescription": "Leave these alone unless a run is being throttled."
+    },
+    "sessions": {
+      "title": "Parallel proxy sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, e.g. 4 (default 4). Each is paced at perIp requests per second; more sessions = a faster run at the same cost.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "editor": "number"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 3, e.g. 1 (default 1). Airbnb tolerated 1 per second in tests; raise it only when a run is slow and not being throttled.",
+      "default": 1,
+      "minimum": 0.1,
+      "maximum": 3,
+      "editor": "number"
+    }
+  },
+  "required": [],
+  "description": "Airbnb Occupancy Rate Scraper: unavailable nights combine blocked and booked dates; actual bookings cannot be identified. Minimal input: {\"locationQueries\":[\"Lisbon, Portugal\"],\"months\":3}. One target field is required. Delivered listing-month rows cost $0.003 each. includeRates defaults true: one sampled stay quote per month, not monthly ADR; no extra charge."
+}

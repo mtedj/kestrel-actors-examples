@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "occupancy": {
+      "eventTitle": "Occupancy row (listing × month)",
+      "eventDescription": "One calendar month of one listing: days available, days blocked or booked, occupancy %, minimum stay, next free night and a sampled nightly rate (row keys id, url, name, month, days_available, days_unavailable, occupancy_pct, checkin_days, nights_min, next_available, rate_nightly, rate_total, rate_check_in, rate_status, currency, rating, reviews_count): $3 per 1,000 rows (12 months of one listing $0.036; 100 listings for 6 months $1.80). Not charged: months under minOccupancyPct (filtered before billing), listing rows, status rows, unknown places, failed calendars. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+      "eventPriceUsd": 0.003,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:32.789Z"
+}

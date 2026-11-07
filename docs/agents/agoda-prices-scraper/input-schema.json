@@ -1,0 +1,219 @@
+{
+  "title": "Agoda Prices",
+  "type": "object",
+  "schemaVersion": 1,
+  "required": [],
+  "properties": {
+    "locationQueries": {
+      "title": "Destinations",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Cities or areas as typed into Agoda, e.g. [\"Bangkok\"], [\"Lisbon\", \"Bali\"], an Agoda city id (\"16364\") or an agoda.com search URL. Each is resolved through Agoda's own autocomplete (best match wins; add the country for ambiguous names) and becomes one search returning up to maxHotelsPerQuery priced properties in sortBy order. An unmatched place is a free status row, nothing charged. Empty = price only the hotels named below. Use for \"hotel prices in Bangkok next month\".",
+      "prefill": [
+        "Lisbon"
+      ],
+      "default": [],
+      "sectionCaption": "What to price"
+    },
+    "hotelIds": {
+      "title": "Hotel ids",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Agoda numeric property ids, e.g. [\"63820\", \"6988894\"]: the hotel_id column of an earlier run. The fastest way to price a known list every day (a comp set, a portfolio): one small request per hotel, no page read. An unknown id is a free status row (not_found). A hotel given twice, or reached by a destination search too, is delivered and billed once. Add calendarDays for each hotel's cheapest dates.",
+      "default": []
+    },
+    "hotelNames": {
+      "title": "Hotel names",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Property names, e.g. [\"Tivoli Avenida Liberdade Lisbon\", \"Mandarin Oriental Bangkok\"]: add the city. Resolved through Agoda's own autocomplete; the best match is priced on its own for the stay, and the free status row carries hotel_name and hotel_id, so check it. A name that matches nothing costs nothing. sortBy and maxHotelsPerQuery do not apply to named hotels; the filters do. Use for \"what does hotel X cost on these dates\".",
+      "default": []
+    },
+    "startUrls": {
+      "title": "Agoda URLs",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Agoda URLs, e.g. [\"https://www.agoda.com/tivoli-avenida-liberdade/hotel/lisbon-pt.html\"]: a property page is priced on its own (the page is read once to find its id); a search URL (agoda.com/search?city=…) is treated like a destination. URLs from other sites are refused before anything is charged. Prefer hotelIds when you have them.",
+      "default": []
+    },
+    "checkIn": {
+      "title": "Check-in",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Check-in date: \"2026-11-20\" (YYYY-MM-DD) or relative to the day the run starts: \"30 days\" (default), \"6 weeks\", \"tomorrow\". Use relative dates for scheduled runs (\"track prices daily\"): the input never goes stale. Check-out = checkIn + nights. A past date is refused before anything is charged. The price calendar (calendarDays) starts here too.",
+      "prefill": "30 days",
+      "default": "30 days",
+      "sectionCaption": "Stay and guests"
+    },
+    "nights": {
+      "title": "Nights",
+      "type": "integer",
+      "editor": "number",
+      "description": "Length of stay, 1 to 30, e.g. 2 (default 1). price_total and price_total_with_taxes cover the whole stay for all rooms; price_nightly is per room per night.",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 30
+    },
+    "adults": {
+      "title": "Adults",
+      "type": "integer",
+      "editor": "number",
+      "description": "Adults per booking, 1 to 9, e.g. 2 (default 2). Agoda prices the cheapest room that fits everyone; the price calendar is read at this adult count.",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 9
+    },
+    "children": {
+      "title": "Children",
+      "type": "integer",
+      "editor": "number",
+      "description": "Children per booking, 0 to 9, e.g. 1 (default 0). Give their ages in childAges for exact child rates.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 9
+    },
+    "childAges": {
+      "title": "Child ages",
+      "type": "array",
+      "editor": "stringList",
+      "description": "One age per child, 0 to 17, in order, e.g. [\"5\", \"9\"] for two children aged 5 and 9. Empty (default) = no children. Give one age for each child counted in children.",
+      "default": []
+    },
+    "rooms": {
+      "title": "Rooms",
+      "type": "integer",
+      "editor": "number",
+      "description": "Rooms per booking, 1 to 9, e.g. 1 (default 1). Nightly prices are per room; totals cover all rooms for the stay.",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 9
+    },
+    "currency": {
+      "title": "Currency",
+      "type": "string",
+      "editor": "textfield",
+      "description": "ISO 4217 code for every price, e.g. \"THB\" (default \"USD\"): USD, EUR, GBP, THB, JPY, SGD, AUD, … converted at Agoda's own rate. When the user names no currency, pass the destination's (\"THB\" for Bangkok).",
+      "default": "USD"
+    },
+    "maxHotelsPerQuery": {
+      "title": "Max hotels per destination",
+      "type": "integer",
+      "editor": "number",
+      "description": "Priced properties per destination search, e.g. 100 (default 45 = one Agoda page). The main cost control: at most maxHotelsPerQuery × $0.004 per destination. Taken in sortBy order; the filters then drop rows, so 100 asked with maxPrice set can deliver fewer. 0 = every property Agoda lists for the stay, up to 40 pages (about 1,800 properties, up to $7.20 for a capital); values above that end at the same 40-page limit. The rank column is the position in that order. Not applied to named hotels.",
+      "prefill": 20,
+      "default": 45,
+      "minimum": 0,
+      "maximum": 2000,
+      "sectionCaption": "How many hotels, sort and filters (before billing)"
+    },
+    "sortBy": {
+      "title": "Sort destination results",
+      "type": "string",
+      "editor": "select",
+      "description": "Agoda's own order for destination searches: \"best_match\" (default, Agoda's ranking), \"price_low\" (cheapest first; Agoda only sorts price ascending), \"guest_rating\" (highest score first), \"secret_deals\". Use \"price_low\" with maxHotelsPerQuery for \"the 20 cheapest hotels in Bangkok\". The rank and sort columns record it. Ignored for named hotels.",
+      "enum": [
+        "best_match",
+        "price_low",
+        "guest_rating",
+        "secret_deals"
+      ],
+      "enumTitles": [
+        "Best match (Agoda's ranking)",
+        "Lowest price first",
+        "Guest rating, highest first",
+        "Secret deals first"
+      ],
+      "default": "best_match"
+    },
+    "maxPrice": {
+      "title": "Max nightly price",
+      "type": "number",
+      "editor": "number",
+      "description": "Highest nightly price in `currency`, e.g. 80. 0 (default) = no cap. Keeps hotels whose price_nightly (per room per night, before taxes: Agoda's displayed price) is at or under it. Dropped hotels are never delivered or billed: a daily \"anything under 80\" alert costs nothing on days without a match. Applies to destination searches and named hotels. Use for \"hotels under 80 USD a night\".",
+      "default": 0,
+      "minimum": 0
+    },
+    "minStars": {
+      "title": "Min star rating",
+      "type": "number",
+      "editor": "number",
+      "description": "Lowest star rating to keep, 0 to 5, e.g. 4 (= 4-star and 5-star properties). 0 (default) = any. Applied by the actor before billing, so dropped properties are free. Unrated properties (many apartments, hostels and Agoda Homes) have no stars and are dropped when this is set: use minReviewScore for those instead.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5
+    },
+    "minReviewScore": {
+      "title": "Min guest score",
+      "type": "number",
+      "editor": "number",
+      "description": "Lowest guest review score to keep, 0 to 10, e.g. 8 (default 0 = any). Compared with review_score, Agoda's combined score across the sources it aggregates; unreviewed properties are dropped when this is set. Applied before billing. Use for \"well-rated hotels only\" or to rank hostels and apartments that have no stars.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 10
+    },
+    "freeCancellationOnly": {
+      "title": "Free cancellation only",
+      "type": "boolean",
+      "editor": "checkbox",
+      "description": "false (default) = every priced hotel, with free_cancellation true or false on each row. true = keep only hotels whose cheapest rate is free to cancel (cancellation = FreeCancellation); the rest are dropped free of charge. Use for \"refundable hotels only\".",
+      "default": false
+    },
+    "calendarDays": {
+      "title": "Price calendar days (properties only)",
+      "type": "integer",
+      "editor": "number",
+      "description": "0 (default) disables calendars. N prices up to 60 check-in dates from checkIn for named hotels (hotelIds, hotelNames or property URLs), not destination searches. One live request per date; only priced dates produce rows. Fields: price_nightly, price_total, rank_in_window and trend where available. Each calendar row costs $0.002, plus the base hotel row at $0.004. Example: 20 hotels × 60 priced dates = $2.40 calendar fees + $0.08 hotel fees = $2.48. Unpriced dates are free.",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 60,
+      "sectionCaption": "Price calendar and sold-out rows"
+    },
+    "includeSoldOut": {
+      "title": "Include sold-out properties",
+      "type": "boolean",
+      "editor": "checkbox",
+      "description": "false (default) = only priced hotels, so the dataset is a price list. true = also write a free row for every property Agoda lists but cannot price for the stay, with sold_out true and every price empty: an occupancy signal for a destination. Sold-out rows are never charged either way; a named hotel with no rate gets status sold_out.",
+      "default": false
+    },
+    "locale": {
+      "title": "Locale",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Agoda locale for hotel names, areas and city labels, e.g. \"en-us\" (default), \"ja-jp\", \"th-th\", \"ko-kr\", \"zh-cn\", \"de-de\". Prices and currency are not affected (set currency instead).",
+      "default": "en-us",
+      "sectionCaption": "Language"
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "editor": "number",
+      "description": "Parallel proxy sessions (egress IPs), 1 to 16, e.g. 4 (default 4). More is faster; each session is paced separately by perIp. Leave the default unless Agoda throttles.",
+      "default": 4,
+      "minimum": 1,
+      "maximum": 16,
+      "sectionCaption": "Proxy and pacing"
+    },
+    "perIp": {
+      "title": "Requests per second per session",
+      "type": "number",
+      "editor": "number",
+      "description": "Requests per second per session, 0.1 to 3, e.g. 1 (default 1). Agoda tolerates about one request per second per IP; faster causes retries, not speed.",
+      "default": 1,
+      "minimum": 0.1,
+      "maximum": 3
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "description": "Apify Proxy (default, datacenter group) is required: Agoda throttles a single busy IP within a few pages. Datacenter proxies are enough for this endpoint; residential is not needed.",
+      "default": {
+        "useApifyProxy": true
+      },
+      "prefill": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "description": "Agoda hotel prices. Minimal input: {\"locationQueries\": [\"Bangkok\"]} (checkIn defaults to \"30 days\", 1 night, 2 adults, USD) or {\"hotelIds\": [\"63820\"]} or {\"hotelNames\": [\"Mandarin Oriental Bangkok\"]} — at least one target input. maxHotelsPerQuery defaults to 45 (one page, up to $0.18 per destination at $0.004 a hotel); 0 = every hotel Agoda lists (about 1,800 for a capital). calendarDays defaults to 0 (calendar rows $0.002 each, named hotels only)."
+}

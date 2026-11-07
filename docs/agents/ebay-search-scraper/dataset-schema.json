@@ -1,0 +1,491 @@
+{
+  "actorSpecification": 1,
+  "title": "eBay listings",
+  "description": "Two row types share one dataset: item (one eBay listing from a search page or an item page, charged) and status (one per keyword or URL, free).",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "item",
+          "status"
+        ],
+        "description": "Row type: item or status."
+      },
+      "item_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "eBay's numeric listing id — the number in any /itm/ URL."
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing title as the seller wrote it."
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Canonical item page URL."
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Search rows: the keyword that returned this listing."
+      },
+      "search_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Search rows: the exact eBay URL this page was read from, filters included."
+      },
+      "page": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Which results page the row came from."
+      },
+      "position": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "The slot in eBay's own result order, counted across pages."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace domain suffix, e.g. com or co.uk."
+      },
+      "marketplace": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Marketplace country name."
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Price as a number. For a price range, the low bound — what a shopper compares on. Null when eBay withholds the price (a MAP-restricted listing shows \"See price\" until checkout); price_display then carries eBay's own wording, and a run with price bounds set drops those rows free rather than billing them."
+      },
+      "price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Price exactly as eBay printed it, range and currency prefix included."
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Currency read from the rendered price, not assumed from the marketplace."
+      },
+      "list_price": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Struck-through original price when eBay shows one."
+      },
+      "list_price_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Original price exactly as printed."
+      },
+      "discount_pct": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "How far below the list price the current price sits, in percent."
+      },
+      "shipping_cost": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Shipping charge as a number; 0 when delivery is free."
+      },
+      "shipping_display": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Shipping line exactly as printed, delivery estimate included."
+      },
+      "free_shipping": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when eBay shows free delivery."
+      },
+      "condition": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Condition label: Brand New, Pre-Owned, Open Box, Certified - Refurbished and so on."
+      },
+      "buying_format": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "buy_it_now or auction."
+      },
+      "bids": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Auction rows: how many bids have been placed."
+      },
+      "time_left": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Auction rows: eBay's own time-left text, e.g. \"9m\" or \"1d 4h\"."
+      },
+      "best_offer": {
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "description": "True when the seller accepts offers."
+      },
+      "units_sold": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many units this listing has sold — the closest public signal to real demand."
+      },
+      "watchers": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many shoppers are watching this listing."
+      },
+      "returns": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Returns line when eBay shows one, e.g. \"Free returns\" or \"30 days returns\"."
+      },
+      "seller": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Seller username or store name."
+      },
+      "seller_feedback_pct": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Seller's positive-feedback percentage."
+      },
+      "seller_feedback_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Seller's feedback score, expanded from eBay's abbreviated form (40.6K -> 40600)."
+      },
+      "location": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Where the item ships from."
+      },
+      "image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Listing image URL."
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Product star rating out of 5, when the listing is matched to an eBay catalogue product."
+      },
+      "ratings_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many product ratings that catalogue product has."
+      },
+      "results_total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "How many listings eBay reports for the whole search."
+      },
+      "quantity_available": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Item-page rows: availability text, e.g. \"Last one\" or \"More than 10 available\"."
+      },
+      "breadcrumbs": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Item-page rows: eBay's category path for this listing."
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Item-page rows: the leaf category from the breadcrumb."
+      },
+      "item_specifics": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Item-page rows: the seller's specifics table — brand, model, MPN, colour, size and the rest."
+      },
+      "seller_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Item-page rows: the seller's eBay store or profile URL."
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: ok, no_results or error."
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: the keyword or URL this job was given."
+      },
+      "kind": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: search, url or item."
+      },
+      "items": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: listing rows delivered by this job."
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: rows dropped by your price bounds, never charged."
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: listings another job in the run already delivered."
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Status rows: how many pages were requested."
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Status rows: why the job failed, null when it did not. An eBay refusal lands here, never as an empty result."
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "UTC timestamp when the row was fetched."
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "item_id",
+          "title",
+          "price",
+          "currency",
+          "shipping_cost",
+          "condition",
+          "buying_format",
+          "units_sold",
+          "watchers",
+          "seller",
+          "seller_feedback_pct",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "demand": {
+      "title": "Demand signals",
+      "transformation": {
+        "fields": [
+          "item_id",
+          "title",
+          "price",
+          "currency",
+          "units_sold",
+          "watchers",
+          "bids",
+          "time_left",
+          "best_offer",
+          "list_price",
+          "discount_pct",
+          "results_total",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "sellers": {
+      "title": "Sellers",
+      "transformation": {
+        "fields": [
+          "seller",
+          "seller_feedback_pct",
+          "seller_feedback_count",
+          "seller_url",
+          "location",
+          "item_id",
+          "title",
+          "price",
+          "currency",
+          "condition",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "price_research": {
+      "title": "Price research",
+      "transformation": {
+        "fields": [
+          "query",
+          "position",
+          "page",
+          "item_id",
+          "title",
+          "condition",
+          "price",
+          "price_display",
+          "currency",
+          "shipping_cost",
+          "free_shipping",
+          "list_price",
+          "discount_pct",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "item_pages": {
+      "title": "Item pages",
+      "transformation": {
+        "fields": [
+          "item_id",
+          "title",
+          "category",
+          "breadcrumbs",
+          "item_specifics",
+          "quantity_available",
+          "returns",
+          "seller",
+          "seller_url",
+          "price",
+          "currency",
+          "url"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Run status",
+      "transformation": {
+        "fields": [
+          "type",
+          "kind",
+          "target",
+          "status",
+          "items",
+          "filtered",
+          "duplicates",
+          "pages",
+          "results_total",
+          "error",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

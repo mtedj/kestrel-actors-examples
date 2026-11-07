@@ -1,0 +1,239 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "domain_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "result_link": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "snippet": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rank": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "page": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "previous_rank": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "rank_change": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    }
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "title",
+          "domain",
+          "domain_url",
+          "result_link",
+          "snippet",
+          "rank",
+          "page",
+          "query",
+          "country",
+          "source_url",
+          "fetched_at",
+          "change",
+          "previous_rank",
+          "rank_change"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "domain": {
+            "label": "Domain",
+            "format": "text"
+          },
+          "domain_url": {
+            "label": "Domain Url",
+            "format": "text"
+          },
+          "result_link": {
+            "label": "Result Link",
+            "format": "text"
+          },
+          "snippet": {
+            "label": "Snippet",
+            "format": "text"
+          },
+          "rank": {
+            "label": "Rank",
+            "format": "text"
+          },
+          "page": {
+            "label": "Page",
+            "format": "text"
+          },
+          "query": {
+            "label": "Query",
+            "format": "text"
+          },
+          "country": {
+            "label": "Country",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "Source Url",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "previous_rank": {
+            "label": "Previous Rank",
+            "format": "text"
+          },
+          "rank_change": {
+            "label": "Rank Change",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "id",
+          "title",
+          "domain",
+          "domain_url",
+          "result_link",
+          "snippet",
+          "rank",
+          "page"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "domain": {
+            "label": "Domain",
+            "format": "text"
+          },
+          "domain_url": {
+            "label": "Domain Url",
+            "format": "text"
+          },
+          "result_link": {
+            "label": "Result Link",
+            "format": "text"
+          },
+          "snippet": {
+            "label": "Snippet",
+            "format": "text"
+          },
+          "rank": {
+            "label": "Rank",
+            "format": "text"
+          },
+          "page": {
+            "label": "Page",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

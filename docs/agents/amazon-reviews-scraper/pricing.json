@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One customer review from the public product page (row keys rating, title, text, author, country, date_text, verified, helpful_votes, variant): $5 per 1,000 reviews. Measured: 8 to 13 reviews per product and never more (Amazon shows no more without a login), so review rows cost at most $0.065 per product. Not charged: reviews removed by minRating, verifiedOnly or requireText, duplicates, products with no visible reviews, unknown or blocked ASINs, status rows. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd).",
+      "eventPriceUsd": 0.005,
+      "isPrimaryEvent": true
+    },
+    "product": {
+      "eventTitle": "Product row",
+      "eventDescription": "One product's rating summary (row keys asin, title, brand, rating, ratings_count, 5_star_pct to 1_star_pct — the star histogram as percentages, null when Amazon hides it — price, currency, availability, in_stock, bsr, image, features, reviews_visible = reviews on the page): $3 per 1,000 products. Delivered once per ASIN and marketplace while includeProductRow is true (the default); set it false to pay for review rows only. Not charged: duplicates, unknown or blocked ASINs, status rows. No start fee; proxy and compute are included in the event price.",
+      "eventPriceUsd": 0.003
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:38.881Z"
+}

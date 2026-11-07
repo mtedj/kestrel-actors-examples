@@ -1,0 +1,7 @@
+{
+  "queries": [
+    "artificial intelligence"
+  ],
+  "maxArticlesPerQuery": 3,
+  "maxResults": 3
+}

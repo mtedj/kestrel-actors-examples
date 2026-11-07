@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/airbnb-occupancy-scraper",
+  "input": {
+    "locationQueries": [
+      "Lisbon, Portugal"
+    ],
+    "maxListingsPerQuery": 3,
+    "months": 1
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

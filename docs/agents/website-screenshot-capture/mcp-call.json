@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/website-screenshot-capture",
+  "input": {
+    "startUrls": [
+      "https://example.com"
+    ],
+    "width": 1440,
+    "height": 900,
+    "fullPage": true,
+    "maxResults": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

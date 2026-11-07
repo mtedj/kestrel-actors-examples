@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "history-fetched": {
+      "eventTitle": "History check",
+      "eventDescription": "One successfully parsed ticker history: $3 per 1,000 checks. Charged even when filters, exclusions, duplicates or monitoring leave zero rows. Failed/unrecognized responses and invalid input are not charged. A separate delivered-row fee applies. No start fee; compute included. No extra source account or API key. Work stops before a new check when the Apify run option maxTotalChargeUsd cannot cover that check plus one row.",
+      "eventPriceUsd": 0.003
+    },
+    "price": {
+      "eventTitle": "Daily price bar",
+      "eventDescription": "One delivered price row: $0.2 per 1,000 rows. Row keys: ticker, date, open, high, low, close, volume, adjusted_close, dividend, split_ratio, currency. Filtered, duplicate, excluded and unchanged rows are not charged. Successful source checks are separately billed at $0.003 each, including empty checks. No start fee; compute included. maxTotalChargeUsd is an Apify run option, not input.",
+      "eventPriceUsd": 0.0002,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-05T06:46:16.807Z"
+}

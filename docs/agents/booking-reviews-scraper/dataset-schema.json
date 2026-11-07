@@ -1,0 +1,523 @@
+{
+  "actorSpecification": 1,
+  "title": "Booking.com reviews",
+  "description": "One row per guest review (charged), plus a free hotel context row and a free status row per property.",
+  "fields": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "review | hotel | status"
+      },
+      "hotel_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Booking.com's numeric property id"
+      },
+      "hotel_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Property name as Booking's autocomplete resolved it (null when the input was a bare id)"
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The Booking.com URL you gave, if any"
+      },
+      "locale": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The site locale the labels came in"
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "region": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "country_code": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "score_staff": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "Booking's category score, 1-10"
+      },
+      "score_facilities": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "score_cleanliness": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "score_comfort": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "score_value": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "score_location": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "score_wifi": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "review_count": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Booking's total number of reviews for the property"
+      },
+      "languages": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "[{code, count}] — how many reviews each language holds"
+      },
+      "traveler_types": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "[{type, count}] — FAMILIES, COUPLES, GROUP_OF_FRIENDS, SOLO_TRAVELLERS, BUSINESS_TRAVELLERS"
+      },
+      "seasons": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "[{season, count}] — Booking's time-of-year buckets"
+      },
+      "reviews_fetched": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "review_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Booking's review key (stable across runs)"
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "1-10, Booking's scale"
+      },
+      "rating_5": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "The same score out of five"
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "positives": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest liked"
+      },
+      "negatives": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "What the guest disliked"
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Liked and disliked joined into one comment (null for score-only reviews)"
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Language code of the review text"
+      },
+      "review_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "YYYY-MM-DD"
+      },
+      "check_in": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "check_out": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "nights": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "room_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "room_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "traveler_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Couple, Family, Solo traveller … in the site language"
+      },
+      "traveler_type_code": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Booking's code: COUPLES, FAMILIES, GROUP_OF_FRIENDS, SOLO_TRAVELLERS, BUSINESS_TRAVELLERS"
+      },
+      "stay_status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_country": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "reviewer_country_code": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "anonymous": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "helpful_votes": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "photos": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Guest photo URLs"
+      },
+      "approved": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "response": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The property's public reply"
+      },
+      "target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The input this status row is about"
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "ok | no_reviews | error"
+      },
+      "reviews": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Review rows delivered for this property"
+      },
+      "filtered": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Reviews fetched but dropped by maxRating / requireText (never charged)"
+      },
+      "pages": {
+        "type": [
+          "integer",
+          "null"
+        ]
+      },
+      "total": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Booking's review count for the property (after server-side filters)"
+      },
+      "duplicates": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "1 when another input already covered this property"
+      },
+      "error": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "review_score": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "hotel row: Booking's overall review score for the property, 1-10"
+      },
+      "stars": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "description": "hotel row: the property's star rating"
+      },
+      "property_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "hotel row: hotel, apartment, hostel …"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "type",
+          "hotel_id",
+          "hotel_name",
+          "rating",
+          "title",
+          "text",
+          "language",
+          "review_date",
+          "traveler_type",
+          "reviewer_country",
+          "status",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "rating_5",
+          "title",
+          "positives",
+          "negatives",
+          "language",
+          "review_date",
+          "check_in",
+          "nights",
+          "room_type",
+          "traveler_type",
+          "reviewer_name",
+          "reviewer_country",
+          "helpful_votes",
+          "response"
+        ]
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "complaints": {
+      "title": "Complaints",
+      "transformation": {
+        "fields": [
+          "hotel_name",
+          "rating",
+          "title",
+          "negatives",
+          "positives",
+          "review_date",
+          "room_type",
+          "traveler_type",
+          "reviewer_country",
+          "response"
+        ],
+        "filter": {
+          "type": "review"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "hotels": {
+      "title": "Hotels",
+      "transformation": {
+        "fields": [
+          "hotel_id",
+          "hotel_name",
+          "city",
+          "country",
+          "review_count",
+          "score_staff",
+          "score_facilities",
+          "score_cleanliness",
+          "score_comfort",
+          "score_value",
+          "score_location",
+          "score_wifi",
+          "languages",
+          "traveler_types",
+          "reviews_fetched"
+        ],
+        "filter": {
+          "type": "hotel"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "transformation": {
+        "fields": [
+          "target",
+          "hotel_id",
+          "hotel_name",
+          "status",
+          "reviews",
+          "filtered",
+          "pages",
+          "total",
+          "duplicates",
+          "error",
+          "fetched_at"
+        ],
+        "filter": {
+          "type": "status"
+        }
+      },
+      "display": {
+        "component": "table"
+      }
+    }
+  }
+}

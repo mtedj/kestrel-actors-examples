@@ -1,0 +1,69 @@
+{
+  "title": "Sitemap URL Extractor - Links, Lastmod & Nested Indexes",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Example: {\"sitemapUrls\": [\"https://docs.python.org/sitemap.xml\"], \"maxResults\": 3}. Successful source parsing is billed, including zero-match checks; set maxTotalChargeUsd as an Apify run option.",
+  "properties": {
+    "sitemapUrls": {
+      "type": "array",
+      "title": "Sitemap URLs",
+      "description": "Pass 1–50 public sitemap URLs, e.g. ['https://docs.python.org/sitemap.xml']. Exact source URLs only; no website discovery. XML must be at most 8 MB decompressed. Successfully parsed sources are billed even when filters leave zero rows.",
+      "prefill": [
+        "https://docs.python.org/sitemap.xml"
+      ],
+      "sectionCaption": "Sources",
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "maxResults": {
+      "type": "integer",
+      "title": "Maximum output rows",
+      "description": "1000 for URLs or 100 for entries by default. Caps delivered rows across all sources after filters. Reaching this cap stops further source requests.",
+      "minimum": 1,
+      "maximum": 100000,
+      "default": 1000
+    },
+    "sinceDate": {
+      "type": "string",
+      "title": "Earliest date",
+      "description": "Empty (default) keeps every date. Example: \"2026-10-01\" or \"2026-10-01T12:00:00Z\". Inclusive UTC cutoff on lastmod or publication date (updated date when publication is absent). Rows with missing or invalid dates are excluded when set. Source parsing is still billed.",
+      "sectionCaption": "Filters",
+      "default": "",
+      "editor": "textfield"
+    },
+    "urlContains": {
+      "type": "array",
+      "title": "URL path or text filter",
+      "description": "[] (default) keeps all URLs. Example: [\"/products/\", \"/blog/\"] keeps URLs containing either literal substring, case insensitive. Filters apply before the result cap and URL billing; source parsing remains billed.",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "maxSources": {
+      "type": "integer",
+      "title": "Maximum sitemap files",
+      "description": "30 (default), including index files, malformed responses and failed requests. Example: 5 limits processing to five unique source URLs. Nested indexes are followed breadth first; loops and repeated sources are skipped. Source fees apply only to successfully parsed files.",
+      "minimum": 1,
+      "maximum": 100,
+      "sectionCaption": "Repeat runs and cost limits",
+      "default": 30
+    },
+    "excludeIds": {
+      "type": "array",
+      "title": "Previously returned IDs",
+      "description": "[] (default) keeps all unseen rows within this run. Pass id values from an earlier dataset, e.g. [\"previous-id\"], to omit them. No state is remembered automatically. Source parsing remains billed even when every row is excluded.",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    }
+  },
+  "required": [
+    "sitemapUrls"
+  ]
+}

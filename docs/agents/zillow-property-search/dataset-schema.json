@@ -1,0 +1,418 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "zpid": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "listing_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "address": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "street": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "state": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "zipcode": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "price_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "status_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "beds": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "baths": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "area_sqft": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "home_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "latitude": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "longitude": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "days_on_zillow": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "broker_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "unit_options": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "object"
+        }
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "search_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "change": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "previous_price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "price_change": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    }
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "zpid",
+          "listing_type",
+          "title",
+          "url",
+          "address",
+          "street",
+          "city",
+          "state",
+          "zipcode",
+          "price",
+          "price_text",
+          "currency",
+          "status",
+          "status_text",
+          "beds",
+          "baths",
+          "area_sqft",
+          "home_type",
+          "latitude",
+          "longitude",
+          "days_on_zillow",
+          "broker_name",
+          "unit_options",
+          "image_url",
+          "source_url",
+          "search_url",
+          "fetched_at",
+          "change",
+          "previous_price",
+          "price_change"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "zpid": {
+            "label": "Zpid",
+            "format": "text"
+          },
+          "listing_type": {
+            "label": "Listing Type",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "address": {
+            "label": "Address",
+            "format": "text"
+          },
+          "street": {
+            "label": "Street",
+            "format": "text"
+          },
+          "city": {
+            "label": "City",
+            "format": "text"
+          },
+          "state": {
+            "label": "State",
+            "format": "text"
+          },
+          "zipcode": {
+            "label": "Zipcode",
+            "format": "text"
+          },
+          "price": {
+            "label": "Price",
+            "format": "text"
+          },
+          "price_text": {
+            "label": "Price Text",
+            "format": "text"
+          },
+          "currency": {
+            "label": "Currency",
+            "format": "text"
+          },
+          "status": {
+            "label": "Status",
+            "format": "text"
+          },
+          "status_text": {
+            "label": "Status Text",
+            "format": "text"
+          },
+          "beds": {
+            "label": "Beds",
+            "format": "text"
+          },
+          "baths": {
+            "label": "Baths",
+            "format": "text"
+          },
+          "area_sqft": {
+            "label": "Area Sqft",
+            "format": "text"
+          },
+          "home_type": {
+            "label": "Home Type",
+            "format": "text"
+          },
+          "latitude": {
+            "label": "Latitude",
+            "format": "text"
+          },
+          "longitude": {
+            "label": "Longitude",
+            "format": "text"
+          },
+          "days_on_zillow": {
+            "label": "Days On Zillow",
+            "format": "text"
+          },
+          "broker_name": {
+            "label": "Broker Name",
+            "format": "text"
+          },
+          "unit_options": {
+            "label": "Unit Options",
+            "format": "text"
+          },
+          "image_url": {
+            "label": "Image Url",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "Source Url",
+            "format": "text"
+          },
+          "search_url": {
+            "label": "Search Url",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "Fetched At",
+            "format": "text"
+          },
+          "change": {
+            "label": "Change",
+            "format": "text"
+          },
+          "previous_price": {
+            "label": "Previous Price",
+            "format": "text"
+          },
+          "price_change": {
+            "label": "Price Change",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "overview": {
+      "title": "Overview",
+      "transformation": {
+        "fields": [
+          "id",
+          "zpid",
+          "listing_type",
+          "title",
+          "url",
+          "address",
+          "street",
+          "city"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id",
+            "format": "text"
+          },
+          "zpid": {
+            "label": "Zpid",
+            "format": "text"
+          },
+          "listing_type": {
+            "label": "Listing Type",
+            "format": "text"
+          },
+          "title": {
+            "label": "Title",
+            "format": "text"
+          },
+          "url": {
+            "label": "Url",
+            "format": "text"
+          },
+          "address": {
+            "label": "Address",
+            "format": "text"
+          },
+          "street": {
+            "label": "Street",
+            "format": "text"
+          },
+          "city": {
+            "label": "City",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

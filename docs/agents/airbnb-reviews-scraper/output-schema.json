@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Airbnb reviews",
+  "description": "Three row types share one dataset: review (one guest review, charged), listing (context for a listing, free) and status (per listing or place, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Airbnb reviews",
+      "description": "One row per guest review, plus per-listing status rows. Charged rows are billed as delivered; status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error and duplicate tallies, and its HTTP stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

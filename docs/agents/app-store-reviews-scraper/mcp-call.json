@@ -1,0 +1,18 @@
+{
+  "actor": "kestrel/app-store-reviews-scraper",
+  "input": {
+    "appIds": [
+      "310633997"
+    ],
+    "countries": [
+      "us"
+    ],
+    "maxReviewsPerApp": 3,
+    "sort": "most_recent"
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

@@ -1,0 +1,212 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "id"
+      },
+      "cik": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "cik"
+      },
+      "company": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "company"
+      },
+      "accession_number": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "accession number"
+      },
+      "form": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "form"
+      },
+      "filing_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "filing date"
+      },
+      "report_date": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "report date"
+      },
+      "accepted_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "accepted at"
+      },
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "items"
+      },
+      "primary_document": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "primary document"
+      },
+      "document_description": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "document description"
+      },
+      "is_xbrl": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "is xbrl"
+      },
+      "document_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "document url"
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "source url"
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "content hash"
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "fetched at"
+      }
+    },
+    "required": [
+      "id",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "results": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "cik",
+          "company",
+          "accession_number",
+          "form",
+          "filing_date",
+          "report_date",
+          "accepted_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "cik": {
+            "label": "cik",
+            "format": "text"
+          },
+          "company": {
+            "label": "company",
+            "format": "text"
+          },
+          "accession_number": {
+            "label": "accession number",
+            "format": "text"
+          },
+          "form": {
+            "label": "form",
+            "format": "text"
+          },
+          "filing_date": {
+            "label": "filing date",
+            "format": "text"
+          },
+          "report_date": {
+            "label": "report date",
+            "format": "text"
+          },
+          "accepted_at": {
+            "label": "accepted at",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "monitoring": {
+      "title": "Monitoring",
+      "transformation": {
+        "fields": [
+          "id",
+          "content_hash",
+          "fetched_at",
+          "source_url"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "id",
+            "format": "text"
+          },
+          "content_hash": {
+            "label": "content hash",
+            "format": "text"
+          },
+          "fetched_at": {
+            "label": "fetched at",
+            "format": "text"
+          },
+          "source_url": {
+            "label": "source url",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}

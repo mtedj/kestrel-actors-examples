@@ -1,0 +1,19 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Trustpilot reviews",
+  "description": "Three row types share one dataset: review (one Trustpilot review, charged), company (the profile's TrustScore, histogram and contact block, free) and status (one per company, free).",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Trustpilot reviews",
+      "description": "One row per review, plus a company context row and a status row per company. Charged rows are billed as delivered; company and status rows are always free.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Run summary",
+      "description": "One JSON record with the counts this run delivered and charged, its error, capped and duplicate tallies, and its HTTP and token stats.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

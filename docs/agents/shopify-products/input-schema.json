@@ -1,0 +1,81 @@
+{
+  "title": "Shopify products",
+  "schemaVersion": 1,
+  "type": "object",
+  "description": "Minimal input: {\"storeUrls\": [\"https://kith.com\"], \"maxProductsPerStore\": 3, \"maxResults\": 3}. $2 per 1000 delivered product rows; no start fee.",
+  "required": [
+    "storeUrls"
+  ],
+  "properties": {
+    "storeUrls": {
+      "title": "Store urls",
+      "type": "array",
+      "description": "Required: 1-10 public store homepage URLs, e.g. [\"https://www.allbirds.com\"]. HTTPS only; no paths or query strings. The public Shopify products.json feed must be enabled. No global store discovery, login or API key. One product with all its variants = one charged row.",
+      "editor": "stringList",
+      "prefill": [
+        "https://kith.com"
+      ],
+      "sectionCaption": "Stores and limits"
+    },
+    "maxProductsPerStore": {
+      "title": "Max products per store",
+      "type": "integer",
+      "description": "100 by default; 1-5000. Maximum matching products per store AFTER filters and exclusions, not variants. Source order; not sorted by newest. May return fewer if the catalog ends or maxPagesPerStore is reached. 10 products cost $0.02.",
+      "minimum": 1,
+      "maximum": 5000,
+      "default": 100
+    },
+    "maxResults": {
+      "title": "Max results",
+      "type": "integer",
+      "description": "100 by default. Maximum delivered product rows across all inputs, after filters and deduplication. Stops early even if sources remain. Free status rows do not count. Cost is at most maxResults × $0.002; use Apify run option maxTotalChargeUsd for a dollar cap.",
+      "minimum": 1,
+      "maximum": 10000,
+      "default": 100
+    },
+    "onlyAvailable": {
+      "title": "Only available",
+      "type": "boolean",
+      "description": "false (default) keeps all products. true keeps products with at least one variant explicitly available. All variants, including unavailable ones, stay in each returned product. Availability is a storefront flag, not an inventory quantity. Free filter before billing and caps.",
+      "sectionCaption": "Product filters",
+      "default": false
+    },
+    "titleKeywords": {
+      "title": "Title keywords",
+      "type": "array",
+      "description": "[\"shoe\", \"runner\"] keeps product titles containing either phrase, case insensitive. Empty = any title. Multiple title phrases use OR; combined with vendorKeywords and onlyAvailable using AND. Free filter before the product cap.",
+      "editor": "stringList",
+      "default": []
+    },
+    "vendorKeywords": {
+      "title": "Vendor keywords",
+      "type": "array",
+      "description": "[\"Nike\"] keeps vendor names containing a phrase, case insensitive. Empty = all vendors. Multiple phrases use OR. Combined with titleKeywords and onlyAvailable using AND. Free filter before billing.",
+      "editor": "stringList",
+      "default": []
+    },
+    "collection": {
+      "title": "Collection",
+      "type": "string",
+      "description": "Empty (default) scans the public catalog. A handle such as \"shoes\" scans /collections/shoes/products.json on every store. Pass the handle, not a URL. Unknown collections may be empty or fail. No extra charge.",
+      "editor": "textfield",
+      "default": ""
+    },
+    "excludeProductIds": {
+      "title": "Exclude product ids",
+      "type": "array",
+      "description": "Pass product_id strings or exact product_key values from previous output. A key is host:id WITHOUT https://, e.g. [\"www.allbirds.com:7340901859408\"]. If a supplied key begins with https://, remove that prefix before calling; URL-shaped keys do not match. Prefer keys across stores. Up to 10000 strings. Free exclusions before caps. Save/pass IDs externally; scheduling and history are external.",
+      "editor": "stringList",
+      "sectionCaption": "Repeat runs and scan bounds",
+      "default": []
+    },
+    "maxPagesPerStore": {
+      "title": "Max pages per store",
+      "type": "integer",
+      "description": "5 by default; 1-20. Each public catalog page requests up to 250 products. Filtered and excluded rows still consume this scan allowance. Reaching it sets cap_reached=true and status=scan_limit; the run may have more matches outside the scanned pages. Requests themselves are not billed.",
+      "minimum": 1,
+      "maximum": 20,
+      "default": 5
+    }
+  }
+}

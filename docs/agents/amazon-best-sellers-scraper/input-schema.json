@@ -1,0 +1,107 @@
+{
+  "title": "Amazon Best Sellers",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "categories": {
+      "title": "Categories",
+      "type": "array",
+      "description": "Category slugs, e.g. [\"electronics\", \"kitchen\", \"books\", \"toys-and-games\"]: the segment after /gp/bestsellers/ in a Best Sellers URL; nested paths copied from a chart URL work. Each category delivers every rank of the pages requested (default 2 pages = the Top 100) at $0.004 per entry. Use for \"top 100 in X\", \"best selling X\", \"what is trending in X\" (compare two daily runs). Slugs differ between marketplaces: copy it from that marketplace's chart URL. A slug Amazon does not know costs nothing.",
+      "editor": "stringList",
+      "prefill": [
+        "electronics"
+      ],
+      "uniqueItems": true,
+      "sectionCaption": "What to scrape"
+    },
+    "chart": {
+      "title": "Chart",
+      "type": "string",
+      "description": "\"bestsellers\" (default) = the Best Sellers chart (standing sales rank). \"new_releases\" = the New Releases chart (newest products gaining traction). Movers & Shakers, Most Wished For and Gift Ideas are not available.",
+      "enum": [
+        "bestsellers",
+        "new_releases"
+      ],
+      "enumTitles": [
+        "Best Sellers",
+        "New Releases"
+      ],
+      "default": "bestsellers",
+      "editor": "select"
+    },
+    "domain": {
+      "title": "Marketplace",
+      "type": "string",
+      "description": "Marketplace, e.g. \"de\" for amazon.de. Default \"com\". One of: com, co.uk, de, fr, it, es, ca, com.au, co.jp, in, com.mx, com.br, nl, se, pl, sa, ae, sg, com.tr, com.be. Charts and currency are that marketplace's own. With RESIDENTIAL proxies the run routes through the marketplace's country automatically.",
+      "editor": "textfield",
+      "default": "com"
+    },
+    "pages": {
+      "title": "Pages per category",
+      "type": "integer",
+      "description": "Chart pages per category, 1 to 20, e.g. 2 (default 2 = ranks 1 to 100). A page holds 50 ranks (30 rendered + 20 lazy-loaded, both delivered while fillRanks is on). Walking stops early when a page adds nothing new. Cost = pages × 50 × $0.004 per category.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 20,
+      "default": 2,
+      "sectionCaption": "How many rows, which rows (filters run before billing)"
+    },
+    "maxResultsPerCategory": {
+      "title": "Max products per category",
+      "type": "integer",
+      "description": "0 (default) = every entry on the pages requested. N = the top N only, e.g. 10 for \"top 10 in electronics\": the main cost control, and lazy-loaded entries are fetched only for the ranks you asked for. Entries beyond N are never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 2000,
+      "default": 0
+    },
+    "minRating": {
+      "title": "Minimum rating",
+      "type": "number",
+      "description": "Keep only entries rated at or above this, e.g. 4. 0 (default) = every entry. Entries whose rating could not be read are dropped too. Filtered entries are never charged.",
+      "editor": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "fillRanks": {
+      "title": "Complete every rank",
+      "type": "boolean",
+      "description": "true (DEFAULT) = complete every rank: Amazon renders 30 of a page's 50 entries and lazy-loads 20; the run makes the page's own load-more call (one small request per page, product pages only as a fallback) so the chart has no gaps. false = only the 30 rendered entries per page, one request, ranks 31 to 50 missing. Keep true for \"the top 100\".",
+      "editor": "checkbox",
+      "default": true
+    },
+    "sessions": {
+      "title": "Parallel sessions",
+      "type": "integer",
+      "description": "Parallel proxy sessions (one egress IP each), 1 to 16, e.g. 4 (default 4). More is faster for long category lists; each session is paced separately.",
+      "editor": "number",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 4,
+      "sectionCaption": "Proxy and pacing"
+    },
+    "perIp": {
+      "title": "Requests per second per IP",
+      "type": "number",
+      "description": "Requests per second per session, 0.1 to 2 (default 0.5). Amazon tolerates about 0.5/s per IP; faster causes captchas, not speed. Leave the default.",
+      "editor": "number",
+      "minimum": 0.1,
+      "maximum": 2,
+      "default": 0.5
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "description": "Apify Proxy, default {\"useApifyProxy\": true} (datacentre). Required: Amazon captchas unrotated datacentre traffic; the run rotates the IP on a captcha or 503 and after two refusals in a row moves to residential proxies by itself, routed through the marketplace's country. Pass {\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]} for the most reliable runs.",
+      "editor": "proxy",
+      "default": {
+        "useApifyProxy": true
+      }
+    }
+  },
+  "required": [
+    "categories"
+  ],
+  "description": "Amazon Best Sellers charts. Minimal input: {\"categories\": [\"electronics\"]} = the Top 100 of that category (pages defaults to 2, 50 ranks per page) at $0.004 per entry, $0.40. New Releases: add \"chart\": \"new_releases\". maxResultsPerCategory and minRating cut rows before billing."
+}

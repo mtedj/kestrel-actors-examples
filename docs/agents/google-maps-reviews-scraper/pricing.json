@@ -1,0 +1,12 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "review": {
+      "eventTitle": "Review row",
+      "eventDescription": "One Google Maps review: stars, text, translation, exact publish and edit dates, owner reply (row keys review_id, place_id, stars, text, text_translated, published_at, updated_at, owner_reply_text, owner_reply_at, likes, photos, reviewer_name, reviewer_is_local_guide, reviewer_review_count, sub_ratings, visit_details): $1 per 1,000 reviews. Not charged: place rows (rating, review count, histogram, completeness check), status rows, reviews your filters remove, duplicates, reviews an earlier only-new run already delivered, places with no reviews, places or links Google does not know, bad input. No start fee; proxy and compute are included in the event price. The run stops at the maximum cost per run you set when starting it (Apify run option maxTotalChargeUsd), never above it.",
+      "eventPriceUsd": 0.001,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-06T09:24:53.528Z"
+}
