@@ -4,6 +4,12 @@ Google Hotels prices scraper for exact dates and guests: the lowest nightly rate
 
 **You pay only for priced rows.** Sold-out hotels, empty searches and status rows cost nothing, and the price per row is stated on this page and identical on every plan.
 
+## Connect this Actor to your AI agent
+
+[Open the MCP setup and small sample call](https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/) for this Actor, or [choose a related toolkit](https://mtedj.github.io/kestrel-actors-examples/agents/) for a larger workflow. The setup includes the input schema and current pricing events.
+
+For a per-run dollar ceiling, use the hosted MCP `call-actor` tool with `callOptions.maxTotalChargeUsd` outside the Actor input. After the run finishes, retrieve the dataset with `get-dataset-items`; a run response is not the data itself. Check the live schema and pricing before a large or recurring run.
+
 ## Google 酒店价格、酒店比价与 OTA 房价：中文调用与语言设置
 
 查询城市或具体酒店的指定入住日期，获得酒店价格、税费与可订状态。需要多渠道比价时开启 includeOffers；只需要酒店行时关闭，避免多余的报价行费用。

@@ -5,6 +5,12 @@ Google news returns headlines and articles from public keyword search RSS feeds 
 Last verified working: 2026-10-16.
 
 
+## Connect this Actor to your AI agent
+
+[Open the MCP setup and small sample call](https://mtedj.github.io/kestrel-actors-examples/agents/google-news/) for this Actor, or [choose a related toolkit](https://mtedj.github.io/kestrel-actors-examples/agents/) for a larger workflow. The setup includes the input schema and current pricing events.
+
+For a per-run dollar ceiling, use the hosted MCP `call-actor` tool with `callOptions.maxTotalChargeUsd` outside the Actor input. After the run finishes, retrieve the dataset with `get-dataset-items`; a run response is not the data itself. Check the live schema and pricing before a large or recurring run.
+
 ## Google News RSS API for agent workflows
 
 Use this independent Apify actor to retrieve the public data documented below. It is not an official platform API or an account-management API. Pass the documented input JSON, keep result limits small for the first call, and use Apify run option `maxTotalChargeUsd` for the charge cap.

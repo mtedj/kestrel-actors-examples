@@ -1,0 +1,18 @@
+{
+  "actor": "kestrel/rss-atom-feed-reader",
+  "input": {
+    "feedUrls": [
+      "https://blog.python.org/feeds/posts/default?alt=rss",
+      "https://github.com/python/cpython/releases.atom"
+    ],
+    "sinceDate": "2026-10-31",
+    "excludeIds": [],
+    "maxResults": 20,
+    "maxItemsPerFeed": 10
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.05,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

@@ -2,6 +2,12 @@
 
 Read RSS and Atom sources with a feed reader that returns structured article metadata and publisher-supplied text. Each record includes a stable identifier, title, link, author, dates, categories and source address. This is useful for release monitoring, news intake and routing new entries into downstream workflows without opening a browser or obtaining a separate source API key.
 
+## Connect this Actor to your AI agent
+
+[Open the MCP setup and small sample call](https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/) for this Actor, or [choose a related toolkit](https://mtedj.github.io/kestrel-actors-examples/agents/) for a larger workflow. The setup includes the input schema and current pricing events.
+
+For a per-run dollar ceiling, use the hosted MCP `call-actor` tool with `callOptions.maxTotalChargeUsd` outside the Actor input. After the run finishes, retrieve the dataset with `get-dataset-items`; a run response is not the data itself. Check the live schema and pricing before a large or recurring run.
+
 ## RSS inputs: which request maps to which JSON?
 
 Use this actor for exact public RSS 2.0 or Atom 1.0 addresses. It reads entries already present in those documents. It does not search the web, discover feeds from homepages, retrieve an archive, or visit article pages to expand shortened descriptions.

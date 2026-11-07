@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T09:07:48.204637+00:00",
+  "generatedAt": "2026-11-07T09:25:46.849184+00:00",
   "publisher": "kestrel",
   "actors": [
     {
@@ -605,8 +605,8 @@
       "description": "Google Hotels API: hotel prices by city, hotel name or URL for your dates. One row per hotel: nightly rate, stay total, taxes, deals, availability, rating. Optional OTA rates (Booking.com, Expedia, Agoda, official site): rate parity, price comparison, price tracking. Free: address, phone, amenities.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.9.8",
-      "verifiedAt": "2026-11-07T09:07:37.317640+00:00",
+      "buildNumber": "1.9.10",
+      "verifiedAt": "2026-11-07T09:25:46.821204+00:00",
       "storeUrl": "https://apify.com/kestrel/google-hotels-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -696,8 +696,8 @@
       "description": "Search Google News articles by keyword, country and language, including Chinese. One row per article: headline, publisher, publication date and Google News link. Filter dates and publisher domains before billing; exclude known IDs. RSS metadata only, not full text or direct publisher article URLs.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-07T09:07:37.601660+00:00",
+      "buildNumber": "1.0.11",
+      "verifiedAt": "2026-11-07T09:25:45.359816+00:00",
       "storeUrl": "https://apify.com/kestrel/google-news",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1168,8 +1168,8 @@
       "description": "Search Pinterest pins by keywords. One row per pin: title, description, image URL, dimensions, destination URL, domain, board name and date. Filter text, image orientation and destination domains; collect only new pins. Parsed pages are billed even when filters or monitoring return no rows.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.3",
-      "verifiedAt": "2026-11-07T09:07:43.450290+00:00",
+      "buildNumber": "1.0.5",
+      "verifiedAt": "2026-11-07T09:25:45.329886+00:00",
       "storeUrl": "https://apify.com/kestrel/pinterest-pin-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1200,8 +1200,8 @@
       "description": "Parse RSS and Atom feeds from URLs. Each article entry includes title, link, feed text, author, dates, categories and stable ID. Filter titles and dates; exclude known IDs for new items on repeat runs. Successful feed checks are billed even with no new items. No article crawling or login.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T09:07:43.470965+00:00",
+      "buildNumber": "1.0.7",
+      "verifiedAt": "2026-11-07T09:25:45.358090+00:00",
       "storeUrl": "https://apify.com/kestrel/rss-atom-feed-reader",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1254,8 +1254,8 @@
       "description": "Get Shopify product catalogs from store URLs or a collection. Each product includes prices, currency, variants, SKUs, availability, images, vendor and descriptions. Filter titles, vendors and available products before billing. Exclude known IDs for new products. No login or API key needed.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.12",
-      "verifiedAt": "2026-11-07T09:07:44.192150+00:00",
+      "buildNumber": "1.0.13",
+      "verifiedAt": "2026-11-07T09:25:46.409229+00:00",
       "storeUrl": "https://apify.com/kestrel/shopify-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1281,8 +1281,8 @@
       "description": "Extract URLs from XML sitemaps, gzip files and nested sitemap indexes. Each URL includes link, lastmod, priority, change frequency and source sitemap. Filter paths and last-modified dates; exclude known IDs for repeat runs. Source parsing is billed even with zero matches. No browser or proxy.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T09:07:44.504529+00:00",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T09:25:46.444866+00:00",
       "storeUrl": "https://apify.com/kestrel/sitemap-url-extractor",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1530,8 +1530,8 @@
       "description": "Fetch Yahoo Finance historical prices by ticker and date range. One row per daily bar: open, high, low, close, volume, adjusted close, dividends, splits and currency. Stocks, ETFs, forex and crypto. Monitor new or changed bars; successful history checks are billed even with no new rows.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.3",
-      "verifiedAt": "2026-11-07T09:07:47.400511+00:00",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-07T09:25:46.420105+00:00",
       "storeUrl": "https://apify.com/kestrel/yahoo-finance-price-history",
       "pricing": {
         "model": "PAY_PER_EVENT",

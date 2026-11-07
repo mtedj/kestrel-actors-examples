@@ -26,3 +26,32 @@ For REST API calls, send the Actor input body to `POST https://api.apify.com/v2/
 - [PDF tables, Markdown and OCR](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/document-extraction.html): Extract PDF pages, tables and image text for document analysis.
 - [Price history and SEC filings](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/financial-research.html): Fetch daily Yahoo Finance OHLCV bars, dividends and splits; find SEC company filings.
 - [Patents and clinical trials](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/research-records.html): Search patent records and clinical-trial registry records.
+
+## Example: check both feeds for new Python articles and releases
+
+[Download the prepared call](https://mtedj.github.io/kestrel-actors-examples/agents/recipes/rss-new-items.json). Replace the cutoff date with your monitoring window and fill `excludeIds` with IDs saved from prior results.
+
+```json
+{
+  "actor": "kestrel/rss-atom-feed-reader",
+  "input": {
+    "feedUrls": [
+      "https://blog.python.org/feeds/posts/default?alt=rss",
+      "https://github.com/python/cpython/releases.atom"
+    ],
+    "sinceDate": "2026-10-31",
+    "excludeIds": [],
+    "maxResults": 20,
+    "maxItemsPerFeed": 10
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.05,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}
+```
+
+`maxItemsPerFeed: 10` and `maxResults: 20` leave room to check both feeds. This can return fewer than 20 entries even if one feed has more; increase the per-feed limit and the global cap together when you want deeper coverage. A global cap of 20 with 20 allowed from the first feed can stop before the second feed is checked. The `$0.05` budget may also stop work early.
+
+Two successful feed parses cost $0.005 at the listed rate, including checks with no new matching entries. Entries have no additional per-row fee. Persist returned IDs externally for the next call. The date filter can fall back to `updated_at` when publication time is missing; if the task requires a strict publication date, inspect `published_at` in the returned rows.

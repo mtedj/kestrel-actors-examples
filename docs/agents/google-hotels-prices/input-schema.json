@@ -101,14 +101,14 @@
     "includeOffers": {
       "title": "Fetch every source's rates",
       "type": "boolean",
-      "description": "true (DEFAULT) = also return each booking site's rate per hotel as offer rows at $0.002 each: about 18 per hotel (up to 36), so about $0.04 per hotel, not $0.004. Set false for one price per hotel, a price calendar or plain price tracking. Keep true for rate parity, OTA comparison, \"which site is cheapest\". The official site is the offer row with official: true, present only when Google lists it. With false the hotel row has the lowest nightly rate but not which site sells it.",
+      "description": "true (DEFAULT) adds booking-site offer rows at $0.002 each, plus $0.004 per hotel. Observed sources sample: average 18 offers/hotel, range 4–36; not a cap. maxOffersPerHotel=N>0 caps each hotel/stay at $0.004+N×$0.002; 0 leaves offer count uncapped. Set false for one lowest price per hotel, calendars or plain tracking without an OTA breakdown. Keep true for OTA comparison/rate parity. official:true identifies an official-site offer only when Google lists it.",
       "default": true,
       "editor": "checkbox"
     },
     "offerLevel": {
       "title": "Offer rows per hotel",
       "type": "string",
-      "description": "\"sources\" (default) = one offer row per booking site with its lowest rate: about 18 rows per hotel. \"rooms\" = every booking site × room type × rate, with room name, max guests and free-cancellation deadline: about 65 rows per hotel, up to 150 ($0.13–0.30 in offer fees, plus the $0.004 hotel row). Choose \"rooms\" only when the user asks for room types or cancellation deadlines. Ignored when includeOffers is false.",
+      "description": "\"sources\" (default) keeps each booking site's lowest rate. \"rooms\" adds room/rate variants, names, max guests and cancellation deadlines. Observed room-level sample: average 65, high 150 offers/hotel; not a cap. Both modes obey maxOffersPerHotel: N>0 keeps only the N cheapest offers and can omit the official site. Per hotel/stay ≤$0.004+N×$0.002. For a run ceiling use call-actor callOptions.maxTotalChargeUsd, outside input. Ignored when includeOffers=false.",
       "enum": [
         "sources",
         "rooms"

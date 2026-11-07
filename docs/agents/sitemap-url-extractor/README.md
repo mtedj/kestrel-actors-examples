@@ -2,6 +2,12 @@
 
 Extract sitemap URLs and lastmod values from public XML documents, gzip files and nested indexes. Each delivered record identifies a page and the file that listed it, giving downstream workflows an auditable inventory for content discovery, SEO analysis or crawl preparation. No browser, proxy subscription or third-party API key is needed.
 
+## Connect this Actor to your AI agent
+
+[Open the MCP setup and small sample call](https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/) for this Actor, or [choose a related toolkit](https://mtedj.github.io/kestrel-actors-examples/agents/) for a larger workflow. The setup includes the input schema and current pricing events.
+
+For a per-run dollar ceiling, use the hosted MCP `call-actor` tool with `callOptions.maxTotalChargeUsd` outside the Actor input. After the run finishes, retrieve the dataset with `get-dataset-items`; a run response is not the data itself. Check the live schema and pricing before a large or recurring run.
+
 ## Sitemap inputs: which request maps to which JSON?
 
 Use this actor when you already know a site's published XML source address. It follows child indexes and produces deduplicated page records. It does not discover source addresses from homepages, crawl page content, verify page availability, or prove that a page is indexed by a search engine.
