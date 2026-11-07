@@ -41,9 +41,9 @@ Use this actor when the request names a company and wants its Trustpilot custome
 
 | user request | input JSON |
 |---|---|
-| reviews of company X | `{"companyDomains": ["www.monzo.com"]}` (100 newest reviews; `"maxReviewsPerCompany": 1000` for a full corpus) |
+| reviews of company X | `{"companyDomains": ["www.monzo.com"]}` (up to 100 newest reviews; `"maxReviewsPerCompany": 1000` requests a capped star-band sample, not a full corpus) |
 | negative reviews / complaints about X | `{"companyDomains": ["www.monzo.com"], "maxRating": 2, "requireText": true}` |
-| only new reviews since yesterday (daily monitoring) | `{"companyDomains": ["www.monzo.com"], "sinceDate": "1 day", "sort": "most_recent"}` |
+| reviews published since yesterday (deduplicate repeat windows externally) | `{"companyDomains": ["www.monzo.com"], "sinceDate": "1 day", "sort": "most_recent"}` |
 | reviews from the last 3 months | `{"companyDomains": ["www.monzo.com"], "dateRange": "last3months"}` |
 | what people say about refunds | `{"companyDomains": ["www.monzo.com"], "keyword": "refund"}` |
 | German-language reviews only | `{"companyDomains": ["www.monzo.com"], "languages": "de"}` |
@@ -75,9 +75,9 @@ A URL and its bare domain count as the same company and are harvested once, so m
 
 This is the number nobody else on the Store states plainly, so here it is: **an anonymous visitor gets ten pages — 200 reviews — of any one filtered view.** Ask for page eleven and the site answers with a redirect to its login screen. That is a hard wall, and it is why some listings quietly return 200 rows and call a brand "done".
 
-This actor gets past it honestly. The five star ratings are five *separate* filtered views, each with its own 200-review allowance, and they are disjoint — a review is one star or four, never both. With **`deepPaging`** on (the default) a request for more than 200 reviews is split across the 1★, 2★, 3★, 4★ and 5★ views, the results are merged and de-duplicated, and up to **1,000 reviews per company per run** come back. The share taken from each band follows the profile's own histogram, so the sample keeps the shape of the real distribution rather than over-weighting whichever band was read first.
+This actor gets past it honestly. The five star ratings are five *separate* filtered views, each with its own 200-review allowance, and they are disjoint — a review is one star or four, never both. With **`deepPaging`** on (the default) a request for more than 200 reviews is split across the 1★, 2★, 3★, 4★ and 5★ views, the results are merged and de-duplicated, and up to **1,000 reviews per company per run** come back. Quotas use the profile's histogram, but per-band caps and filters can change the resulting mix. This is a capped sample, not a complete corpus or necessarily the globally newest 1,000 reviews. For a chronological latest sample, use `sort: "most_recent"` with `maxReviewsPerCompany` at most 200.
 
-When a walk stops at the wall rather than at the end of the reviews, the `status` row says so: `capped: true`. Nothing is ever silently truncated.
+A walk that reaches the source wall reports `capped: true` in its free status row. A requested result cap can stop earlier without setting this flag, so `capped: false` does not prove you collected the full history. Check the requested cap, delivered count, filters and source status together.
 
 ## Review monitoring that costs what it should
 
@@ -88,7 +88,7 @@ Six controls run **before** billing, and together they are why watching a hundre
 - **`languages`** keeps a single language, filtered on their side. The default here is `all` — the public page shows English only, which hides most reviews of a global brand — and the `review_languages` field on the company row tells you how many reviews each language holds before you commit.
 - **`keyword`** is their review search: `refund`, `delivery`, `chargeback`, `cancellation`. Non-matching reviews are never fetched.
 - **`verifiedOnly`** keeps only reviews carrying the verified badge.
-- **`sinceDate`** and **`requireText`** run inside the actor, still before billing: `sinceDate` accepts `2026-08-01` or a relative `7 days` so a schedule never goes stale, and with newest-first order the walk stops at the first page older than the cut — a daily run reads one or two pages.
+- **`sinceDate`** and **`requireText`** run inside the actor before billing. `sinceDate` accepts a date or relative `7 days`; newest-first order can stop when older reviews are reached. Page count depends on activity and caps. There is no cross-run review memory: an overlapping date window can deliver and bill the same review again. `requireText` is applied after the collection cap, so the delivered count can be lower.
 
 Filtered reviews are never charged. Neither are company rows, status rows, profiles with no reviews, or domains that turn out not to exist.
 
@@ -96,7 +96,7 @@ Filtered reviews are never charged. Neither are company rows, status rows, profi
 
 - **Support and CX teams** run a daily complaints feed across their own profile and their rivals' — Trustpilot competitor reviews next to their own, in one dataset: `minRating: 1, maxRating: 2, sinceDate: "2 days", sort: "most_recent"`. Every row carries `reply_text` and `reply_date`, so "which complaints did we answer" is a filter, not a project.
 - **Marketing and reputation monitoring** track `trust_score` and the `ratings` histogram over time. Schedule the run, keep `maxReviewsPerCompany: 0` off and `includeCompanyRow: true` on, and you have a cheap daily reputation monitoring series for a whole category.
-- **Analysts** pull the corpus for review sentiment analysis and voice of customer data: `maxReviewsPerCompany: 1000`, `requireText: true`, one language at a time so the model gets clean input.
+- **Analysts** pull a capped sample for review sentiment analysis and voice of customer data: `maxReviewsPerCompany: 1000`, `requireText: true`, one language at a time so the model gets clean input.
 - **Sales and lead generation** use the free company row on its own — `email`, `phone`, `address`, `categories`, `website`, `is_claimed` — to qualify a list of domains before anyone picks up the phone.
 - **Due diligence and marketplace risk** read `is_closed`, `is_collecting`, `verified_payment` and `verified_identity` next to the score.
 
@@ -283,7 +283,15 @@ Cost scales with delivered rows, not with companies, which is what makes bulk co
 
 ## Scrape Trustpilot on a schedule
 
-Set `sinceDate` to a relative window — `"1 day"`, `"7 days"` — and put the actor on an Apify schedule. Newest-first order plus a date cut means each run reads one or two pages per company and delivers only what is new, so an incremental review data pipeline stays cheap forever. Key on `review_id` at your end and the merge is idempotent.
+Set an Apify schedule separately; this Actor does not create one or remember delivered review IDs between runs. `sinceDate: "1 day"` includes yesterday and today, so daily windows overlap. Reviews delivered again are billed again, even if your database already holds their IDs. Downstream deduplication prevents duplicate stored records, not repeat Actor charges.
+
+Use this bounded input for a daily complaints feed, then store the review data externally:
+
+```json
+{"companyDomains":["www.monzo.com"],"maxReviewsPerCompany":50,"maxRating":2,"requireText":true,"sinceDate":"2 days","sort":"most_recent","includeCompanyRow":true}
+```
+
+The first and repeat calls use the same input. Up to 50 reviews cost $0.075 per company per run; set `callOptions.maxTotalChargeUsd: 0.075` on MCP `call-actor`, outside `input` (API: run option `maxTotalChargeUsd`). Fewer rows can remain after `requireText`. Retrieve and paginate the run's default dataset. Separate `type="review"`, free `company`, and free `status` rows; join company context by `company_domain` and upsert review rows by `review_id`, retaining `fetched_at`, `updated_date`, `reply_text` and `reply_date`. An overlapping publication-date window can catch late arrivals, but it does not guarantee later edits or replies on older reviews are revisited. A capped daily snapshot can miss reviews on a busy profile; inspect `status.capped`, counts and the requested cap.
 
 ### Customer feedback that keeps its structure
 

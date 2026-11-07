@@ -44,7 +44,7 @@ Use it when the user names one or more hotels and wants every booking site's rat
 | Is anyone undercutting hotel X for a stay | `{"hotelNames": ["Hyatt Regency Lisbon"], "checkIn": "2026-11-14", "nights": 2}` then read `undercut_by` and `undercut_pct` |
 | Every OTA's rate for hotel X side by side | the same input; the `sources` array, cheapest first, each with `price_nightly`, `price_total`, `free_cancellation`, `url` |
 | A parity report for our comp set every morning | `{"hotels": ["<entity_id>", "<entity_id>"], "checkIn": "30 days", "nights": 1}` (entity ids from a first run by name) and an Apify schedule |
-| Only the breaches, nothing in parity | add `"minSpreadPct": 5` (rows under 5 % spread are free status rows) |
+| Only stays with at least 5% cheapest-to-dearest spread | add `"minSpreadPct": 5`; this does not itself prove an OTA undercut of the official site |
 | Only where an OTA is under the official site | keep `minSpreadPct` 0 and filter rows on `undercut_by` not empty (`spread_pct` measures cheapest vs dearest source, not direct) |
 | The next week of check-in dates per hotel | `"sweepDays": 6` (7 stays per hotel, one row each) |
 | A family stay, prices in pounds as a UK booker sees them | `"adults": 2, "childrenAges": [5, 9], "currency": "GBP", "country": "gb"` |
@@ -55,6 +55,42 @@ One `parity` row per hotel and stay, $0.01, however many sources the row holds (
 Rows come in two types. `parity`: `hotel_name`, `entity_id`, `check_in`, `check_out`, `nights`, `currency`, `sources` (array, cheapest first: `source`, `source_id`, `official`, `price_nightly`, `price_total`, `free_cancellation`, `url`), `n_sources`, `min_source`, `min_price`, `max_source`, `max_price`, `spread_pct`, `median_price`, `official_source`, `official_price`, `official_is_cheapest`, `undercut_by` (OTAs priced under the official site, cheapest first), `undercut_pct`, `fetched_at`; `stars`, `rating`, `reviews` are filled for hotels given by name, null for hotels given by URL. When Google lists no official site for the hotel that day, `official_source`, `official_price`, `official_is_cheapest` and `undercut_pct` are null and `undercut_by` is empty — and Google does not list it on every run: a null one day and a rate the next is Google's listing changing, not the hotel's rate, so confirm a missing direct rate on a second run before acting on it. `status`: one per hotel and stay with `status` `ok`, `filtered`, `no_rates`, `not_found`, `duplicate`, `unpaid` or `error`, never charged. An empty result is a `status` row that says why, not a failed run; the run's status message counts the rows and how many undercut the official site.
 
 In other languages: Preisvergleich Hotelpreise, Ratenparität (DE); comparador de precios de hoteles, paridad tarifaria (ES); comparateur de prix d'hôtel, parité tarifaire (FR); comparação de preços de hotéis (PT).
+
+### Flag a lower OTA quote without confusing missing evidence with parity
+
+For an OTA quote at least 5% below direct, leave `minSpreadPct` at zero. That input measures the cheapest-to-dearest source spread, not the discount from the official site.
+
+```json
+{
+  "actor": "kestrel/hotel-rate-parity",
+  "input": {
+    "hotelNames": ["Hyatt Regency Lisbon"],
+    "checkIn": "2026-12-10",
+    "nights": 3,
+    "adults": 2,
+    "currency": "EUR",
+    "minSpreadPct": 0,
+    "sweepDays": 0
+  },
+  "callOptions": {"maxTotalChargeUsd": 0.05, "timeout": 180},
+  "waitSecs": 30
+}
+```
+
+This `call-actor` envelope requests one hotel/stay: at most one $0.01 parity event plus a free status row. Poll `get-actor-run` if needed and fetch its default dataset with `get-dataset-items`. Validate the resolved `hotel_name`, `hotel_url` and `entity_id`; the name guard is a heuristic, not proof of identity. Reuse the verified `entity_id` in `hotels` on later runs.
+
+Interpret `type: "parity"` rows as follows:
+
+| Returned evidence | Interpretation |
+|---|---|
+| `official_price` is null | Direct comparison is unknown; an empty `undercut_by` does not mean parity passed. |
+| Official price exists, `undercut_by` is nonempty, and `undercut_pct >= 5` | At least one returned OTA quote is 5% or more below the lowest returned direct quote. Inspect `sources` for the source and rate. |
+| Official price exists and the condition above is false | No returned quote met that threshold; this is limited to the offers Google exposed for this request. |
+| Status is `no_rates`, `not_found`, `filtered`, `unpaid` or `error` | No comparable delivered parity result; report the reason instead of declaring parity. |
+
+These are per-source minimum quotes for the requested stay/party. The code does not join an identical room, meal plan, cancellation contract, payment timing or tax basis across channels. A source's `free_cancellation` value is an available indicator, not that full contract. Treat a lower quote as a lead to investigate, not a verified equivalent-rate violation. The Actor sends no notification itself; a downstream integration can act on qualified rows.
+
+Each run uses its own dataset. Save the rows with `fetched_at` and the request context to build a history; fixed absolute dates compare the same stay, while relative dates compare a moving lead time.
 
 ## What does the rate parity checker return?
 
@@ -73,8 +109,8 @@ Parity breaks quietly: a wholesaler feeds a bed bank, a bed bank feeds a metasea
 
 - **Relative dates.** `"checkIn": "30 days"` means "the stay 30 days from whenever this run starts", forever. No stale dates, no edited schedules.
 - **A window per run.** `sweepDays: 6` checks the same length of stay on seven consecutive check-in dates — one parity row each — so a single scheduled run covers the week that matters for your pickup.
-- **Violations only.** `minSpreadPct: 5` delivers only properties whose cheapest-to-dearest spread reaches 5%; everything in parity gets a free `status` row. Your alert channel sees breaches, not noise, and you are not billed for the properties that behaved.
-- **History you own.** Every run appends dated rows to the same dataset. Export to Sheets, BigQuery or a warehouse and the `undercut_pct` column over time is your parity violation report — and, read across properties, plain hotel price tracking and hotel price comparison for the set you named.
+- **Spread filter.** `minSpreadPct: 5` delivers only stays whose cheapest-to-dearest spread reaches 5%. A filtered stay is not a verified parity pass; for an official-site undercut threshold, keep this filter at zero and qualify the direct-rate evidence downstream.
+- **History you own.** Each run writes dated rows to its own dataset; combine saved datasets externally to build a history. Export to Sheets, BigQuery or a warehouse and the `undercut_pct` column over time is your parity violation report — and, read across properties, plain hotel price tracking and hotel price comparison for the set you named.
 
 Pair the run with Apify's webhooks or an n8n, Make or Zapier flow and a breach becomes a Slack message with the property, the OTA, the gap and the booking link — see the integrations section below.
 
@@ -104,7 +140,7 @@ Once resolved, reuse the `entity_id` from the row in `hotels`: exact, one call p
 | `sweepDays` | Also check the same stay starting on each of the next N days (a week of check-in dates = `6`). |
 | `adults`, `childrenAges` | Occupancy per room; rates scale with it exactly as on Google. |
 | `currency`, `language`, `country` | One currency for every price; Google UI language (`hl`); market (`gl`) — the booker's country, which decides which booking sites Google lists. |
-| `minSpreadPct` | 0 = every property. N = only properties whose spread is at least N% (violations-only feed). Dropped properties are never billed. |
+| `minSpreadPct` | 0 = every priced property. N = only properties whose cheapest-to-dearest spread is at least N%. This is not an official-site undercut filter. Dropped properties are never billed. |
 | `proxyConfiguration` | Apify datacenter proxies work; keep the default. |
 | `sessions`, `perIp` | Parallel proxy sessions and requests per second per IP (defaults 4 and 0.5). |
 
@@ -166,7 +202,7 @@ When Google lists no official site, `official_price`, `official_is_cheapest` and
 
 ## How much does it cost?
 
-Pay per event: one `parity` event per delivered parity row, at the price on this page's pricing tab. A comp set of ten properties checked over seven check-in dates is 70 rows; the same run with `minSpreadPct` set delivers — and bills — only the breaches. Properties with no rates for the stay, names that do not resolve, a property listed twice, rows removed by the filter, rows the spending limit refused and `status` rows are all free, and a property and stay is billed once per run. Apify's platform usage for such a run is a fraction of a cent: name lookups take one search each, every property and stay takes one offers call.
+Pay per event: one `parity` event per delivered parity row, at the price on this page's pricing tab. A comp set of ten properties checked over seven check-in dates is 70 rows; the same run with `minSpreadPct` set delivers and bills only rows meeting the cheapest-to-dearest spread threshold. That filter does not establish a direct-price undercut or equivalent-room violation. Properties with no rates for the stay, names that do not resolve, a property listed twice, rows removed by the filter, rows the spending limit refused and `status` rows are all free, and a property and stay is billed once per run. Apify's platform usage for such a run is a fraction of a cent: name lookups take one search each, every property and stay takes one offers call.
 
 Compared with the parent [Google Hotels Prices Scraper](https://apify.com/kestrel/google-hotels-prices), which bills one row per source, a parity row is one event for the whole comparison — usually cheaper per property, and already in the shape a rate shopper wants.
 
@@ -183,7 +219,7 @@ There is no public Google Hotels API for reading prices; Google's own hotel APIs
 
 Run it from the Apify Console with the form, or programmatically. Replace `<TOKEN>` with your Apify API token.
 
-Python — daily breaches to stdout:
+Python — observed direct-price undercuts to stdout, for further comparison of terms:
 
 ```python
 from apify_client import ApifyClient
@@ -195,15 +231,19 @@ for r in sorted(rows, key=lambda r: -(r["undercut_pct"] or 0)):
     if r["undercut_by"]: print(r["hotel_name"], r["check_in"], f'{r["undercut_pct"]}% under direct via {r["undercut_by"][0]} ({r["min_price"]} vs {r["official_price"]} {r["currency"]})')
 ```
 
-JavaScript / Node.js — violations only, straight into a message:
+JavaScript / Node.js — observed direct-price undercuts of at least 5%, with unknown results kept distinct:
 
 ```javascript
 import { ApifyClient } from 'apify-client';
 const client = new ApifyClient({ token: '<TOKEN>' });
-const run = await client.actor('kestrel/hotel-rate-parity').call({ hotels: ['ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE'], checkIn: '30 days', nights: 1, minSpreadPct: 5 });
+const run = await client.actor('kestrel/hotel-rate-parity').call({ hotels: ['ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE'], checkIn: '30 days', nights: 1, minSpreadPct: 0 });
 const { items } = await client.dataset(run.defaultDatasetId).listItems();
-const lines = items.filter(r => r.type === 'parity' && r.undercut_by.length).map(r => `${r.hotel_name} ${r.check_in}: ${r.min_source} ${r.min_price} vs direct ${r.official_price} (${r.undercut_pct}%)`);
-console.log(lines.join('\n') || 'in parity');
+const comparisons = items.filter(r => r.type === 'parity');
+const lines = comparisons.filter(r => r.official_price != null && r.undercut_by.length && r.undercut_pct >= 5)
+  .map(r => `${r.hotel_name} ${r.check_in}: ${r.min_source} ${r.min_price} vs direct ${r.official_price} (${r.undercut_pct}%) — verify room and rate terms`);
+const unknown = !comparisons.length || comparisons.some(r => r.official_price == null || !r.sources.some(s => !s.official));
+if (unknown) lines.push('Some comparisons lack direct/OTA evidence; parity unknown for those results');
+console.log(lines.join('\n') || 'No observed OTA undercut of at least 5%; equivalent room and rate terms remain unverified');
 ```
 
 curl:
@@ -224,10 +264,10 @@ The actor reads publicly displayed prices — the same figures any visitor sees 
 
 ## Limits and honest notes
 
-- Rates are what Google Hotels displays for the market (`country`) and currency you choose. Whether the displayed rate includes taxes follows the country of the proxy IP (pre-tax plus mandatory fees from a US IP, all-in from most others), not `country`; every source in one row follows the same rule, so the parity math is like for like, but a comparison across proxy setups or markets is not.
+- Rates are what Google Hotels displays for the market (`country`) and currency you choose. Proxy location can affect tax presentation. Keep the request context consistent and verify each source's taxes and fees before treating a difference as comparable; a shared market and currency do not prove identical rate terms.
 - Sources per property vary by market and day: 4 to 36, about 18 on average (measured on 174 hotels with the same call). A property with a rate on only one source still gets a row (spread 0); a property with none gets a free `no_rates` status.
 - Official-site detection is Google's. A few properties are listed under a marketplace brand (a property manager, a franchise engine) and carry no official flag; the row then has `official_price: null`. Google also drops the official listing on some runs and shows it again the next: confirm a missing direct rate on a second run.
-- Google's comparison shows each source's lowest offer for the occupancy. Room-level parity (the same room type on every channel) is a different question: use the parent scraper with `offerLevel: "rooms"` for that.
+- Google's comparison shows each source's lowest offer for the occupancy. Use the parent scraper with `offerLevel: "rooms"` to inspect room-level offers, then verify room, cancellation and other rate terms across channels; collecting room offers does not itself prove equivalence.
 - Name lookups are guarded, not clairvoyant: a name matching a *different* property with the same words (two "Grand Hotel" in one city) resolves to Google's best match. Check the `entity_id` once, then switch to `hotels`.
 - Google changes its internal formats occasionally; a daily canary run watches for that, the actor is rebuilt within days, and every run reports `status` rows so a failure is visible rather than a silent zero.
 
@@ -239,11 +279,11 @@ No. There is no public API for reading Google Hotels prices; the actor reads the
 
 ### What is rate parity, in the terms this actor uses?
 
-Rate parity means the same room sells for the same price on every channel, including your own site. The row measures it two ways: `spread_pct` is the gap between the cheapest and dearest source across the market, and `undercut_pct` is how far the cheapest channel beats your direct rate. A rate parity check is a scan of `undercut_by`; a hotel rate audit is that column over time, and `official_price` is your direct booking rate as Google shows it. Google Hotels rate parity, in short, is what a guest comparing channels on Google actually sees.
+Rate parity compares the same room and rate terms across channels, including your own site. This row summarizes displayed source minima: `spread_pct` is the gap between cheapest and dearest, and `undercut_pct` is how far the cheapest OTA is below the official quote. Scan `undercut_by` for candidate gaps to investigate; `official_price` is the direct quote Google shows. The row does not verify identical room or rate terms, and an absent official quote leaves that comparison unknown.
 
 ### Can it run a rate parity check for my whole comp set every morning?
 
-Yes: list the properties in `hotels` (or `hotelNames` for the first run), use a relative `checkIn`, add `sweepDays` for the booking window, and schedule the actor in Apify Console. Every run appends dated rows; `minSpreadPct` keeps the feed to breaches.
+Yes: list the properties in `hotels` (or `hotelNames` for the first run), add `sweepDays` for the booking window, and schedule the actor in Apify Console. Save each run's separate dataset externally. Relative `checkIn` observes a moving lead time; absolute dates retain a fixed stay. `minSpreadPct` filters the source spread; keep it zero and qualify `official_price`, `undercut_by` and `undercut_pct` downstream for a direct-undercut alert.
 
 ### Why is the OTA cheaper than my official site?
 
@@ -255,7 +295,7 @@ Every source Google Hotels lists for that property and market — the big OTAs, 
 
 ### Does the price include taxes and fees?
 
-It is the nightly and total figure Google Hotels shows. Whether that includes taxes follows the country the request leaves from (the proxy IP: pre-tax plus mandatory fees from a US IP, all-in from most others), not `country`; every source in a row follows the same rule, so the parity math compares like with like.
+It is the nightly and total figure Google Hotels shows. Tax presentation can depend on proxy location. Verify source-level taxes, fees and rate terms before a like-for-like conclusion; the Actor compares displayed minima and does not prove those terms match.
 
 ### How is this different from the Google Hotels Prices Scraper?
 

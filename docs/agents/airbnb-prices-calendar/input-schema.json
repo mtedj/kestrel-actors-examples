@@ -18,7 +18,7 @@
     "startUrls": {
       "title": "Airbnb URLs",
       "type": "array",
-      "description": "Airbnb search URLs (https://www.airbnb.com/s/Paris--France/homes?checkin=2026-11-10&checkout=2026-11-14&price_max=200) or listing URLs (https://www.airbnb.com/rooms/12345678). A search URL keeps every filter it carries: dates, guests, price band, room type, bedrooms, amenities, map bounds; checkIn/checkOut given here override its dates. Use for \"price the listings from this search\" or \"this listing\". A URL from another site is rejected before anything is charged. Default empty.",
+      "description": "Airbnb search URLs or listing URLs, e.g. \"https://www.airbnb.com/rooms/11562247\". Search URLs retain their filters and guest counts; explicit checkIn/checkOut override URL dates. URL guest defaults are 2 adults, no children/infants/pets. Rows and optional details use that same effective context. Overlapping inputs deliver a listing once per run: first processed occurrence wins. Use separate runs for different stays/parties. Empty = use locationQueries or listingIds.",
       "editor": "stringList",
       "default": [],
       "uniqueItems": true
@@ -34,7 +34,7 @@
     "checkIn": {
       "title": "Check-in",
       "type": "string",
-      "description": "Check-in date: \"2026-11-07\" (YYYY-MM-DD) or relative to the run date: \"30 days\", \"tomorrow\". Relative dates make a schedule that never needs editing; they count from the run day, so for a fixed weekday stay (Friday to Sunday) run weekly on that weekday with multiples of 7 (\"28 days\", \"30 days\"). Empty (default) = no stay: each listing row carries Airbnb's default displayed price and is billed. A past date is rejected before anything is charged; give both checkIn and checkOut or neither.",
+      "description": "Check-in as \"2026-12-10\" or relative \"30 days\". Give both checkIn/checkOut or neither. Explicit dates override search-URL dates; otherwise a dated search URL keeps its stay, and undated inputs use the default displayed price. Reuse absolute dates to track the SAME stay; relative dates move with each run and track a constant lead time. Explicit past dates are rejected before charging. Pricing applies to the requested stay; calendarMonths starts in the current month.",
       "editor": "datepicker",
       "dateType": "absoluteOrRelative",
       "pattern": "^(\\d{4}-\\d{2}-\\d{2}|\\+?\\s*\\d+\\s*(d|days?|w|weeks?|m|months?|y|years?)|today|tomorrow)?$",
@@ -107,7 +107,7 @@
     "maxListingsPerQuery": {
       "title": "Max listings per place",
       "type": "integer",
-      "description": "Listings to return per place or search URL, 1 to 280, e.g. 50 (default 40). The main cost control: at most maxListingsPerQuery × $0.005 per place and stay (calendar and review rows only if asked). Airbnb applies filters before this cap, so 30 asked = the first 30 matching listings in Airbnb's relevance order — not by price: for \"the N cheapest\" set priceMax, or raise the cap and sort price_total at your end. About 280 is Airbnb's ceiling per search. Ignored for listingIds.",
+      "description": "Listings per place or search URL, 1-280; default 40. Caps Airbnb relevance-ordered results, not the cheapest listings. For a price comparison, sort delivered price_total or price_nightly_effective and label it a returned sample; a cap or priceMax does not prove a market-wide cheapest result. At most N x $0.005 listing charges per search, plus requested calendar/review events. Ignored for listingIds; duplicates are not billed again in one run.",
       "default": 40,
       "minimum": 1,
       "maximum": 280,
@@ -125,7 +125,7 @@
     "calendarMonths": {
       "title": "Calendar months",
       "type": "integer",
-      "description": "0 (default) = no calendar. N = one calendar row per listing with day-by-day availability for the next N months (1 to 24): available, check-in and check-out allowed, minimum and maximum nights per day, plus occupancy for the next 30, 90 and 365 nights and the next available date. $0.002 per month, so 12 = $0.024 per listing. Availability only: Airbnb's calendar carries no price per day (price one-night stays for that). Blocked and booked nights look the same; occupancy counts both.",
+      "description": "0 (default) skips the calendar. N requests N calendar months starting in the CURRENT month, not at checkIn (1-24). One calendar row per listing has a nested days array; join to listing rows on id. Billing is $0.002 per delivered month, not per row: 2 months = $0.004 per listing. Days contain availability and stay rules, not daily prices. occupancy_* counts unavailable days, including host blocks; it is not verified bookings. The run charge cap can shorten the calendar.",
       "default": 0,
       "minimum": 0,
       "maximum": 24,

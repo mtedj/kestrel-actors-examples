@@ -6,7 +6,7 @@
     "hotelNames": {
       "title": "Properties by name",
       "type": "array",
-      "description": "Hotels by name, e.g. [\"Hyatt Regency Lisbon\", \"Altis Grand Hotel Lisbon\"]: use for \"is anyone undercutting hotel X\" when you have no Google Hotels URL. One free Google search per name; the listing is kept only when its name shares at least two words and 60% of yours, so a stranger is never billed. A name that matches nothing is a free not_found status row: retry with the name as Google spells it (a city Google omits from the name counts against it), or pass the entity_id of a row in hotels.",
+      "description": "Hotel names, e.g. [\"Hyatt Regency Lisbon\"]. Google search plus a name-overlap guard rejects weak matches, but does not verify identity. Check hotel_name, hotel_url and entity_id before using the comparison. No match gives a free not_found status row. Reuse a verified entity_id in hotels for repeat checks; names and a city can be ambiguous. A Google entity response and a result-list response use different overlap thresholds.",
       "editor": "stringList",
       "default": [],
       "prefill": [],
@@ -55,7 +55,7 @@
     "minSpreadPct": {
       "title": "Only keep spreads of at least N %",
       "type": "number",
-      "description": "0 (default) = deliver every hotel and stay. N = deliver only rows whose spread between the cheapest and dearest source is at least N %, e.g. 5: the violations-only feed. Rows under N get a free status row (status \"filtered\") and are never billed. Use for \"only parity breaches\", \"only where the gap is over 10%\". It filters on spread_pct (cheapest vs dearest source), not on undercut_pct: for \"only where an OTA undercuts the official site\" keep 0 and filter rows on undercut_by.",
+      "description": "0 (default) keeps every priced stay. N filters cheapest-to-dearest spread_pct, NOT the OTA discount from direct. For \"OTA undercuts direct by 5%\", keep 0; downstream require official_price not null, undercut_by nonempty and undercut_pct >= 5. Missing official_price means unknown, not parity passed. Source minima can differ in room, cancellation, meal or tax terms; a price gap alone is not a verified equivalent-rate breach. Filtered rows are not billed.",
       "default": 0,
       "minimum": 0,
       "maximum": 1000,

@@ -18,7 +18,7 @@
     "departDate": {
       "title": "Departure date",
       "type": "string",
-      "description": "Departure date: \"2026-11-20\" (YYYY-MM-DD), or relative to the day the run starts: \"30 days\", \"6 weeks\", \"tomorrow\". Use relative dates for scheduled runs (\"track this fare daily\"): the input never needs editing and always looks the same distance ahead. Required. A past date is refused before anything is charged.",
+      "description": "Departure as \"2026-12-10\" or relative \"30 days\", \"6 weeks\", \"tomorrow\". Required; a past date is refused before charging. To track the SAME booked-date search, reuse its absolute departure/return dates until departure. Relative dates move with every run: they compare a fixed lead time, not the same trip. Each run has its own dataset; save fetched_at with route, dates, passenger mix, seat and currency to build history.",
       "editor": "textfield",
       "prefill": "30 days"
     },
@@ -32,7 +32,7 @@
     "sweepDays": {
       "title": "Also price the next N departure days",
       "type": "integer",
-      "description": "0 (default) = only the departure date above. N = the same trip also departing on each of the next N days, e.g. departDate \"30 days\", sweepDays 6 = 7 departure days = 7 searches per route; a returnDate shifts with each day so the trip length stays. Use for a price calendar or \"which day is cheapest\": sort flight rows by price, or read `cheapest` on each status row. Cost multiplies by N + 1; cap it with maxResultsPerSearch. Maximum 60. One row per day instead: kestrel/flight-price-tracker.",
+      "description": "0 (default) searches only departDate. N adds the next N departures; 6 = 7 searches per route. returnDate shifts too, preserving trip length. For a fare calendar, group flight rows by route/depart_date and take each group's minimum price; status.cheapest is only the minimum DELIVERED in that search. A result/spend cap can miss cheaper itineraries. Each delivered itinerary is billed. For one row per day and adults only, see kestrel/flight-price-tracker. Maximum 60.",
       "editor": "number",
       "minimum": 0,
       "maximum": 60,
@@ -43,7 +43,7 @@
     "maxResultsPerSearch": {
       "title": "Max itineraries per search",
       "type": "integer",
-      "description": "0 (default) = every itinerary Google lists for a route and date, usually 10 to 35 rows at $0.005 each. N = only the first N in Google's own order (its \"best\" ranking, not strictly the cheapest), e.g. 5: the main cost cap, at most N × $0.005 per route and date. Use 1 to 5 for \"the cheapest fare\" or \"a few options\", 0 for the whole market. Maximum 200.",
+      "description": "0 (default) returns all parsed itineraries for each route/date; each delivered flight costs $0.005. N (1-200) takes the FIRST N in Google's order, not the N cheapest. For \"3 cheapest\", use 0 and sort returned price values, subject to your run budget; with a cap or incomplete run, report only the cheapest among delivered rows. Cost is at most routes x (sweepDays+1) x N x $0.005 when N>0. Set maxTotalChargeUsd outside input to limit the run.",
       "editor": "number",
       "minimum": 0,
       "maximum": 200,
@@ -174,5 +174,5 @@
   "required": [
     "departDate"
   ],
-  "description": "Google Flights prices. Minimal input: {\"routes\": [\"LIS-LHR\"], \"departDate\": \"30 days\"}; routes and departDate are both required. maxResultsPerSearch defaults to 0 = every itinerary Google lists, usually 10 to 35 rows per route and date at $0.005 each: set 5 for \"the cheapest few\", and remember sweepDays multiplies the searches."
+  "description": "Google Flights prices. Minimal input: {\"routes\": [\"LIS-LHR\"], \"departDate\": \"30 days\"}; both are required. maxResultsPerSearch=0 requests all parsed itineraries at $0.005 per delivered row. A positive cap takes the first N in Google's order, not the cheapest N. Sort delivered prices and state any result/spending-cap limit. sweepDays=N makes N+1 searches per route. Set maxTotalChargeUsd outside Actor input."
 }

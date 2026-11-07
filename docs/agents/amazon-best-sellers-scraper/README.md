@@ -49,7 +49,7 @@ This localized quick start uses the existing input contract. API users should se
 | "Best sellers on amazon.de for a category" | `{"categories": ["<segment after /gp/bestsellers/ in the amazon.de URL>"], "domain": "de"}` |
 | "Only best sellers rated 4 and up" | `{"categories": ["toys-and-games"], "minRating": 4}` |
 | "Top 200 in a category" | `{"categories": ["electronics"], "pages": 4}` |
-| "Track BSR daily / what is trending" | schedule the same input daily and diff `rank` per ASIN between runs |
+| "Track BSR daily / what is trending" | schedule one category per run; compare `rank` by `(domain, chart, category, asin)` across dated snapshots |
 | "Fast and cheap, gaps are fine" | `{"categories": ["electronics"], "fillRanks": false}` — 30 of 50 per page |
 
 **One `product` row** ($0.004): `rank`, `asin`, `title`, `url`, `chart`, `category`, `page`, `price`, `price_display`, `currency`, `rating`, `ratings_count`, `image`, `domain`, `marketplace` (`query` and `position` null, `sponsored` false). An entry whose tile the store withholds still comes with `rank`, `asin` and `url` and is counted under `partial` in the status row. **One `status` row per category** (free): `status` is `ok`, `no_results` or `error`, with `products`, `filtered`, `duplicates`, `partial`, `pages` and `error`.
@@ -80,7 +80,9 @@ Set `fillRanks: false` if you only want the entries the page renders — one req
 
 ## Amazon best sellers rank (BSR) tracking
 
-`rank` is the product's position in the category chart — its **amazon sales rank** within that node. Schedule a daily run over your categories and keep the dataset, and **amazon bsr history** falls out with no extra work: every row is stamped with `fetched_at`, so rank over time is a group-by away. That is the whole of **amazon best seller rank tracker** functionality without a subscription to one, and the same dataset doubles as an **amazon rank tracker** for competitors, because their rows arrive next to yours.
+`rank` is the product's position in this category chart, its **amazon sales rank** within that node. For **amazon bsr history**, schedule one category per run and retain `(domain, chart, category, asin, fetched_at, rank)`. Compare ranks only within the same marketplace, chart type and category; chart rank is not sales volume.
+
+The actor delivers and bills each ASIN once across the entire run. If an ASIN appears in two input categories, only one category's row survives; concurrent jobs do not guarantee which one. A multi-category run is therefore useful for a deduplicated product list, but cannot preserve every category membership. Use separate runs when an **amazon best seller rank tracker** or **amazon rank tracker** needs independent chart observations. A missing ASIN in a capped, filtered or failed snapshot does not prove it left the source chart.
 
 What makes the rank useful is the row it arrives on. The same record carries `price`, `rating` and `ratings_count`, so a weekly run answers the questions that actually change decisions:
 
@@ -118,14 +120,18 @@ The **amazon top 100 products** of a node, with price and rating on every row, a
 ### Example: the Top 100 of one category, daily
 
 ```json
-{ "categories": ["electronics"], "chart": "bestsellers", "pages": 2 }
+{ "categories": ["electronics"], "chart": "bestsellers", "pages": 2, "fillRanks": true, "maxResultsPerCategory": 100, "minRating": 0 }
 ```
 
-### Example: New Releases across several nodes, top 20 each
+Set `callOptions.maxTotalChargeUsd: 0.40` on MCP `call-actor`, outside `input` (API: run option `maxTotalChargeUsd`). Repeat the same input daily and save each run's dataset externally. For two categories, make two separate calls with a $0.40 ceiling each, at most $0.80 combined. Retrieve the default dataset and paginate; inspect free `status` rows and `SUMMARY`, and verify the requested rank set before treating a snapshot as complete. `partial` counts delivered rows missing a title, not a count of missing ranks.
+
+### Example: New Releases across several nodes, independent top 20 snapshots
 
 ```json
-{ "categories": ["kitchen", "home-garden", "pet-supplies"], "chart": "new_releases", "pages": 1, "maxResultsPerCategory": 20 }
+{ "categories": ["kitchen"], "chart": "new_releases", "pages": 1, "maxResultsPerCategory": 20 }
 ```
+
+Run the same input separately for `home-garden` and `pet-supplies` to retain each category's membership. At most 20 collected entries cost $0.08 per run; set that monetary ceiling separately. `minRating` is applied after the collection cap, so fewer than 20 matching rows can remain.
 
 ### Example: only well-rated entries, UK marketplace
 
@@ -156,7 +162,7 @@ The **amazon top 100 products** of a node, with price and rating on every row, a
 
 Pay per event, one per **delivered** product row. Free: `status` rows, every row removed by `minRating` or the cap, empty categories, and failed jobs. A product that sits in two categories' charts is delivered and billed once per run.
 
-A chart page is 50 ranks, so one category's Top 100 is 100 rows; ten categories daily is 1,000 rows a day. Completing the lazy-loaded ranks is one small extra request per page (the page's own load-more call), so a Top 100 run is four requests in total — platform compute and proxy traffic stay at a fraction of a cent. Exact per-row pricing is on this page's pricing tab.
+A chart page has up to 50 ranks. Ten separate category runs requesting Top 100 each have a combined ceiling of 1,000 delivered rows ($4 at the current event price). A single multi-category run can deliver fewer because shared ASINs are deduplicated; it does not preserve every chart membership. Completing the lazy-loaded ranks is one small extra request per page (the page's own load-more call), so a Top 100 run is four requests in total — platform compute and proxy traffic stay at a fraction of a cent. Exact per-row pricing is on this page's pricing tab.
 
 ## Amazon best sellers scraper in Python, JavaScript, curl, n8n, Make or an AI agent
 
@@ -222,7 +228,7 @@ The caveats: the store's Conditions of Use discourage automated access, so this 
 
 ### How many products does one run return?
 
-50 per page per category. `pages: 2` is the Top 100; `pages: 4` is the Top 200 where the category goes that deep. `maxResultsPerCategory` caps each category independently, and the walk stops on its own when a page adds nothing new.
+50 per page per category. `pages: 2` is the Top 100; `pages: 4` is the Top 200 where the category goes that deep. `maxResultsPerCategory` caps collection per category before rating filters, and the walk stops when a page adds nothing new. Run-wide ASIN deduplication can remove a category's row when the ASIN was already delivered for another category; use one category per run for independent charts.
 
 ### Why do other chart scrapers return 30 entries per page?
 

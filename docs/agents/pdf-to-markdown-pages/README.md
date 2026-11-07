@@ -42,7 +42,7 @@ The example is a small test, not a promise of a fixed row count. A document may 
 | --- | --- |
 | `documentUrls` | Public PDF URLs. Up to 100, 12 MB each. One billed nonempty page. Default digital text; enable ocrMode=auto for scanned pages without text. Use ocrLanguage=chi_sim or eng+chi_sim for Chinese. |
 | `startPage` | First PDF page to inspect, one-based, e.g. 2. Default 1. Pages before this are not inspected or billed. |
-| `maxPagesPerDocument` | Maximum PDF pages inspected per document, 1–20. Default 5. Blank pages or pages with no tables still consume this scan limit but are free. |
+| `maxPagesPerDocument` | Maximum PDF pages inspected per document from startPage, 1–20; default 5. This is a scan cap, not a guaranteed row count. Pages without extracted text consume it but have no result fee. A delivered text-bearing page is billed even if it contains no tables; OCR pages with recognized text use the same page price. maxResults separately caps paid rows. |
 | `ocrMode` | "disabled" (default) extracts digital PDF text only. "auto" applies printed-text OCR only to pages with no extractable text. Does not OCR images on text-bearing pages or repair bad text layers. One billed nonempty page, same price. 扫描PDF识别。 |
 | `ocrLanguage` | "eng" (default), "chi_sim" for simplified Chinese, or "eng+chi_sim" for mixed printed text. Used only when ocrMode=auto needs OCR; not automatic language detection. 中文扫描件识别。 |
 | `maxResults` | Maximum paid rows across the run, 1–1000, default 20. Example: 3 for a sample. Exclusions and empty results apply before the cap. |
@@ -98,7 +98,7 @@ Status `no_matches` means no qualifying row was produced without a target failur
 
 ## How much does it cost?
 
-The event price is **$0.01 per delivered nonempty PDF page**, equivalent to **$10 per 1,000 rows**. Ten rows cost $0.1; one hundred cost $1. There is no Actor start fee. Compute and network access are included in the event price. Nested data and files described for a row are included in that row's price.
+The event price is **$0.01 per delivered nonempty PDF page**, equivalent to **$10 per 1,000 rows**. Ten rows cost $0.1; one hundred cost $1. There is no Actor start fee. Compute and network access are included in the event price. Nested data and files described for a row are included in that row's price. Prose pages without tables are paid results when they contain extracted text; blank or empty-text pages have no result fee.
 
 Within-run duplicates, excluded identities, excluded matching snapshots and empty extractions are free. Failures without delivered data produce no result charge. An invalid-syntax email is a valid diagnostic result and is billed as an email check; a DNS NXDOMAIN response and a registry not-found response are likewise useful observations, not failed requests. The Actor never charges a separate event for every nested word, cell, DNS record or forecast step.
 

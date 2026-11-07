@@ -29,7 +29,7 @@
     "maxPagesPerDocument": {
       "title": "maxPagesPerDocument",
       "type": "integer",
-      "description": "Maximum PDF pages inspected per document, 1–20. Default 5. Blank pages or pages with no tables still consume this scan limit but are free.",
+      "description": "Maximum PDF pages inspected per document from startPage, 1–20; default 5. This is a scan cap, not a guaranteed row count. Pages without extracted text consume it but have no result fee. A delivered text-bearing page is billed even if it contains no tables; OCR pages with recognized text use the same page price. maxResults separately caps paid rows.",
       "default": 5,
       "minimum": 1,
       "maximum": 20

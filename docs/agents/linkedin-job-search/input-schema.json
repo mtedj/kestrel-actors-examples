@@ -20,7 +20,7 @@
     "maxResultsPerSource": {
       "title": "Maximum delivered rows per source",
       "type": "integer",
-      "description": "Maximum matching rows per search after filters and monitoring; for example 50. Default 50, maximum 1000. A ceiling, not a guarantee. Deduplicated across the run; Google IDs include domain, query and country; only the first visible result per domain is kept.",
+      "description": "Maximum delivered job rows per query, after filters, monitoring and cross-query deduplication. Default 50; maximum 1000. IDs are LinkedIn job IDs, so different jobs at the same company or linkedin.com can all be returned. The same job appearing in several queries is delivered once across the run. Source availability and page caps can leave fewer rows.",
       "default": 50,
       "minimum": 1,
       "maximum": 1000,
@@ -66,7 +66,7 @@
     "titleContains": {
       "title": "Title includes any",
       "type": "array",
-      "description": "Keep titles containing any phrase, case-insensitive, for example [\"engineer\"]. For Zillow, title is building name or address. Empty disables it. Applied before row billing; parsed pages are still billed.",
+      "description": "Keep titles containing any phrase, case-insensitive, for example [\"engineer\"]. Empty disables it. Applied before row billing; parsed pages are still billed.",
       "default": [],
       "editor": "stringList",
       "items": {

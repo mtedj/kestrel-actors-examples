@@ -20,7 +20,7 @@
     "maxResultsPerSource": {
       "title": "Maximum delivered rows per source",
       "type": "integer",
-      "description": "Maximum matching rows per search after filters and monitoring; for example 50. Default 50, maximum 1000. A ceiling, not a guarantee. Deduplicated across the run; Google IDs include domain, query and country; only the first visible result per domain is kept.",
+      "description": "Maximum delivered property or rental-building rows per search URL, after filters, monitoring and cross-URL deduplication. Default 50; maximum 1000. Deduplication uses output id: zpid for a property, a building-* ID for a rental building. Different listings on zillow.com remain separate; the same listing across URLs is delivered once. Source availability and page caps can leave fewer rows.",
       "default": 50,
       "minimum": 1,
       "maximum": 1000,

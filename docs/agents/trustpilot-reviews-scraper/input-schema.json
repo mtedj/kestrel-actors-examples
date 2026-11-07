@@ -27,7 +27,7 @@
     "maxReviewsPerCompany": {
       "title": "Max reviews per company",
       "type": "integer",
-      "description": "Reviews to return per company, 0 to 1000, e.g. 40 (default 100 = up to $0.15 per company). The main cost control. Trustpilot's filters and sinceDate apply BEFORE this cap, so 50 with maxRating 2 = the 50 newest 1- and 2-star reviews. 0 = every review Trustpilot serves without a login: 200 per filtered view, up to 1000 per company with deepPaging; the status row says capped: true when that wall, not the end of the reviews, stopped the walk.",
+      "description": "0–1000; default 100. Maximum collected reviews per company after source/date filters, before requireText; fewer may be delivered. At $0.0015/review, N>0 costs at most N × $0.0015. 0 means all accessible views within source caps, not unlimited history. One view is capped at 200; deepPaging can combine selected star bands. A 1000 request is a capped sample, not a full corpus. Check status.capped and requested caps; capped=false does not prove completeness.",
       "editor": "number",
       "minimum": 0,
       "maximum": 1000,
@@ -74,7 +74,7 @@
     "sinceDate": {
       "title": "Since date",
       "type": "string",
-      "description": "Keep only reviews published on or after this date: \"2026-09-01\" (YYYY-MM-DD) or relative to the run day — any \"N days\" / \"N weeks\" / \"N months\" / \"N years\" or \"today\" (\"1 day\" = since yesterday) — so a schedule never needs editing. Empty (default) = no date cut. Use for \"only new reviews since last run\": with most_recent order the walk stops at the first page older than the cut, so a daily run reads a page or two; older reviews are never billed. No memory between runs: dedupe on review_id.",
+      "description": "Inclusive publication-date cutoff: \"2026-11-01\" or \"7 days\", \"2 weeks\", \"3 months\", \"1 year\", \"today\". \"1 day\" includes yesterday and today. Empty = no cutoff. With most_recent, older pages stop the walk. NO cross-run memory: overlapping windows can deliver and bill the same review again. Save review_id and dedupe downstream; use an overlap to catch late arrivals, but this does not guarantee later edits/replies on older reviews are revisited.",
       "editor": "textfield",
       "default": ""
     },
@@ -140,7 +140,7 @@
     "deepPaging": {
       "title": "Go past Trustpilot's 200-review wall",
       "type": "boolean",
-      "description": "true (default) = when more than 200 reviews are asked for, each star rating (1 to 5) is fetched as its own 200-review view, merged and de-duplicated: up to 1000 reviews per company. The merged set is the newest 200 of each star rating, not the 1000 newest overall: for a strictly chronological sample stay at 200 or slice with sinceDate / dateRange. false = one view only, never more than 200 reviews or 10 page requests per company. No effect on the price per review.",
+      "description": "true (default): requests above 200, or 0, split eligible star ratings into separate views, up to 200 source reviews each, using histogram-based quotas. Results are merged and deduplicated within the run. This is a capped sample, not necessarily the globally newest N reviews or the full company history. false uses one view (up to 200). For a chronological latest sample use most_recent and maxReviewsPerCompany<=200. Repeat runs have no shared review memory.",
       "editor": "checkbox",
       "default": true,
       "sectionCaption": "Depth",
@@ -186,5 +186,5 @@
     }
   },
   "required": [],
-  "description": "Trustpilot customer reviews. Minimal input: {\"companyDomains\": [\"www.booking.com\"]} (or startUrls with a review-page URL). maxReviewsPerCompany defaults to 100 (up to $0.15 per company at $0.0015 a review): set 1000 for a full corpus, or maxRating 2 + sinceDate \"7 days\" for a daily complaints feed. Every filter runs before billing."
+  "description": "Trustpilot reviews: {\"companyDomains\":[\"www.booking.com\"],\"maxReviewsPerCompany\":100}. Up to $0.15 per company at $0.0015/review. Date-window monitoring has NO cross-run memory: overlapping delivered reviews are billed again; dedupe review_id downstream. Deep paging returns a capped star-band sample, not a full corpus or necessarily the globally newest 1000. Set callOptions.maxTotalChargeUsd outside input in MCP."
 }

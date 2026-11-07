@@ -44,13 +44,13 @@ This localized quick start uses the existing input contract. API users should se
 | User request | Input |
 | --- | --- |
 | "Search results for wireless earbuds" | `{"queries": ["wireless earbuds"]}` |
-| "Where does B0CHWRXH8B rank for wireless earbuds, organic only" | `{"queries": ["wireless earbuds"], "pages": 3, "skipSponsored": true}` — find the ASIN's `position` |
+| "Where does B0CHWRXH8B appear for wireless earbuds, excluding ads" | `{"queries": ["wireless earbuds"], "pages": 3, "maxResultsPerQuery": 20, "skipSponsored": true}` — retain `page` and source `position`; this is not a global organic rank |
 | "Top 10 results for X in Electronics" | `{"queries": ["X"], "department": "electronics", "maxResultsPerQuery": 10}` |
 | "Results on amazon.co.uk" | `{"queries": ["X"], "domain": "co.uk"}` |
 | "Products rated 4.5 and up for X" | `{"queries": ["X"], "minRating": 4.5}` |
 | "Which ads run on keyword X" | `{"queries": ["X"]}` — keep the sponsored rows and read `sponsored: true` |
 | "Best sellers in kitchen, quick look" | `{"categories": ["kitchen"], "chart": "bestsellers"}` |
-| "Track rank weekly" | schedule the same input and compare `position` per ASIN across runs |
+| "Track keyword position weekly" | schedule one keyword per run and compare `(page, position)` by `(domain, query, asin)` and `fetched_at`; save snapshots externally |
 
 **One `product` row** ($0.004): `asin`, `title`, `url`, `query`, `chart`, `category`, `position`, `rank`, `page`, `price`, `price_display`, `currency`, `rating`, `ratings_count`, `image`, `sponsored`, `domain`, `marketplace`. Search rows fill `query` and `position`; chart rows fill `chart`, `category` and `rank`; the rest is null. `price` is null when the results page shows none. **One `status` row per keyword or category** (free): `status` is `ok`, `no_results` or `error`, with `products`, `filtered`, `duplicates`, `pages` and `error`.
 
@@ -63,16 +63,15 @@ You give it keywords or categories. It gives you **amazon product data** as rows
 - **`product` rows** — from a search: `query`, `page`, `position` (the slot on the page, ads included), `asin`, `title`, `price`, `currency`, `rating`, `ratings_count`, `image`, `sponsored`, `url`. From a chart: `chart`, `category` and `rank` instead.
 - **`status` rows** — free: per keyword or category, what was delivered, how many were filtered, and why anything failed.
 
-**Sponsored results are flagged, not silently dropped.** That matters more than it sounds: a rank tracker that counts ads as organic reports the wrong number every time. Set `skipSponsored` and **amazon sponsored products** are removed *before* you are billed for them, leaving **amazon organic rank**.
+**Sponsored results are flagged.** Set `skipSponsored` to remove **amazon sponsored products** before billing. The remaining rows are organic results, but `position` is unchanged: this does not calculate an exact **amazon organic rank**.
 
 ## Amazon keyword rank tracking
 
-`position` is the slot on the results page with ads included — which is what "where do I rank" actually means to a shopper looking at the page. Pair it with `sponsored` and you can report both numbers honestly:
+`position` is Amazon's `data-index` on the individual results page. It is copied from the source, can have gaps, and is not renumbered when ads or other rows are removed. Keep `page` with it. Neither `position` alone nor `(page - 1) × 20 + position` is a guaranteed global organic rank: source page sizes vary, duplicate ASINs are removed, and filters can hide intervening rows.
 
-- **Blended rank** — `position` as-is, the shopper's view.
-- **Organic rank** — run with `skipSponsored: true`, or filter `sponsored == false` yourself.
+For **amazon keyword tracking**, run each keyword separately. The actor deduplicates an ASIN across the entire run, including concurrent keywords and charts; a multi-keyword run therefore does not preserve every keyword's observation for the same ASIN. Store snapshots by `(domain, query, asin, fetched_at)` and compare `(page, position)` within the same keyword and marketplace. A missing ASIN means it was not delivered within that run's pages, cap and filters; it does not prove the product disappeared from Amazon.
 
-Schedule a daily run over your keywords and store `position` per ASIN. Every row is timestamped with `fetched_at`, so **amazon keyword tracking** history falls out of the dataset with no extra work. That is the whole of **amazon rank tracker** functionality without a subscription to one.
+`maxResultsPerQuery` caps collected unique ASINs before `skipSponsored` and `minRating`. Asking for 20 with ads excluded can deliver fewer than 20 organic rows. The actor does not continue collecting extra rows to replace filtered ones.
 
 ## Amazon best sellers and new releases
 
@@ -96,7 +95,7 @@ Every row carries an `asin`. That is deliberate: pipe the ASINs from a search or
 | `categories` | Category nodes for charts, e.g. `electronics`, `kitchen`, `books` — the slug from a Best Sellers URL. |
 | `chart` | `bestsellers` or `new_releases`, applied to each category (Movers & Shakers is client-rendered and not available). |
 | `pages` | How many result pages to walk (about 20 organic products per search page, ~30 per chart page). |
-| `maxResultsPerQuery` | `0` = everything found. `N` = the first N in Amazon's order. |
+| `maxResultsPerQuery` | `0` = all unique ASINs within the page budget. `N` caps collection before sponsored/rating filters, so fewer than N may be delivered. |
 | `skipSponsored` | Drop ad placements and keep only organic results. Never charged for what it drops. |
 | `minRating` | Keep only products rated at or above this. |
 | `domain` | Marketplace: `com`, `co.uk`, `de`, `fr`, `it`, `es`, `ca`, `com.au`, `co.jp`, `in`, `com.mx`, `com.br`, `nl`, `se`, `pl`, `sa`, `ae`, `sg`, `com.tr`, `com.be`. |
@@ -104,11 +103,15 @@ Every row carries an `asin`. That is deliberate: pipe the ASINs from a search or
 | `sessions`, `perIp` | Parallel proxy sessions and the pace of each. Leave alone unless a run is throttled. |
 | `proxyConfiguration` | Apify Proxy. Required — Amazon captchas datacentre traffic that is not rotated. Datacentre is a fine starting point: the run escalates to residential by itself when Amazon pushes back. |
 
-### Example: daily organic rank tracking on three keywords
+### Example: daily keyword position snapshots
+
+Use this input for one keyword, then make separate runs for `bone conduction headphones` and `sleep earbuds` so cross-keyword ASIN deduplication cannot remove their observations:
 
 ```json
-{ "queries": ["wireless earbuds", "bone conduction headphones", "sleep earbuds"], "pages": 2, "skipSponsored": true }
+{"queries":["wireless earbuds"],"domain":"com","pages":2,"maxResultsPerQuery":20,"skipSponsored":true}
 ```
+
+Twenty collected products cost at most $0.08 per run; removed ads reduce that charge. For three such runs the combined event ceiling is $0.24. Set `callOptions.maxTotalChargeUsd: 0.08` on each MCP `call-actor` call, outside `input`; the API equivalent is the run option `maxTotalChargeUsd`. Scheduling and snapshot storage are external. Retrieve the run's default dataset, paginate its items, and keep `type="product"` rows; inspect free `type="status"` rows for errors, filters, duplicates and coverage. Compare `page` plus `position`, not `position` alone.
 
 ### Example: what is climbing in a category
 
@@ -193,7 +196,7 @@ curl -X POST "https://api.apify.com/v2/acts/kestrel~amazon-search-scraper/run-sy
   -d '{"queries":["wireless earbuds"],"pages":1,"skipSponsored":true}'
 ```
 
-For **n8n**, **Make** and Zapier, add the actor as a step through Apify's integration and map `position`, `asin` and `price` into a sheet or an alert — "my ASIN dropped below position 10" is two nodes. For **AI agents**, the actor is callable over Apify's MCP server. To get **amazon search results csv**, run it and use the dataset's Export button, or append `?format=csv` to the dataset items API.
+For **n8n**, **Make** and Zapier, use one keyword per run and map `query`, `page`, `position`, `asin`, `price` and `fetched_at` into a snapshot table. Compare positions only within the same keyword and marketplace. For **AI agents**, the actor is callable over Apify's MCP server. To get **amazon search results csv**, run it and use the dataset's Export button, or append `?format=csv` to the dataset items API.
 
 ## Amazon competitor tracking, in practice
 
@@ -218,7 +221,7 @@ The caveats: Amazon's Conditions of Use discourage automated access, so this is 
 
 ## Limits and honest notes
 
-- **`position` includes ads.** That is intentional — it is the shopper's view. Use `sponsored` or `skipSponsored` for organic rank.
+- **`position` is page-relative source data-index.** Removing ads does not renumber it. Save `page` too; this is not an exact global organic rank. Use one keyword per run to preserve per-keyword ASIN observations.
 - **Price is what the results page shows.** Some listings show a range, or nothing until you open the product; `price` is then null. Chart pages in particular often omit prices for a portion of entries.
 - **Chart `rank` is Amazon's own** where it prints one, and otherwise the position in the returned order.
 - **Search pages carry about 20 organic products**, plus ads. Walking more `pages` is how you go deeper, and a page that adds nothing new ends the walk automatically.
@@ -234,7 +237,7 @@ No. Amazon's Product Advertising API needs an affiliate account with ongoing sal
 
 ### Can I track Amazon keyword rank over time?
 
-Yes — that is the main use. Schedule the run, keep the dataset, and `position` plus `fetched_at` give you rank history per ASIN per keyword. Use `skipSponsored` if you want organic rank only.
+You can track page-position snapshots: schedule one keyword per run and save `(domain, query, asin, fetched_at, page, position)`. `skipSponsored` removes ads but leaves the source positions unchanged. The output does not provide an exact global organic rank, and capped or filtered runs are incomplete observations.
 
 ### How do I separate sponsored from organic results?
 

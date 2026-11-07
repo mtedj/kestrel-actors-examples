@@ -6,7 +6,7 @@
     "queries": {
       "title": "Search keywords",
       "type": "array",
-      "description": "Search keywords exactly as a shopper types them, e.g. [\"wireless earbuds\", \"cast iron skillet\"]. Each keyword is searched over `pages` result pages (about 20 organic products plus sponsored ones per page, $0.004 per row). Use for \"search results for X\", \"where does ASIN Y rank for X\" (read `position`; organic rank with skipSponsored), \"prices for X\", competitor listings. A keyword with no results costs nothing. Either queries or categories is required.",
+      "description": "Search keywords, e.g. [\"wireless earbuds\"]. Use ONE keyword per run when tracking each keyword: the same ASIN is delivered once across the whole run, so another keyword may lose that observation. For each result retain query, domain, page, position and fetched_at. position is the source page data-index; it is not a global or renumbered organic rank. Each delivered row costs $0.004. Either queries or categories is required.",
       "editor": "stringList",
       "prefill": [
         "wireless earbuds"
@@ -42,7 +42,7 @@
     "maxResultsPerQuery": {
       "title": "Max products per keyword or category",
       "type": "integer",
-      "description": "0 (default) = everything the pages returned. N = only the first N per keyword or category in Amazon's order, e.g. 10 for \"the top 10 results for X\". Applied after skipSponsored and minRating. Rows beyond N are never charged.",
+      "description": "0 (default) = every unique ASIN found within pages. N caps the collected rows per keyword/category BEFORE skipSponsored and minRating; those filters can leave fewer than N paid rows. Collection stops at N, the page limit or a page with no new ASINs. Each ASIN is delivered only once across all queries/categories in the run. At most N × $0.004 per target when N > 0; use callOptions.maxTotalChargeUsd for the MCP dollar ceiling.",
       "editor": "number",
       "minimum": 0,
       "maximum": 2000,
@@ -51,7 +51,7 @@
     "skipSponsored": {
       "title": "Skip sponsored results",
       "type": "boolean",
-      "description": "true = drop sponsored (ad) placements before billing and keep organic results only: the honest keyword rank. Default false (sponsored rows are delivered with sponsored: true, in the slot a shopper sees). Use for \"organic rank\", \"where do we rank excluding ads\".",
+      "description": "true drops rows flagged sponsored before billing; false (default) keeps them. It does NOT renumber position: that remains Amazon's data-index on its page and can have gaps. Use for organic product results, not an exact global organic rank. With maxResultsPerQuery=N, ads are removed from the first N collected rows, so fewer than N may remain. Keep page with position when comparing snapshots.",
       "editor": "checkbox",
       "default": false
     },
@@ -118,5 +118,5 @@
     }
   },
   "required": [],
-  "description": "Amazon search results. Minimal input: {\"queries\": [\"wireless earbuds\"]}: about 20 organic products plus sponsored ones per page at $0.004 each. pages (default 1) × keywords decides the bill; skipSponsored, minRating and maxResultsPerQuery drop rows before billing. Charts: {\"categories\": [\"electronics\"], \"chart\": \"bestsellers\"} gives 30 of the 50 entries per page; for the full Top 100 use kestrel/amazon-best-sellers-scraper."
+  "description": "Amazon search results: {\"queries\":[\"wireless earbuds\"],\"pages\":2,\"maxResultsPerQuery\":20,\"skipSponsored\":true}. Up to $0.08 at $0.004/product; filters can reduce rows. The cap applies BEFORE filters. position is Amazon's page data-index, not a renumbered organic or global rank. For keyword tracking, run one keyword per run: ASINs are deduplicated across all queries. Set callOptions.maxTotalChargeUsd outside input in MCP. Charts here contain partial pages; use the Best Sellers Actor for Top 100."
 }

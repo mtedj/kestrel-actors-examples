@@ -1,6 +1,39 @@
-import { ApifyClient } from 'apify-client';
-const client = new ApifyClient({ token: '<TOKEN>' });
-const run = await client.actor('kestrel/hotel-price-tracker').call({ hotels: ['ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE'], checkIn: '2026-10-09', days: 3, nights: 2, maxPrice: 300 });
-const { items } = await client.dataset(run.defaultDatasetId).listItems();
-const hits = items.filter(r => r.type === 'rate').map(r => `${r.hotel_name} ${r.check_in}: ${r.price} ${r.currency} at ${r.source} ${r.source_url}`);
-console.log(hits.join('\n') || 'nothing under target yet');
+// kestrel/hotel-price-tracker | input checked against build 1.0.7 on 2026-11-07.
+// Install: npm install 'apify-client@^2'
+// Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
+// Change the sample targets before use. APIFY_TOKEN comes from your environment.
+const { ApifyClient } = require('apify-client');
+const input = {
+    "hotels": [
+        "https://www.google.com/travel/hotels/entity/ChkIhLCQwvjO2IYWGg0vZy8xMXE0bTZieDkyEAE"
+    ],
+    "checkIn": "30 days",
+    "days": 1,
+    "nights": 1,
+    "currency": "USD"
+};
+
+async function main() {
+    if (!process.env.APIFY_TOKEN) throw new Error('Set APIFY_TOKEN in your environment.');
+    // Do not automatically repeat a paid start request after a network failure.
+    const client = new ApifyClient({ token: process.env.APIFY_TOKEN, maxRetries: 0 });
+    const run = await client.actor("kestrel/hotel-price-tracker").call(input, {
+        maxTotalChargeUsd: 0.25,
+        timeout: 300, restartOnError: false, log: null,
+    });
+    if (!run) throw new Error('No run returned. Inspect Apify Console before another start.');
+    console.error(`Run ${run.id}: ${run.status}; inspect its status, logs and summary.`);
+    // Paginate and retain all row types, hidden fields and nulls.
+    const dataset = client.dataset(run.defaultDatasetId);
+    let offset = 0;
+    while (true) {
+        const { items } = await dataset.listItems({ offset, limit: 100, clean: false });
+        for (const item of items) console.log(JSON.stringify(item));
+        offset += items.length;
+        if (items.length < 100) break;
+    }
+    if (run.status !== 'SUCCEEDED') {
+        throw new Error('Run did not succeed; exported rows may be partial. Do not retry blindly.');
+    }
+}
+main().catch(error => { console.error(error.message); process.exitCode = 1; });

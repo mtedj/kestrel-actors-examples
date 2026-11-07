@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T13:22:42.346483+00:00",
+  "generatedAt": "2026-11-07T17:53:05.753257+00:00",
   "publisher": "kestrel",
   "actors": [
     {
@@ -9,7 +9,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.4",
-      "verifiedAt": "2026-11-07T13:22:31.285902+00:00",
+      "verifiedAt": "2026-11-07T17:52:54.832928+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -98,7 +98,12 @@
         "calendar",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-prices-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/agoda-reviews-scraper",
@@ -107,7 +112,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.23",
-      "verifiedAt": "2026-11-07T13:22:24.714516+00:00",
+      "verifiedAt": "2026-11-07T17:52:48.594229+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -179,7 +184,12 @@
         "hotel",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/agoda-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/airbnb-occupancy-scraper",
@@ -188,7 +198,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:27.208818+00:00",
+      "verifiedAt": "2026-11-07T17:52:50.543464+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-occupancy-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -267,7 +277,12 @@
         "listing",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-occupancy-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/airbnb-prices-calendar",
@@ -275,8 +290,8 @@
       "description": "Airbnb vacation rental listings and prices by place, URL or ID for your dates and guests. Rows: nightly rate, stay total, rating, bedrooms, Superhost, photos. Optional 24-month availability calendar and reviews. Free details: amenities, house rules, host, price breakdown. No daily calendar prices.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.2.12",
-      "verifiedAt": "2026-11-07T13:22:23.112874+00:00",
+      "buildNumber": "1.2.14",
+      "verifiedAt": "2026-11-07T17:52:46.992675+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-prices-calendar",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -413,7 +428,12 @@
         "review",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-prices-calendar/example.sh"
+      }
     },
     {
       "actor": "kestrel/airbnb-reviews-scraper",
@@ -422,7 +442,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.6",
-      "verifiedAt": "2026-11-07T13:22:23.333283+00:00",
+      "verifiedAt": "2026-11-07T17:52:47.264923+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -480,7 +500,12 @@
         "listing",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/airbnb-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/aliexpress-reviews-scraper",
@@ -489,7 +514,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-07T13:22:33.904335+00:00",
+      "verifiedAt": "2026-11-07T17:52:57.144755+00:00",
       "storeUrl": "https://apify.com/kestrel/aliexpress-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -594,7 +619,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/amazon-best-sellers-scraper",
@@ -602,8 +632,8 @@
       "description": "Amazon Best Sellers and New Releases charts by category in 20 marketplaces, every rank: 2 pages = the Top 100. One row per chart entry: best seller rank (BSR), ASIN, title, price, rating, ratings count, image. Free: minimum rating filter, top-N cap. Track sales rank daily, spot trending products.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.2.2",
-      "verifiedAt": "2026-11-07T13:22:25.953994+00:00",
+      "buildNumber": "1.2.3",
+      "verifiedAt": "2026-11-07T17:52:49.837272+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-best-sellers-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -658,7 +688,12 @@
         "product",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-best-sellers-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/amazon-product-scraper",
@@ -667,7 +702,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-07T13:22:29.873925+00:00",
+      "verifiedAt": "2026-11-07T17:52:53.403504+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-product-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -734,7 +769,12 @@
         "product",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-product-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/amazon-reviews-scraper",
@@ -743,7 +783,7 @@
       "notice": "UNDER_MAINTENANCE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.7.3",
-      "verifiedAt": "2026-11-07T13:22:25.650133+00:00",
+      "verifiedAt": "2026-11-07T17:52:49.129379+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -807,16 +847,21 @@
         "product",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/amazon-search-scraper",
       "title": "Amazon Search Scraper — Search Results, Keyword Rank & Prices",
-      "description": "Amazon search results by keyword in 20 marketplaces, plus Best Sellers and New Releases charts. One row per product: ASIN, title, price, rating, ratings count, image, sponsored flag, position on the page, chart rank. Free filters: skip sponsored (organic rank), min rating, department.",
+      "description": "Amazon search results by keyword in 20 marketplaces, plus Best Sellers and New Releases charts. One row per product: ASIN, title, price, rating, ratings count, image, sponsored flag, position on the page, chart rank. Free filters: skip sponsored (organic results), min rating, department.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.4.2",
-      "verifiedAt": "2026-11-07T13:22:25.482695+00:00",
+      "buildNumber": "1.4.3",
+      "verifiedAt": "2026-11-07T17:52:49.292064+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -870,7 +915,12 @@
         "product",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-search-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/app-store-reviews-scraper",
@@ -879,7 +929,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:28.306437+00:00",
+      "verifiedAt": "2026-11-07T17:52:51.969440+00:00",
       "storeUrl": "https://apify.com/kestrel/app-store-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -952,7 +1002,12 @@
         "app",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/ashby-jobs-scraper",
@@ -961,7 +1016,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:36.044996+00:00",
+      "verifiedAt": "2026-11-07T17:52:59.620605+00:00",
       "storeUrl": "https://apify.com/kestrel/ashby-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1020,7 +1075,12 @@
         "cap_reached"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/ashby-jobs-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/booking-prices-scraper",
@@ -1029,7 +1089,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-07T13:22:30.649235+00:00",
+      "verifiedAt": "2026-11-07T17:52:53.792761+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1133,7 +1193,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-prices-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/booking-reviews-scraper",
@@ -1142,7 +1207,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.1",
-      "verifiedAt": "2026-11-07T13:22:30.048401+00:00",
+      "verifiedAt": "2026-11-07T17:52:53.511651+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1225,7 +1290,12 @@
         "property_type"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/booking-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/clinical-trials-search",
@@ -1234,7 +1304,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-07T13:22:38.341420+00:00",
+      "verifiedAt": "2026-11-07T17:53:01.900722+00:00",
       "storeUrl": "https://apify.com/kestrel/clinical-trials-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1279,7 +1349,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/clinical-trials-search/example.sh"
+      }
     },
     {
       "actor": "kestrel/despegar-hotel-ratings",
@@ -1288,7 +1363,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:32.928012+00:00",
+      "verifiedAt": "2026-11-07T17:52:56.435748+00:00",
       "storeUrl": "https://apify.com/kestrel/despegar-hotel-ratings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1363,7 +1438,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/despegar-hotel-ratings/example.sh"
+      }
     },
     {
       "actor": "kestrel/ebay-search-scraper",
@@ -1372,7 +1452,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-07T13:22:34.621650+00:00",
+      "verifiedAt": "2026-11-07T17:52:58.077203+00:00",
       "storeUrl": "https://apify.com/kestrel/ebay-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1447,7 +1527,12 @@
         "item",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/ebay-search-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/flight-price-tracker",
@@ -1456,7 +1541,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-07T13:22:26.217792+00:00",
+      "verifiedAt": "2026-11-07T17:52:48.714540+00:00",
       "storeUrl": "https://apify.com/kestrel/flight-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1522,7 +1607,12 @@
         "fare",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/flight-price-tracker/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-ads-transparency-scraper",
@@ -1531,7 +1621,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T13:22:36.956361+00:00",
+      "verifiedAt": "2026-11-07T17:53:00.363759+00:00",
       "storeUrl": "https://apify.com/kestrel/google-ads-transparency-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1584,7 +1674,12 @@
         "complete"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-ads-transparency-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-autocomplete-keywords",
@@ -1593,7 +1688,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T13:22:42.346117+00:00",
+      "verifiedAt": "2026-11-07T17:53:05.752544+00:00",
       "storeUrl": "https://apify.com/kestrel/google-autocomplete-keywords",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1632,7 +1727,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-autocomplete-keywords/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-flights-prices",
@@ -1640,8 +1740,8 @@
       "description": "Get Google Flights prices by route, dates, cabin and passengers. One row per itinerary: price, airline, times, duration, stops, layovers, CO2. One-way or round trip; nonstop and business class fares. Sweep dates for a fare calendar. Schedule daily flight price tracking to build price history.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-07T13:22:23.055236+00:00",
+      "buildNumber": "1.1.5",
+      "verifiedAt": "2026-11-07T17:52:46.958553+00:00",
       "storeUrl": "https://apify.com/kestrel/google-flights-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1710,7 +1810,12 @@
         "flight",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-flights-prices/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-hotels-prices",
@@ -1719,7 +1824,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.9.11",
-      "verifiedAt": "2026-11-07T13:22:23.962973+00:00",
+      "verifiedAt": "2026-11-07T17:52:47.476163+00:00",
       "storeUrl": "https://apify.com/kestrel/google-hotels-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1823,7 +1928,12 @@
       ],
       "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/output-schema.json",
       "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example-output.json",
-      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example-output-provenance.json"
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-maps-reviews-scraper",
@@ -1832,7 +1942,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-07T13:22:35.545679+00:00",
+      "verifiedAt": "2026-11-07T17:52:58.825079+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1911,7 +2021,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-maps-scraper",
@@ -1920,7 +2035,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-07T13:22:35.051149+00:00",
+      "verifiedAt": "2026-11-07T17:52:58.700076+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2025,7 +2140,12 @@
         "place",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-maps-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-news",
@@ -2034,7 +2154,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.11",
-      "verifiedAt": "2026-11-07T13:22:36.609112+00:00",
+      "verifiedAt": "2026-11-07T17:52:59.872956+00:00",
       "storeUrl": "https://apify.com/kestrel/google-news",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2082,7 +2202,12 @@
         "currency_warning"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-news/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-patents-search",
@@ -2091,7 +2216,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T13:22:37.122741+00:00",
+      "verifiedAt": "2026-11-07T17:53:00.660504+00:00",
       "storeUrl": "https://apify.com/kestrel/google-patents-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2130,7 +2255,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-patents-search/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-play-reviews-scraper",
@@ -2139,7 +2269,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T13:22:29.331169+00:00",
+      "verifiedAt": "2026-11-07T17:52:52.920048+00:00",
       "storeUrl": "https://apify.com/kestrel/google-play-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2203,7 +2333,12 @@
         "app",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-play-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-search-rank-tracker",
@@ -2212,7 +2347,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:41.405576+00:00",
+      "verifiedAt": "2026-11-07T17:53:05.081355+00:00",
       "storeUrl": "https://apify.com/kestrel/google-search-rank-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2255,7 +2390,12 @@
         "rank_change"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-search-rank-tracker/example.sh"
+      }
     },
     {
       "actor": "kestrel/google-shopping-products",
@@ -2264,7 +2404,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:40.381135+00:00",
+      "verifiedAt": "2026-11-07T17:53:04.024585+00:00",
       "storeUrl": "https://apify.com/kestrel/google-shopping-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2313,7 +2453,12 @@
         "price_change"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/google-shopping-products/example.sh"
+      }
     },
     {
       "actor": "kestrel/greenhouse-jobs-scraper",
@@ -2322,7 +2467,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:35.660052+00:00",
+      "verifiedAt": "2026-11-07T17:52:59.123230+00:00",
       "storeUrl": "https://apify.com/kestrel/greenhouse-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2381,7 +2526,12 @@
         "cap_reached"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/greenhouse-jobs-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/hostelworld-reviews-scraper",
@@ -2390,7 +2540,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T13:22:32.285390+00:00",
+      "verifiedAt": "2026-11-07T17:52:55.439622+00:00",
       "storeUrl": "https://apify.com/kestrel/hostelworld-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2469,7 +2619,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/hostelworld-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/hotel-price-tracker",
@@ -2478,7 +2633,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:26.924984+00:00",
+      "verifiedAt": "2026-11-07T17:52:50.399081+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2540,7 +2695,12 @@
         "rate",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-price-tracker/example.sh"
+      }
     },
     {
       "actor": "kestrel/hotel-rate-parity",
@@ -2548,8 +2708,8 @@
       "description": "Check hotel rate parity on Google Hotels by name or URL. Each stay compares OTA and official site rates: nightly price, cancellation, booking link, cheapest source, spread and direct booking rate. Find parity violations: who undercuts the hotel and by how much. Available rates only; rate shopping.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:26.706086+00:00",
+      "buildNumber": "1.0.10",
+      "verifiedAt": "2026-11-07T17:52:50.318747+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-rate-parity",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2607,7 +2767,12 @@
         "parity",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-rate-parity/example.sh"
+      }
     },
     {
       "actor": "kestrel/hotel-reputation-checker",
@@ -2616,7 +2781,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.2",
-      "verifiedAt": "2026-11-07T13:22:35.001590+00:00",
+      "verifiedAt": "2026-11-07T17:52:58.564848+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-reputation-checker",
       "pricing": {
         "model": "FREE",
@@ -2669,7 +2834,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/hotel-reputation-checker/example.sh"
+      }
     },
     {
       "actor": "kestrel/hrs-reviews-scraper",
@@ -2678,7 +2848,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:28.875196+00:00",
+      "verifiedAt": "2026-11-07T17:52:52.159706+00:00",
       "storeUrl": "https://apify.com/kestrel/hrs-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2744,7 +2914,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/hrs-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/image-to-text-ocr",
@@ -2753,7 +2928,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T13:22:39.396720+00:00",
+      "verifiedAt": "2026-11-07T17:53:03.076645+00:00",
       "storeUrl": "https://apify.com/kestrel/image-to-text-ocr",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2788,7 +2963,12 @@
         "artifact_sha256"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/image-to-text-ocr/example.sh"
+      }
     },
     {
       "actor": "kestrel/indeed-company-reviews",
@@ -2797,7 +2977,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.1",
-      "verifiedAt": "2026-11-07T13:22:33.167921+00:00",
+      "verifiedAt": "2026-11-07T17:52:56.834835+00:00",
       "storeUrl": "https://apify.com/kestrel/indeed-company-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2875,7 +3055,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/indeed-company-reviews/example.sh"
+      }
     },
     {
       "actor": "kestrel/kurzurlaub-reviews-scraper",
@@ -2884,7 +3069,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:28.330181+00:00",
+      "verifiedAt": "2026-11-07T17:52:51.866348+00:00",
       "storeUrl": "https://apify.com/kestrel/kurzurlaub-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2943,7 +3128,12 @@
         "hotel",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/kurzurlaub-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/linkedin-job-search",
@@ -2951,8 +3141,8 @@
       "description": "Search LinkedIn jobs by keyword and location. Each job includes title, company, location, posted date, URL and available salary text. Optional job descriptions and employment types. Filter company, title and date; monitor new jobs. Parsed pages are billed even when no rows match.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:40.901952+00:00",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T17:53:04.490436+00:00",
       "storeUrl": "https://apify.com/kestrel/linkedin-job-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3006,7 +3196,12 @@
         "change"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-job-search/example.sh"
+      }
     },
     {
       "actor": "kestrel/pdf-to-excel-tables",
@@ -3015,7 +3210,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T13:22:39.241079+00:00",
+      "verifiedAt": "2026-11-07T17:53:02.636570+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-excel-tables",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3052,7 +3247,12 @@
         "artifact_sha256"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-excel-tables/example.sh"
+      }
     },
     {
       "actor": "kestrel/pdf-to-markdown-pages",
@@ -3060,8 +3260,8 @@
       "description": "Convert public PDF URLs to Markdown with page text extraction. Each nonempty page includes text, page number, extraction method, dimensions and download URL. Optional English/Chinese OCR for scanned pages without text. Free blank pages and ID/hash exclusions; page ranges. PDF转Markdown、扫描PDF识别。",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:38.884557+00:00",
+      "buildNumber": "1.0.8",
+      "verifiedAt": "2026-11-07T17:53:02.376104+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-markdown-pages",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3100,7 +3300,12 @@
         "ocr_language"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/pdf-to-markdown-pages/example.sh"
+      }
     },
     {
       "actor": "kestrel/pinterest-pin-search",
@@ -3109,7 +3314,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-07T13:22:41.960609+00:00",
+      "verifiedAt": "2026-11-07T17:53:05.550315+00:00",
       "storeUrl": "https://apify.com/kestrel/pinterest-pin-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3158,7 +3363,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/pinterest-pin-search/example.sh"
+      }
     },
     {
       "actor": "kestrel/rss-atom-feed-reader",
@@ -3167,7 +3377,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:40.264266+00:00",
+      "verifiedAt": "2026-11-07T17:53:03.666227+00:00",
       "storeUrl": "https://apify.com/kestrel/rss-atom-feed-reader",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3203,7 +3413,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/rss-atom-feed-reader/example.sh"
+      }
     },
     {
       "actor": "kestrel/sec-company-filings",
@@ -3212,7 +3427,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-07T13:22:38.016172+00:00",
+      "verifiedAt": "2026-11-07T17:53:01.413477+00:00",
       "storeUrl": "https://apify.com/kestrel/sec-company-filings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3251,7 +3466,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/sec-company-filings/example.sh"
+      }
     },
     {
       "actor": "kestrel/shopify-products",
@@ -3260,7 +3480,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.13",
-      "verifiedAt": "2026-11-07T13:22:36.081126+00:00",
+      "verifiedAt": "2026-11-07T17:52:59.732950+00:00",
       "storeUrl": "https://apify.com/kestrel/shopify-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3319,7 +3539,12 @@
         "currency_warning"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/shopify-products/example.sh"
+      }
     },
     {
       "actor": "kestrel/sitemap-url-extractor",
@@ -3328,7 +3553,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:39.884275+00:00",
+      "verifiedAt": "2026-11-07T17:53:03.413415+00:00",
       "storeUrl": "https://apify.com/kestrel/sitemap-url-extractor",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3365,7 +3590,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/sitemap-url-extractor/example.sh"
+      }
     },
     {
       "actor": "kestrel/steam-player-reviews",
@@ -3374,7 +3604,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T13:22:37.656379+00:00",
+      "verifiedAt": "2026-11-07T17:53:00.900374+00:00",
       "storeUrl": "https://apify.com/kestrel/steam-player-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3416,7 +3646,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/steam-player-reviews/example.sh"
+      }
     },
     {
       "actor": "kestrel/trip-com-reviews-scraper",
@@ -3425,7 +3660,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T13:22:27.663954+00:00",
+      "verifiedAt": "2026-11-07T17:52:51.289459+00:00",
       "storeUrl": "https://apify.com/kestrel/trip-com-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3502,7 +3737,12 @@
         "hotel",
         "status"
       ],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/trip-com-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/tripadvisor-restaurant-reviews",
@@ -3511,7 +3751,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-07T13:22:33.113163+00:00",
+      "verifiedAt": "2026-11-07T17:52:56.644876+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-restaurant-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3605,7 +3845,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-restaurant-reviews/example.sh"
+      }
     },
     {
       "actor": "kestrel/tripadvisor-reviews-scraper",
@@ -3614,7 +3859,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-07T13:22:31.243423+00:00",
+      "verifiedAt": "2026-11-07T17:52:54.781172+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3694,16 +3939,21 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/tripadvisor-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/trustpilot-reviews-scraper",
       "title": "Trustpilot Reviews Scraper — Customer Reviews & TrustScore",
-      "description": "Trustpilot customer reviews of any company by domain or URL. One row per review: star rating, title, text, dates, reviewer country, verified, company reply. Free: TrustScore, star histogram, email, phone. Filters before billing: negative reviews, date range, language, keyword, only new reviews.",
+      "description": "Trustpilot customer reviews by domain or URL. Each review: rating, title, text, dates, country, verified label, company reply. Free: TrustScore, star histogram, email, phone. Filter negative reviews, date, language and keyword before billing. Repeat windows can overlap; dedupe review_id downstream.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.1.2",
-      "verifiedAt": "2026-11-07T13:22:31.485608+00:00",
+      "buildNumber": "1.1.3",
+      "verifiedAt": "2026-11-07T17:52:55.188240+00:00",
       "storeUrl": "https://apify.com/kestrel/trustpilot-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3779,7 +4029,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/trustpilot-reviews-scraper/example.sh"
+      }
     },
     {
       "actor": "kestrel/website-email-finder",
@@ -3788,7 +4043,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:38.166103+00:00",
+      "verifiedAt": "2026-11-07T17:53:01.835904+00:00",
       "storeUrl": "https://apify.com/kestrel/website-email-finder",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3819,7 +4074,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-email-finder/example.sh"
+      }
     },
     {
       "actor": "kestrel/website-screenshot-capture",
@@ -3828,7 +4088,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T13:22:39.364501+00:00",
+      "verifiedAt": "2026-11-07T17:53:02.978497+00:00",
       "storeUrl": "https://apify.com/kestrel/website-screenshot-capture",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3865,7 +4125,12 @@
         "artifact_sha256"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/website-screenshot-capture/example.sh"
+      }
     },
     {
       "actor": "kestrel/workday-company-jobs",
@@ -3874,7 +4139,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T13:22:37.129987+00:00",
+      "verifiedAt": "2026-11-07T17:53:00.794612+00:00",
       "storeUrl": "https://apify.com/kestrel/workday-company-jobs",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3914,7 +4179,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/workday-company-jobs/example.sh"
+      }
     },
     {
       "actor": "kestrel/yahoo-finance-price-history",
@@ -3923,7 +4193,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T13:22:41.469199+00:00",
+      "verifiedAt": "2026-11-07T17:53:05.179110+00:00",
       "storeUrl": "https://apify.com/kestrel/yahoo-finance-price-history",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3973,7 +4243,12 @@
         "fetched_at"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/yahoo-finance-price-history/example.sh"
+      }
     },
     {
       "actor": "kestrel/youtube-channel-videos",
@@ -3982,7 +4257,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T13:22:40.466432+00:00",
+      "verifiedAt": "2026-11-07T17:53:04.117609+00:00",
       "storeUrl": "https://apify.com/kestrel/youtube-channel-videos",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4025,7 +4300,12 @@
         "thumbnail_url"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-channel-videos/example.sh"
+      }
     },
     {
       "actor": "kestrel/zillow-property-search",
@@ -4033,8 +4313,8 @@
       "description": "Search Zillow real estate from city URLs: property listings and rental buildings with unit options. Each row has address, price, beds, baths, area, status and URL. Filter price and bedrooms; monitor new listings and price changes. Parsed pages are billed even with no matching rows.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T13:22:41.316186+00:00",
+      "buildNumber": "1.0.9",
+      "verifiedAt": "2026-11-07T17:53:04.733094+00:00",
       "storeUrl": "https://apify.com/kestrel/zillow-property-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4093,7 +4373,12 @@
         "price_change"
       ],
       "outputRowTypes": [],
-      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/output-schema.json"
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/output-schema.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/zillow-property-search/example.sh"
+      }
     }
   ],
   "bundles": [

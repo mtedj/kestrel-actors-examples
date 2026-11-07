@@ -48,16 +48,45 @@ Use it when the user wants flight prices from Google Flights for a route and dat
 | Nonstop only | add `"maxStops": "nonstop"` |
 | Business class fares | add `"seat": "business"` |
 | A family: 2 adults, 2 children | add `"adults": 2, "children": 2` (`price` is the total for all four) |
-| Only the cheapest few, a cheaper run | add `"maxResultsPerSearch": 5` |
+| A few Google-ranked options, a bounded run | add `"maxResultsPerSearch": 5`; these are not necessarily the five cheapest |
 | Which departure day is cheapest, a price calendar | add `"sweepDays": 13` (14 departure days; sort `flight` rows by `price`, or read `cheapest` on each `status` row) |
 | Prices in euros as seen from Germany | add `"currency": "EUR", "market": "de"` |
 | Track a fare daily without editing the input | `"departDate": "30 days"` (and `"returnDate": "37 days"`) with an Apify schedule |
 | Several routes at once | `"routes": ["JFK-LHR", "EWR-LHR", "BOS-LHR"]` (every route is searched for every date) |
 | A spending limit | the Apify run option `maxTotalChargeUsd`; `maxResultsPerSearch` bounds the rows per search |
 
-`maxResultsPerSearch` defaults to `0` = every itinerary Google lists, usually 10 to 35 per route and date, and each one is billed; `sweepDays` multiplies the searches. Set `maxResultsPerSearch` to a small number whenever the user wants "the cheapest fare" rather than the whole market.
+`maxResultsPerSearch` defaults to `0` = every itinerary Google lists, usually 10 to 35 per route and date, and each one is billed; `sweepDays` multiplies the searches. A small `maxResultsPerSearch` buys a ranked sample. For a lowest-fare comparison, sort the delivered observations and state any cap or completeness limit.
 
 Rows come in two types. `flight`: `route`, `depart_date`, `return_date`, `trip`, `rank` (Google's own order, 1 = its top pick), `price` (total for all passengers), `currency`, `round_trip_total`, `airline`, `airlines`, `stops`, `depart_time`, `arrive_time`, `depart_day`, `arrive_day`, `depart_airport`, `arrive_airport`, `duration`, `duration_minutes`, `layovers` (airport, city, minutes), `layover_airports`, `overnight_layover`, `co2_kg`, `emissions_vs_typical`, `google_url`, `fetched_at`. `status`: one per route and date with `searches`, `flights`, `duplicates`, `cheapest`, `status` (`ok`, `no_results`, `error`) and `error`, never charged. A search with no itineraries is a `status` row with `no_results`, not a failed run; a search Google priced in another currency is a `status` row with an error and no billed rows. An input the actor cannot act on (a past date, a route that is not two airport codes, more than 9 passengers) ends the run with the reason on the run card and nothing charged.
+
+### Three cheapest returned options within a hard budget
+
+`maxResultsPerSearch: 3` means Google's first three ranked results. It does not identify the three lowest fares. For a family search, retrieve the parsed results with `0`, then sort delivered `flight` rows numerically by `price` and take three. The price includes all requested passengers; with a return date it is the round-trip quote, not a per-leg or per-person amount.
+
+```json
+{
+  "actor": "kestrel/google-flights-prices",
+  "input": {
+    "routes": ["LIS-LHR"],
+    "departDate": "2026-12-10",
+    "returnDate": "2026-12-17",
+    "adults": 2,
+    "children": 2,
+    "maxStops": "nonstop",
+    "currency": "EUR",
+    "maxResultsPerSearch": 0,
+    "sweepDays": 0
+  },
+  "callOptions": {"maxTotalChargeUsd": 0.10, "timeout": 180},
+  "waitSecs": 30
+}
+```
+
+Use this envelope with `call-actor`; pass only `input` in the Actor editor. Poll a running call with `get-actor-run`, then read the default dataset with `get-dataset-items`. A $0.10 cap funds at most 20 delivered flight events at $0.005 each; status rows are free. If more itineraries are available, the spending cap can truncate Google's ordered results. Inspect `SUMMARY.limit_hit` and status errors. Report the cheapest among the delivered observations; neither a capped response nor Google's page guarantees the market's absolute cheapest bookable fare.
+
+`status.cheapest` is computed from the rows actually delivered for that route/date, not from unseen or unpaid results. For `sweepDays: 6`, group by route, `depart_date`, `return_date`, passenger mix, cabin and currency before taking daily minima: seven departure days mean seven searches and a potentially larger bill. The return shifts by the same number of days. For adult-only one-row-per-day comparisons, use Flight Price Tracker; that Actor has no child/infant input.
+
+Each run creates its own dataset. Persist the observations externally to build history. Repeat absolute dates to monitor a fixed trip; relative dates keep a constant lead time and change the trip on every run. Notifications require a separate schedule/webhook/integration.
 
 ## What does the Google Flights scraper do?
 
@@ -159,7 +188,7 @@ A one-stop itinerary carries its connections:
 
 ## How much does it cost?
 
-Pay per event, one event per **delivered** itinerary row. Searches that return nothing, `status` rows and failed searches are free, and the same itinerary is billed once per run even when two overlapping searches return it — `NYC-LON` and `JFK-LHR` will not bill the same flight twice. `maxResultsPerSearch` caps rows when you only want the cheapest few.
+Pay per event, one event per **delivered** itinerary row. Searches that return nothing, `status` rows and failed searches are free, and the same itinerary is billed once per run even when two overlapping searches return it — `NYC-LON` and `JFK-LHR` will not bill the same flight twice. `maxResultsPerSearch` caps the first rows in Google's order. Sort delivered prices for a lowest-fare comparison; a cap may exclude a cheaper itinerary.
 
 A single route and date is typically 10–35 rows. A 7-day sweep on 3 routes is about 21 searches — a few hundred rows. Apify platform usage for a run that size is a fraction of a cent; the verified runs behind this listing cost $0.0002–$0.0026 each in compute. Exact per-row pricing is on this page's pricing tab.
 
@@ -249,7 +278,7 @@ Three usual reasons: your `market` differs from your browser's country, your `cu
 
 ### How many itineraries does one search return?
 
-Usually 10–35 for a route and date, which is what Google itself lists. `maxResultsPerSearch` caps it lower when you only want the cheapest handful and want the run to cost less.
+Usually 10–35 for a route and date, which is what Google itself lists. `maxResultsPerSearch` can reduce the number delivered and billed, but takes Google's first ranked rows, not necessarily the cheapest. Sort the delivered rows and report any cap or incomplete coverage.
 
 ### Can I use it as an airfare scraper for Skyscanner or Kayak specifically?
 

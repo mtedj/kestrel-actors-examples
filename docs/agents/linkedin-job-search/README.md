@@ -30,13 +30,13 @@ Each source runs sequentially. `maxResultsPerSource` limits delivered matches af
 | Field | Meaning |
 |---|---|
 | `queries` | Search keywords, for example ["data engineer"]. Up to 20 queries. Each query has independent page and delivered-result limits. No separate source account or API key required. |
-| `maxResultsPerSource` | Maximum matching rows per search after filters and monitoring; for example 50. Default 50, maximum 1000. A ceiling, not a guarantee. Deduplicated across the run; Google IDs include domain, query and country; only the first visible result per domain is kept. |
+| `maxResultsPerSource` | Maximum delivered job rows per query, after filters, monitoring and cross-query deduplication. Default 50; maximum 1000. IDs are LinkedIn job IDs, so different jobs at the same company or linkedin.com can all be returned. The same job appearing in several queries is delivered once across the run. Source availability and page caps can leave fewer rows. |
 | `location` | Location passed to LinkedIn public search, for example "United States" or "London". Default United States. Source search can include nearby locations; this is not an exact city filter. |
 | `includeDetails` | true fetches full public description, seniority, employment type, job function and industries when available. Charges $0.004 per delivered enriched job instead of $0.001 for a listing-only job. Failed descriptions are skipped with an error and no job fee. Page fees still apply. |
 | `companies` | Keep company names containing any phrase, case-insensitive, for example ["Microsoft"]. Empty means all. Applied to visible search results before job billing; it does not discover a company directory. |
 | `postedWithinDays` | Keep jobs whose source posted_date is within this number of UTC calendar days, for example 7. Zero disables it. Missing dates do not pass an active filter. This filters inspected pages; it does not guarantee every recent job. |
 | `onlyNew` | true emits job IDs not previously delivered. First run delivers the baseline; use the same monitorKey later. Successful unchanged checks still pay page fees. Default false. |
-| `titleContains` | Keep titles containing any phrase, case-insensitive, for example ["engineer"]. For Zillow, title is building name or address. Empty disables it. Applied before row billing; parsed pages are still billed. |
+| `titleContains` | Keep titles containing any phrase, case-insensitive, for example ["engineer"]. Empty disables it. Applied before row billing; parsed pages are still billed. |
 | `titleExcludes` | Drop titles containing any phrase, case-insensitive, for example ["senior"]. Empty disables it. Filtered rows have no row fee; parsed pages still carry their fee. |
 | `monitorKey` | Persistent history name, for example "daily-watch". Use 1–60 letters, digits, underscores or hyphens. Use the same targets, filters and name for repeat runs. Keeps the latest 50,000 delivered IDs. Do not overlap runs sharing this name. |
 | `excludeIds` | Skip exact output id values. Up to 10,000. Useful for external deduplication; excluded rows have no row fee, but parsed pages are billed. |

@@ -1,8 +1,34 @@
+# kestrel/google-hotels-prices | input checked against build 1.9.11 on 2026-11-07.
+# Install: python -m pip install 'apify-client>=3.1,<4'
+# Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
+# Change the sample targets before use. APIFY_TOKEN comes from your environment.
+import json
+import os
+import sys
+from datetime import timedelta
+from urllib.request import Request, urlopen
 from apify_client import ApifyClient
-client = ApifyClient("<TOKEN>")
-run = client.actor("kestrel/google-hotels-prices").call(run_input={
-    "queries": ["hotels in Lisbon"], "checkIn": "2026-10-03", "checkOut": "2026-10-06", "adults": 2, "currency": "USD", "maxHotels": 40})
-rows = list(client.dataset(run["defaultDatasetId"]).iterate_items())
-hotels = [r for r in rows if r["type"] == "hotel"]; offers = [r for r in rows if r["type"] == "offer"]
-cheapest = min((h for h in hotels if h["nightly"]), key=lambda h: h["nightly"])
-print(cheapest["name"], cheapest["nightly_display"], cheapest["total_display"])
+
+run_input = json.loads("{\n    \"queries\": [\n        \"hotels in Lisbon\"\n    ],\n    \"checkIn\": \"30 days\",\n    \"checkOut\": \"32 days\",\n    \"adults\": 2,\n    \"currency\": \"USD\",\n    \"maxHotels\": 3,\n    \"includeOffers\": true,\n    \"offerLevel\": \"sources\",\n    \"maxOffersPerHotel\": 3\n}")
+token = os.environ["APIFY_TOKEN"]
+# Start once: SDK3 HTTP retries could repeat a start after a lost response.
+request = Request(
+    "https://api.apify.com/v2/acts/kestrel~google-hotels-prices/runs?timeout=300&restartOnError=false&maxTotalChargeUsd=0.25",
+    data=json.dumps(run_input).encode(),
+    headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+    method="POST",
+)
+with urlopen(request, timeout=60) as response:
+    run_id = json.load(response)["data"]["id"]
+print(f"Run {run_id} started; preserve this ID if a later request fails.", file=sys.stderr)
+# SDK retries are safe here: polling and dataset retrieval only read existing data.
+client = ApifyClient(token)
+run = client.run(run_id).wait_for_finish(wait_duration=timedelta(seconds=360))
+if run is None:
+    raise RuntimeError("No run returned. Inspect Apify Console before starting another run.")
+print(f"Run {run.id}: {run.status}; inspect its status, logs and summary.", file=sys.stderr)
+# SDK 3 returns a typed Run object, not a dictionary. Keep all row types and nulls.
+for item in client.dataset(run.default_dataset_id).iterate_items(clean=False):
+    print(json.dumps(item, ensure_ascii=False))
+if run.status != "SUCCEEDED":
+    raise SystemExit("Run did not succeed; exported rows may be partial. Do not retry blindly.")

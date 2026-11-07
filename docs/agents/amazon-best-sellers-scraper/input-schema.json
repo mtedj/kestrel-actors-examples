@@ -6,7 +6,7 @@
     "categories": {
       "title": "Categories",
       "type": "array",
-      "description": "Category slugs, e.g. [\"electronics\", \"kitchen\", \"books\", \"toys-and-games\"]: the segment after /gp/bestsellers/ in a Best Sellers URL; nested paths copied from a chart URL work. Each category delivers every rank of the pages requested (default 2 pages = the Top 100) at $0.004 per entry. Use for \"top 100 in X\", \"best selling X\", \"what is trending in X\" (compare two daily runs). Slugs differ between marketplaces: copy it from that marketplace's chart URL. A slug Amazon does not know costs nothing.",
+      "description": "Category slugs from the marketplace chart URL, e.g. [\"electronics\"] or [\"kitchen\"]. Use ONE category per run when every chart membership/rank matters: the same ASIN appears only once across all categories in one run. Multiple categories are useful for a deduplicated product list, not complete independent charts. Default 2 pages with fillRanks=true requests Top 100 per category at up to $0.40; filters, source issues and spending caps can reduce coverage. Unknown slugs yield free status rows.",
       "editor": "stringList",
       "prefill": [
         "electronics"
@@ -49,7 +49,7 @@
     "maxResultsPerCategory": {
       "title": "Max products per category",
       "type": "integer",
-      "description": "0 (default) = every entry on the pages requested. N = the top N only, e.g. 10 for \"top 10 in electronics\": the main cost control, and lazy-loaded entries are fetched only for the ranks you asked for. Entries beyond N are never charged.",
+      "description": "0 (default) keeps all collected entries within pages. N keeps the first N by chart rank BEFORE minRating and run-wide ASIN deduplication, so fewer can be delivered. It does not refill removed rows. For Top 100 use 100 (or 0), pages 2 and fillRanks=true with minRating 0. One category per run preserves independent chart memberships. At most N × $0.004 per category for N>0; set the separate run monetary cap as well.",
       "editor": "number",
       "minimum": 0,
       "maximum": 2000,
@@ -103,5 +103,5 @@
   "required": [
     "categories"
   ],
-  "description": "Amazon Best Sellers charts. Minimal input: {\"categories\": [\"electronics\"]} = the Top 100 of that category (pages defaults to 2, 50 ranks per page) at $0.004 per entry, $0.40. New Releases: add \"chart\": \"new_releases\". maxResultsPerCategory and minRating cut rows before billing."
+  "description": "Amazon Best Sellers/New Releases charts. For independent category rank histories, use ONE category per run: ASINs are delivered once across all categories in a run. Example: {\"categories\":[\"electronics\"],\"pages\":2,\"fillRanks\":true,\"maxResultsPerCategory\":100}. Up to 100 rows × $0.004 = $0.40. Keep domain, chart, category, asin, rank and fetched_at. Caps apply before minRating. Inspect status/coverage; no sales-unit estimate. Set callOptions.maxTotalChargeUsd outside input in MCP."
 }

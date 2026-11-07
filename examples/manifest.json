@@ -1,0 +1,746 @@
+{
+  "generatedAt": "2026-11-07T17:53:05.753257+00:00",
+  "actors": [
+    {
+      "actor": "kestrel/agoda-prices-scraper",
+      "buildId": "fFeFWHAAlgpJu9Cr1",
+      "buildNumber": "1.1.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "agoda-prices-scraper.py",
+        "agoda-prices-scraper.js",
+        "agoda-prices-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/agoda-reviews-scraper",
+      "buildId": "iUBDOCfSgh1oRqLni",
+      "buildNumber": "1.0.23",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "agoda-reviews-scraper.py",
+        "agoda-reviews-scraper.js",
+        "agoda-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/airbnb-occupancy-scraper",
+      "buildId": "1kjrf2ER4n4A8SnNC",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "airbnb-occupancy-scraper.py",
+        "airbnb-occupancy-scraper.js",
+        "airbnb-occupancy-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/airbnb-prices-calendar",
+      "buildId": "lJp3EWB3wXYzEou0R",
+      "buildNumber": "1.2.14",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "airbnb-prices-calendar.py",
+        "airbnb-prices-calendar.js",
+        "airbnb-prices-calendar.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/airbnb-reviews-scraper",
+      "buildId": "ERyi8qgew79Ld0REX",
+      "buildNumber": "1.2.6",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "airbnb-reviews-scraper.py",
+        "airbnb-reviews-scraper.js",
+        "airbnb-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/aliexpress-reviews-scraper",
+      "buildId": "ROzGjRoqL9w43blCR",
+      "buildNumber": "1.1.9",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "aliexpress-reviews-scraper.py",
+        "aliexpress-reviews-scraper.js",
+        "aliexpress-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/amazon-best-sellers-scraper",
+      "buildId": "ZN7SYrDItYVzvzEAP",
+      "buildNumber": "1.2.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "amazon-best-sellers-scraper.py",
+        "amazon-best-sellers-scraper.js",
+        "amazon-best-sellers-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/amazon-product-scraper",
+      "buildId": "b4fiBxsu8cH7mEYID",
+      "buildNumber": "1.3.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "amazon-product-scraper.py",
+        "amazon-product-scraper.js",
+        "amazon-product-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/amazon-reviews-scraper",
+      "buildId": "i3PoO3ts8q3DelZOW",
+      "buildNumber": "1.7.3",
+      "notice": "UNDER_MAINTENANCE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "amazon-reviews-scraper.py",
+        "amazon-reviews-scraper.js",
+        "amazon-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/amazon-search-scraper",
+      "buildId": "u9tDai9c12h0XEcEO",
+      "buildNumber": "1.4.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "amazon-search-scraper.py",
+        "amazon-search-scraper.js",
+        "amazon-search-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/app-store-reviews-scraper",
+      "buildId": "z9GYFk078hqnSt6Ph",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "app-store-reviews-scraper.py",
+        "app-store-reviews-scraper.js",
+        "app-store-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/ashby-jobs-scraper",
+      "buildId": "fNBVbn3OkqFxrfhNI",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "ashby-jobs-scraper.py",
+        "ashby-jobs-scraper.js",
+        "ashby-jobs-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/booking-prices-scraper",
+      "buildId": "akBxKlnRgx0ViLNPf",
+      "buildNumber": "1.2.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "booking-prices-scraper.py",
+        "booking-prices-scraper.js",
+        "booking-prices-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/booking-reviews-scraper",
+      "buildId": "zml0fjxGxD6OGzdu6",
+      "buildNumber": "1.3.1",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "booking-reviews-scraper.py",
+        "booking-reviews-scraper.js",
+        "booking-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/clinical-trials-search",
+      "buildId": "FMTic5ePlk9rly1c0",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "clinical-trials-search.py",
+        "clinical-trials-search.js",
+        "clinical-trials-search.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/despegar-hotel-ratings",
+      "buildId": "p8Irf8wKYhKhRpXhn",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "despegar-hotel-ratings.py",
+        "despegar-hotel-ratings.js",
+        "despegar-hotel-ratings.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/ebay-search-scraper",
+      "buildId": "xjvMwYdqXdhzeuVXk",
+      "buildNumber": "1.1.9",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "ebay-search-scraper.py",
+        "ebay-search-scraper.js",
+        "ebay-search-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/flight-price-tracker",
+      "buildId": "Vkd9OIWa6fpgzBYFW",
+      "buildNumber": "1.1.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "flight-price-tracker.py",
+        "flight-price-tracker.js",
+        "flight-price-tracker.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-ads-transparency-scraper",
+      "buildId": "9pVx4iSqe4sq0K5CW",
+      "buildNumber": "1.0.9",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-ads-transparency-scraper.py",
+        "google-ads-transparency-scraper.js",
+        "google-ads-transparency-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-autocomplete-keywords",
+      "buildId": "wzVLcOsgQXFMkJFfc",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-autocomplete-keywords.py",
+        "google-autocomplete-keywords.js",
+        "google-autocomplete-keywords.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-flights-prices",
+      "buildId": "GZbuTGudhYwVcwKtv",
+      "buildNumber": "1.1.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-flights-prices.py",
+        "google-flights-prices.js",
+        "google-flights-prices.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-hotels-prices",
+      "buildId": "qhXdYDigjvfncx1gu",
+      "buildNumber": "1.9.11",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-hotels-prices.py",
+        "google-hotels-prices.js",
+        "google-hotels-prices.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-maps-reviews-scraper",
+      "buildId": "uNi6rYKkNsVckLsHs",
+      "buildNumber": "1.0.10",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-maps-reviews-scraper.py",
+        "google-maps-reviews-scraper.js",
+        "google-maps-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-maps-scraper",
+      "buildId": "vtKUU2doVaDV6Zp14",
+      "buildNumber": "1.3.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-maps-scraper.py",
+        "google-maps-scraper.js",
+        "google-maps-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-news",
+      "buildId": "Wu0G4ovXbac2PPbSG",
+      "buildNumber": "1.0.11",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-news.py",
+        "google-news.js",
+        "google-news.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-patents-search",
+      "buildId": "SgNQbHT9DUduYE9li",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-patents-search.py",
+        "google-patents-search.js",
+        "google-patents-search.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-play-reviews-scraper",
+      "buildId": "udbqSwnHhjJXb0p6N",
+      "buildNumber": "1.0.6",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-play-reviews-scraper.py",
+        "google-play-reviews-scraper.js",
+        "google-play-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-search-rank-tracker",
+      "buildId": "lOeTta7ZMqq3Xqob3",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-search-rank-tracker.py",
+        "google-search-rank-tracker.js",
+        "google-search-rank-tracker.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-shopping-products",
+      "buildId": "texV0vbzrE2FQMUTe",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-shopping-products.py",
+        "google-shopping-products.js",
+        "google-shopping-products.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/greenhouse-jobs-scraper",
+      "buildId": "cx7uHM0Jx7h5BaMJO",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "greenhouse-jobs-scraper.py",
+        "greenhouse-jobs-scraper.js",
+        "greenhouse-jobs-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/hostelworld-reviews-scraper",
+      "buildId": "VMUwhMhok2t88Rpio",
+      "buildNumber": "1.0.9",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "hostelworld-reviews-scraper.py",
+        "hostelworld-reviews-scraper.js",
+        "hostelworld-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/hotel-price-tracker",
+      "buildId": "teDrtkfYgRGucD8mT",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "hotel-price-tracker.py",
+        "hotel-price-tracker.js",
+        "hotel-price-tracker.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/hotel-rate-parity",
+      "buildId": "WeRqZbYvi1oFhTTi6",
+      "buildNumber": "1.0.10",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "hotel-rate-parity.py",
+        "hotel-rate-parity.js",
+        "hotel-rate-parity.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/hotel-reputation-checker",
+      "buildId": "bMbpHSQTeP8fetxex",
+      "buildNumber": "1.3.2",
+      "notice": "NONE",
+      "pricingModel": "FREE",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "hotel-reputation-checker.py",
+        "hotel-reputation-checker.js",
+        "hotel-reputation-checker.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/hrs-reviews-scraper",
+      "buildId": "O5wM9Csz1L1Tl65qw",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "hrs-reviews-scraper.py",
+        "hrs-reviews-scraper.js",
+        "hrs-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/image-to-text-ocr",
+      "buildId": "weLtceizLOnx4LKqq",
+      "buildNumber": "1.0.6",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "image-to-text-ocr.py",
+        "image-to-text-ocr.js",
+        "image-to-text-ocr.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/indeed-company-reviews",
+      "buildId": "7aJn40eyQb2TS6aZJ",
+      "buildNumber": "1.2.1",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "indeed-company-reviews.py",
+        "indeed-company-reviews.js",
+        "indeed-company-reviews.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/kurzurlaub-reviews-scraper",
+      "buildId": "53qh07ksOMgEshyvV",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "kurzurlaub-reviews-scraper.py",
+        "kurzurlaub-reviews-scraper.js",
+        "kurzurlaub-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/linkedin-job-search",
+      "buildId": "qks37QpAAZyZ7fvD1",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "linkedin-job-search.py",
+        "linkedin-job-search.js",
+        "linkedin-job-search.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/pdf-to-excel-tables",
+      "buildId": "St4wCdkrbm05dVE29",
+      "buildNumber": "1.0.6",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "pdf-to-excel-tables.py",
+        "pdf-to-excel-tables.js",
+        "pdf-to-excel-tables.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/pdf-to-markdown-pages",
+      "buildId": "pflMSAUO587bkb3X3",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "pdf-to-markdown-pages.py",
+        "pdf-to-markdown-pages.js",
+        "pdf-to-markdown-pages.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/pinterest-pin-search",
+      "buildId": "LugMR8FP6DlxEDSMT",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "pinterest-pin-search.py",
+        "pinterest-pin-search.js",
+        "pinterest-pin-search.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/rss-atom-feed-reader",
+      "buildId": "QyfGt4FoRHxqXh9c4",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "rss-atom-feed-reader.py",
+        "rss-atom-feed-reader.js",
+        "rss-atom-feed-reader.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/sec-company-filings",
+      "buildId": "2mXlhDppge4tmEJXI",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "sec-company-filings.py",
+        "sec-company-filings.js",
+        "sec-company-filings.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/shopify-products",
+      "buildId": "AAc4eexFln69aXwiB",
+      "buildNumber": "1.0.13",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "shopify-products.py",
+        "shopify-products.js",
+        "shopify-products.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/sitemap-url-extractor",
+      "buildId": "tDtnlgka64XwSTtB5",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "sitemap-url-extractor.py",
+        "sitemap-url-extractor.js",
+        "sitemap-url-extractor.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/steam-player-reviews",
+      "buildId": "9sM5SPjb9YFyyhtuu",
+      "buildNumber": "1.0.6",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "steam-player-reviews.py",
+        "steam-player-reviews.js",
+        "steam-player-reviews.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/trip-com-reviews-scraper",
+      "buildId": "xOpRwHN5lL70O1D1G",
+      "buildNumber": "1.0.9",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "trip-com-reviews-scraper.py",
+        "trip-com-reviews-scraper.js",
+        "trip-com-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/tripadvisor-restaurant-reviews",
+      "buildId": "TrQyTklQjQ7iBHhTb",
+      "buildNumber": "1.2.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "tripadvisor-restaurant-reviews.py",
+        "tripadvisor-restaurant-reviews.js",
+        "tripadvisor-restaurant-reviews.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/tripadvisor-reviews-scraper",
+      "buildId": "UX0EWWDCPQpl5xyor",
+      "buildNumber": "1.2.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "tripadvisor-reviews-scraper.py",
+        "tripadvisor-reviews-scraper.js",
+        "tripadvisor-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/trustpilot-reviews-scraper",
+      "buildId": "pUjOPzHDFJvfIEZkT",
+      "buildNumber": "1.1.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "trustpilot-reviews-scraper.py",
+        "trustpilot-reviews-scraper.js",
+        "trustpilot-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/website-email-finder",
+      "buildId": "a0yT4vYulSXmydjGV",
+      "buildNumber": "1.0.8",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "website-email-finder.py",
+        "website-email-finder.js",
+        "website-email-finder.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/website-screenshot-capture",
+      "buildId": "fALEhVsLKa45PYDWc",
+      "buildNumber": "1.0.7",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "website-screenshot-capture.py",
+        "website-screenshot-capture.js",
+        "website-screenshot-capture.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/workday-company-jobs",
+      "buildId": "okprIaRGcNWWERsO0",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "workday-company-jobs.py",
+        "workday-company-jobs.js",
+        "workday-company-jobs.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/yahoo-finance-price-history",
+      "buildId": "oTqrcjWTeDw1p5uyX",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "yahoo-finance-price-history.py",
+        "yahoo-finance-price-history.js",
+        "yahoo-finance-price-history.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/youtube-channel-videos",
+      "buildId": "RTgzaUIbK4sDHcZUk",
+      "buildNumber": "1.0.6",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "youtube-channel-videos.py",
+        "youtube-channel-videos.js",
+        "youtube-channel-videos.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/zillow-property-search",
+      "buildId": "8Fohnlnf0JIkjQMzC",
+      "buildNumber": "1.0.9",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "zillow-property-search.py",
+        "zillow-property-search.js",
+        "zillow-property-search.sh"
+      ]
+    }
+  ]
+}

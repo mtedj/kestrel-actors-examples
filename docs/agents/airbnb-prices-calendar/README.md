@@ -80,7 +80,7 @@ Every listing row carries `price_total` (what Airbnb displays for the stay after
 
 ## Airbnb availability calendar and Airbnb occupancy data
 
-`calendarMonths: 12` adds a calendar row per listing: 365 days with availability flags and minimum/maximum nights, and `occupancy_30`, `occupancy_90`, `occupancy_365` (share of nights not available — blocked or booked, the calendar does not tell which), `available_90`, `next_available`, `min_nights_typical`. This is the Airbnb availability API people search for and the company does not offer: an Airbnb calendar API you call with listing ids. Run it on a schedule and the dataset becomes an occupancy and price history for a market or a portfolio: the short term rental data API investors and revenue managers otherwise buy as AirDNA-style subscriptions, at a few cents per listing. Airbnb occupancy rate by city, by neighbourhood or by bedroom count is a group-by on the calendar rows.
+`calendarMonths: 12` adds a calendar row per listing: 365 days with availability flags and minimum/maximum nights, and `occupancy_30`, `occupancy_90`, `occupancy_365` (share of nights not available — blocked or booked, the calendar does not tell which), `available_90`, `next_available`, `min_nights_typical`. This is the Airbnb availability API people search for and the company does not offer: an Airbnb calendar API you call with listing ids. Run it on a schedule and save each run's dataset externally to build an availability and price history for a market or a portfolio: the short term rental data API investors and revenue managers otherwise buy as AirDNA-style subscriptions, at a few cents per listing. Airbnb occupancy rate by city, by neighbourhood or by bedroom count is a group-by on the calendar rows.
 
 ## Does Airbnb have an API? Airbnb API vs Airbnb scraper vs AirDNA alternative
 
@@ -99,15 +99,50 @@ So as an AirDNA alternative it is not a dashboard: it is the Airbnb data API lay
 
 ## Airbnb price tracker and Airbnb price history
 
-Schedule the actor with relative dates (`"checkIn": "30 days"`) and every run prices the same stay window again. The dataset grows into an Airbnb price history per listing — `price_total` and `price_nightly_effective` by `fetched_at` — and, with `calendarMonths`, an occupancy history. Connect a run-finished webhook to n8n, Make or Zapier for an Airbnb price tracker that alerts on drops in a shortlist, on a competitor undercutting you, or on new availability. For a portfolio, put your listing ids in `listingIds` and your competitive set in a second run; each listing and stay is billed once.
+Schedule the actor with relative dates (`"checkIn": "30 days"`) and every run prices a stay at the same lead time. Save each run's dataset externally to build an Airbnb price history per listing — `price_total` and `price_nightly_effective` by `fetched_at` — and, with `calendarMonths`, an availability history. Connect a run-finished webhook to n8n, Make or Zapier for an Airbnb price tracker that alerts on drops in a shortlist, on a competitor undercutting you, or on new availability. For a portfolio, put your listing ids in `listingIds` and your competitive set in a second run; each listing is delivered and billed at most once per run, even across overlapping stays or guest counts.
 
 ## Airbnb market data: comps, revenue and occupancy for investors
 
-To scrape Airbnb listings for a market — a city, a neighbourhood, a coastline — combine a place search with `calendarMonths`: the listing rows give the price distribution for the dates (use `price_nightly_effective` for like-for-like nightly figures), the calendar rows give occupancy for the next 30, 90 and 365 nights per listing, and `rating`, `reviews_count`, `bedrooms`, `room_type` and coordinates let you segment. Airbnb comps for an underwriting: search the neighbourhood with the same bedrooms and room type, take the median `price_nightly_effective` and `occupancy_90`. An Airbnb revenue calculator follows: median nightly price × occupied nights × 12. A search is capped at about 280 listings, so cover a large market with price bands or map bounds in pasted URLs; the status rows tell you how many pages each search returned and which place was resolved.
+To scrape Airbnb listings for a market — a city, a neighbourhood, a coastline — combine a place search with `calendarMonths`: the listing rows give the price distribution for the dates (use `price_nightly_effective` for like-for-like nightly figures), the calendar rows give occupancy for the next 30, 90 and 365 nights per listing, and `rating`, `reviews_count`, `bedrooms`, `room_type` and coordinates let you segment. Airbnb comps for an underwriting: search the neighbourhood with the same bedrooms and room type, take the median `price_nightly_effective` and `occupancy_90`. A displayed-price × unavailable-nights calculation is a scenario, not observed revenue: blocked nights and sampled stay prices cannot establish bookings or realized earnings. A search is capped at about 280 listings, so cover a large market with price bands or map bounds in pasted URLs; the status rows tell you how many pages each search returned and which place was resolved.
 
 ## Airbnb reviews scraper
 
 `maxReviewsPerListing` adds review rows per listing (a reviews scraper without a separate run) — newest first by default, or highest, lowest or most relevant — with the rating, text (and the site's translation when it exists), date, reviewer first name and location, the host's reply and the stay-type tag. `reviews_total` carries the listing's total review count so you know how much you sampled. To scrape Airbnb reviews for one property, give its id in `listingIds` with `maxReviewsPerListing: 200`.
+
+### Search URL context and overlapping searches
+
+A search URL keeps its embedded stay and guest filters. Explicit `checkIn` and `checkOut` inputs override its dates. URL guest values remain authoritative for that search; when absent, its existing URL-parser defaults apply (2 adults, no children, infants or pets). Listing and status dates and optional detail-price requests now use that same effective search context.
+
+A listing is delivered and billed at most once per run, including its calendar/review add-ons, even when overlapping searches request different stays or parties. The first processed occurrence wins; concurrent searches need not finish in input order. Use separate runs to compare the same listing across distinct stays or guest counts, and inspect the emitted stay/guest fields.
+
+### Join a stay quote to an availability calendar
+
+This call asks for five Lisbon listings for one three-night stay, with amenities and two calendar months of availability. It costs at most $0.045 for five priced listings ($0.025) plus ten calendar-month events ($0.020), before the $0.05 run cap. It asks for no reviews.
+
+```json
+{
+  "actor": "kestrel/airbnb-prices-calendar",
+  "input": {
+    "locationQueries": ["Lisbon, Portugal"],
+    "checkIn": "2026-12-10",
+    "checkOut": "2026-12-13",
+    "adults": 2,
+    "currency": "EUR",
+    "maxListingsPerQuery": 5,
+    "includeDetails": true,
+    "calendarMonths": 2,
+    "maxReviewsPerListing": 0
+  },
+  "callOptions": {"maxTotalChargeUsd": 0.05, "timeout": 180},
+  "waitSecs": 30
+}
+```
+
+This is a `call-actor` envelope; only `input` belongs in the Actor input editor. If it is still running, poll `get-actor-run`, then fetch the default dataset with `get-dataset-items`. Group rows by `type`. Join each `calendar` row to its `listing` row using `id`; a two-month calendar is one dataset row containing `days[]`, but two billing events. Five complete results can therefore be five listing rows, five calendar rows and one free status row. A missing calendar is not zero availability: check `calendar_errors`, returned `months`, and `SUMMARY.limit_hit`.
+
+`listing.price_total` and `price_nightly_effective` describe the quoted stay. Calendar months start in the current month, independently of `checkIn`; daily calendar entries supply availability/stay rules, not nightly prices. Do not spread the stay price across all calendar dates or equate unavailable days with confirmed bookings. `occupancy_*` uses the returned days in its named window; check `nights_30`, `nights_90` or `nights_365` before comparing differently sized calendar samples.
+
+To monitor this same December stay, keep its absolute dates and save each run's dataset with `fetched_at`. Relative dates such as `30 days` / `33 days` produce a moving three-night stay, not the same check-in dates. Availability-based revenue calculations are scenarios, not observed earnings.
 
 ## Input
 
@@ -179,7 +214,7 @@ The Console's **Listings**, **Calendar**, **Reviews** and **Run status** tabs sh
 
 ## How much does it cost?
 
-Pay per row: a `listing` row that carries a price, each `calendar_month` (a 12-month calendar row = 12 events), each `review` row. Listings that could not be priced, unknown places, empty searches and `status` rows are free, and a listing and stay is billed once per run even if two searches return it. Worked examples: 80 Lisbon listings with prices for a weekend = 80 listing events; the same 80 with a 6-month calendar = 80 + 480 calendar-month events; your 10 listings with details, 12-month calendars and 20 reviews each = 10 + 120 + 200 events. Platform compute for those runs is a fraction of a cent. Exact per-event prices are on this page's pricing tab.
+Pay per row: a `listing` row that carries a price, each `calendar_month` (a 12-month calendar row = 12 events), each `review` row. Listings that could not be priced, unknown places, empty searches and `status` rows are free, and each listing is delivered and billed at most once per run even across overlapping stays or guest counts. Worked examples: 80 Lisbon listings with prices for a weekend = 80 listing events; the same 80 with a 6-month calendar = 80 + 480 calendar-month events; your 10 listings with details, 12-month calendars and 20 reviews each = 10 + 120 + 200 events. Platform compute for those runs is a fraction of a cent. Exact per-event prices are on this page's pricing tab.
 
 ## Airbnb scraper in Python, JavaScript, curl, n8n, Make or an AI agent
 
@@ -246,7 +281,7 @@ No. It is the share of nights not available; hosts also block nights. Over a mar
 
 ### Can I track Airbnb prices and availability over time?
 
-Yes. Schedule the actor with relative dates; every run appends dated rows (`fetched_at`), and the calendar summary gives occupancy per run.
+Yes. Schedule the actor and save each run's dated rows (`fetched_at`) externally; each run has a separate dataset. Relative dates observe a moving stay at the same lead time; fixed dates observe the same stay. Calendar summaries report unavailability, including both blocked and booked nights.
 
 ### Can I scrape Airbnb host emails or phone numbers?
 
