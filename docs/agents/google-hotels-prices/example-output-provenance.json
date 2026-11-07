@@ -1,0 +1,28 @@
+{
+  "actor": "kestrel/google-hotels-prices",
+  "observedAt": "2026-11-07T12:56:49.975Z",
+  "buildNumber": "1.9.10",
+  "input": {
+    "hotelNames": [
+      "Hyatt Regency Dubai"
+    ],
+    "checkIn": "2026-12-10",
+    "checkOut": "2026-12-13",
+    "adults": 2,
+    "currency": "USD",
+    "includeOffers": true,
+    "offerLevel": "sources",
+    "maxHotels": 1,
+    "maxOffersPerHotel": 5,
+    "sessions": 1
+  },
+  "maxTotalChargeUsd": 0.05,
+  "rows": {
+    "hotel": 1,
+    "offer": 5,
+    "status": 1
+  },
+  "completeCapturedDataset": true,
+  "source": "Actual owner validation run; unchanged public hotel and booking-source rows. No customer inputs or credentials.",
+  "interpretation": "Historical example, not a live quote. Five-offer cap can omit other sources and the official site. Zero offer_errors in this run. Optional fields may be null."
+}
