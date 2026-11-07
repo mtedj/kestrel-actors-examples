@@ -54,6 +54,37 @@ Use it when the task is to **read the reviews of known places** — a restaurant
 | "by place id" / "by CID" / "this short link" | `{"places": ["ChIJD3uTd9hx5kcR1IQvGfr8dbk"]}` — a place id, CID, feature id, place URL, short link or search URL all go in `places` |
 | "rating and review count only" | `{"places": ["…"], "maxReviewsPerPlace": 1}` — the free `place` row carries the rating, the listed total and the histogram; one review is billed |
 
+### Latest 20 one- or two-star reviews, then monitor new matches
+
+For the Louvre in Paris, this first call keeps reviews without replies and includes `owner_reply_text` / `owner_reply_at` when present. `hasOwnerReply: "yes"` would instead exclude reviews with no reply. Use newest order for the latest matching reviews; do not add an arbitrary date cutoff.
+
+```json
+{
+  "actor": "kestrel/google-maps-reviews-scraper",
+  "input": {
+    "places": ["ChIJD3uTd9hx5kcR1IQvGfr8dbk"],
+    "maxReviewsPerPlace": 20,
+    "sort": "newest",
+    "minStars": 1,
+    "maxStars": 2,
+    "hasOwnerReply": "any",
+    "onlyNew": true,
+    "monitorKey": "louvre-negative-daily",
+    "includeEdited": false
+  },
+  "callOptions": {"maxTotalChargeUsd": 0.05, "timeout": 180},
+  "waitSecs": 30
+}
+```
+
+This is a `call-actor` envelope; only its `input` object goes in the Actor's input editor. Twenty delivered reviews cost $0.02 at $0.001 each. The place and status rows are free, so a successful first run can contain 22 dataset rows. If the call is still running, poll `get-actor-run`; then fetch its default dataset and select `type: "review"`. Check `place_id`, the status row and `SUMMARY` before accepting results.
+
+Set `onlyNew: true` on the **first** run and reuse the same key, resolved place and filters for repeats. A run with `onlyNew: false` does not register its output. The memory uses the resolved place's CID, so replacing a name with the verified ID of that same place preserves its memory. Use a distinct key for a different feed/filter set and avoid overlapping runs of one key. This stores delivery state, not a secret or an externally supplied processed-ID list.
+
+Monitoring suppresses remembered IDs and older backlog; it is **not pagination through older matching reviews**. If a cap leaves older matches behind, repeating `onlyNew` does not guarantee a complete catch-up. Use a separate historical/date-range workflow for that purpose. Keep the original dataset until downstream processing succeeds and retry from it if processing fails: a rerun can suppress rows the Actor already delivered. Edits can be delivered again only with `includeEdited: true`; this does not promise detection of a newly added owner reply. State retains at most 20,000 delivered review IDs per key/place. Review dates are in `published_at` and `updated_at`; Google's newest feed is ordered by modification time.
+
+Verified on 2026-11-07: the first bounded call returned 20 matching reviews with 20 charged events; the immediate same-key repeat returned zero reviews with zero charged events. All 20 had date and nullable reply fields; none had an owner reply. This validates this monitoring example, not permanent source coverage.
+
 What comes back: rows with `type: "review"` (`review_id`, `place_id`, `place_name`, `stars`, `text`, `text_translated`, `original_language`, `published_at`, `updated_at`, `edited`, `likes`, `photos`, `owner_reply_text`, `owner_reply_at`, `reviewer_name`, `reviewer_url`, `reviewer_is_local_guide`, `sub_ratings`, `visit_details`), one free `type: "place"` row per place (`rating`, `reviews_total`, `histogram`, `reviews_read`, `reviews_delivered`, `completeness`, `stopped_by`, `trend`) and one free `type: "status"` row per input line (`status` = `ok`, `no_reviews`, `not_found`, `duplicate` or `error`, plus `found`, `filtered`, `filtered_by`, `already_seen`, `charged`). An unknown place, a place with no reviews and a date range nothing falls in are all successful runs that cost $0 — read the status row to explain an empty result instead of guessing. Charged review events always equal delivered review rows. The text comes back in its original language or translated, so reseñas de Google Maps, Google Bewertungen (Rezensionen), avis Google, recensioni Google and avaliações do Google are all the same call.
 
 ## What does the Google Maps Reviews Scraper do?
@@ -103,7 +134,7 @@ Dates are compared with `published_at`, the moment the review was first posted. 
 For agencies, multi-location brands and anyone who wants new Google reviews in Slack — Google reviews for multiple locations is exactly what this mode is for: turn on `onlyNew` and put the run on a schedule.
 
 - The first run delivers up to `maxReviewsPerPlace` reviews per place and remembers them.
-- Every later run delivers — and bills — **only reviews it has not delivered before**, then stops at the first page of already-delivered reviews. For most places that is a single request.
+- Later runs deliver and bill matching reviews newer than the remembered boundary, suppress remembered IDs, and stop at already-delivered/older pages. This monitors new activity; it does not page through older matches omitted by a prior cap.
 - A run that finds nothing new delivers 0 rows and charges **$0**.
 - With `includeEdited`, a review whose author edited it after you received it is delivered again (`edited` = true, with both dates).
 - `monitorKey` names the memory. Runs with the same key share it; give each separate feed — a client, a channel, a test — its own key.

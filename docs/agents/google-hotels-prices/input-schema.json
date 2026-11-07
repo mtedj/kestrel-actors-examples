@@ -101,7 +101,7 @@
     "includeOffers": {
       "title": "Fetch every source's rates",
       "type": "boolean",
-      "description": "true (DEFAULT) adds booking-site offer rows at $0.002 each, plus $0.004 per hotel. Observed sources sample: average 18 offers/hotel, range 4–36; not a cap. maxOffersPerHotel=N>0 caps each hotel/stay at $0.004+N×$0.002; 0 leaves offer count uncapped. Set false for one lowest price per hotel, calendars or plain tracking without an OTA breakdown. Keep true for OTA comparison/rate parity. official:true identifies an official-site offer only when Google lists it.",
+      "description": "true (DEFAULT) adds separate type=\"offer\" rows at $0.002 each, plus $0.004/hotel. Offers: source, official, nightly, total, currency, link, partner_url; join by entity_id + check_in + check_out. Set false for one lowest price per hotel without OTA rates. For comparison keep true. maxOffersPerHotel=N>0 caps each hotel/stay at $0.004+N×$0.002; 0 is uncapped. official:true marks the hotel site only when Google lists it; a cap can omit it. Links may be null.",
       "default": true,
       "editor": "checkbox"
     },
@@ -274,7 +274,7 @@
     "maxOffersPerHotel": {
       "title": "Max offer rows per hotel",
       "type": "integer",
-      "description": "0 (default) = every offer row. N = only the N cheapest offer rows per hotel, e.g. 5: a hard cost cap, at most $0.004 + N × $0.002 per hotel. The official-site row is kept only if it is among the N cheapest, so leave 0 for rate parity.",
+      "description": "0 (default) = all available offer rows, not a cost cap. N>0 keeps the N cheapest offers per hotel/stay: at most $0.004+N×$0.002 including its hotel row. Example: 10 hotels with N=8 cost at most $0.20. A cap can omit the official-site offer; report a missing direct price rather than concluding parity. Use call-actor callOptions.maxTotalChargeUsd outside input for a run ceiling.",
       "default": 0,
       "minimum": 0,
       "maximum": 500,
@@ -330,5 +330,5 @@
     "checkIn",
     "checkOut"
   ],
-  "description": "Google Hotels prices. Minimal input: {\"queries\": [\"hotels in Lisbon\"], \"checkIn\": \"2026-10-03\", \"checkOut\": \"2026-10-06\"}. One of queries / hotelNames / hotels is required. includeOffers defaults to true (every booking site's rate, about 18 extra rows per hotel): set it false for one price per hotel."
+  "description": "Google Hotels prices. Minimal input: {\"queries\":[\"hotels in Lisbon\"],\"checkIn\":\"30 days\",\"checkOut\":\"33 days\"}. Output is flat: type=hotel/offer/status. Join hotel and offer rows by entity_id + check_in + check_out; hotel_id may be null. Offers contain source, official, nightly, total, currency, link and partner_url. includeOffers=true (default) adds $0.002/offer to $0.004/hotel; set false for one lowest-rate hotel row. Optional fields can be null."
 }

@@ -6,10 +6,10 @@
     "asins": {
       "title": "ASINs or product URLs",
       "type": "array",
-      "description": "Amazon ASINs or product URLs, e.g. [\"B0BSHF7WHW\", \"https://www.amazon.co.uk/dp/B09G9FPHY6\"]. A URL's marketplace is used as is; a bare ASIN uses `domain`. Each ASIN + marketplace is fetched and billed once per run. Expect 8 to 13 reviews per product, never more: Amazon shows only that many without a login, so review rows cost at most $0.065 per product, plus $0.003 for its product row. An unknown ASIN or a page Amazon blocks costs nothing and is reported in a status row.",
+      "description": "Verified UK example: [\"https://www.amazon.co.uk/dp/B09G9FPHY6\"]. Current US tests require sign-in and return no reviews. A URL selects its marketplace; bare ASINs use domain (default com). Only source-visible product-page samples, not full history or a guaranteed count. Each ASIN + marketplace is fetched and billed once. Blocked pages have a free error status.",
       "editor": "stringList",
       "prefill": [
-        "B0BSHF7WHW"
+        "https://www.amazon.co.uk/dp/B09G9FPHY6"
       ],
       "default": [],
       "uniqueItems": true,
@@ -18,14 +18,14 @@
     "domain": {
       "title": "Marketplace",
       "type": "string",
-      "description": "Marketplace for bare ASINs, e.g. \"de\" for amazon.de. Default \"com\". One of: com, co.uk, de, fr, it, es, ca, com.au, co.jp, in, com.mx, com.br, nl, se, pl, sa, ae, sg, com.tr, com.be. Reviews, ratings and currency are that marketplace's own, so the same ASIN on two marketplaces is two products. Reviews come in whatever languages the marketplace page shows (no language filter, no translation). Ignored for full URLs, which carry their own marketplace.",
+      "description": "Marketplace for bare ASINs; runtime default \"com\" means amazon.com, whose current tested review pages require sign-in. A full UK URL such as \"https://www.amazon.co.uk/dp/B09G9FPHY6\" selects co.uk automatically and ignores this field. The parser accepts 20 marketplace codes listed in the README; current anonymous availability is not guaranteed for all of them. Reviews retain the source language; no language filter or translation.",
       "editor": "textfield",
       "default": "com"
     },
     "minRating": {
       "title": "Only reviews at or below this rating",
       "type": "integer",
-      "description": "Star CEILING, not a floor: keeps only reviews rated at or BELOW this many stars, e.g. 2 = one- and two-star reviews only, 3 = three stars and below. 0 (default) = every rating. Use for \"negative reviews\", \"complaints\", \"what do customers dislike\". The filter selects within the 8 to 13 reviews on the page, so a negative-only run returns a few rows per product and none when no visible review is negative. Dropped reviews are never charged; the product row is still delivered.",
+      "description": "Star CEILING, not a floor: keeps only reviews rated at or BELOW this many stars, e.g. 2 = one- and two-star reviews only, 3 = three stars and below. 0 (default) = every rating. Use for \"negative reviews\", \"complaints\", \"what do customers dislike\". The filter selects within the visible product-page sample, so a negative-only run returns a few rows per product and none when no visible review is negative. Dropped reviews are never charged; the product row is still delivered.",
       "editor": "number",
       "minimum": 0,
       "maximum": 5,
@@ -42,9 +42,10 @@
     "requireText": {
       "title": "Only reviews with written text",
       "type": "boolean",
-      "description": "true = drop rating-only reviews that have no written text. Default false. Use for sentiment analysis, topic mining or any request that needs words; dropped reviews are never charged.",
+      "description": "true = drop rating-only reviews without written text before billing. Runtime default false; the first-call form prefills true for a useful text sample. Use for sentiment analysis or topic mining. Filtered reviews are never charged.",
       "editor": "checkbox",
-      "default": false
+      "default": false,
+      "prefill": true
     },
     "includeProductRow": {
       "title": "Include a product row",
@@ -57,11 +58,12 @@
     "maxReviewsPerProduct": {
       "title": "Max reviews per product",
       "type": "integer",
-      "description": "0 (default) = every visible review: 8 to 13, the most Amazon shows without a login (the hard ceiling of this actor, hence the maximum of 13). N = the first N in Amazon's order (a mix of most recent and most helpful), e.g. 1 for a rating-only sweep: one review row plus the product row per ASIN, $0.008. There is no sort, date or only-new control: each run re-reads the same visible sample, so dedupe on review_id between runs. Applied after the filters.",
+      "description": "0 (runtime default) = all source-visible reviews. The form prefills 3 for a small UK sample. N caps rows per product after free filters, in source order; fewer may be available. Three reviews cost at most $0.015, plus $0.003 if includeProductRow is true. Setting 1 still returns one eligible review plus the optional product row; it is not a product-only switch. No sort, date or only-new control; dedupe on review_id.",
       "editor": "number",
       "minimum": 0,
       "maximum": 13,
-      "default": 0
+      "default": 0,
+      "prefill": 3
     },
     "sessions": {
       "title": "Parallel sessions",
@@ -85,7 +87,7 @@
     "proxyConfiguration": {
       "title": "Proxy",
       "type": "object",
-      "description": "Apify Proxy, default {\"useApifyProxy\": true} (datacentre). Required: Amazon captchas unrotated datacentre traffic. The run detects a captcha or a \"Sign in to see customer reviews\" page and rotates the IP, and after two refusals in a row moves the run to residential proxies by itself. For the most reliable runs outside amazon.com pass residential explicitly: {\"useApifyProxy\": true, \"apifyProxyGroups\": [\"RESIDENTIAL\"]}.",
+      "description": "Apify Proxy defaults to {\"useApifyProxy\":true}; the run can retry transient blocks and escalate to residential routing. Rotation does not guarantee access when Amazon requires sign-in. The verified UK examples work with the default proxy setup. To request residential directly: {\"useApifyProxy\":true,\"apifyProxyGroups\":[\"RESIDENTIAL\"]}. Input prices and billing rules are unchanged.",
       "editor": "proxy",
       "default": {
         "useApifyProxy": true
@@ -93,5 +95,5 @@
     }
   },
   "required": [],
-  "description": "Amazon customer reviews. Minimal input: {\"asins\": [\"B0BSHF7WHW\"]}. Each product returns the 8 to 13 reviews Amazon shows without a login ($0.005 each) plus one product row ($0.003; includeProductRow is on by default). minRating, verifiedOnly and requireText drop reviews before billing. No only-new mode: every run re-reads the same visible sample, dedupe on review_id. Rating-only sweep: maxReviewsPerProduct 1."
+  "description": "UK first call: {\"asins\":[\"https://www.amazon.co.uk/dp/B09G9FPHY6\"],\"maxReviewsPerProduct\":3,\"requireText\":true}. US pages currently require sign-in and return no reviews. Only visible product-page samples, not full history. Review rows cost $0.005 each; includeProductRow defaults to true and adds a $0.003 product row. Filters run before billing. API defaults are unchanged."
 }

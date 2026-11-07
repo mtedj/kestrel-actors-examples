@@ -1,18 +1,24 @@
 # Amazon Reviews Scraper — Customer Reviews, Product Reviews
 
-An **amazon reviews scraper** for product-page samples of **amazon customer reviews** and **amazon product reviews**. **US review collection is currently under maintenance**: fresh tests returned a sign-in wall or no usable reviews. When the source exposes data, rows contain rating, text, reviewer, country, date, Verified Purchase and helpful votes; an optional product row carries **amazon ratings** and their count.
+An **amazon reviews scraper** for product-page samples of **amazon customer reviews** and **amazon product reviews**. **UK examples are verified; current US review pages require sign-in.** Available rows contain rating, text, reviewer, country, date, Verified Purchase and helpful votes; an optional product row carries **amazon ratings** and their count. This is a public-page sample, not the full review history.
 
-## Current availability — 2026-11-06
+## Current availability — 2026-11-07
 
-US review collection is currently under maintenance. Three fresh tests against valid Amazon product pages returned a sign-in wall or no usable review data. Do not rely on this Actor for a working US review fetch until a verified recovery is published. When the source exposes reviews, this Actor collects product-page samples, not the full review history.
+Two distinct UK product URLs returned real review text and IDs in owner validation, with matching review charges. The first-call form uses a verified UK URL and a three-review limit. **US access has not recovered:** current desktop and mobile US tests explicitly say “Sign in to see customer reviews” and contain no review records. Do not use this Actor for a working US review fetch. Other configured marketplaces are not newly verified by these checks.
 
-When the source exposes public reviews, it turns **amazon product reviews** into **amazon review data** you can query, with **amazon ratings** attached to every product. Give it ASINs or product URLs. No login, no **amazon review api** key, no browser. It bills per row, and three filters cut what you pay for *before* you are billed. Read the **Scope** section before you buy: this reads the reviews Amazon shows publicly, not its full archive.
+```json
+{"asins":["https://www.amazon.co.uk/dp/B09G9FPHY6"],"maxReviewsPerProduct":3,"requireText":true}
+```
 
-Last verified working: 2026-10-19.
+The URL selects `co.uk` automatically. API defaults are unchanged: bare ASINs still use `domain: "com"`, `maxReviewsPerProduct: 0` means all source-visible reviews, and `includeProductRow: true` adds a $0.003 product row. The form's three-review sample costs at most $0.015 for reviews plus that optional product row. A blocked page is not a successful empty result and is not billed. The platform maintenance notice may remain while its checks catch up; these results establish partial regional availability, not US recovery.
+
+When the source exposes public reviews, it turns **amazon product reviews** into **amazon review data** you can query, with **amazon ratings** attached to available product rows. Give it ASINs or product URLs. No login, no **amazon review api** key, no browser. Filters run before billing. Read the **Scope** section: the Actor reads source-visible product-page samples, not a full archive or a guaranteed review count.
+
+Last verified working: 2026-11-07 (UK examples only).
 
 ## Amazon 商品评论与买家评价：中文调用与语言设置
 
-使用 ASIN 或商品 URL 获取评论、星级、认证购买标记和有用票数。只交付来源公开返回的评论，不能保证完整历史评论。
+使用 ASIN 或商品 URL 获取评论、星级、认证购买标记和有用票数。英国示例已验证；当前美国测试要求登录，无法获取评论。只交付来源公开返回的评论，不能保证完整历史评论。
 
 domain 选择 Amazon 市场，例如 com、de、co.jp。没有中国大陆 cn 市场，也没有评论语言筛选或自动翻译；中文用户应选择目标商品实际销售的受支持市场。
 
@@ -26,7 +32,7 @@ domain 选择 Amazon 市场，例如 com、de、co.jp。没有中国大陆 cn �
 ```json
 {
   "asins": [
-    "B0BSHF7WHW"
+    "https://www.amazon.co.uk/dp/B09G9FPHY6"
   ],
   "requireText": true,
   "maxReviewsPerProduct": 1,
@@ -46,22 +52,22 @@ This localized quick start uses the existing input contract. API users should se
 
 ## Amazon reviews scraper for AI agents: which input answers which request?
 
-**Use it for** the reviews the product page shows — 8 to 13 per product, never more — with the product's overall rating and ratings count, for any ASIN list in 20 marketplaces: complaint feeds, verified-purchase samples, sentiment and voice-of-customer corpora, competitor review tracking, catalogue-wide rating sweeps.
+**Use it for** the source-visible product-page sample and available rating summary. UK examples are verified; current US review requests are blocked. The input recognizes 20 marketplace codes, with availability dependent on the source. Suitable uses include: complaint feeds, verified-purchase samples, sentiment and voice-of-customer corpora, competitor review tracking, catalogue-wide rating sweeps.
 
-**Do not use it for** a product's full review archive (the site shows at most 13 reviews without a login, and this actor does not log in), review photos or videos, the "Customers say" AI summary, reviews filtered by date or keyword, or prices (`price` on the product row is best-effort; use the [Amazon Product Scraper](https://apify.com/kestrel/amazon-product-scraper)).
+**Do not use it for** a product's full review archive (this Actor only reads the public product-page sample and does not log in), review photos or videos, the "Customers say" AI summary, reviews filtered by date or keyword, or prices (`price` on the product row is best-effort; use the [Amazon Product Scraper](https://apify.com/kestrel/amazon-product-scraper)).
 
 | User request | Input |
 | --- | --- |
-| "Reviews for B0BSHF7WHW" | `{"asins": ["B0BSHF7WHW"]}` |
-| "Negative reviews / complaints for these products" | `{"asins": ["B0BSHF7WHW", "B09B8V1LZ3"], "minRating": 2, "requireText": true}` |
-| "Only verified purchase reviews" | `{"asins": ["B0BSHF7WHW"], "verifiedOnly": true}` |
+| "A small verified UK review sample" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "maxReviewsPerProduct": 3, "requireText": true}` |
+| "Negative reviews / complaints for these products" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6", "https://www.amazon.co.uk/dp/B0F23KT34P"], "minRating": 2, "requireText": true}` |
+| "Only verified purchase reviews" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "verifiedOnly": true}` |
 | "Reviews of this amazon.de product" | `{"asins": ["https://www.amazon.de/dp/B09B8V1LZ3"]}` or `{"asins": ["B09B8V1LZ3"], "domain": "de"}` |
-| "Review text for sentiment analysis" | `{"asins": ["B0BSHF7WHW"], "requireText": true}` |
+| "Review text for sentiment analysis" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "requireText": true}` |
 | "Rating and review count for 500 ASINs, as little review text as possible" | `{"asins": [...], "minRating": 1, "requireText": true}` — the product rows carry `rating` and `ratings_count`; only one-star reviews with text are delivered as review rows |
-| "At most 5 reviews per product" | `{"asins": ["B0BSHF7WHW"], "maxReviewsPerProduct": 5}` |
-| "Review rows only, no product rows" | `{"asins": ["B0BSHF7WHW"], "includeProductRow": false}` |
-| "Only new reviews since yesterday" / "track new reviews" | not built in: schedule the same input and compare `review_id` with the previous dataset; every run re-reads the same 8–13 visible reviews |
-| "Rating and 5-to-1 histogram only, no review text" | `{"asins": ["B07FZ8S74Z"], "maxReviewsPerProduct": 1}` — the product row (free of review text, $0.003) plus one review row; review rows cannot be switched off entirely |
+| "At most 5 reviews per product" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "maxReviewsPerProduct": 5}` |
+| "Review rows only, no product rows" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "includeProductRow": false}` |
+| "Only new reviews since yesterday" / "track new reviews" | not built in: schedule the same input and compare `review_id` with the previous dataset; every run re-reads the visible product-page sample |
+| "Rating and 5-to-1 histogram only, no review text" | `{"asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "maxReviewsPerProduct": 1}` — the product row (free of review text, $0.003) plus one review row; review rows cannot be switched off entirely |
 
 **One `review` row** ($0.005): `rating` (1–5), `title` (often null), `text`, `author`, `country`, `date_text`, `verified`, `helpful_votes`, `variant`, `review_id`, `url`, `asin`, `domain`, `product_title`. **One `product` row** ($0.003, `includeProductRow` on by default): `rating`, `ratings_count`, `reviews_visible`, `5_star_pct` … `1_star_pct` when shown, `title`, `brand`, `availability`, `image`, `features`, `price` (best-effort). **One `status` row per target** (free): `status` is `ok`, `no_reviews` or `error`, with `reviews`, `filtered`, `duplicates` and `error`.
 
@@ -80,10 +86,10 @@ Amazon mixes **international reviews** into a product page, so `country` lets yo
 ## Amazon reviews by ASIN, URL or marketplace
 
 - **`asins`** takes either form: a bare **amazon asin** like `B0BSHF7WHW`, or a full product URL from any marketplace.
-- A URL's marketplace is used automatically. `https://www.amazon.co.uk/dp/B09G9FPHY6` is scraped from the UK site and priced in GBP without you setting anything.
-- **`domain`** sets the marketplace for bare ASINs. Twenty are supported: `com`, `co.uk`, `de`, `fr`, `it`, `es`, `ca`, `com.au`, `co.jp`, `in`, `com.mx`, `com.br`, `nl`, `se`, `pl`, `sa`, `ae`, `sg`, `com.tr`, `com.be`.
+- A URL's marketplace is used automatically. `https://www.amazon.co.uk/dp/B09G9FPHY6` is scraped from the UK site without changing `domain`; the currency field follows the price Amazon actually displays.
+- **`domain`** sets the marketplace for bare ASINs. The parser recognizes twenty marketplace codes; this does not guarantee current anonymous review access on each: `com`, `co.uk`, `de`, `fr`, `it`, `es`, `ca`, `com.au`, `co.jp`, `in`, `com.mx`, `com.br`, `nl`, `se`, `pl`, `sa`, `ae`, `sg`, `com.tr`, `com.be`.
 
-The same ASIN on two marketplaces is two products, because the reviews genuinely differ. The non-English marketplaces call them Bewertungen or Rezensionen (amazon.de), avis (amazon.fr), opiniones (amazon.es), recensioni (amazon.it), レビュー (amazon.co.jp) and avaliações (amazon.com.br); the same input reads all of them, and `country` says where each review was written. An ASIN and its own URL are one product, fetched and billed once — so **amazon reviews by marketplace** comparisons are explicit rather than accidental.
+The same ASIN on two marketplaces is two products, because the reviews genuinely differ. The non-English marketplaces call them Bewertungen or Rezensionen (amazon.de), avis (amazon.fr), opiniones (amazon.es), recensioni (amazon.it), レビュー (amazon.co.jp) and avaliações (amazon.com.br); the matching domain code selects the requested marketplace, while current public review availability must be checked; `country` says where an available review was written. An ASIN and its own URL are one product, fetched and billed once — so **amazon reviews by marketplace** comparisons are explicit rather than accidental.
 
 ## Amazon negative reviews without paying for the five-star ones
 
@@ -112,7 +118,7 @@ Filtered rows are never charged. In a verified run, a product with 8 visible rev
 | `minRating` | `0` = everything. `1`–`5` = only reviews at or **below** that rating (`2` = the complaints feed). Never charged for what it drops. |
 | `verifiedOnly` | Keep only Verified Purchase reviews. |
 | `requireText` | Drop rating-only reviews with no written body. |
-| `maxReviewsPerProduct` | `0` = every review visible on the page (8–13, the ceiling). `N` = the first N, applied after the filters. |
+| `maxReviewsPerProduct` | `0` = every source-visible review; the form prefills `3` for a small UK sample. `N` = the first N, applied after the filters. |
 | `includeProductRow` | `true` (default) = one product row per ASIN at $0.003 with `rating`, `ratings_count`, `reviews_visible` and the star histogram when shown. `false` = review rows only. |
 | `sessions`, `perIp` | Parallel proxy sessions and the pace of each. Leave alone unless a run is throttled. |
 | `proxyConfiguration` | Apify Proxy. Required — Amazon captchas datacentre traffic that is not rotated. Datacentre is a fine starting point: the run escalates to residential by itself when Amazon pushes back. |
@@ -120,22 +126,24 @@ Filtered rows are never charged. In a verified run, a product with 8 visible rev
 ### Example: a complaints feed across a catalogue
 
 ```json
-{ "asins": ["B0BSHF7WHW", "B09B8V1LZ3"], "minRating": 2, "requireText": true, "verifiedOnly": true }
+{ "asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6", "https://www.amazon.co.uk/dp/B0F23KT34P"], "minRating": 2, "requireText": true, "verifiedOnly": true }
 ```
 
-### Example: the same product in two marketplaces
+### Example: two verified UK products
 
 ```json
-{ "asins": ["B0BSHF7WHW", "https://www.amazon.co.uk/dp/B09G9FPHY6"], "maxReviewsPerProduct": 0 }
+{ "asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6", "https://www.amazon.co.uk/dp/B0F23KT34P"], "maxReviewsPerProduct": 0 }
 ```
 
-### Example: rating summaries only, no review rows
+### Example: rating summaries with one-star text filtering
 
 ```json
-{ "asins": ["B0BSHF7WHW", "B08N5M7S6K"], "maxReviewsPerProduct": 0, "minRating": 1, "requireText": true }
+{ "asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6", "https://www.amazon.co.uk/dp/B0F23KT34P"], "maxReviewsPerProduct": 0, "minRating": 1, "requireText": true }
 ```
 
 ## Output
+
+Historical response shapes are shown below. Their US sample values illustrate the schema and do not imply current US availability; use the verified UK first-call input above.
 
 ```json
 {
@@ -166,7 +174,7 @@ The `product` row carries the rating summary:
 
 ## How much does it cost?
 
-Pay per event: one per **delivered** review row and one per product row. Free: `status` rows, every review removed by a filter, products with no visible reviews, and failed products. An ASIN and its URL are one product, fetched and billed once per run.
+Pay per event: one per **delivered** review row and one per product row. Free: `status` rows, every review removed by a filter, and failed products. A genuine accessible product with no reviews has no review charge; its optional product row is still charged if delivered. An ASIN and its URL are one product, fetched and billed once per run.
 
 Verified runs behind this listing cost $0.0002–$0.0024 each in platform compute. Exact per-row pricing is on this page's pricing tab.
 
@@ -179,7 +187,7 @@ from apify_client import ApifyClient
 
 client = ApifyClient("<YOUR_APIFY_TOKEN>")
 run = client.actor("kestrel/amazon-reviews-scraper").call(run_input={
-    "asins": ["B0BSHF7WHW"], "minRating": 2, "verifiedOnly": True, "requireText": True,
+    "asins": ["https://www.amazon.co.uk/dp/B09G9FPHY6"], "maxReviewsPerProduct": 3, "requireText": True,
 })
 for row in client.dataset(run["defaultDatasetId"]).iterate_items():
     if row["type"] == "review":
@@ -193,7 +201,7 @@ import { ApifyClient } from 'apify-client';
 
 const client = new ApifyClient({ token: '<YOUR_APIFY_TOKEN>' });
 const run = await client.actor('kestrel/amazon-reviews-scraper').call({
-    asins: ['B0BSHF7WHW', 'https://www.amazon.co.uk/dp/B09G9FPHY6'],
+    asins: ['https://www.amazon.co.uk/dp/B09G9FPHY6'], maxReviewsPerProduct: 3, requireText: true,
 });
 const { items } = await client.dataset(run.defaultDatasetId).listItems();
 console.log(items.filter((i) => i.type === 'product').map((p) => [p.marketplace, p.rating, p.ratings_count]));
@@ -204,16 +212,16 @@ With **curl**, synchronously:
 ```bash
 curl -X POST "https://api.apify.com/v2/acts/kestrel~amazon-reviews-scraper/run-sync-get-dataset-items?token=<YOUR_APIFY_TOKEN>" \
   -H 'Content-Type: application/json' \
-  -d '{"asins":["B0BSHF7WHW"],"minRating":2}'
+  -d '{"asins":["https://www.amazon.co.uk/dp/B09G9FPHY6"],"maxReviewsPerProduct":3,"requireText":true}'
 ```
 
 For **n8n**, **Make** and Zapier, add the actor as a step through Apify's integration and map `rating`, `text` and `date_text` into an alert — "new one-star review on any of my ASINs" is two nodes. For **AI agents**, the actor is callable over Apify's MCP server. To get **amazon reviews csv**, run it and use the dataset's Export button, or append `?format=csv` to the dataset items API.
 
 ## Scope — read this before you buy
 
-This reads the reviews Amazon publishes on the **public product page**, which is roughly **8–13 reviews per product**, ordered by Amazon's own mix of recent and most-helpful. Amazon requires a signed-in session for its full review archive, and this actor deliberately does not attempt that — no account sharing, no cookie injection, no session resale. If you need every review a product has ever had, this is not the tool, and no honest listing should tell you otherwise.
+This reads the reviews Amazon publishes on the **public product page**, whose review count varies by product and marketplace, ordered by Amazon's own mix of recent and most-helpful. Amazon requires a signed-in session for its full review archive, and this actor deliberately does not attempt that — no account sharing, no cookie injection, no session resale. If you need every review a product has ever had, this is not the tool, and no honest listing should tell you otherwise.
 
-What you *do* get for every ASIN is the complete rating summary (`rating`, `ratings_count`) plus that visible sample, which is enough for rating trends, complaint detection and competitor tracking across a large catalogue.
+When the page is accessible and exposes these fields, the optional product row includes `rating` and `ratings_count` alongside the visible sample, which is enough for rating trends, complaint detection and competitor tracking across a large catalogue.
 
 Likewise, **`price` is best-effort**. Amazon frequently withholds price markup from unauthenticated clients — on a 1.8 MB product page in testing there was no price element at all. When Amazon serves one, you get it; treat the field as a bonus, not a price-tracking feature. If you want prices and rank, use the companion Amazon Search & Best Sellers actor, which reads them from result pages where Amazon does render them.
 
@@ -225,7 +233,7 @@ Two caveats worth taking seriously. Reviews contain **personal data** — a disp
 
 ## Limits and honest notes
 
-- **8–13 reviews per product**, as covered in Scope. `reviews_visible` on the product row tells you exactly how many were on the page.
+- **A variable product-page sample**, as covered in Scope; no minimum or complete history is promised. `reviews_visible` on the product row tells you exactly how many were on the page.
 - **`title` is often null.** The compact review blocks Amazon renders on product pages frequently omit a headline; the body is always there.
 - **Amazon serves a captcha to repeat callers.** The run detects it and rotates to a fresh IP rather than parsing the captcha page as an empty product.
 - **Cheap proxies first, residential only when Amazon pushes back.** A run starts on the proxies you chose — datacentre is the cheapest — and rotates to a fresh IP on a captcha or a 503. When the same page is refused twice in a row that is the IP range being blocked, not the page, so the run stops trusting that pool: its sessions re-open on a residential proxy and stay there for the rest of the run. Nothing to configure, no run has to fail to teach it, and a run that is never refused never leaves the cheap pool — so a run costs the least that still succeeds. The run's SUMMARY reports it as `http.escalated`.
@@ -249,7 +257,7 @@ Set `minRating` to your ceiling (`2` for one- and two-star) and add `requireText
 
 ### How many reviews will I get per product?
 
-Roughly 8–13 — the set Amazon shows publicly. This is a real limit, not a setting, and it is the honest answer that some listings in this category avoid giving. `reviews_visible` on each product row reports the exact number.
+Only the reviews currently visible on the product page; the number can vary and may be zero. The first-call example caps delivery at three. No minimum count or full history is promised. `reviews_visible` on each product row reports the exact number.
 
 ### Can I scrape Amazon reviews by ASIN in bulk?
 
@@ -265,7 +273,7 @@ Best-effort only — see Scope. Amazon commonly withholds price markup from unau
 
 ### Can I get the star-rating breakdown?
 
-The product row carries `rating` and `ratings_count` for every ASIN. The 5/4/3/2/1 percentage split is included when Amazon renders it on the page, which is not always.
+An accessible product row carries `rating` and `ratings_count` when those fields are present in the source. The 5/4/3/2/1 percentage split is included when Amazon renders it on the page, which is not always.
 
 ### Can I scrape Amazon reviews without an API?
 
@@ -293,7 +301,7 @@ Because `includeProductRow` can be left on with `maxReviewsPerProduct: 0` and a 
 
 ### Comparing marketplaces properly
 
-The same ASIN often sells in a dozen Amazon marketplaces, and its reception differs by market. Passing both `B0BSHF7WHW` and `https://www.amazon.co.uk/dp/B09G9FPHY6` produces two product rows with their own ratings, currencies and review sets, because they genuinely are two different audiences.
+The same ASIN often sells in a dozen Amazon marketplaces, and its reception differs by market. Use full product URLs for the marketplaces you intend to compare, and check each status row before combining results. Only the UK examples were newly verified; current US review requests are blocked, so do not assume a US/UK comparison will return both sides.
 
 That is why the run treats an ASIN plus a marketplace as the identity, rather than the ASIN alone. Mixing a bare ASIN with its own URL still collapses to one product — the de-duplication is on identity, not on string.
 

@@ -75,7 +75,7 @@
       "default": 1,
       "minimum": 1,
       "maximum": 30,
-      "description": "Rooms the party needs, 1 to 30, e.g. 1 (default 1). With 2 rooms Booking matches two room blocks per property and price_total covers both."
+      "description": "Requested room count, 1 to 30, e.g. 1 (default 1), sent with adults and children to Booking. This requests accommodation for that party; it does not guarantee one returned block per requested room or independently verify the final payable amount."
     },
     "currency": {
       "title": "Currency",
@@ -132,7 +132,7 @@
       "editor": "number",
       "default": 0,
       "minimum": 0,
-      "description": "Highest nightly price in `currency`, e.g. 150. 0 (default) = no cap. Keeps properties whose price_nightly (stay total ÷ nights, the displayed total, which in some markets excludes taxes) is at or under it; dropped properties are never delivered or billed, so a daily \"anything under 150\" alert costs nothing on days without a match. With a cap set, sold-out properties are dropped too (no price to compare). Applies to destination searches and named hotels. Use for \"hotels under 150 EUR a night\"."
+      "description": "Highest displayed nightly price in currency, e.g. 150; 0 (default) disables this filter. Applied AFTER maxHotelsPerQuery; dropped rows are not replaced, so output can be short. Compares price_nightly (displayed stay total / nights), not a verified tax-inclusive payable amount. Unpriced rows are dropped when this cap is set. Applies to destinations and named hotels; rejected rows are not delivered or billed."
     },
     "minStars": {
       "title": "Minimum stars",
@@ -148,7 +148,7 @@
       "type": "boolean",
       "editor": "checkbox",
       "default": false,
-      "description": "false (DEFAULT) = one hotel row per property, carrying the cheapest room's name only. true = also one room row per room and rate combination Booking matched to the stay, at $0.002 each: room name, occupancy, meal plan, stay total and nightly rate, free-cancellation deadline, \"only X left\". The hotel row's rooms_listed is the number of room rows to expect. Keep false for price tracking and market scans; true for \"every room and rate hotel X offers\", meal plans or cancellation deadlines.",
+      "description": "false (DEFAULT) emits hotel rows only. true also emits Booking's returned matching room/rate blocks at $0.002 each, with same-block room_id, meal plan, price and free-cancellation text when supplied. These are not exhaustive inventory or complete payment/cancellation contracts. rooms_listed counts returned blocks before a spending limit; there is no separate room cap. Set maxTotalChargeUsd as a run option. Keep false for hotel-price tracking.",
       "sectionCaption": "Room-level rates"
     },
     "locale": {

@@ -1,6 +1,7 @@
 {
   "asins": [
-    "B0BSHF7WHW"
+    "https://www.amazon.co.uk/dp/B09G9FPHY6"
   ],
-  "requireText": true
+  "requireText": true,
+  "maxReviewsPerProduct": 3
 }

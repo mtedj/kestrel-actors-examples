@@ -149,7 +149,7 @@
       "price_total": {
         "type": "number",
         "title": "Stay total",
-        "description": "The lowest price Booking shows for the whole stay and party, in `currency` (null = sold out / unpriced)",
+        "description": "Booking displayPrice.amountPerStay on hotel rows, or the matching block finalPrice on room rows. Reported stay amount, not a verified final payable total; null means the source supplied no parsed price.",
         "nullable": true
       },
       "price_nightly": {
@@ -184,53 +184,55 @@
       "taxes_fees_excluded": {
         "type": "number",
         "title": "Taxes and fees not included",
-        "description": "Charges Booking lists as excluded from price_total, in `currency` (null when everything is included)",
+        "description": "Reported excludeChargesAggregated.amountPerStay. Null means unavailable, not proof that all charges are included. Exhaustiveness, party adjustment and non-overlap are not verified; the aggregate's separate currency is not retained.",
         "nullable": true
       },
       "taxes_included": {
         "type": "boolean",
         "title": "Taxes included",
-        "description": "True when Booking lists no excluded charges for the stay",
+        "description": "Legacy derived indicator: with a non-null price_total, true when the excluded aggregate is missing or zero; false when nonzero. It does not verify inclusion of all mandatory charges. Null when price_total is null.",
         "nullable": true
       },
       "charges_note": {
         "type": "string",
         "title": "Charges note",
-        "description": "Booking's own wording, e.g. '+US$9 taxes and fees' or 'Includes taxes and fees'",
+        "description": "Booking chargesInfo.translation when supplied. Null is missing text, not proof that no additional charges or conditions apply.",
         "nullable": true
       },
       "free_cancellation": {
         "type": "boolean",
         "title": "Free cancellation",
-        "description": "Booking's free-cancellation badge for the cheapest option",
+        "description": "Hotel row: bool(policies.showFreeCancellation). Room row: whether freeCancellationUntil text exists. False includes missing information; neither value supplies a complete cancellation policy or penalty schedule.",
         "nullable": true
       },
       "no_prepayment": {
         "type": "boolean",
         "title": "No prepayment",
-        "nullable": true
+        "nullable": true,
+        "description": "Hotel-level showNoPrepayment badge converted to boolean. False includes an absent badge and does not prove advance payment is required; no amount or payment schedule is provided."
       },
       "meal_plan": {
         "type": "string",
         "title": "Meal plan",
-        "description": "e.g. 'Breakfast included'",
+        "description": "Hotel-level mealPlanIncluded.text on hotel rows; the matching block mealPlanIncluded.text on room rows. Hotel summary fields are not proven to describe one identical cheapest rate.",
         "nullable": true
       },
       "breakfast_included": {
         "type": "boolean",
         "title": "Breakfast included",
-        "nullable": true
+        "nullable": true,
+        "description": "Whether the hotel-level meal-plan text contains the English word breakfast. False can reflect absent or localized text; this is not a verified same-rate meal entitlement."
       },
       "room_name": {
         "type": "string",
-        "title": "Cheapest room",
-        "description": "The room behind the headline price",
+        "title": "Reported room name",
+        "description": "Hotel row: name of the block with the lowest numeric finalPrice.amount, selected separately from the headline display price. Room row: the matching block roomId's unit name. Not a verified headline-rate join.",
         "nullable": true
       },
       "rooms_listed": {
         "type": "integer",
         "title": "Room options",
-        "description": "How many room and rate combinations Booking matched to the stay",
+        "description": "Number of dictionary-valued blocks returned with the hotel result. Not complete property inventory and not necessarily the number delivered after a spending limit.",
         "nullable": true
       },
       "sold_out": {
@@ -323,19 +325,20 @@
       },
       "price_original": {
         "type": "number",
-        "title": "Price in hotel currency",
-        "description": "The block price in the hotel currency",
+        "title": "Original block price",
+        "description": "The matching block originalPrice amount, with original_currency. This is not independently verified as the hotel-currency price.",
         "nullable": true
       },
       "original_currency": {
         "type": "string",
-        "title": "Hotel currency",
-        "nullable": true
+        "title": "Original price currency",
+        "nullable": true,
+        "description": "Currency supplied with the block originalPrice; it need not be treated as proof of the property's native currency."
       },
       "free_cancellation_until": {
         "type": "string",
         "title": "Free cancellation until",
-        "description": "ISO timestamp",
+        "description": "Source freeCancellationUntil text for the matching room block; nullable, not normalized to a timezone, and not a complete cancellation penalty contract.",
         "nullable": true
       },
       "only_x_left": {
@@ -431,7 +434,7 @@
       "fetched_at": {
         "type": "string",
         "title": "Fetched at",
-        "description": "ISO timestamp",
+        "description": "Actor UTC timestamp when the emitted row is constructed after parsing. Not a Booking price-acquisition timestamp or a guarantee about upstream cache age.",
         "nullable": true
       }
     },

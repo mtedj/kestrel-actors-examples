@@ -1,6 +1,6 @@
 # Booking.com Scraper — Hotel Prices & Availability by Date
 
-This **Booking.com scraper** is a **hotel price scraper** for exact dates, guests and rooms: it returns **Booking.com hotel prices** for every property in a destination, or for a list of hotels by URL, name or id, each as one clean row with the stay total in your currency, the nightly price, the taxes and fees Booking leaves out, free-cancellation and breakfast flags, stars, review score, location and the cheapest room. It reads the same call Booking.com's own search results page makes, so there is no browser, no login and no Booking.com API key — a way to scrape Booking.com without API access — and you pay per priced property, never for sold-out ones.
+This **Booking.com scraper** is a **hotel price scraper** for exact dates, guests and rooms: it returns **Booking.com hotel prices** for matching properties in a destination, or for a list of hotels by URL, name or id, each as one row with the reported stay total, derived nightly price, reported excluded-charge aggregate, free-cancellation and breakfast indicators, stars, review score, location and a room name from the returned blocks. It reads the same call Booking.com's own search results page makes, so there is no browser, no login and no Booking.com API key — a way to scrape Booking.com without API access — and you pay per priced property, never for sold-out ones.
 
 Last verified working: 2026-10-17.
 
@@ -40,7 +40,7 @@ This localized quick start uses the existing input contract. API users should se
 
 ## Booking.com scraper for AI agents: which input answers which request?
 
-**Use it when** the request is a Booking.com price or availability for specific dates: every hotel in a destination, a named hotel, a comp set re-priced daily, "hotels under X a night", "is it sold out", or every room and rate one hotel offers. **Do not use it for** guest reviews (Booking.com Reviews Scraper), prices on other booking sites or rate parity (Google Hotels Prices Scraper, Hotel Rate Parity Checker), member-only Genius rates, or making a booking. One run prices ONE stay (`checkIn` + `nights`); for a price calendar run it once per check-in date or use the Hotel Price Tracker.
+**Use it when** the request is a Booking.com price or availability for specific dates: matching hotels in a destination, a named hotel, a comp set re-priced daily, "hotels under X a night", "is it sold out", or the room/rate blocks Booking returns for a hotel. **Do not use it for** guest reviews (Booking.com Reviews Scraper), prices on other booking sites or rate parity (Google Hotels Prices Scraper, Hotel Rate Parity Checker), member-only Genius rates, or making a booking. One run prices ONE stay (`checkIn` + `nights`); for a price calendar run it once per check-in date or use the Hotel Price Tracker.
 
 | User request | Input JSON |
 |---|---|
@@ -48,7 +48,7 @@ This localized quick start uses the existing input contract. API users should se
 | "The 50 cheapest hotels in Lisbon next weekend" | `{"locationQueries": ["Lisbon"], "checkIn": "2026-11-21", "nights": 2, "sortBy": "price", "maxHotelsPerQuery": 50}` |
 | "4-star hotels in the Algarve under 150 GBP a night for a family of four" | `{"locationQueries": ["Algarve"], "checkIn": "2026-12-20", "nights": 7, "adults": 2, "childrenAges": ["5", "9"], "currency": "GBP", "minStars": 4, "maxPrice": 150}` |
 | "What does Memmo Alfama cost on 20 November?" | `{"hotelNames": ["Memmo Alfama Lisbon"], "checkIn": "2026-11-20"}` |
-| "Every room and rate hotel 536251 offers that night" | `{"hotelIds": ["536251"], "checkIn": "2026-11-20", "includeRooms": true}` |
+| "The room/rate blocks returned for hotel 536251 that night" | `{"hotelIds": ["536251"], "checkIn": "2026-11-20", "includeRooms": true}` |
 | "Track my comp set every morning at a 30-day lead time" | `{"hotelIds": ["536251", "2251985", "1471925"], "checkIn": "30 days", "nights": 1}` on an Apify schedule |
 | "Is hotel X available on these dates?" | the named-hotel input above: a row with `sold_out: true` (and Booking's `alternative_check_in` / `alternative_check_out`) means no |
 | "Prices in German, in euros" | add `"currency": "EUR", "locale": "de-DE"` — `locale` changes labels, `currency` changes prices |
@@ -57,11 +57,25 @@ This localized quick start uses the existing input contract. API users should se
 
 **Status and empty results** — every destination and every named hotel also writes one free `status` row: `status` is `ok`, `no_results`, `not_found`, `duplicate` or `error`, with `hotels`, `priced`, `unpriced`, `filtered`, `duplicates`, `rooms`, `pages` and Booking's `total`. A sold-out property is a free `hotel` row with `sold_out: true`; a place or name Booking cannot match is a `status` row with `error` or `not_found` and no hotel rows; a run whose only problem is the input (no `checkIn`, a past date, a non-Booking URL, no target at all) ends green with the reason on the run card and charges nothing. `checkIn` has no default: a run without it is such an input problem.
 
+## Price and rate contract: what these fields establish
+
+The output records Booking's anonymous search-result data. It is not a verified final payable quote or a complete cancellation, payment or eligibility contract. These notes describe the existing output behavior; they do not change billing or field values.
+
+- **Stay total and taxes:** hotel `price_total` copies `priceDisplayInfoIrene.displayPrice.amountPerStay`; `price_nightly` divides it by the requested nights. `taxes_fees_excluded` copies `excludedCharges.excludeChargesAggregated.amountPerStay`. The Actor does not verify exhaustive mandatory charges, party/room adjustment, non-overlap or final property-payable amounts. It does not retain the aggregate's separate currency or the requested `excludeChargesList` components. Do not label their sum a verified payable total.
+- **Legacy tax flag:** if a hotel price exists, `taxes_included` is true when the excluded aggregate is missing or zero and false when nonzero. Missing `charges_note` is missing text, not proof that no conditions apply.
+- **Rate association:** hotel price, meal-plan text and policy badges are result-level fields. Hotel `room_name` is independently selected from the lowest numeric `blocks[].finalPrice.amount`. There is no emitted identifier proving that all hotel summary fields describe one identical rate. Room rows provide same-block `room_id`, `occupancy`, `meal_plan_id`, `policy_group_id`, price and optional cancellation text.
+- **Cancellation and payment:** hotel `free_cancellation` and `no_prepayment` are boolean badge conversions; false includes missing source information. Room `free_cancellation` means cancellation-deadline text exists. Neither mode supplies a full penalty schedule, normalized deadline timezone or payment amount/due-date schedule. A `policy_group_id` identifies a policy group but does not contain the policy.
+- **Breakfast:** `breakfast_included` checks the hotel summary's text for the English word “breakfast”. Localized or absent text can return false. Inspect `meal_plan`; do not treat the flag as a verified rate entitlement.
+- **Audience and freshness:** locale, currency, anonymous web context and proxy location are request settings, not verified mobile/member/geo eligibility or booker market. `transport` means public transport near the property. `fetched_at` is the Actor's row-construction time; the code makes an HTTP request and has no Actor-level response cache, but does not prove upstream cache age.
+- **Coverage and caps:** `maxHotelsPerQuery` limits destination results before the local `maxPrice` filter; rejected rows are not replaced. `includeRooms` emits returned matching blocks for delivered priced hotels, not exhaustive inventory or a separate checkout-policy fetch. Optional values may be null, including a room-block price. There is no independent room-row cap; the run-level charge limit can shorten output. Read `SUMMARY.limit_hit`, delivered counts and charged events. `rooms_listed` is the source block count before that limit.
+
+For comparisons needing verified payable totals or complete rate conditions, this output alone is insufficient. Preserve the original dataset and input context; later runs cannot reconstruct an earlier quote.
+
 ## What does the Booking.com scraper do?
 
 Give it a stay — check-in, nights, adults, children's ages, rooms, currency — and either destinations ("Lisbon", "Algarve", "Times Square", "Portugal") or properties. It returns:
 
-- **One `hotel` row per property**: the lowest stay total Booking.com shows for that party, the nightly rate derived from it, the hotel-currency total, what is excluded (taxes and fees) and Booking's own wording for it, free cancellation, no-prepayment and breakfast flags, stars, the 1-10 review score and count, address, coordinates, neighbourhood and distance from the centre, the room behind the headline price, whether the property is sold out and the alternative dates Booking suggests.
+- **One `hotel` row per property**: the lowest stay total Booking.com shows for that party, the nightly rate derived from it, the hotel-currency total, what is excluded (taxes and fees) and Booking's own wording for it, free cancellation, no-prepayment and breakfast flags, stars, the 1-10 review score and count, address, coordinates, neighbourhood and distance from the centre, a room name selected from the lowest-priced returned block, whether the property is sold out and the alternative dates Booking suggests.
 - **Optional `room` rows** (`includeRooms`): every room and rate combination Booking matched to the stay, with its own price, occupancy, meal plan, free-cancellation deadline and "only 2 left" message.
 - **One `status` row per target**: how many properties were delivered, priced, filtered and duplicated, how many pages were read and Booking's total for the destination.
 
@@ -135,7 +149,7 @@ One request, 100 rows, 100 × $0.004 = $0.40.
 }
 ```
 
-Three `hotel` rows and every room and rate each property offers for that night, every morning, at the same 30-day lead time.
+Up to three priced `hotel` rows and the matching room/rate blocks returned by Booking, every morning at the same 30-day lead time; this is not a complete inventory guarantee.
 
 ### Example: family rooms under a budget with Booking's 4-star filter
 
@@ -198,14 +212,14 @@ Every row has `type`: `hotel`, `room` or `status`. Hotel rows always carry every
 Key columns:
 
 - `price_total` / `price_nightly` / `currency` — the lowest total Booking shows for the whole stay and party, and that total divided by nights. `price_display` is Booking's own formatted string.
-- `taxes_included`, `taxes_fees_excluded`, `charges_note` — whether Booking lists excluded charges, how much they are, and its wording ("+US$9 taxes and fees").
+- `taxes_included`, `taxes_fees_excluded`, `charges_note` — legacy summary indicators and the reported excluded-charge aggregate/note. Missing information is not proof that all charges are included; see the contract below.
 - `price_hotel_currency_total` / `hotel_currency` — the same total in the property's own currency, so conversions are yours to make.
 - `stars`, `review_score`, `review_count`, `property_type`, `address`, `latitude`, `longitude`, `display_location`, `distance_from_center`, `transport`.
 - `free_cancellation`, `no_prepayment`, `meal_plan`, `breakfast_included`, `room_name`, `rooms_listed`.
 - `sold_out`, `sold_out_message`, `alternative_check_in`, `alternative_check_out` — a property with no price for the dates is delivered free with these filled in.
 - `sponsored`, `newly_opened`, `sustainable`, `host_type`, `image`, `rank`, `query`.
 
-`room` rows: `room_id`, `room_name`, `occupancy`, `meal_plan`, `price_total`, `price_nightly`, `currency`, `price_original` in the hotel currency, `free_cancellation_until`, `only_x_left`, `has_crib`, `third_party`.
+`room` rows: `room_id`, `room_name`, `occupancy`, `meal_plan`, `price_total`, `price_nightly`, `currency`, `price_original` with `original_currency` from the same block, `free_cancellation_until`, `only_x_left`, `has_crib`, `third_party`.
 
 `status` rows: `target`, `kind` (destination or hotel), `dest_type`, `dest_id`, `hotel_id`, `hotel_name`, `status` (`ok`, `no_results`, `not_found`, `duplicate`, `error`), `hotels`, `priced`, `unpriced`, `filtered`, `duplicates`, `rooms`, `pages`, `total`, `error`.
 
@@ -263,9 +277,9 @@ The actor reads the publicly visible prices and property facts that Booking.com 
 ## Limits and honest notes
 
 - **Residential proxy required.** Booking's search call answers datacenter addresses with its WAF challenge but serves residential ones without cookies or tokens. The default `proxyConfiguration` is set accordingly; changing it to datacenter makes every search fail.
-- **"Top picks" shifts between pages.** Booking's default `popularity` order is personalised and reshuffles, so a long paged run under it can repeat properties (deduplicated, counted in `duplicates`) and miss others. Use `price`, `review_score`, `stars` or `distance` for a complete, repeatable list.
+- **"Top picks" shifts between pages.** Booking's default `popularity` order is personalised and reshuffles, so a long paged run under it can repeat properties (deduplicated, counted in `duplicates`) and miss others. Use `price`, `review_score`, `stars` or `distance` to reduce reordering; pagination does not certify complete inventory.
 - **Prices are for your party.** The stay total depends on adults, children's ages and rooms; a solo traveller sees different rates than a couple. `price_nightly` is the total divided by nights, not Booking's own per-night figure (which it omits for most searches).
-- **Taxes vary by market.** In some countries the total includes taxes; elsewhere Booking lists them as excluded. `taxes_included`, `taxes_fees_excluded` and `charges_note` say which, per row.
+- **Excluded-charge data is incomplete evidence.** These fields report a source aggregate and note; they do not verify a mandatory payable total. `taxes_included: true` also occurs when the aggregate is missing.
 - **Sold-out properties** still appear (free) with `sold_out: true` and Booking's alternative dates when it offers them. With `maxPrice` set they are dropped, since they have no price to compare.
 - **Room rows** describe the combinations Booking matched to the party, not the property's whole inventory; a room can appear twice with different meal plans or cancellation policies.
 - **A destination that names a property** ("Memmo Alfama Lisbon") prices just that property — the status row says `kind: hotel`.
@@ -299,7 +313,7 @@ With `includeRooms: true` you get one `room` row per room and rate combination, 
 
 ### What does `taxes_included: false` mean?
 
-Booking lists charges it excludes from the displayed total (city tax, VAT, resort fees). `taxes_fees_excluded` holds their amount in your currency and `charges_note` Booking's wording.
+The returned excluded-charge aggregate was nonzero. `taxes_fees_excluded` copies that amount, but its separate currency is not retained and its completeness is not verified. True means zero OR missing aggregate when a price exists. Neither flag certifies a final payable total; `charges_note` can be absent.
 
 ### Why does the same hotel come back at a slightly different price on the next run?
 
@@ -313,7 +327,7 @@ Three ways to work with it rather than against it:
 
 ### Can I use it for hotel price comparison across sites?
 
-Yes — pair it with the Google Hotels and rate-parity actors below, which return every booking site's rate for the same stay, and compare the `price_total` columns.
+Pair it with the Google Hotels or rate-parity actors below to compare the quotes their sources expose for the same stay. Match currency, occupancy and available rate conditions; these price fields do not establish equivalent payable totals or eligibility.
 
 ### How do I build a Booking.com price history?
 
@@ -331,7 +345,7 @@ That is what this does: no Booking.com API, no key, no browser — a plain reque
 
 ### Comp-set monitoring
 
-Put the ids of your property and its competitors in `hotelIds`, schedule the run at the same hour daily for a few lead times (7, 14, 30 days), and chart `price_nightly` by `hotel_id` and `check_in`. `free_cancellation` and `breakfast_included` tell you whether a lower rate is really comparable.
+Put the ids of your property and its competitors in `hotelIds`, schedule the run at the same hour daily for a few lead times (7, 14, 30 days), and chart `price_nightly` by `hotel_id` and `check_in`. `free_cancellation` and `breakfast_included` are source-summary indicators; they do not prove that two prices have identical rate conditions or eligibility.
 
 ### Market scans
 

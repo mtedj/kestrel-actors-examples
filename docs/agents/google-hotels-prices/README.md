@@ -10,6 +10,22 @@ Google Hotels prices scraper for exact dates and guests: the lowest nightly rate
 
 For a per-run dollar ceiling, use the hosted MCP `call-actor` tool with `callOptions.maxTotalChargeUsd` outside the Actor input. After the run finishes, retrieve the dataset with `get-dataset-items`; a run response is not the data itself. Check the live schema and pricing before a large or recurring run.
 
+## Read the hotel and booking-site offer rows
+
+For cross-site price comparison, use `includeOffers: true` (the default). The dataset is a **flat list of three row types**, not a hotel object with nested offers:
+
+| Row type | Meaning and useful fields |
+|---|---|
+| `hotel` | One hotel's lowest price for the stay: `entity_id`, `check_in`, `check_out`, `name`, `nightly`, `total`, `currency`. Its `source` can be null; read offer rows for individual booking sites. |
+| `offer` | One booking site's rate: `source`, `official`, `nightly`, `total`, `currency`, `link`, `partner_url`, cancellation fields and the same stay keys. Optional values and links can be null. |
+| `status` | Counts, `error` and `offer_errors` for a place/property and stay. Never charged. Check these before interpreting missing offers. |
+
+**Join `hotel` and `offer` rows on `(entity_id, check_in, check_out)`.** Do not join solely on `hotel_id`, which can be null. For each hotel/stay, collect the matching offer rows to build a nested comparison for your user. Keep different currencies and stay dates separate. `official: true` means an official-site offer is actually present; its absence does not prove there is no direct rate or no parity violation.
+
+[Read the declared dataset fields](https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/dataset-schema.json), [an observed hotel-and-offer dataset](https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example-output.json), and [the example's input, date and limits](https://mtedj.github.io/kestrel-actors-examples/agents/google-hotels-prices/example-output-provenance.json). The example contains historical prices, not a current quote. A sampled output schema from an integration can omit optional offer fields; use the declared contract and actual returned rows together.
+
+`includeOffers: false` omits the offer rows and costs at most $0.004 per delivered priced hotel. With offers enabled, `maxOffersPerHotel: N` for N greater than zero bounds each hotel/stay at $0.004 + N × $0.002. Ten hotels with eight offers each cost at most $0.20 in listed events. A cap keeps the cheapest offers and can omit the official site; use a suitable row cap and a separate `callOptions.maxTotalChargeUsd` run ceiling, then report incomplete comparisons accurately.
+
 ## Google 酒店价格、酒店比价与 OTA 房价：中文调用与语言设置
 
 查询城市或具体酒店的指定入住日期，获得酒店价格、税费与可订状态。需要多渠道比价时开启 includeOffers；只需要酒店行时关闭，避免多余的报价行费用。
@@ -62,7 +78,7 @@ Use it when the user wants hotel prices from Google Hotels for given dates: a ci
 
 | The user asks for | Input |
 |---|---|
-| Hotel prices in a city for dates | `{"queries": ["hotels in Lisbon"], "checkIn": "2026-10-10", "checkOut": "2026-10-13", "includeOffers": false}` |
+| Hotel prices in a city for dates | `{"queries": ["hotels in Lisbon"], "checkIn": "30 days", "checkOut": "33 days", "includeOffers": false}` |
 | The 30 cheapest 4-star and 5-star hotels | add `"maxHotels": 30, "sortBy": "lowest_price", "hotelClass": ["4", "5"]` |
 | Pool, free cancellation, under 250 a night, rated 4.5+ | add `"amenities": ["pool"], "freeCancellation": true, "maxPrice": 250, "minRating": "4.5"` |
 | Address, phone, amenities, photos of each hotel | add `"includeDetails": true` (no extra charge) |

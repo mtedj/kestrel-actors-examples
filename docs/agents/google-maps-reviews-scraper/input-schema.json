@@ -66,7 +66,7 @@
       "title": "Only new reviews since the last run",
       "type": "boolean",
       "default": false,
-      "description": "false (default) = every run delivers what the other inputs ask for. true = monitoring: the actor remembers which reviews it delivered for each place (memory named by monitorKey) and later runs deliver and bill only reviews not delivered before, stopping at the first page of already-delivered ones. Put it on a schedule for \"new Google reviews every week\"; a run that finds nothing new delivers 0 rows and costs $0. The first run delivers up to maxReviewsPerPlace per place. Sort is forced to newest.",
+      "description": "false (default) keeps no memory. Set true on the FIRST run and every repeat to remember delivered reviews under monitorKey; a false run does not register its output. First run returns up to maxReviewsPerPlace. Later runs suppress remembered IDs and older backlog, using newest order. This is monitoring, not paging through history or importing an external ID list. Filtered/already-delivered reviews are free; no new rows costs $0. includeEdited controls repeat delivery of edits.",
       "sectionCaption": "Monitoring: only new reviews",
       "sectionDescription": "Deliver each review once, however often the run repeats."
     },
@@ -75,7 +75,7 @@
       "type": "string",
       "editor": "textfield",
       "default": "default",
-      "description": "Name of the memory onlyNew uses, e.g. \"acme-weekly\" (default \"default\"; letters, digits and hyphens, up to 40). Runs with the same key share one memory: give each separate feed (a client, a Slack channel, a test) its own key so they do not hide reviews from each other. Ignored unless onlyNew is true."
+      "description": "Name this review feed, e.g. \"louvre-negative-daily\" (default \"default\"; 1-40 letters, digits or hyphens). Use the SAME key, place and filters on the first onlyNew=true run and every repeat. Separate feeds or changed filter sets need different keys so their memories do not hide reviews from one another. This names stored state; it is not a password or a list of IDs. Ignored when onlyNew=false."
     },
     "includeEdited": {
       "title": "Also deliver edited reviews",
@@ -124,7 +124,7 @@
         "Only reviews still waiting for a reply"
       ],
       "default": "any",
-      "description": "\"any\" (default), \"yes\" = only reviews the owner replied to, \"no\" = only reviews still waiting for a reply. \"no\" is a reputation manager's to-do list (\"which reviews have we not answered\"); \"yes\" shows a competitor's reply tone and speed (owner_reply_at). Free."
+      "description": "\"any\" (default) keeps reviews with or without a reply and returns owner_reply_text / owner_reply_at when present. Leave \"any\" for \"include any owner reply\"; replies need no extra flag or fee. \"yes\" filters to replied-to reviews; \"no\" keeps only reviews awaiting a reply. Example: \"no\" for a reputation team's unanswered-review queue. Filtering happens before delivery and billing."
     },
     "keywords": {
       "title": "Keywords (any of)",
