@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/youtube-video-comments",
+  "input": {
+    "videoUrls": [
+      "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+    ],
+    "maxResults": 3,
+    "maxPagesPerSource": 1
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

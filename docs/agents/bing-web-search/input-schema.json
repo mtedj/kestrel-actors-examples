@@ -1,0 +1,111 @@
+{
+  "title": "Bing Search - Web Results, URLs & Snippets",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input {\"queries\": [\"project management software\"], \"maxResults\": 3, \"maxPagesPerSource\": 1}. $0.004 per parsed page plus $0.001 per delivered result. Parsed empty/filtered pages are paid. No start fee; use maxTotalChargeUsd as a run option.",
+  "required": [
+    "queries"
+  ],
+  "properties": {
+    "queries": {
+      "title": "Queries",
+      "description": "Required search phrases, e.g. [\"project management\"]. Up to 20 queries, visited in order. One maxResults cap is shared across the whole run. Use specific terms in any language. Successful parsed pages and delivered matching rows are separate paid events.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList",
+      "prefill": [
+        "project management software"
+      ],
+      "sectionCaption": "Sources"
+    },
+    "maxResults": {
+      "title": "Max results",
+      "description": "Maximum paid rows across the ENTIRE run after filters, deduplication and exclusions. Default 20; range 1–1000. Earlier targets can fill this cap. Set maxTotalChargeUsd in the Apify run options for a dollar cap; it is not an input field.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "prefill": 3,
+      "sectionCaption": "Results and filters"
+    },
+    "market": {
+      "title": "Market",
+      "description": "Bing language-country market, e.g. \"en-US\" (default), \"de-DE\" or \"fr-FR\". Sets source search preferences, not a guaranteed IP location. Queries can be in any language. No additional fee.",
+      "type": "string",
+      "default": "en-US",
+      "enum": [
+        "en-US",
+        "en-GB",
+        "en-CA",
+        "en-AU",
+        "de-DE",
+        "fr-FR",
+        "es-ES",
+        "pt-BR",
+        "ja-JP",
+        "en-IN"
+      ]
+    },
+    "textContains": {
+      "title": "Text contains",
+      "description": "Optional case-insensitive OR substring filter, e.g. [\"pricing\", \"cost\"]. Comments: matches comment text. Bing: matches title plus snippet. Empty disables. Filters run before maxResults; parsed-page fees apply, skipped rows are free.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "includeDomains": {
+      "title": "Include domains",
+      "description": "Optional allowed destination domains, e.g. [\"example.com\"]. Subdomains also match. Use bare domains, not URLs. Empty allows all. This filters fetched Bing results; it does not issue separate site: queries. No extra filter fee.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "excludeDomains": {
+      "title": "Exclude domains",
+      "description": "Optional destination domains to skip, e.g. [\"youtube.com\"]. Subdomains also match. Use bare domains, not URLs. Empty disables. Filtered rows are free; inspected pages retain their page fee.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "maxPagesPerSource": {
+      "title": "Max pages per source",
+      "description": "Maximum successfully parsed result pages per query/video, default 2; range 1–20. Each page has a fee even if filters leave zero rows. Bootstrap/sort requests are included in that fee. This limits search depth, not a guarantee of enough matching results.",
+      "type": "integer",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 20,
+      "sectionCaption": "Page budget and history"
+    },
+    "excludeIds": {
+      "title": "Exclude ids",
+      "description": "Row id values from a previous dataset, e.g. [] on the first run. Up to 5,000 IDs. Skips matching IDs even if their content changed. Excluded rows have no row fee; parsed-page fees still apply. Keep IDs in your workflow; no history is stored automatically.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "excludeContentHashes": {
+      "title": "Exclude content hashes",
+      "description": "Prior content_hash values, e.g. [] initially. Up to 5,000 SHA-256 values. Skips unchanged records while allowing changed prices/text/metrics through. Collection time, query, page position and images do not affect hashes. Caller-managed history; parsed-page fees apply.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    }
+  }
+}

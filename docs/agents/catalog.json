@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T07:24:06.518791+00:00",
+  "generatedAt": "2026-11-08T08:40:10.774933+00:00",
   "publisher": "kestrel",
   "actors": [
     {
@@ -9,7 +9,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.4",
-      "verifiedAt": "2026-11-08T07:23:55.311687+00:00",
+      "verifiedAt": "2026-11-08T08:39:58.461555+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -112,7 +112,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.23",
-      "verifiedAt": "2026-11-08T07:23:49.271381+00:00",
+      "verifiedAt": "2026-11-08T08:39:51.994675+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -198,7 +198,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:23:51.242019+00:00",
+      "verifiedAt": "2026-11-08T08:39:54.151398+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-occupancy-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -291,7 +291,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.14",
-      "verifiedAt": "2026-11-08T07:23:47.616932+00:00",
+      "verifiedAt": "2026-11-08T08:39:50.424613+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-prices-calendar",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -442,7 +442,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.6",
-      "verifiedAt": "2026-11-08T07:23:47.882254+00:00",
+      "verifiedAt": "2026-11-08T08:39:50.600385+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -508,13 +508,78 @@
       }
     },
     {
+      "actor": "kestrel/aliexpress-product-search",
+      "title": "AliExpress Product Search - Prices, Ratings & Sales",
+      "description": "Search AliExpress products by keywords with US/USD locale preferences. One row per product: title, displayed price, rating, sales label, discount, promotions and URL. Filter price or rating; skip saved IDs or hashes. Welcome offers are labeled; prices are not checkout quotes.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.5",
+      "verifiedAt": "2026-11-08T08:40:10.499454+00:00",
+      "storeUrl": "https://apify.com/kestrel/aliexpress-product-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source result page, $8 per 1,000 pages. Paid even when filters, exclusions or a recognized empty result leave zero rows. Source bootstrap/sort reads are included. Failed or blocked responses are not charged. No start fee; proxy and compute are included. See maxPagesPerSource; maxTotalChargeUsd is an Apify run option.",
+            "eventPriceUsd": 0.008
+          },
+          "product": {
+            "eventTitle": "Product",
+            "eventDescription": "One delivered product with row keys product_id, title, price, currency, rating, sales_text, discount_percent, promotion_tags, url. $2 per 1,000 rows, plus the separate parsed-page fee. Filtered, duplicate and excluded rows are not charged for the row event. No start fee; proxy and compute are included. Collection stops when the maxTotalChargeUsd run option cannot cover another page and row.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-08T08:18:18.220Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/aliexpress-product-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "product_id",
+        "title",
+        "query",
+        "url",
+        "price",
+        "price_text",
+        "currency",
+        "discount_percent",
+        "rating",
+        "sales_text",
+        "selling_points",
+        "promotion_tags",
+        "price_is_promotional",
+        "sponsored",
+        "image_url",
+        "page",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/aliexpress-product-search/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/aliexpress-reviews-scraper",
       "title": "AliExpress Reviews Scraper: Product Reviews, Ratings & Feedback",
       "description": "Scrape AliExpress product reviews by URL or item id: star rating, buyer feedback translated into 16 languages, buyer photos, country, SKU variant. Date, keyword and star filters, new-review monitoring, free sentiment analysis. For dropshipping product research. No login. API and MCP ready.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-08T07:23:57.615899+00:00",
+      "verifiedAt": "2026-11-08T08:40:00.860257+00:00",
       "storeUrl": "https://apify.com/kestrel/aliexpress-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -633,7 +698,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.3",
-      "verifiedAt": "2026-11-08T07:23:50.558790+00:00",
+      "verifiedAt": "2026-11-08T08:39:53.247466+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-best-sellers-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -702,7 +767,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-08T07:23:53.879560+00:00",
+      "verifiedAt": "2026-11-08T08:39:56.983128+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-product-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -783,7 +848,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.8.1",
-      "verifiedAt": "2026-11-08T07:23:49.736415+00:00",
+      "verifiedAt": "2026-11-08T08:39:52.906908+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -861,7 +926,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.4.3",
-      "verifiedAt": "2026-11-08T07:23:49.998009+00:00",
+      "verifiedAt": "2026-11-08T08:39:52.624942+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -929,7 +994,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:23:52.346075+00:00",
+      "verifiedAt": "2026-11-08T08:39:55.520383+00:00",
       "storeUrl": "https://apify.com/kestrel/app-store-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1016,7 +1081,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:24:00.039980+00:00",
+      "verifiedAt": "2026-11-08T08:40:03.096250+00:00",
       "storeUrl": "https://apify.com/kestrel/ashby-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1083,13 +1148,69 @@
       }
     },
     {
+      "actor": "kestrel/bing-web-search",
+      "title": "Bing Search - Web Results, URLs & Snippets",
+      "description": "Search Bing in batches by query and market. One row per organic web result: title, destination URL, domain, snippet, page and position. Filter text or domains; skip saved IDs or unchanged hashes. JSON for research agents. Public snippets only, not fetched article bodies.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-08T08:40:10.773369+00:00",
+      "storeUrl": "https://apify.com/kestrel/bing-web-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source result page, $4 per 1,000 pages. Paid even when filters, exclusions or a recognized empty result leave zero rows. Source bootstrap/sort reads are included. Failed or blocked responses are not charged. No start fee; proxy and compute are included. See maxPagesPerSource; maxTotalChargeUsd is an Apify run option.",
+            "eventPriceUsd": 0.004
+          },
+          "result": {
+            "eventTitle": "Result",
+            "eventDescription": "One delivered result with row keys title, url, domain, snippet, page, position. $1 per 1,000 rows, plus the separate parsed-page fee. Filtered, duplicate and excluded rows are not charged for the row event. No start fee; proxy and compute are included. Collection stops when the maxTotalChargeUsd run option cannot cover another page and row.",
+            "eventPriceUsd": 0.001,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-08T08:18:19.996Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/bing-web-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "title",
+        "query",
+        "url",
+        "domain",
+        "snippet",
+        "page",
+        "position",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/bing-web-search/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/booking-prices-scraper",
       "title": "Booking.com Scraper — Hotel Prices & Availability by Date",
       "description": "Booking.com prices and availability by date for destinations or hotels by URL, name or id. One row per hotel: stay total, nightly rate, taxes, free cancellation, breakfast, stars, review score, sold out. Optional room rates. Filters before billing: max price, star class. Price tracking, comp sets.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-08T07:23:54.533391+00:00",
+      "verifiedAt": "2026-11-08T08:39:57.494248+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1207,7 +1328,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.1",
-      "verifiedAt": "2026-11-08T07:23:53.989809+00:00",
+      "verifiedAt": "2026-11-08T08:39:57.113357+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1304,7 +1425,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T07:24:02.517027+00:00",
+      "verifiedAt": "2026-11-08T08:40:05.422669+00:00",
       "storeUrl": "https://apify.com/kestrel/clinical-trials-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1363,7 +1484,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:23:57.129065+00:00",
+      "verifiedAt": "2026-11-08T08:40:00.095665+00:00",
       "storeUrl": "https://apify.com/kestrel/despegar-hotel-ratings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1452,7 +1573,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-08T07:23:58.827184+00:00",
+      "verifiedAt": "2026-11-08T08:40:01.738058+00:00",
       "storeUrl": "https://apify.com/kestrel/ebay-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1541,7 +1662,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-08T07:23:49.295039+00:00",
+      "verifiedAt": "2026-11-08T08:39:52.547566+00:00",
       "storeUrl": "https://apify.com/kestrel/flight-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1621,7 +1742,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T07:24:01.317463+00:00",
+      "verifiedAt": "2026-11-08T08:40:04.015288+00:00",
       "storeUrl": "https://apify.com/kestrel/google-ads-transparency-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1688,7 +1809,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T07:24:06.517546+00:00",
+      "verifiedAt": "2026-11-08T08:40:09.446089+00:00",
       "storeUrl": "https://apify.com/kestrel/google-autocomplete-keywords",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1741,7 +1862,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.5",
-      "verifiedAt": "2026-11-08T07:23:47.595511+00:00",
+      "verifiedAt": "2026-11-08T08:39:50.331325+00:00",
       "storeUrl": "https://apify.com/kestrel/google-flights-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1824,7 +1945,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.9.11",
-      "verifiedAt": "2026-11-08T07:23:48.034524+00:00",
+      "verifiedAt": "2026-11-08T08:39:51.328086+00:00",
       "storeUrl": "https://apify.com/kestrel/google-hotels-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1942,7 +2063,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-08T07:23:59.261004+00:00",
+      "verifiedAt": "2026-11-08T08:40:02.552450+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2035,7 +2156,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-08T07:23:59.216481+00:00",
+      "verifiedAt": "2026-11-08T08:40:02.309606+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2154,7 +2275,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.11",
-      "verifiedAt": "2026-11-08T07:24:00.314920+00:00",
+      "verifiedAt": "2026-11-08T08:40:03.610160+00:00",
       "storeUrl": "https://apify.com/kestrel/google-news",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2216,7 +2337,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T07:24:01.098046+00:00",
+      "verifiedAt": "2026-11-08T08:40:04.169697+00:00",
       "storeUrl": "https://apify.com/kestrel/google-patents-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2269,7 +2390,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T07:23:53.661591+00:00",
+      "verifiedAt": "2026-11-08T08:39:56.375337+00:00",
       "storeUrl": "https://apify.com/kestrel/google-play-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2347,7 +2468,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:24:05.646524+00:00",
+      "verifiedAt": "2026-11-08T08:40:08.633196+00:00",
       "storeUrl": "https://apify.com/kestrel/google-search-rank-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2404,7 +2525,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:24:04.577267+00:00",
+      "verifiedAt": "2026-11-08T08:40:07.590600+00:00",
       "storeUrl": "https://apify.com/kestrel/google-shopping-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2467,7 +2588,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:23:59.877441+00:00",
+      "verifiedAt": "2026-11-08T08:40:02.803136+00:00",
       "storeUrl": "https://apify.com/kestrel/greenhouse-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2540,7 +2661,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T07:23:56.140055+00:00",
+      "verifiedAt": "2026-11-08T08:39:59.174978+00:00",
       "storeUrl": "https://apify.com/kestrel/hostelworld-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2633,7 +2754,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:23:50.972946+00:00",
+      "verifiedAt": "2026-11-08T08:39:53.864786+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2709,7 +2830,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-08T07:23:50.695773+00:00",
+      "verifiedAt": "2026-11-08T08:39:53.948835+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-rate-parity",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2781,7 +2902,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.2",
-      "verifiedAt": "2026-11-08T07:23:58.989502+00:00",
+      "verifiedAt": "2026-11-08T08:40:02.053503+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-reputation-checker",
       "pricing": {
         "model": "FREE",
@@ -2848,7 +2969,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:23:52.861044+00:00",
+      "verifiedAt": "2026-11-08T08:39:55.828224+00:00",
       "storeUrl": "https://apify.com/kestrel/hrs-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2928,7 +3049,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T07:24:03.605975+00:00",
+      "verifiedAt": "2026-11-08T08:40:06.662001+00:00",
       "storeUrl": "https://apify.com/kestrel/image-to-text-ocr",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2977,7 +3098,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.1",
-      "verifiedAt": "2026-11-08T07:23:57.320245+00:00",
+      "verifiedAt": "2026-11-08T08:40:00.413212+00:00",
       "storeUrl": "https://apify.com/kestrel/indeed-company-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3069,7 +3190,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:23:52.414114+00:00",
+      "verifiedAt": "2026-11-08T08:39:55.401370+00:00",
       "storeUrl": "https://apify.com/kestrel/kurzurlaub-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3142,7 +3263,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:24:04.602804+00:00",
+      "verifiedAt": "2026-11-08T08:40:08.042884+00:00",
       "storeUrl": "https://apify.com/kestrel/linkedin-job-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3210,7 +3331,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T07:24:03.386066+00:00",
+      "verifiedAt": "2026-11-08T08:40:06.313080+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-excel-tables",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3261,7 +3382,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:24:02.561664+00:00",
+      "verifiedAt": "2026-11-08T08:40:05.936963+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-markdown-pages",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3314,7 +3435,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T07:24:05.648972+00:00",
+      "verifiedAt": "2026-11-08T08:40:09.116735+00:00",
       "storeUrl": "https://apify.com/kestrel/pinterest-pin-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3377,7 +3498,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:24:04.424411+00:00",
+      "verifiedAt": "2026-11-08T08:40:07.352912+00:00",
       "storeUrl": "https://apify.com/kestrel/rss-atom-feed-reader",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3427,7 +3548,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T07:24:02.133982+00:00",
+      "verifiedAt": "2026-11-08T08:40:05.054758+00:00",
       "storeUrl": "https://apify.com/kestrel/sec-company-filings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3480,7 +3601,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.13",
-      "verifiedAt": "2026-11-08T07:24:00.275357+00:00",
+      "verifiedAt": "2026-11-08T08:40:03.373748+00:00",
       "storeUrl": "https://apify.com/kestrel/shopify-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3553,7 +3674,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:24:03.592901+00:00",
+      "verifiedAt": "2026-11-08T08:40:06.978557+00:00",
       "storeUrl": "https://apify.com/kestrel/sitemap-url-extractor",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3604,7 +3725,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T07:24:01.325349+00:00",
+      "verifiedAt": "2026-11-08T08:40:04.673807+00:00",
       "storeUrl": "https://apify.com/kestrel/steam-player-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3660,7 +3781,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T07:23:52.024476+00:00",
+      "verifiedAt": "2026-11-08T08:39:54.698681+00:00",
       "storeUrl": "https://apify.com/kestrel/trip-com-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3751,7 +3872,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-08T07:23:57.132639+00:00",
+      "verifiedAt": "2026-11-08T08:40:00.159128+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-restaurant-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3859,7 +3980,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-08T07:23:55.493226+00:00",
+      "verifiedAt": "2026-11-08T08:39:58.276287+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3953,7 +4074,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-08T07:23:55.635102+00:00",
+      "verifiedAt": "2026-11-08T08:39:58.723512+00:00",
       "storeUrl": "https://apify.com/kestrel/trustpilot-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4037,13 +4158,78 @@
       }
     },
     {
+      "actor": "kestrel/walmart-product-search",
+      "title": "Walmart Product Search - Prices, Sellers & Stock",
+      "description": "Search Walmart US products by keywords. One row per product: title, USD price, was price, rating, review count, seller, stock label and URL. Filter price, rating, seller or in-stock items; exclude ads and saved IDs or hashes. Public search observations, not checkout quotes.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-08T08:40:09.811575+00:00",
+      "storeUrl": "https://apify.com/kestrel/walmart-product-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source result page, $8 per 1,000 pages. Paid even when filters, exclusions or a recognized empty result leave zero rows. Source bootstrap/sort reads are included. Failed or blocked responses are not charged. No start fee; proxy and compute are included. See maxPagesPerSource; maxTotalChargeUsd is an Apify run option.",
+            "eventPriceUsd": 0.008
+          },
+          "product": {
+            "eventTitle": "Product",
+            "eventDescription": "One delivered product with row keys product_id, title, price, was_price, currency, rating, seller, availability, url. $2 per 1,000 rows, plus the separate parsed-page fee. Filtered, duplicate and excluded rows are not charged for the row event. No start fee; proxy and compute are included. Collection stops when the maxTotalChargeUsd run option cannot cover another page and row.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-08T08:18:05.286Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/walmart-product-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "product_id",
+        "title",
+        "query",
+        "url",
+        "price",
+        "currency",
+        "was_price",
+        "rating",
+        "review_count",
+        "seller",
+        "seller_id",
+        "brand",
+        "availability",
+        "sponsored",
+        "image_url",
+        "page",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/walmart-product-search/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/website-email-finder",
       "title": "Website Email Finder - Contacts, Source Pages & 邮箱提取",
       "description": "Extract public email contacts from supplied websites and linked contact pages. One row per website/email: address, source page and page title. Bounded same-site crawl; free duplicates and ID/hash exclusions. 网站邮箱提取。 No guessed addresses, private profiles or mailbox verification.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T07:24:02.357980+00:00",
+      "verifiedAt": "2026-11-08T08:40:05.518008+00:00",
       "storeUrl": "https://apify.com/kestrel/website-email-finder",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4088,7 +4274,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T07:24:03.539918+00:00",
+      "verifiedAt": "2026-11-08T08:40:06.549363+00:00",
       "storeUrl": "https://apify.com/kestrel/website-screenshot-capture",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4139,7 +4325,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T07:24:01.302373+00:00",
+      "verifiedAt": "2026-11-08T08:40:04.462969+00:00",
       "storeUrl": "https://apify.com/kestrel/workday-company-jobs",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4193,7 +4379,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T07:24:05.625681+00:00",
+      "verifiedAt": "2026-11-08T08:40:08.752398+00:00",
       "storeUrl": "https://apify.com/kestrel/yahoo-finance-price-history",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4257,7 +4443,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T07:24:04.632077+00:00",
+      "verifiedAt": "2026-11-08T08:40:07.711119+00:00",
       "storeUrl": "https://apify.com/kestrel/youtube-channel-videos",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4308,13 +4494,143 @@
       }
     },
     {
+      "actor": "kestrel/youtube-video-comments",
+      "title": "YouTube Comments - Text, Likes & Keyword Filters",
+      "description": "Collect top-level YouTube comments by video URL or ID, newest or top. One row per comment: text, author, likes, reply count, published label and URL. Filter keywords or likes; skip saved IDs or unchanged hashes. Rounded likes are labeled. Reply text is not collected.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-08T08:40:09.700916+00:00",
+      "storeUrl": "https://apify.com/kestrel/youtube-video-comments",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source result page, $2 per 1,000 pages. Paid even when filters, exclusions or a recognized empty result leave zero rows. Source bootstrap/sort reads are included. Failed or blocked responses are not charged. No start fee; proxy and compute are included. See maxPagesPerSource; maxTotalChargeUsd is an Apify run option.",
+            "eventPriceUsd": 0.002
+          },
+          "comment": {
+            "eventTitle": "Comment",
+            "eventDescription": "One delivered comment with row keys video_id, text, author, likes, reply_count, published_text, url. $0.8 per 1,000 rows, plus the separate parsed-page fee. Filtered, duplicate and excluded rows are not charged for the row event. No start fee; proxy and compute are included. Collection stops when the maxTotalChargeUsd run option cannot cover another page and row.",
+            "eventPriceUsd": 0.0008,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-08T08:18:05.152Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/youtube-video-comments",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "video_id",
+        "video_title",
+        "text",
+        "url",
+        "author",
+        "author_channel_id",
+        "author_channel_url",
+        "author_is_creator",
+        "author_is_verified",
+        "likes",
+        "likes_text",
+        "likes_approximate",
+        "reply_count",
+        "published_text",
+        "is_reply",
+        "page",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-comments/example.sh"
+      }
+    },
+    {
+      "actor": "kestrel/youtube-video-search",
+      "title": "YouTube Video Search - Keywords, Views & Duration",
+      "description": "Search YouTube videos by keywords. One row per video: title, channel, views, duration, published label, snippet and URL. Filter views, duration or title; skip saved IDs or unchanged hashes. Paginate public video results. Rounded metrics are labeled; no transcripts.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.5",
+      "verifiedAt": "2026-11-08T08:40:10.162735+00:00",
+      "storeUrl": "https://apify.com/kestrel/youtube-video-search",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "page-parsed": {
+            "eventTitle": "Parsed page",
+            "eventDescription": "One successfully parsed source result page, $2 per 1,000 pages. Paid even when filters, exclusions or a recognized empty result leave zero rows. Source bootstrap/sort reads are included. Failed or blocked responses are not charged. No start fee; proxy and compute are included. See maxPagesPerSource; maxTotalChargeUsd is an Apify run option.",
+            "eventPriceUsd": 0.002
+          },
+          "video": {
+            "eventTitle": "Video",
+            "eventDescription": "One delivered video with row keys video_id, title, channel_name, views, duration_seconds, published_text, url. $0.8 per 1,000 rows, plus the separate parsed-page fee. Filtered, duplicate and excluded rows are not charged for the row event. No start fee; proxy and compute are included. Collection stops when the maxTotalChargeUsd run option cannot cover another page and row.",
+            "eventPriceUsd": 0.0008,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-08T08:18:06.304Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/youtube-video-search",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "video_id",
+        "title",
+        "query",
+        "url",
+        "channel_id",
+        "channel_name",
+        "channel_url",
+        "views",
+        "views_text",
+        "views_approximate",
+        "duration_seconds",
+        "duration_text",
+        "published_text",
+        "description_snippet",
+        "image_url",
+        "page",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/youtube-video-search/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/zillow-property-search",
       "title": "Zillow Properties - Rentals, New Listings & Price Changes",
       "description": "Search Zillow real estate from city URLs: property listings and rental buildings with unit options. Each row has address, price, beds, baths, area, status and URL. Filter price and bedrooms; monitor new listings and price changes. Parsed pages are billed even with no matching rows.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T07:24:05.468089+00:00",
+      "verifiedAt": "2026-11-08T08:40:08.409491+00:00",
       "storeUrl": "https://apify.com/kestrel/zillow-property-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4382,6 +4698,29 @@
     }
   ],
   "bundles": [
+    {
+      "id": "video-web-research",
+      "title": "Video discovery, comments and web search",
+      "description": "Search YouTube videos, collect top-level comments and find Bing web results with snippets.",
+      "actors": [
+        "kestrel/youtube-video-search",
+        "kestrel/youtube-video-comments",
+        "kestrel/bing-web-search"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/video-web-research.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/youtube-video-search,kestrel/youtube-video-comments,kestrel/bing-web-search"
+    },
+    {
+      "id": "marketplace-price-research",
+      "title": "Walmart and AliExpress price research",
+      "description": "Collect public product search prices, ratings and source labels; filter results and compare saved snapshots.",
+      "actors": [
+        "kestrel/walmart-product-search",
+        "kestrel/aliexpress-product-search"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/marketplace-price-research.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/walmart-product-search,kestrel/aliexpress-product-search"
+    },
     {
       "id": "news-monitoring",
       "title": "News and feed monitoring",

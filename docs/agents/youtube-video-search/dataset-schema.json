@@ -1,0 +1,268 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "video_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "channel_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "channel_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "channel_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "views": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "views_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "views_approximate": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "duration_seconds": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "duration_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "published_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description_snippet": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "page": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "video_id",
+          "title",
+          "query",
+          "url",
+          "channel_id",
+          "channel_name",
+          "channel_url",
+          "views",
+          "views_text",
+          "views_approximate",
+          "duration_seconds",
+          "duration_text",
+          "published_text",
+          "description_snippet",
+          "image_url",
+          "page",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "video_id": {
+            "label": "Video id"
+          },
+          "title": {
+            "label": "Title"
+          },
+          "query": {
+            "label": "Query"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "channel_id": {
+            "label": "Channel id"
+          },
+          "channel_name": {
+            "label": "Channel name"
+          },
+          "channel_url": {
+            "label": "Channel url"
+          },
+          "views": {
+            "label": "Views"
+          },
+          "views_text": {
+            "label": "Views text"
+          },
+          "views_approximate": {
+            "label": "Views approximate"
+          },
+          "duration_seconds": {
+            "label": "Duration seconds"
+          },
+          "duration_text": {
+            "label": "Duration text"
+          },
+          "published_text": {
+            "label": "Published text"
+          },
+          "description_snippet": {
+            "label": "Description snippet"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "page": {
+            "label": "Page"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

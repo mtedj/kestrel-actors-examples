@@ -1,0 +1,268 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "video_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "video_title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "author": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "author_channel_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "author_channel_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "author_is_creator": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "author_is_verified": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "likes": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "likes_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "likes_approximate": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "reply_count": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "published_text": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "is_reply": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "page": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "video_id",
+          "video_title",
+          "text",
+          "url",
+          "author",
+          "author_channel_id",
+          "author_channel_url",
+          "author_is_creator",
+          "author_is_verified",
+          "likes",
+          "likes_text",
+          "likes_approximate",
+          "reply_count",
+          "published_text",
+          "is_reply",
+          "page",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "video_id": {
+            "label": "Video id"
+          },
+          "video_title": {
+            "label": "Video title"
+          },
+          "text": {
+            "label": "Text"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "author": {
+            "label": "Author"
+          },
+          "author_channel_id": {
+            "label": "Author channel id"
+          },
+          "author_channel_url": {
+            "label": "Author channel url"
+          },
+          "author_is_creator": {
+            "label": "Author is creator"
+          },
+          "author_is_verified": {
+            "label": "Author is verified"
+          },
+          "likes": {
+            "label": "Likes"
+          },
+          "likes_text": {
+            "label": "Likes text"
+          },
+          "likes_approximate": {
+            "label": "Likes approximate"
+          },
+          "reply_count": {
+            "label": "Reply count"
+          },
+          "published_text": {
+            "label": "Published text"
+          },
+          "is_reply": {
+            "label": "Is reply"
+          },
+          "page": {
+            "label": "Page"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

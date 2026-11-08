@@ -1,0 +1,268 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "product_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "was_price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "review_count": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "seller": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "seller_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "brand": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "availability": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sponsored": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "page": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "product_id",
+          "title",
+          "query",
+          "url",
+          "price",
+          "currency",
+          "was_price",
+          "rating",
+          "review_count",
+          "seller",
+          "seller_id",
+          "brand",
+          "availability",
+          "sponsored",
+          "image_url",
+          "page",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "product_id": {
+            "label": "Product id"
+          },
+          "title": {
+            "label": "Title"
+          },
+          "query": {
+            "label": "Query"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "price": {
+            "label": "Price"
+          },
+          "currency": {
+            "label": "Currency"
+          },
+          "was_price": {
+            "label": "Was price"
+          },
+          "rating": {
+            "label": "Rating"
+          },
+          "review_count": {
+            "label": "Review count"
+          },
+          "seller": {
+            "label": "Seller"
+          },
+          "seller_id": {
+            "label": "Seller id"
+          },
+          "brand": {
+            "label": "Brand"
+          },
+          "availability": {
+            "label": "Availability"
+          },
+          "sponsored": {
+            "label": "Sponsored"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "page": {
+            "label": "Page"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T07:24:06.518791+00:00",
+  "generatedAt": "2026-11-08T08:40:10.774933+00:00",
   "actors": [
     {
       "actor": "kestrel/agoda-prices-scraper",
@@ -64,6 +64,19 @@
         "airbnb-reviews-scraper.py",
         "airbnb-reviews-scraper.js",
         "airbnb-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/aliexpress-product-search",
+      "buildId": "xMuMYWCa9wxViRv1c",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "aliexpress-product-search.py",
+        "aliexpress-product-search.js",
+        "aliexpress-product-search.sh"
       ]
     },
     {
@@ -155,6 +168,19 @@
         "ashby-jobs-scraper.py",
         "ashby-jobs-scraper.js",
         "ashby-jobs-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/bing-web-search",
+      "buildId": "vvBqcjauIl13M0FQk",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "bing-web-search.py",
+        "bing-web-search.js",
+        "bing-web-search.sh"
       ]
     },
     {
@@ -665,6 +691,19 @@
       ]
     },
     {
+      "actor": "kestrel/walmart-product-search",
+      "buildId": "vyyhezM1ER37bisP2",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "walmart-product-search.py",
+        "walmart-product-search.js",
+        "walmart-product-search.sh"
+      ]
+    },
+    {
       "actor": "kestrel/website-email-finder",
       "buildId": "a0yT4vYulSXmydjGV",
       "buildNumber": "1.0.8",
@@ -727,6 +766,32 @@
         "youtube-channel-videos.py",
         "youtube-channel-videos.js",
         "youtube-channel-videos.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/youtube-video-comments",
+      "buildId": "disoCZaPAYgmHUm8a",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "youtube-video-comments.py",
+        "youtube-video-comments.js",
+        "youtube-video-comments.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/youtube-video-search",
+      "buildId": "Oi3Dzpp031MydWysm",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "youtube-video-search.py",
+        "youtube-video-search.js",
+        "youtube-video-search.sh"
       ]
     },
     {

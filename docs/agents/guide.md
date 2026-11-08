@@ -16,6 +16,8 @@ For REST API calls, send the Actor input body to `POST https://api.apify.com/v2/
 
 ## Find the right workflow
 
+- [Video discovery, comments and web search](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/video-web-research.html): Search YouTube videos, collect top-level comments and find Bing web results with snippets.
+- [Walmart and AliExpress price research](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/marketplace-price-research.html): Collect public product search prices, ratings and source labels; filter results and compare saved snapshots.
 - [News and feed monitoring](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/news-monitoring.html): Read Google News articles, follow RSS feeds and discover new sitemap URLs.
 - [Business leads and public emails](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/business-leads.html): Find local businesses and extract email addresses published on their websites.
 - [Hotel and flight price comparison](https://mtedj.github.io/kestrel-actors-examples/agents/bundles/hotel-flight-prices.html): Compare hotel booking-site rates, check rate parity and collect flight prices.

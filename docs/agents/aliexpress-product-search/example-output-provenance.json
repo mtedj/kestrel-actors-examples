@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/aliexpress-product-search",
+  "runId": "UOCLBp7SLdKV1loSC",
+  "buildId": "xMuMYWCa9wxViRv1c",
+  "observedAt": "2026-11-08T08:34:26.848923+00:00",
+  "input": {
+    "queries": [
+      "ceramic mug"
+    ],
+    "maxResults": 3,
+    "maxPagesPerSource": 1
+  },
+  "rows": {
+    "product": 3
+  },
+  "limitations": "Historical owner validation sample, not customer revenue or a current price. Nulls and source labels retained; see active README for source-specific limits."
+}

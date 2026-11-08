@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-marketplace-price-research": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/walmart-product-search,kestrel/aliexpress-product-search"
+    }
+  }
+}

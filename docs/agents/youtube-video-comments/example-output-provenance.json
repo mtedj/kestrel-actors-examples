@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/youtube-video-comments",
+  "runId": "mqbgi7lqgE2H5U83K",
+  "buildId": "disoCZaPAYgmHUm8a",
+  "observedAt": "2026-11-08T08:34:27.795218+00:00",
+  "input": {
+    "videoUrls": [
+      "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+    ],
+    "maxResults": 3,
+    "maxPagesPerSource": 1
+  },
+  "rows": {
+    "comment": 3
+  },
+  "limitations": "Historical owner validation sample, not customer revenue or a current price. Nulls and source labels retained; see active README for source-specific limits."
+}

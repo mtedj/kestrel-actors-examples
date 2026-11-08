@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/youtube-video-search",
+  "runId": "lL66q2gdOP2sgwcXh",
+  "buildId": "Oi3Dzpp031MydWysm",
+  "observedAt": "2026-11-08T08:37:42.799702+00:00",
+  "input": {
+    "queries": [
+      "project management"
+    ],
+    "maxResults": 3,
+    "maxPagesPerSource": 1
+  },
+  "rows": {
+    "video": 3
+  },
+  "limitations": "Historical owner validation sample, not customer revenue or a current price. Nulls and source labels retained; see active README for source-specific limits."
+}

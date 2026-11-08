@@ -1,0 +1,91 @@
+{
+  "title": "YouTube Comments - Text, Likes & Keyword Filters",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input {\"videoUrls\": [\"https://www.youtube.com/watch?v=jNQXAC9IVRw\"], \"maxResults\": 3, \"maxPagesPerSource\": 1}. $0.002 per parsed page plus $0.0008 per delivered comment. Parsed empty/filtered pages are paid. No start fee; use maxTotalChargeUsd as a run option.",
+  "required": [
+    "videoUrls"
+  ],
+  "properties": {
+    "videoUrls": {
+      "title": "Video urls",
+      "description": "Required YouTube video URLs or 11-character IDs, e.g. [\"https://www.youtube.com/watch?v=jNQXAC9IVRw\"]. Up to 20 videos; URLs and equivalent IDs deduplicate. Top-level comments only; reply text is not fetched. maxResults is shared across all videos.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList",
+      "prefill": [
+        "https://www.youtube.com/watch?v=jNQXAC9IVRw"
+      ],
+      "sectionCaption": "Sources"
+    },
+    "maxResults": {
+      "title": "Max results",
+      "description": "Maximum paid rows across the ENTIRE run after filters, deduplication and exclusions. Default 20; range 1–1000. Earlier targets can fill this cap. Set maxTotalChargeUsd in the Apify run options for a dollar cap; it is not an input field.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "prefill": 3,
+      "sectionCaption": "Results and filters"
+    },
+    "sortBy": {
+      "title": "Sort by",
+      "description": "\"newest\" (default) uses YouTube Newest ordering. Use \"top\" for requests for top, best or most popular comments. Both collect top-level comments only. Sort/bootstrap reads are included in the parsed-page price. Replies are not collected.",
+      "type": "string",
+      "default": "newest",
+      "enum": [
+        "newest",
+        "top"
+      ]
+    },
+    "textContains": {
+      "title": "Text contains",
+      "description": "Optional case-insensitive OR substring filter, e.g. [\"pricing\", \"cost\"]. Comments: matches comment text. Bing: matches title plus snippet. Empty disables. Filters run before maxResults; parsed-page fees apply, skipped rows are free.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "minLikes": {
+      "title": "Min likes",
+      "description": "Minimum comment likes, e.g. 100. 0 disables. Missing counts fail a positive threshold. Rounded source labels such as 1.2K are approximate; inspect likes_approximate. Filters before maxResults. No extra filter fee.",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
+    "maxPagesPerSource": {
+      "title": "Max pages per source",
+      "description": "Maximum successfully parsed result pages per query/video, default 2; range 1–20. Each page has a fee even if filters leave zero rows. Bootstrap/sort requests are included in that fee. This limits search depth, not a guarantee of enough matching results.",
+      "type": "integer",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 20,
+      "sectionCaption": "Page budget and history"
+    },
+    "excludeIds": {
+      "title": "Exclude ids",
+      "description": "Row id values from a previous dataset, e.g. [] on the first run. Up to 5,000 IDs. Skips matching IDs even if their content changed. Excluded rows have no row fee; parsed-page fees still apply. Keep IDs in your workflow; no history is stored automatically.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "excludeContentHashes": {
+      "title": "Exclude content hashes",
+      "description": "Prior content_hash values, e.g. [] initially. Up to 5,000 SHA-256 values. Skips unchanged records while allowing changed prices/text/metrics through. Collection time, query, page position and images do not affect hashes. Caller-managed history; parsed-page fees apply.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    }
+  }
+}

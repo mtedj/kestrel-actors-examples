@@ -1,0 +1,119 @@
+{
+  "title": "Walmart Product Search - Prices, Sellers & Stock",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input {\"queries\": [\"wireless headphones\"], \"maxResults\": 3, \"maxPagesPerSource\": 1}. $0.008 per parsed page plus $0.002 per delivered product. Parsed empty/filtered pages are paid. No start fee; use maxTotalChargeUsd as a run option.",
+  "required": [
+    "queries"
+  ],
+  "properties": {
+    "queries": {
+      "title": "Queries",
+      "description": "Required search phrases, e.g. [\"project management\"]. Up to 20 queries, visited in order. One maxResults cap is shared across the whole run. Use specific terms in any language. Successful parsed pages and delivered matching rows are separate paid events.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList",
+      "prefill": [
+        "wireless headphones"
+      ],
+      "sectionCaption": "Sources"
+    },
+    "maxResults": {
+      "title": "Max results",
+      "description": "Maximum paid rows across the ENTIRE run after filters, deduplication and exclusions. Default 20; range 1–1000. Earlier targets can fill this cap. Set maxTotalChargeUsd in the Apify run options for a dollar cap; it is not an input field.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "prefill": 3,
+      "sectionCaption": "Results and filters"
+    },
+    "titleContains": {
+      "title": "Title contains",
+      "description": "Optional case-insensitive OR substring filter on the video/product title, e.g. [\"wireless\", \"bluetooth\"]. Empty disables. Filters run before maxResults; inspected pages still carry page fees. No extra filter fee.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "minPrice": {
+      "title": "Min price",
+      "description": "Minimum displayed USD price, e.g. 5. 0 disables. Source offer conditions still apply. Missing prices fail an active price filter. Filters before maxResults. No extra filter fee.",
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
+    "maxPrice": {
+      "title": "Max price",
+      "description": "Maximum displayed USD price, e.g. 50. 0 disables. This is not a checkout-total or shipping-inclusive limit. Missing prices fail an active filter; minimum must not exceed a positive maximum. No extra filter fee.",
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
+    "minRating": {
+      "title": "Min rating",
+      "description": "Minimum source star rating from 0 to 5, e.g. 4.5. 0 disables. Missing ratings fail a positive threshold. No sentiment is inferred. Filters before maxResults; no extra filter fee.",
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5
+    },
+    "sellers": {
+      "title": "Sellers",
+      "description": "Optional exact, case-insensitive seller names, e.g. [\"Walmart.com\"]. Copy seller values from an initial result. Empty accepts all sellers. Missing seller names fail an active filter. No extra filter fee.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "onlyInStock": {
+      "title": "Only in stock",
+      "description": "false (default) keeps all stock labels. true keeps only source-confirmed IN_STOCK search cards. This is not store-specific or ZIP-code inventory. Missing availability fails the filter. No extra filter fee.",
+      "type": "boolean",
+      "default": false
+    },
+    "excludeSponsored": {
+      "title": "Exclude sponsored",
+      "description": "false (default) keeps sponsored and organic cards. true keeps only source-confirmed organic cards; unknown sponsorship is also excluded. Filters before maxResults; no extra filter fee.",
+      "type": "boolean",
+      "default": false
+    },
+    "maxPagesPerSource": {
+      "title": "Max pages per source",
+      "description": "Maximum successfully parsed result pages per query/video, default 2; range 1–20. Each page has a fee even if filters leave zero rows. Bootstrap/sort requests are included in that fee. This limits search depth, not a guarantee of enough matching results.",
+      "type": "integer",
+      "default": 2,
+      "minimum": 1,
+      "maximum": 20,
+      "sectionCaption": "Page budget and history"
+    },
+    "excludeIds": {
+      "title": "Exclude ids",
+      "description": "Row id values from a previous dataset, e.g. [] on the first run. Up to 5,000 IDs. Skips matching IDs even if their content changed. Excluded rows have no row fee; parsed-page fees still apply. Keep IDs in your workflow; no history is stored automatically.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    },
+    "excludeContentHashes": {
+      "title": "Exclude content hashes",
+      "description": "Prior content_hash values, e.g. [] initially. Up to 5,000 SHA-256 values. Skips unchanged records while allowing changed prices/text/metrics through. Collection time, query, page position and images do not affect hashes. Caller-managed history; parsed-page fees apply.",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "editor": "stringList"
+    }
+  }
+}

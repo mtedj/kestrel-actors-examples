@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-video-web-research": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/youtube-video-search,kestrel/youtube-video-comments,kestrel/bing-web-search"
+    }
+  }
+}

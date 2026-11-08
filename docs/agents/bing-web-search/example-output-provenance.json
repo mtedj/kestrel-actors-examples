@@ -1,0 +1,17 @@
+{
+  "actor": "kestrel/bing-web-search",
+  "runId": "PtGn1COiAzsEMlYye",
+  "buildId": "vvBqcjauIl13M0FQk",
+  "observedAt": "2026-11-08T08:34:26.354701+00:00",
+  "input": {
+    "queries": [
+      "project management software"
+    ],
+    "maxResults": 3,
+    "maxPagesPerSource": 1
+  },
+  "rows": {
+    "result": 3
+  },
+  "limitations": "Historical owner validation sample, not customer revenue or a current price. Nulls and source labels retained; see active README for source-specific limits."
+}

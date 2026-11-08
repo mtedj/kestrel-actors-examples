@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "page-parsed": {
+      "eventTitle": "Parsed page",
+      "eventDescription": "One successfully parsed source result page, $8 per 1,000 pages. Paid even when filters, exclusions or a recognized empty result leave zero rows. Source bootstrap/sort reads are included. Failed or blocked responses are not charged. No start fee; proxy and compute are included. See maxPagesPerSource; maxTotalChargeUsd is an Apify run option.",
+      "eventPriceUsd": 0.008
+    },
+    "product": {
+      "eventTitle": "Product",
+      "eventDescription": "One delivered product with row keys product_id, title, price, was_price, currency, rating, seller, availability, url. $2 per 1,000 rows, plus the separate parsed-page fee. Filtered, duplicate and excluded rows are not charged for the row event. No start fee; proxy and compute are included. Collection stops when the maxTotalChargeUsd run option cannot cover another page and row.",
+      "eventPriceUsd": 0.002,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-08T08:18:05.286Z"
+}
