@@ -1,4 +1,4 @@
-# kestrel/pinterest-pin-search | input checked against build 1.0.5 on 2026-11-07.
+# kestrel/pinterest-pin-search | input checked against build 1.0.5 on 2026-11-08.
 # Install: python -m pip install 'apify-client>=3.1,<4'
 # Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 # Change the sample targets before use. APIFY_TOKEN comes from your environment.

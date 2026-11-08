@@ -1,6 +1,6 @@
 # kestrel Apify Actors
 
-> Structured public web data through Apify MCP and REST APIs. 57 published Actors; status, prices and schemas checked 2026-11-07.
+> Structured public web data through Apify MCP and REST APIs. 57 published Actors; status, prices and schemas checked 2026-11-08.
 
 ## Start here
 

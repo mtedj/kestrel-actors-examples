@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# kestrel/hotel-reputation-checker | input checked against build 1.3.2 on 2026-11-07.
+# kestrel/hotel-reputation-checker | input checked against build 1.3.2 on 2026-11-08.
 # Requires bash, curl and jq. FREE Actor: no event fees; $0.25 run budget. Check platform usage costs.
 # Change the sample targets before use. APIFY_TOKEN comes from your environment.
 set -euo pipefail

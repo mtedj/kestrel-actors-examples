@@ -1,6 +1,6 @@
-// kestrel/amazon-reviews-scraper | input checked against build 1.7.3 on 2026-11-07.
+// kestrel/amazon-reviews-scraper | input checked against build 1.8.1 on 2026-11-08.
 // Install: npm install 'apify-client@^2'
-// Paid sample: $0.25 event-charge ceiling; may stop before completing the input. Apify notice: UNDER_MAINTENANCE; check availability.
+// Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 // Change the sample targets before use. APIFY_TOKEN comes from your environment.
 const { ApifyClient } = require('apify-client');
 const input = {

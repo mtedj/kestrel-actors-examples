@@ -5,7 +5,7 @@
       "https://blog.python.org/feeds/posts/default?alt=rss",
       "https://github.com/python/cpython/releases.atom"
     ],
-    "sinceDate": "2026-10-31",
+    "sinceDate": "2026-11-01",
     "excludeIds": [],
     "maxResults": 20,
     "maxItemsPerFeed": 10

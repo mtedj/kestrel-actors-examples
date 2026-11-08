@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# kestrel/amazon-reviews-scraper | input checked against build 1.7.3 on 2026-11-07.
-# Requires bash, curl and jq. Paid sample: $0.25 event-charge ceiling; may stop before completing the input. Apify notice: UNDER_MAINTENANCE; check availability.
+# kestrel/amazon-reviews-scraper | input checked against build 1.8.1 on 2026-11-08.
+# Requires bash, curl and jq. Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 # Change the sample targets before use. APIFY_TOKEN comes from your environment.
 set -euo pipefail
 : "${APIFY_TOKEN:?Set APIFY_TOKEN in your environment}"

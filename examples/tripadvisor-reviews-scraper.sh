@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# kestrel/tripadvisor-reviews-scraper | input checked against build 1.2.5 on 2026-11-07.
+# kestrel/tripadvisor-reviews-scraper | input checked against build 1.2.5 on 2026-11-08.
 # Requires bash, curl and jq. Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 # Change the sample targets before use. APIFY_TOKEN comes from your environment.
 set -euo pipefail

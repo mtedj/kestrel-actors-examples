@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T17:53:05.753257+00:00",
+  "generatedAt": "2026-11-08T07:24:06.518791+00:00",
   "actors": [
     {
       "actor": "kestrel/agoda-prices-scraper",
@@ -107,9 +107,9 @@
     },
     {
       "actor": "kestrel/amazon-reviews-scraper",
-      "buildId": "i3PoO3ts8q3DelZOW",
-      "buildNumber": "1.7.3",
-      "notice": "UNDER_MAINTENANCE",
+      "buildId": "gCbjhc4puJthh5B6a",
+      "buildNumber": "1.8.1",
+      "notice": "NONE",
       "pricingModel": "PAY_PER_EVENT",
       "maxTotalChargeUsd": 0.25,
       "files": [

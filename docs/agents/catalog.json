@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T17:53:05.753257+00:00",
+  "generatedAt": "2026-11-08T07:24:06.518791+00:00",
   "publisher": "kestrel",
   "actors": [
     {
@@ -9,7 +9,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.4",
-      "verifiedAt": "2026-11-07T17:52:54.832928+00:00",
+      "verifiedAt": "2026-11-08T07:23:55.311687+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -112,7 +112,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.23",
-      "verifiedAt": "2026-11-07T17:52:48.594229+00:00",
+      "verifiedAt": "2026-11-08T07:23:49.271381+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -198,7 +198,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:52:50.543464+00:00",
+      "verifiedAt": "2026-11-08T07:23:51.242019+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-occupancy-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -291,7 +291,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.14",
-      "verifiedAt": "2026-11-07T17:52:46.992675+00:00",
+      "verifiedAt": "2026-11-08T07:23:47.616932+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-prices-calendar",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -442,7 +442,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.6",
-      "verifiedAt": "2026-11-07T17:52:47.264923+00:00",
+      "verifiedAt": "2026-11-08T07:23:47.882254+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -514,7 +514,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-07T17:52:57.144755+00:00",
+      "verifiedAt": "2026-11-08T07:23:57.615899+00:00",
       "storeUrl": "https://apify.com/kestrel/aliexpress-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -633,7 +633,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.3",
-      "verifiedAt": "2026-11-07T17:52:49.837272+00:00",
+      "verifiedAt": "2026-11-08T07:23:50.558790+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-best-sellers-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -702,7 +702,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-07T17:52:53.403504+00:00",
+      "verifiedAt": "2026-11-08T07:23:53.879560+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-product-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -780,10 +780,10 @@
       "actor": "kestrel/amazon-reviews-scraper",
       "title": "Amazon Reviews Scraper — Customer Reviews, Product Reviews",
       "description": "Amazon product-page reviews by ASIN or URL. UK examples verified; US reviews currently hit a sign-in wall. One review row: rating, text, date, author, verified purchase and helpful votes. Optional product ratings. Public-page samples only, not full history; availability varies by marketplace.",
-      "notice": "UNDER_MAINTENANCE",
+      "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
-      "buildNumber": "1.7.3",
-      "verifiedAt": "2026-11-07T17:52:49.129379+00:00",
+      "buildNumber": "1.8.1",
+      "verifiedAt": "2026-11-08T07:23:49.736415+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -806,7 +806,7 @@
       "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/amazon-reviews-scraper",
       "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/input-schema.json",
       "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/mcp-call.json",
-      "recommended": false,
+      "recommended": true,
       "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/amazon-reviews-scraper/dataset-schema.json",
       "declaredOutputFields": [
         "type",
@@ -861,7 +861,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.4.3",
-      "verifiedAt": "2026-11-07T17:52:49.292064+00:00",
+      "verifiedAt": "2026-11-08T07:23:49.998009+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -929,7 +929,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:52:51.969440+00:00",
+      "verifiedAt": "2026-11-08T07:23:52.346075+00:00",
       "storeUrl": "https://apify.com/kestrel/app-store-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1016,7 +1016,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:52:59.620605+00:00",
+      "verifiedAt": "2026-11-08T07:24:00.039980+00:00",
       "storeUrl": "https://apify.com/kestrel/ashby-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1089,7 +1089,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-07T17:52:53.792761+00:00",
+      "verifiedAt": "2026-11-08T07:23:54.533391+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1207,7 +1207,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.1",
-      "verifiedAt": "2026-11-07T17:52:53.511651+00:00",
+      "verifiedAt": "2026-11-08T07:23:53.989809+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1304,7 +1304,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-07T17:53:01.900722+00:00",
+      "verifiedAt": "2026-11-08T07:24:02.517027+00:00",
       "storeUrl": "https://apify.com/kestrel/clinical-trials-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1363,7 +1363,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:52:56.435748+00:00",
+      "verifiedAt": "2026-11-08T07:23:57.129065+00:00",
       "storeUrl": "https://apify.com/kestrel/despegar-hotel-ratings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1452,7 +1452,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-07T17:52:58.077203+00:00",
+      "verifiedAt": "2026-11-08T07:23:58.827184+00:00",
       "storeUrl": "https://apify.com/kestrel/ebay-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1541,7 +1541,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-07T17:52:48.714540+00:00",
+      "verifiedAt": "2026-11-08T07:23:49.295039+00:00",
       "storeUrl": "https://apify.com/kestrel/flight-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1621,7 +1621,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T17:53:00.363759+00:00",
+      "verifiedAt": "2026-11-08T07:24:01.317463+00:00",
       "storeUrl": "https://apify.com/kestrel/google-ads-transparency-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1688,7 +1688,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T17:53:05.752544+00:00",
+      "verifiedAt": "2026-11-08T07:24:06.517546+00:00",
       "storeUrl": "https://apify.com/kestrel/google-autocomplete-keywords",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1741,7 +1741,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.5",
-      "verifiedAt": "2026-11-07T17:52:46.958553+00:00",
+      "verifiedAt": "2026-11-08T07:23:47.595511+00:00",
       "storeUrl": "https://apify.com/kestrel/google-flights-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1824,7 +1824,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.9.11",
-      "verifiedAt": "2026-11-07T17:52:47.476163+00:00",
+      "verifiedAt": "2026-11-08T07:23:48.034524+00:00",
       "storeUrl": "https://apify.com/kestrel/google-hotels-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1942,7 +1942,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-07T17:52:58.825079+00:00",
+      "verifiedAt": "2026-11-08T07:23:59.261004+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2035,7 +2035,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-07T17:52:58.700076+00:00",
+      "verifiedAt": "2026-11-08T07:23:59.216481+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2154,7 +2154,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.11",
-      "verifiedAt": "2026-11-07T17:52:59.872956+00:00",
+      "verifiedAt": "2026-11-08T07:24:00.314920+00:00",
       "storeUrl": "https://apify.com/kestrel/google-news",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2216,7 +2216,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T17:53:00.660504+00:00",
+      "verifiedAt": "2026-11-08T07:24:01.098046+00:00",
       "storeUrl": "https://apify.com/kestrel/google-patents-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2269,7 +2269,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T17:52:52.920048+00:00",
+      "verifiedAt": "2026-11-08T07:23:53.661591+00:00",
       "storeUrl": "https://apify.com/kestrel/google-play-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2347,7 +2347,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:53:05.081355+00:00",
+      "verifiedAt": "2026-11-08T07:24:05.646524+00:00",
       "storeUrl": "https://apify.com/kestrel/google-search-rank-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2404,7 +2404,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:53:04.024585+00:00",
+      "verifiedAt": "2026-11-08T07:24:04.577267+00:00",
       "storeUrl": "https://apify.com/kestrel/google-shopping-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2467,7 +2467,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:52:59.123230+00:00",
+      "verifiedAt": "2026-11-08T07:23:59.877441+00:00",
       "storeUrl": "https://apify.com/kestrel/greenhouse-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2540,7 +2540,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T17:52:55.439622+00:00",
+      "verifiedAt": "2026-11-08T07:23:56.140055+00:00",
       "storeUrl": "https://apify.com/kestrel/hostelworld-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2633,7 +2633,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:52:50.399081+00:00",
+      "verifiedAt": "2026-11-08T07:23:50.972946+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2709,7 +2709,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-07T17:52:50.318747+00:00",
+      "verifiedAt": "2026-11-08T07:23:50.695773+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-rate-parity",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2781,7 +2781,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.2",
-      "verifiedAt": "2026-11-07T17:52:58.564848+00:00",
+      "verifiedAt": "2026-11-08T07:23:58.989502+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-reputation-checker",
       "pricing": {
         "model": "FREE",
@@ -2848,7 +2848,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:52:52.159706+00:00",
+      "verifiedAt": "2026-11-08T07:23:52.861044+00:00",
       "storeUrl": "https://apify.com/kestrel/hrs-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2928,7 +2928,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T17:53:03.076645+00:00",
+      "verifiedAt": "2026-11-08T07:24:03.605975+00:00",
       "storeUrl": "https://apify.com/kestrel/image-to-text-ocr",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2977,7 +2977,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.1",
-      "verifiedAt": "2026-11-07T17:52:56.834835+00:00",
+      "verifiedAt": "2026-11-08T07:23:57.320245+00:00",
       "storeUrl": "https://apify.com/kestrel/indeed-company-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3069,7 +3069,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:52:51.866348+00:00",
+      "verifiedAt": "2026-11-08T07:23:52.414114+00:00",
       "storeUrl": "https://apify.com/kestrel/kurzurlaub-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3142,7 +3142,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:53:04.490436+00:00",
+      "verifiedAt": "2026-11-08T07:24:04.602804+00:00",
       "storeUrl": "https://apify.com/kestrel/linkedin-job-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3210,7 +3210,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T17:53:02.636570+00:00",
+      "verifiedAt": "2026-11-08T07:24:03.386066+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-excel-tables",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3261,7 +3261,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:53:02.376104+00:00",
+      "verifiedAt": "2026-11-08T07:24:02.561664+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-markdown-pages",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3314,7 +3314,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-07T17:53:05.550315+00:00",
+      "verifiedAt": "2026-11-08T07:24:05.648972+00:00",
       "storeUrl": "https://apify.com/kestrel/pinterest-pin-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3377,7 +3377,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:53:03.666227+00:00",
+      "verifiedAt": "2026-11-08T07:24:04.424411+00:00",
       "storeUrl": "https://apify.com/kestrel/rss-atom-feed-reader",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3427,7 +3427,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-07T17:53:01.413477+00:00",
+      "verifiedAt": "2026-11-08T07:24:02.133982+00:00",
       "storeUrl": "https://apify.com/kestrel/sec-company-filings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3480,7 +3480,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.13",
-      "verifiedAt": "2026-11-07T17:52:59.732950+00:00",
+      "verifiedAt": "2026-11-08T07:24:00.275357+00:00",
       "storeUrl": "https://apify.com/kestrel/shopify-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3553,7 +3553,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:53:03.413415+00:00",
+      "verifiedAt": "2026-11-08T07:24:03.592901+00:00",
       "storeUrl": "https://apify.com/kestrel/sitemap-url-extractor",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3604,7 +3604,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T17:53:00.900374+00:00",
+      "verifiedAt": "2026-11-08T07:24:01.325349+00:00",
       "storeUrl": "https://apify.com/kestrel/steam-player-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3660,7 +3660,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T17:52:51.289459+00:00",
+      "verifiedAt": "2026-11-08T07:23:52.024476+00:00",
       "storeUrl": "https://apify.com/kestrel/trip-com-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3751,7 +3751,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-07T17:52:56.644876+00:00",
+      "verifiedAt": "2026-11-08T07:23:57.132639+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-restaurant-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3859,7 +3859,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-07T17:52:54.781172+00:00",
+      "verifiedAt": "2026-11-08T07:23:55.493226+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3953,7 +3953,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-07T17:52:55.188240+00:00",
+      "verifiedAt": "2026-11-08T07:23:55.635102+00:00",
       "storeUrl": "https://apify.com/kestrel/trustpilot-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4043,7 +4043,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-07T17:53:01.835904+00:00",
+      "verifiedAt": "2026-11-08T07:24:02.357980+00:00",
       "storeUrl": "https://apify.com/kestrel/website-email-finder",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4088,7 +4088,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-07T17:53:02.978497+00:00",
+      "verifiedAt": "2026-11-08T07:24:03.539918+00:00",
       "storeUrl": "https://apify.com/kestrel/website-screenshot-capture",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4139,7 +4139,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T17:53:00.794612+00:00",
+      "verifiedAt": "2026-11-08T07:24:01.302373+00:00",
       "storeUrl": "https://apify.com/kestrel/workday-company-jobs",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4193,7 +4193,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-07T17:53:05.179110+00:00",
+      "verifiedAt": "2026-11-08T07:24:05.625681+00:00",
       "storeUrl": "https://apify.com/kestrel/yahoo-finance-price-history",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4257,7 +4257,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-07T17:53:04.117609+00:00",
+      "verifiedAt": "2026-11-08T07:24:04.632077+00:00",
       "storeUrl": "https://apify.com/kestrel/youtube-channel-videos",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4314,7 +4314,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-07T17:53:04.733094+00:00",
+      "verifiedAt": "2026-11-08T07:24:05.468089+00:00",
       "storeUrl": "https://apify.com/kestrel/zillow-property-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
