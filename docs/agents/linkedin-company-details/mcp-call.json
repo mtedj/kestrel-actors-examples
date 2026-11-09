@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/linkedin-company-details",
+  "input": {
+    "companyUrls": [
+      "https://www.linkedin.com/company/google/"
+    ],
+    "maxResults": 3,
+    "maxSources": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

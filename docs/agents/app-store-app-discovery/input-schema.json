@@ -1,0 +1,145 @@
+{
+  "title": "Apple App Store Apps - Search, Ratings & Versions",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input {\"queries\": [\"budget planner\"], \"countries\": [\"US\"], \"maxResults\": 3, \"maxSources\": 1}. $0.002 per valid source check plus $0.0005 per delivered app. Empty or filtered checks are paid. No start fee. maxTotalChargeUsd is a run option.",
+  "required": [],
+  "properties": {
+    "queries": {
+      "title": "Queries",
+      "description": "App Store search phrases, e.g. [\"budget planner\"]. Up to 20; any language. Provide queries, appIds or both. Each query/country combination is a separate paid source check. Search is bounded by searchLimit; no pagination or complete-inventory guarantee.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "prefill": [
+        "budget planner"
+      ],
+      "sectionCaption": "Sources"
+    },
+    "appIds": {
+      "title": "App ids",
+      "description": "Numeric App Store IDs as strings, e.g. [\"310633997\"]. Up to 100. No URLs or bundle IDs. Provide appIds, queries or both. Each ID/country combination is a paid source check, including a valid not-found response. IDs are checked before keyword searches within each country.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "countries": {
+      "title": "Countries",
+      "description": "App Store storefront country codes, e.g. [\"US\"] (default) or [\"DE\", \"JP\"]. Not developer nationality. Supported: US, GB, CA, AU, DE, FR, JP, IN, AE, SG, BR, ES, IT. Each country multiplies source checks. Local currencies retained; no conversion. A row id combines app ID and country so the same app in two markets yields two rows.",
+      "type": "array",
+      "default": [
+        "US"
+      ],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "prefill": [
+        "US"
+      ]
+    },
+    "maxResults": {
+      "title": "Max results",
+      "description": "Maximum paid rows across the ENTIRE run after filters, deduplication and exclusions. Default 20; range 1–1000. Earlier targets can fill it. Set maxTotalChargeUsd in Apify run options for a dollar cap, not inside this input JSON.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "prefill": 3,
+      "sectionCaption": "Results and filters"
+    },
+    "searchLimit": {
+      "title": "Search limit",
+      "description": "Requested results in each App Store keyword response, e.g. 50 (default), range 1–200. Apple can return fewer. This is search depth before filters, not a per-query delivered-row cap. One source fee per valid response plus delivered-app fees; no pagination. Does not change ID lookups.",
+      "type": "integer",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 200
+    },
+    "minRating": {
+      "title": "Min rating",
+      "description": "Minimum App Store rating from 0 to 5, e.g. 4.5. 0 disables. Missing ratings fail a positive threshold. Ratings are storefront-specific. Applied before maxResults; no extra filter fee, successful source checks still cost money.",
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 5
+    },
+    "priceType": {
+      "title": "Price type",
+      "description": "\"all\" (default), \"free\" for upfront price 0, or \"paid\" for price greater than 0 in the local storefront currency. Missing prices fail an active filter. This does not classify subscription or in-app purchase costs. No filter fee; source checks remain paid.",
+      "type": "string",
+      "default": "all",
+      "enum": [
+        "all",
+        "free",
+        "paid"
+      ]
+    },
+    "developerContains": {
+      "title": "Developer contains",
+      "description": "Optional case-insensitive OR phrases in the app developer name, e.g. [\"Google\"]. [] disables. Filters returned apps before maxResults; it is not a developer-catalog lookup. No extra filter fee; source checks are paid.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "textContains": {
+      "title": "Text contains",
+      "description": "Optional case-insensitive OR phrases, e.g. [\"software\", \"education\"]. Matches name, bio/description, industry or category when present. [] disables. Applied before maxResults; skipped rows have no row fee, but successful source checks are paid.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hasWebsite": {
+      "title": "Has website",
+      "description": "\"any\" (default) keeps all. \"yes\" keeps rows with a published website/bio link; \"no\" keeps rows without one. The link is not fetched or verified for reachability. App Store uses sellerUrl. Filters before maxResults; no filter fee, source checks remain paid.",
+      "type": "string",
+      "default": "any",
+      "enum": [
+        "any",
+        "yes",
+        "no"
+      ]
+    },
+    "maxSources": {
+      "title": "Max sources",
+      "description": "Maximum source targets attempted across the run, default 20; range 1–100. One profile/Page/company or one app query/ID and country is one source. Failed attempts count toward this limit but have no source fee. Valid empty/filtered sources are paid. No extra filter fee.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 100,
+      "sectionCaption": "Source budget and history"
+    },
+    "excludeIds": {
+      "title": "Exclude ids",
+      "description": "Prior dataset id values, e.g. [] initially; up to 5,000. Skips identities even when they changed. App IDs include country, e.g. \"310633997:DE\". Excluded rows are free, source checks are paid. Keep history in your workflow; no automatic persistence.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "excludeContentHashes": {
+      "title": "Exclude content hashes",
+      "description": "Prior content_hash values, e.g. [] initially; up to 5,000 SHA-256 values. Skips unchanged observations but allows changed fields through. Time, query, position and image URL are excluded from the hash. Do not also exclude IDs when changes matter. Source checks remain paid; no stored history.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-company-page-enrichment": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/linkedin-company-details,kestrel/facebook-page-details"
+    }
+  }
+}

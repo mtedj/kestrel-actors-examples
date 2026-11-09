@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-app-market-research": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/app-store-app-discovery,kestrel/app-store-reviews-scraper"
+    }
+  }
+}

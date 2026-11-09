@@ -1,0 +1,318 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "platform": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "slug": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "company_urn": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "industry": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "company_size": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "headquarters": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "organization_type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "founded": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "specialties": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "linkedin_members_count": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "followers": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "street_address": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "city": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "region": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "postal_code": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "platform",
+          "slug",
+          "company_urn",
+          "name",
+          "url",
+          "description",
+          "industry",
+          "company_size",
+          "headquarters",
+          "organization_type",
+          "founded",
+          "specialties",
+          "linkedin_members_count",
+          "followers",
+          "website",
+          "street_address",
+          "city",
+          "region",
+          "postal_code",
+          "country",
+          "image_url",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "platform": {
+            "label": "Platform"
+          },
+          "slug": {
+            "label": "Slug"
+          },
+          "company_urn": {
+            "label": "Company urn"
+          },
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "industry": {
+            "label": "Industry"
+          },
+          "company_size": {
+            "label": "Company size"
+          },
+          "headquarters": {
+            "label": "Headquarters"
+          },
+          "organization_type": {
+            "label": "Organization type"
+          },
+          "founded": {
+            "label": "Founded"
+          },
+          "specialties": {
+            "label": "Specialties"
+          },
+          "linkedin_members_count": {
+            "label": "Linkedin members count"
+          },
+          "followers": {
+            "label": "Followers"
+          },
+          "website": {
+            "label": "Website"
+          },
+          "street_address": {
+            "label": "Street address"
+          },
+          "city": {
+            "label": "City"
+          },
+          "region": {
+            "label": "Region"
+          },
+          "postal_code": {
+            "label": "Postal code"
+          },
+          "country": {
+            "label": "Country"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

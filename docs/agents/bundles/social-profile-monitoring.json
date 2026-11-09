@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-social-profile-monitoring": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tiktok-profile-details,kestrel/instagram-profile-details"
+    }
+  }
+}

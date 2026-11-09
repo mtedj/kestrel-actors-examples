@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T08:40:10.774933+00:00",
+  "generatedAt": "2026-11-09T13:16:46.910416+00:00",
   "actors": [
     {
       "actor": "kestrel/agoda-prices-scraper",
@@ -145,6 +145,19 @@
       ]
     },
     {
+      "actor": "kestrel/app-store-app-discovery",
+      "buildId": "VhIngD3RdYrMjRMfZ",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "app-store-app-discovery.py",
+        "app-store-app-discovery.js",
+        "app-store-app-discovery.sh"
+      ]
+    },
+    {
       "actor": "kestrel/app-store-reviews-scraper",
       "buildId": "z9GYFk078hqnSt6Ph",
       "buildNumber": "1.0.7",
@@ -246,6 +259,19 @@
         "ebay-search-scraper.py",
         "ebay-search-scraper.js",
         "ebay-search-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/facebook-page-details",
+      "buildId": "v5eTZT7psz1ec7xcw",
+      "buildNumber": "1.0.4",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "facebook-page-details.py",
+        "facebook-page-details.js",
+        "facebook-page-details.sh"
       ]
     },
     {
@@ -509,6 +535,19 @@
       ]
     },
     {
+      "actor": "kestrel/instagram-profile-details",
+      "buildId": "PKQBG4OEzmTJNYA45",
+      "buildNumber": "1.0.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "instagram-profile-details.py",
+        "instagram-profile-details.js",
+        "instagram-profile-details.sh"
+      ]
+    },
+    {
       "actor": "kestrel/kurzurlaub-reviews-scraper",
       "buildId": "53qh07ksOMgEshyvV",
       "buildNumber": "1.0.7",
@@ -519,6 +558,19 @@
         "kurzurlaub-reviews-scraper.py",
         "kurzurlaub-reviews-scraper.js",
         "kurzurlaub-reviews-scraper.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/linkedin-company-details",
+      "buildId": "W9PgQZUYD8hiwit7V",
+      "buildNumber": "1.0.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "linkedin-company-details.py",
+        "linkedin-company-details.js",
+        "linkedin-company-details.sh"
       ]
     },
     {
@@ -636,6 +688,19 @@
         "steam-player-reviews.py",
         "steam-player-reviews.js",
         "steam-player-reviews.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/tiktok-profile-details",
+      "buildId": "uPv85hjiJIVek9Bj5",
+      "buildNumber": "1.0.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "tiktok-profile-details.py",
+        "tiktok-profile-details.js",
+        "tiktok-profile-details.sh"
       ]
     },
     {

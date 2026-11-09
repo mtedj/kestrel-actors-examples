@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/tiktok-profile-details",
+  "input": {
+    "usernames": [
+      "tiktok"
+    ],
+    "maxResults": 3,
+    "maxSources": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

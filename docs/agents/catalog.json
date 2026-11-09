@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T08:40:10.774933+00:00",
+  "generatedAt": "2026-11-09T13:16:46.910416+00:00",
   "publisher": "kestrel",
   "actors": [
     {
@@ -9,7 +9,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.4",
-      "verifiedAt": "2026-11-08T08:39:58.461555+00:00",
+      "verifiedAt": "2026-11-09T13:16:32.807619+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -112,7 +112,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.23",
-      "verifiedAt": "2026-11-08T08:39:51.994675+00:00",
+      "verifiedAt": "2026-11-09T13:16:26.209296+00:00",
       "storeUrl": "https://apify.com/kestrel/agoda-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -198,7 +198,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:39:54.151398+00:00",
+      "verifiedAt": "2026-11-09T13:16:28.424649+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-occupancy-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -291,7 +291,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.14",
-      "verifiedAt": "2026-11-08T08:39:50.424613+00:00",
+      "verifiedAt": "2026-11-09T13:16:24.444748+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-prices-calendar",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -442,7 +442,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.6",
-      "verifiedAt": "2026-11-08T08:39:50.600385+00:00",
+      "verifiedAt": "2026-11-09T13:16:24.625922+00:00",
       "storeUrl": "https://apify.com/kestrel/airbnb-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -514,7 +514,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T08:40:10.499454+00:00",
+      "verifiedAt": "2026-11-09T13:16:45.743618+00:00",
       "storeUrl": "https://apify.com/kestrel/aliexpress-product-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -579,7 +579,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-08T08:40:00.860257+00:00",
+      "verifiedAt": "2026-11-09T13:16:35.292422+00:00",
       "storeUrl": "https://apify.com/kestrel/aliexpress-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -698,7 +698,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.3",
-      "verifiedAt": "2026-11-08T08:39:53.247466+00:00",
+      "verifiedAt": "2026-11-09T13:16:27.576795+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-best-sellers-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -767,7 +767,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-08T08:39:56.983128+00:00",
+      "verifiedAt": "2026-11-09T13:16:31.460659+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-product-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -848,7 +848,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.8.1",
-      "verifiedAt": "2026-11-08T08:39:52.906908+00:00",
+      "verifiedAt": "2026-11-09T13:16:27.172307+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -926,7 +926,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.4.3",
-      "verifiedAt": "2026-11-08T08:39:52.624942+00:00",
+      "verifiedAt": "2026-11-09T13:16:26.872481+00:00",
       "storeUrl": "https://apify.com/kestrel/amazon-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -988,13 +988,92 @@
       }
     },
     {
+      "actor": "kestrel/app-store-app-discovery",
+      "title": "Apple App Store Apps - Search, Ratings & Versions",
+      "description": "Search Apple App Store apps by keywords or numeric app IDs across country storefronts. One row per app and country: developer, rating, rating count, version, price, currency and URL. Filter rating, free or paid apps and developer names; skip saved IDs or hashes for app research and monitoring.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.5",
+      "verifiedAt": "2026-11-09T13:16:46.863379+00:00",
+      "storeUrl": "https://apify.com/kestrel/app-store-app-discovery",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "source-checked": {
+            "eventTitle": "Source checked",
+            "eventDescription": "One valid public source check (one query or app ID in one country), $2 per 1,000 checks. Paid when filters, exclusions or a valid empty/not-found response leave zero rows. Failed or blocked responses and invalid input are not charged. No start fee; proxy and compute are included. maxSources limits attempted targets. maxTotalChargeUsd is the Apify run option for a dollar cap, not an input field.",
+            "eventPriceUsd": 0.002
+          },
+          "app": {
+            "eventTitle": "App",
+            "eventDescription": "One delivered app; row keys app_id, country, name, developer, rating, rating_count, version, price, currency, url. $0.5 per 1,000 rows plus the source-check fee. Filtered, duplicate and excluded rows have no row fee. No start fee; proxy and compute are included. One query/country returning three rows costs $0.0035 total; ID lookups return at most one row per country.",
+            "eventPriceUsd": 0.0005,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-09T05:44:48.540Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/app-store-app-discovery",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "platform",
+        "app_id",
+        "country",
+        "name",
+        "url",
+        "query",
+        "position",
+        "developer",
+        "developer_id",
+        "developer_url",
+        "website",
+        "seller_name",
+        "bundle_id",
+        "description",
+        "price",
+        "currency",
+        "rating",
+        "rating_count",
+        "current_version_rating",
+        "current_version_rating_count",
+        "version",
+        "released_at",
+        "updated_at",
+        "minimum_os_version",
+        "size_bytes",
+        "content_rating",
+        "primary_genre",
+        "genres",
+        "languages",
+        "image_url",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/app-store-app-discovery/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/app-store-reviews-scraper",
       "title": "Apple App Store Reviews Scraper — iOS App Reviews & Ratings",
       "description": "Get Apple App Store reviews by app ID, URL or name across country storefronts. Rows: rating, title, text, reviewer, date, app version and developer replies. Free app ratings and review counts. Filter negative reviews, star ratings, text and since date before billing. For iOS app feedback monitoring.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:39:55.520383+00:00",
+      "verifiedAt": "2026-11-09T13:16:29.887861+00:00",
       "storeUrl": "https://apify.com/kestrel/app-store-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1081,7 +1160,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:40:03.096250+00:00",
+      "verifiedAt": "2026-11-09T13:16:37.957276+00:00",
       "storeUrl": "https://apify.com/kestrel/ashby-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1154,7 +1233,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:10.773369+00:00",
+      "verifiedAt": "2026-11-09T13:16:45.820499+00:00",
       "storeUrl": "https://apify.com/kestrel/bing-web-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1210,7 +1289,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-08T08:39:57.494248+00:00",
+      "verifiedAt": "2026-11-09T13:16:31.780736+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-prices-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1328,7 +1407,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.1",
-      "verifiedAt": "2026-11-08T08:39:57.113357+00:00",
+      "verifiedAt": "2026-11-09T13:16:31.361129+00:00",
       "storeUrl": "https://apify.com/kestrel/booking-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1425,7 +1504,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T08:40:05.422669+00:00",
+      "verifiedAt": "2026-11-09T13:16:40.273678+00:00",
       "storeUrl": "https://apify.com/kestrel/clinical-trials-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1484,7 +1563,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:40:00.095665+00:00",
+      "verifiedAt": "2026-11-09T13:16:34.691235+00:00",
       "storeUrl": "https://apify.com/kestrel/despegar-hotel-ratings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1573,7 +1652,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.9",
-      "verifiedAt": "2026-11-08T08:40:01.738058+00:00",
+      "verifiedAt": "2026-11-09T13:16:36.608649+00:00",
       "storeUrl": "https://apify.com/kestrel/ebay-search-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1656,13 +1735,79 @@
       }
     },
     {
+      "actor": "kestrel/facebook-page-details",
+      "title": "Facebook Pages - Followers, Categories & Websites",
+      "description": "Read public Facebook business Pages from named Page URLs. One row per Page: name, category, description, followers, website and verified status. Filter follower counts, text or website presence; skip saved IDs or hashes for monitoring. Page details only, without posts or personal profiles.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.4",
+      "verifiedAt": "2026-11-09T13:16:45.790229+00:00",
+      "storeUrl": "https://apify.com/kestrel/facebook-page-details",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "source-checked": {
+            "eventTitle": "Source checked",
+            "eventDescription": "One valid public source check (one profile/Page/company), $2 per 1,000 checks. Paid when filters, exclusions or a valid empty/not-found response leave zero rows. Failed or blocked responses and invalid input are not charged. No start fee; proxy and compute are included. maxSources limits attempted targets. maxTotalChargeUsd is the Apify run option for a dollar cap, not an input field.",
+            "eventPriceUsd": 0.002
+          },
+          "page": {
+            "eventTitle": "Page",
+            "eventDescription": "One delivered page; row keys page_id, name, category, description, followers, website, verified. $2 per 1,000 rows plus the source-check fee. Filtered, duplicate and excluded rows have no row fee. No start fee; proxy and compute are included. One checked profile with one row costs $0.004 total.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-09T05:44:39.967Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/facebook-page-details",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "platform",
+        "page_id",
+        "profile_id",
+        "name",
+        "url",
+        "description",
+        "category",
+        "followers",
+        "followers_approximate",
+        "follower_label",
+        "following",
+        "talking_about_count",
+        "verified",
+        "website",
+        "websites",
+        "confirmed_owner_label",
+        "image_url",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/facebook-page-details/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/flight-price-tracker",
       "title": "Flight Price Tracker — Cheapest Day to Fly & Fare Calendar",
       "description": "Track Google Flights fares across 1–60 departure dates per route. One row per day: cheapest price, airline, stops and rank. Flight price calendar for one-way or round trips, with nonstop and max-price filters. Schedule snapshots for price history; threshold rows do not send notifications.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-08T08:39:52.547566+00:00",
+      "verifiedAt": "2026-11-09T13:16:26.641586+00:00",
       "storeUrl": "https://apify.com/kestrel/flight-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1742,7 +1887,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T08:40:04.015288+00:00",
+      "verifiedAt": "2026-11-09T13:16:38.900681+00:00",
       "storeUrl": "https://apify.com/kestrel/google-ads-transparency-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1809,7 +1954,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:09.446089+00:00",
+      "verifiedAt": "2026-11-09T13:16:44.675531+00:00",
       "storeUrl": "https://apify.com/kestrel/google-autocomplete-keywords",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1862,7 +2007,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.5",
-      "verifiedAt": "2026-11-08T08:39:50.331325+00:00",
+      "verifiedAt": "2026-11-09T13:16:24.448344+00:00",
       "storeUrl": "https://apify.com/kestrel/google-flights-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -1945,7 +2090,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.9.11",
-      "verifiedAt": "2026-11-08T08:39:51.328086+00:00",
+      "verifiedAt": "2026-11-09T13:16:25.071106+00:00",
       "storeUrl": "https://apify.com/kestrel/google-hotels-prices",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2063,7 +2208,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-08T08:40:02.552450+00:00",
+      "verifiedAt": "2026-11-09T13:16:37.030807+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2156,7 +2301,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.3",
-      "verifiedAt": "2026-11-08T08:40:02.309606+00:00",
+      "verifiedAt": "2026-11-09T13:16:36.858474+00:00",
       "storeUrl": "https://apify.com/kestrel/google-maps-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2275,7 +2420,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.11",
-      "verifiedAt": "2026-11-08T08:40:03.610160+00:00",
+      "verifiedAt": "2026-11-09T13:16:38.174498+00:00",
       "storeUrl": "https://apify.com/kestrel/google-news",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2337,7 +2482,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:04.169697+00:00",
+      "verifiedAt": "2026-11-09T13:16:38.989713+00:00",
       "storeUrl": "https://apify.com/kestrel/google-patents-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2390,7 +2535,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T08:39:56.375337+00:00",
+      "verifiedAt": "2026-11-09T13:16:30.915099+00:00",
       "storeUrl": "https://apify.com/kestrel/google-play-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2468,7 +2613,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:40:08.633196+00:00",
+      "verifiedAt": "2026-11-09T13:16:43.640489+00:00",
       "storeUrl": "https://apify.com/kestrel/google-search-rank-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2525,7 +2670,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:40:07.590600+00:00",
+      "verifiedAt": "2026-11-09T13:16:42.657627+00:00",
       "storeUrl": "https://apify.com/kestrel/google-shopping-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2588,7 +2733,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:40:02.803136+00:00",
+      "verifiedAt": "2026-11-09T13:16:37.651383+00:00",
       "storeUrl": "https://apify.com/kestrel/greenhouse-jobs-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2661,7 +2806,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T08:39:59.174978+00:00",
+      "verifiedAt": "2026-11-09T13:16:33.655630+00:00",
       "storeUrl": "https://apify.com/kestrel/hostelworld-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2754,7 +2899,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:39:53.864786+00:00",
+      "verifiedAt": "2026-11-09T13:16:28.213844+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-price-tracker",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2830,7 +2975,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.10",
-      "verifiedAt": "2026-11-08T08:39:53.948835+00:00",
+      "verifiedAt": "2026-11-09T13:16:28.098593+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-rate-parity",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -2902,7 +3047,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.3.2",
-      "verifiedAt": "2026-11-08T08:40:02.053503+00:00",
+      "verifiedAt": "2026-11-09T13:16:36.881300+00:00",
       "storeUrl": "https://apify.com/kestrel/hotel-reputation-checker",
       "pricing": {
         "model": "FREE",
@@ -2969,7 +3114,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:39:55.828224+00:00",
+      "verifiedAt": "2026-11-09T13:16:30.062242+00:00",
       "storeUrl": "https://apify.com/kestrel/hrs-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3049,7 +3194,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T08:40:06.662001+00:00",
+      "verifiedAt": "2026-11-09T13:16:41.321909+00:00",
       "storeUrl": "https://apify.com/kestrel/image-to-text-ocr",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3098,7 +3243,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.1",
-      "verifiedAt": "2026-11-08T08:40:00.413212+00:00",
+      "verifiedAt": "2026-11-09T13:16:34.776197+00:00",
       "storeUrl": "https://apify.com/kestrel/indeed-company-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3184,13 +3329,77 @@
       }
     },
     {
+      "actor": "kestrel/instagram-profile-details",
+      "title": "Instagram Profiles - Followers, Bios & Links",
+      "description": "Read public Instagram profiles by username or profile URL. One row per profile: followers, following, posts, bio, bio links and verified status. Filter followers, text or websites; skip saved IDs or hashes for repeat monitoring. No login required; no posts, follower lists or private accounts.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.3",
+      "verifiedAt": "2026-11-09T13:16:45.799464+00:00",
+      "storeUrl": "https://apify.com/kestrel/instagram-profile-details",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "source-checked": {
+            "eventTitle": "Source checked",
+            "eventDescription": "One valid public source check (one profile/Page/company), $2 per 1,000 checks. Paid when filters, exclusions or a valid empty/not-found response leave zero rows. Failed or blocked responses and invalid input are not charged. No start fee; proxy and compute are included. maxSources limits attempted targets. maxTotalChargeUsd is the Apify run option for a dollar cap, not an input field.",
+            "eventPriceUsd": 0.002
+          },
+          "profile": {
+            "eventTitle": "Profile",
+            "eventDescription": "One delivered profile; row keys username, name, biography, followers, following, posts, bio_links, website, verified. $2 per 1,000 rows plus the source-check fee. Filtered, duplicate and excluded rows have no row fee. No start fee; proxy and compute are included. One checked profile with one row costs $0.004 total.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-09T05:44:40.009Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/instagram-profile-details",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "platform",
+        "username",
+        "name",
+        "url",
+        "biography",
+        "followers",
+        "following",
+        "followers_approximate",
+        "posts",
+        "posts_approximate",
+        "post_count_label",
+        "verified",
+        "website",
+        "bio_links",
+        "image_url",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/instagram-profile-details/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/kurzurlaub-reviews-scraper",
       "title": "Kurzurlaub Reviews Scraper - Hotel Reviews, Gästebewertungen",
       "description": "German Kurzurlaub.de hotel reviews by URL or hotel id. One row per guest rating: 1-6 score, category scores (room, service, food, wellness, location, value), title, comments, date. Free hotel row: stars, city. Free filters: complaints, only new since a date. Kurzurlaub Bewertungen, Hotelbewertungen.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:39:55.401370+00:00",
+      "verifiedAt": "2026-11-09T13:16:29.663837+00:00",
       "storeUrl": "https://apify.com/kestrel/kurzurlaub-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3257,13 +3466,83 @@
       }
     },
     {
+      "actor": "kestrel/linkedin-company-details",
+      "title": "LinkedIn Companies - Industry, Size & Websites",
+      "description": "Read public LinkedIn company pages by company URL or slug. One row per company: industry, size band, headquarters, website, followers and description. Filter industry, size or text; skip saved IDs or hashes for monitoring. Company details only, without employee lists or email enrichment.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.3",
+      "verifiedAt": "2026-11-09T13:16:46.866318+00:00",
+      "storeUrl": "https://apify.com/kestrel/linkedin-company-details",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "source-checked": {
+            "eventTitle": "Source checked",
+            "eventDescription": "One valid public source check (one profile/Page/company), $2 per 1,000 checks. Paid when filters, exclusions or a valid empty/not-found response leave zero rows. Failed or blocked responses and invalid input are not charged. No start fee; proxy and compute are included. maxSources limits attempted targets. maxTotalChargeUsd is the Apify run option for a dollar cap, not an input field.",
+            "eventPriceUsd": 0.002
+          },
+          "company": {
+            "eventTitle": "Company",
+            "eventDescription": "One delivered company; row keys name, industry, company_size, headquarters, website, followers, linkedin_members_count. $2 per 1,000 rows plus the source-check fee. Filtered, duplicate and excluded rows have no row fee. No start fee; proxy and compute are included. One checked profile with one row costs $0.004 total.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-09T05:44:47.666Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/linkedin-company-details",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "platform",
+        "slug",
+        "company_urn",
+        "name",
+        "url",
+        "description",
+        "industry",
+        "company_size",
+        "headquarters",
+        "organization_type",
+        "founded",
+        "specialties",
+        "linkedin_members_count",
+        "followers",
+        "website",
+        "street_address",
+        "city",
+        "region",
+        "postal_code",
+        "country",
+        "image_url",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/linkedin-company-details/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/linkedin-job-search",
       "title": "LinkedIn Jobs - Job Descriptions & New Jobs",
       "description": "Search LinkedIn jobs by keyword and location. Each job includes title, company, location, posted date, URL and available salary text. Optional job descriptions and employment types. Filter company, title and date; monitor new jobs. Parsed pages are billed even when no rows match.",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:40:08.042884+00:00",
+      "verifiedAt": "2026-11-09T13:16:42.586947+00:00",
       "storeUrl": "https://apify.com/kestrel/linkedin-job-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3331,7 +3610,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T08:40:06.313080+00:00",
+      "verifiedAt": "2026-11-09T13:16:41.325021+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-excel-tables",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3382,7 +3661,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:40:05.936963+00:00",
+      "verifiedAt": "2026-11-09T13:16:40.460400+00:00",
       "storeUrl": "https://apify.com/kestrel/pdf-to-markdown-pages",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3435,7 +3714,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T08:40:09.116735+00:00",
+      "verifiedAt": "2026-11-09T13:16:43.715254+00:00",
       "storeUrl": "https://apify.com/kestrel/pinterest-pin-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3498,7 +3777,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:40:07.352912+00:00",
+      "verifiedAt": "2026-11-09T13:16:42.464749+00:00",
       "storeUrl": "https://apify.com/kestrel/rss-atom-feed-reader",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3548,7 +3827,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T08:40:05.054758+00:00",
+      "verifiedAt": "2026-11-09T13:16:39.969606+00:00",
       "storeUrl": "https://apify.com/kestrel/sec-company-filings",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3601,7 +3880,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.13",
-      "verifiedAt": "2026-11-08T08:40:03.373748+00:00",
+      "verifiedAt": "2026-11-09T13:16:37.966396+00:00",
       "storeUrl": "https://apify.com/kestrel/shopify-products",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3674,7 +3953,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:40:06.978557+00:00",
+      "verifiedAt": "2026-11-09T13:16:41.538910+00:00",
       "storeUrl": "https://apify.com/kestrel/sitemap-url-extractor",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3725,7 +4004,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T08:40:04.673807+00:00",
+      "verifiedAt": "2026-11-09T13:16:39.223530+00:00",
       "storeUrl": "https://apify.com/kestrel/steam-player-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3775,13 +4054,77 @@
       }
     },
     {
+      "actor": "kestrel/tiktok-profile-details",
+      "title": "TikTok Profiles - Followers, Likes & Bio Links",
+      "description": "Read public TikTok profiles by username or profile URL. One row per profile: followers, following, total likes, videos, bio, website and verified status. Filter followers, bio text or websites; skip saved IDs or hashes for repeat monitoring. Profile data only; no videos or follower lists.",
+      "notice": "NONE",
+      "permissionLevel": "LIMITED_PERMISSIONS",
+      "buildNumber": "1.0.3",
+      "verifiedAt": "2026-11-09T13:16:46.909473+00:00",
+      "storeUrl": "https://apify.com/kestrel/tiktok-profile-details",
+      "pricing": {
+        "model": "PAY_PER_EVENT",
+        "events": {
+          "source-checked": {
+            "eventTitle": "Source checked",
+            "eventDescription": "One valid public source check (one profile/Page/company), $2 per 1,000 checks. Paid when filters, exclusions or a valid empty/not-found response leave zero rows. Failed or blocked responses and invalid input are not charged. No start fee; proxy and compute are included. maxSources limits attempted targets. maxTotalChargeUsd is the Apify run option for a dollar cap, not an input field.",
+            "eventPriceUsd": 0.002
+          },
+          "profile": {
+            "eventTitle": "Profile",
+            "eventDescription": "One delivered profile; row keys username, name, biography, followers, following, likes, videos, website, verified. $2 per 1,000 rows plus the source-check fee. Filtered, duplicate and excluded rows have no row fee. No start fee; proxy and compute are included. One checked profile with one row costs $0.004 total.",
+            "eventPriceUsd": 0.002,
+            "isPrimaryEvent": true
+          }
+        },
+        "effectiveAt": "2026-11-09T05:44:39.983Z"
+      },
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tiktok-profile-details",
+      "inputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/input-schema.json",
+      "exampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/mcp-call.json",
+      "recommended": true,
+      "datasetSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/dataset-schema.json",
+      "declaredOutputFields": [
+        "id",
+        "type",
+        "platform",
+        "username",
+        "name",
+        "url",
+        "biography",
+        "followers",
+        "following",
+        "likes",
+        "videos",
+        "counts_approximate",
+        "verified",
+        "website",
+        "business_category",
+        "language",
+        "image_url",
+        "source_url",
+        "content_hash",
+        "fetched_at"
+      ],
+      "outputRowTypes": [],
+      "outputSchemaUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/output-schema.json",
+      "outputExampleUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/example-output.json",
+      "outputExampleProvenanceUrl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/example-output-provenance.json",
+      "apiExamples": {
+        "python": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/example.py",
+        "javascript": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/example.js",
+        "curl": "https://mtedj.github.io/kestrel-actors-examples/agents/tiktok-profile-details/example.sh"
+      }
+    },
+    {
       "actor": "kestrel/trip-com-reviews-scraper",
       "title": "Trip.com Reviews Scraper — Ctrip Hotel Guest Reviews & Ratings",
       "description": "Trip.com and Ctrip (携程) hotel guest reviews by URL or id. One row per review: 0-10 rating, 4 sub-scores, text, stay date, room, travel type, reviewer country, photos, hotel reply, source. Free hotel row: stars, address, scores. Filters before billing: language, max score (negative reviews). 酒店点评",
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T08:39:54.698681+00:00",
+      "verifiedAt": "2026-11-09T13:16:29.160117+00:00",
       "storeUrl": "https://apify.com/kestrel/trip-com-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3872,7 +4215,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-08T08:40:00.159128+00:00",
+      "verifiedAt": "2026-11-09T13:16:34.743152+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-restaurant-reviews",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -3980,7 +4323,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.2.5",
-      "verifiedAt": "2026-11-08T08:39:58.276287+00:00",
+      "verifiedAt": "2026-11-09T13:16:32.819031+00:00",
       "storeUrl": "https://apify.com/kestrel/tripadvisor-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4074,7 +4417,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.1.3",
-      "verifiedAt": "2026-11-08T08:39:58.723512+00:00",
+      "verifiedAt": "2026-11-09T13:16:33.142712+00:00",
       "storeUrl": "https://apify.com/kestrel/trustpilot-reviews-scraper",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4164,7 +4507,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:09.811575+00:00",
+      "verifiedAt": "2026-11-09T13:16:44.780900+00:00",
       "storeUrl": "https://apify.com/kestrel/walmart-product-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4229,7 +4572,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.8",
-      "verifiedAt": "2026-11-08T08:40:05.518008+00:00",
+      "verifiedAt": "2026-11-09T13:16:40.068441+00:00",
       "storeUrl": "https://apify.com/kestrel/website-email-finder",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4274,7 +4617,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.7",
-      "verifiedAt": "2026-11-08T08:40:06.549363+00:00",
+      "verifiedAt": "2026-11-09T13:16:41.339446+00:00",
       "storeUrl": "https://apify.com/kestrel/website-screenshot-capture",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4325,7 +4668,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:04.462969+00:00",
+      "verifiedAt": "2026-11-09T13:16:39.000046+00:00",
       "storeUrl": "https://apify.com/kestrel/workday-company-jobs",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4379,7 +4722,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:08.752398+00:00",
+      "verifiedAt": "2026-11-09T13:16:43.642303+00:00",
       "storeUrl": "https://apify.com/kestrel/yahoo-finance-price-history",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4443,7 +4786,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.6",
-      "verifiedAt": "2026-11-08T08:40:07.711119+00:00",
+      "verifiedAt": "2026-11-09T13:16:42.501346+00:00",
       "storeUrl": "https://apify.com/kestrel/youtube-channel-videos",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4500,7 +4843,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.4",
-      "verifiedAt": "2026-11-08T08:40:09.700916+00:00",
+      "verifiedAt": "2026-11-09T13:16:44.772724+00:00",
       "storeUrl": "https://apify.com/kestrel/youtube-video-comments",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4565,7 +4908,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.5",
-      "verifiedAt": "2026-11-08T08:40:10.162735+00:00",
+      "verifiedAt": "2026-11-09T13:16:44.774063+00:00",
       "storeUrl": "https://apify.com/kestrel/youtube-video-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4630,7 +4973,7 @@
       "notice": "NONE",
       "permissionLevel": "LIMITED_PERMISSIONS",
       "buildNumber": "1.0.9",
-      "verifiedAt": "2026-11-08T08:40:08.409491+00:00",
+      "verifiedAt": "2026-11-09T13:16:43.542237+00:00",
       "storeUrl": "https://apify.com/kestrel/zillow-property-search",
       "pricing": {
         "model": "PAY_PER_EVENT",
@@ -4698,6 +5041,39 @@
     }
   ],
   "bundles": [
+    {
+      "id": "social-profile-monitoring",
+      "title": "TikTok and Instagram profile monitoring",
+      "description": "Read public profile counters, biographies and bio links; filter known accounts and compare saved observations.",
+      "actors": [
+        "kestrel/tiktok-profile-details",
+        "kestrel/instagram-profile-details"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/social-profile-monitoring.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/tiktok-profile-details,kestrel/instagram-profile-details"
+    },
+    {
+      "id": "company-page-enrichment",
+      "title": "LinkedIn companies and Facebook Pages",
+      "description": "Enrich named company and business Page URLs with public descriptions, categories, follower counts and websites.",
+      "actors": [
+        "kestrel/linkedin-company-details",
+        "kestrel/facebook-page-details"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/company-page-enrichment.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/linkedin-company-details,kestrel/facebook-page-details"
+    },
+    {
+      "id": "app-market-research",
+      "title": "App Store discovery and review research",
+      "description": "Find iOS apps by keyword or ID, compare storefront ratings, versions and upfront prices, then collect reviews with the separate review tool.",
+      "actors": [
+        "kestrel/app-store-app-discovery",
+        "kestrel/app-store-reviews-scraper"
+      ],
+      "url": "https://mtedj.github.io/kestrel-actors-examples/agents/bundles/app-market-research.html",
+      "mcpUrl": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/app-store-app-discovery,kestrel/app-store-reviews-scraper"
+    },
     {
       "id": "video-web-research",
       "title": "Video discovery, comments and web search",

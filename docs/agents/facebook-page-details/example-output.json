@@ -1,0 +1,50 @@
+[
+  {
+    "id": "104958162837",
+    "type": "page",
+    "platform": "facebook",
+    "page_id": "104958162837",
+    "profile_id": "100044143314112",
+    "name": "Google",
+    "url": "https://www.facebook.com/Google",
+    "category": "Workplace & Office",
+    "followers": 36191652,
+    "followers_approximate": false,
+    "follower_label": "36M followers",
+    "following": null,
+    "talking_about_count": 185932,
+    "verified": true,
+    "website": "http://google.com/",
+    "websites": [
+      "http://google.com/"
+    ],
+    "confirmed_owner_label": "Google Inc.",
+    "source_url": "https://www.facebook.com/google/",
+    "content_hash": "34bcf3d17d60d7c98e6c6e0589a1d6c50d11aaa6737f40956bdbcc79005722da",
+    "fetched_at": "2026-11-09T13:14:32.490891+00:00"
+  },
+  {
+    "id": "22092443056",
+    "type": "page",
+    "platform": "facebook",
+    "page_id": "22092443056",
+    "profile_id": "100064487329582",
+    "name": "Starbucks",
+    "url": "https://www.facebook.com/Starbucks",
+    "category": "Food & beverage company",
+    "followers": 34044469,
+    "followers_approximate": false,
+    "follower_label": "34M followers",
+    "following": 67,
+    "talking_about_count": 163012,
+    "verified": true,
+    "website": "https://www.starbucks.com/",
+    "websites": [
+      "https://www.starbucks.com/"
+    ],
+    "confirmed_owner_label": "STARBUCKS CORPORATION",
+    "source_url": "https://www.facebook.com/starbucks/",
+    "content_hash": "6ffa0f34cc9402fff81c4f17eb9ba1789db85661998ee11804f8efa8f326041b",
+    "fetched_at": "2026-11-09T13:14:35.026212+00:00"
+  }
+]

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# kestrel/ebay-search-scraper | input checked against build 1.1.9 on 2026-11-08.
+# kestrel/ebay-search-scraper | input checked against build 1.1.9 on 2026-11-09.
 # Requires bash, curl and jq. Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 # Change the sample targets before use. APIFY_TOKEN comes from your environment.
 set -euo pipefail

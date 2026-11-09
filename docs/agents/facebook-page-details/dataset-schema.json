@@ -1,0 +1,281 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "platform": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "page_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "profile_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "category": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "followers": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "followers_approximate": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "follower_label": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "following": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "talking_about_count": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "verified": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "websites": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "confirmed_owner_label": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "platform",
+          "page_id",
+          "profile_id",
+          "name",
+          "url",
+          "description",
+          "category",
+          "followers",
+          "followers_approximate",
+          "follower_label",
+          "following",
+          "talking_about_count",
+          "verified",
+          "website",
+          "websites",
+          "confirmed_owner_label",
+          "image_url",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "platform": {
+            "label": "Platform"
+          },
+          "page_id": {
+            "label": "Page id"
+          },
+          "profile_id": {
+            "label": "Profile id"
+          },
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "category": {
+            "label": "Category"
+          },
+          "followers": {
+            "label": "Followers"
+          },
+          "followers_approximate": {
+            "label": "Followers approximate"
+          },
+          "follower_label": {
+            "label": "Follower label"
+          },
+          "following": {
+            "label": "Following"
+          },
+          "talking_about_count": {
+            "label": "Talking about count"
+          },
+          "verified": {
+            "label": "Verified"
+          },
+          "website": {
+            "label": "Website"
+          },
+          "websites": {
+            "label": "Websites"
+          },
+          "confirmed_owner_label": {
+            "label": "Confirmed owner label"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

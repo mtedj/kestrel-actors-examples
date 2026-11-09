@@ -1,0 +1,414 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "platform": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "app_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "country": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "query": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "position": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "developer": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "developer_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "developer_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "seller_name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "bundle_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "description": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "price": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "currency": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "rating": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "rating_count": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "current_version_rating": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "current_version_rating_count": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "version": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "released_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "updated_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "minimum_os_version": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "size_bytes": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "content_rating": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "primary_genre": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "genres": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "languages": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "platform",
+          "app_id",
+          "country",
+          "name",
+          "url",
+          "query",
+          "position",
+          "developer",
+          "developer_id",
+          "developer_url",
+          "website",
+          "seller_name",
+          "bundle_id",
+          "description",
+          "price",
+          "currency",
+          "rating",
+          "rating_count",
+          "current_version_rating",
+          "current_version_rating_count",
+          "version",
+          "released_at",
+          "updated_at",
+          "minimum_os_version",
+          "size_bytes",
+          "content_rating",
+          "primary_genre",
+          "genres",
+          "languages",
+          "image_url",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "platform": {
+            "label": "Platform"
+          },
+          "app_id": {
+            "label": "App id"
+          },
+          "country": {
+            "label": "Country"
+          },
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "query": {
+            "label": "Query"
+          },
+          "position": {
+            "label": "Position"
+          },
+          "developer": {
+            "label": "Developer"
+          },
+          "developer_id": {
+            "label": "Developer id"
+          },
+          "developer_url": {
+            "label": "Developer url"
+          },
+          "website": {
+            "label": "Website"
+          },
+          "seller_name": {
+            "label": "Seller name"
+          },
+          "bundle_id": {
+            "label": "Bundle id"
+          },
+          "description": {
+            "label": "Description"
+          },
+          "price": {
+            "label": "Price"
+          },
+          "currency": {
+            "label": "Currency"
+          },
+          "rating": {
+            "label": "Rating"
+          },
+          "rating_count": {
+            "label": "Rating count"
+          },
+          "current_version_rating": {
+            "label": "Current version rating"
+          },
+          "current_version_rating_count": {
+            "label": "Current version rating count"
+          },
+          "version": {
+            "label": "Version"
+          },
+          "released_at": {
+            "label": "Released at"
+          },
+          "updated_at": {
+            "label": "Updated at"
+          },
+          "minimum_os_version": {
+            "label": "Minimum os version"
+          },
+          "size_bytes": {
+            "label": "Size bytes"
+          },
+          "content_rating": {
+            "label": "Content rating"
+          },
+          "primary_genre": {
+            "label": "Primary genre"
+          },
+          "genres": {
+            "label": "Genres"
+          },
+          "languages": {
+            "label": "Languages"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

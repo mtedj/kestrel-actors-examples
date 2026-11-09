@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/linkedin-company-details",
+  "observedAt": "2026-11-09T13:11:57.488109+00:00",
+  "runId": "UFcTga1Qr2Hd6khOq",
+  "buildId": "W9PgQZUYD8hiwit7V",
+  "input": {
+    "companyUrls": [
+      "https://www.linkedin.com/company/google/",
+      "https://www.linkedin.com/company/apify/"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "company": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Description, biography and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Public organization pages only. Supply named /company/ URLs or slugs, not numeric IDs, personal profiles or search URLs. Industry and size filters select from the supplied companies; they do not search LinkedIn for new companies. linkedin_members_count counts LinkedIn profiles associated with the organization and is not payroll headcount. company_size is the published band. No employees, founder lookup, email addresses, revenue estimates or jobs."
+}

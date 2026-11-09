@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/facebook-page-details",
+  "input": {
+    "pageUrls": [
+      "https://www.facebook.com/Google/"
+    ],
+    "maxResults": 3,
+    "maxSources": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

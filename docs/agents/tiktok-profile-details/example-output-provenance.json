@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/tiktok-profile-details",
+  "observedAt": "2026-11-09T13:11:45.183065+00:00",
+  "runId": "VS3nG3bFRlC1D6qhw",
+  "buildId": "uPv85hjiJIVek9Bj5",
+  "input": {
+    "usernames": [
+      "tiktok",
+      "duolingo"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "profile": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Description, biography and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Public profile details only. Videos is a count, not video records. No video downloads, posts, comments, follower lists, historical growth or account access. Exact source stats are preferred; counts_approximate is true when a rounded source counter is used. Username matching protects against unrelated profiles."
+}

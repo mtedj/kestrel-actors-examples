@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/instagram-profile-details",
+  "observedAt": "2026-11-09T13:11:48.675079+00:00",
+  "runId": "BscKGcJ9Qf36w3BKx",
+  "buildId": "PKQBG4OEzmTJNYA45",
+  "input": {
+    "usernames": [
+      "natgeo",
+      "nasa"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "profile": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Description, biography and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Public profile details only. posts is the profile post count, not a dataset of posts. Followers and following are counts, not lists of people. Exact public follower counters are used; post counts may be rounded, as posts_approximate records. Private profiles, login responses and unrelated profile suggestions are not results."
+}

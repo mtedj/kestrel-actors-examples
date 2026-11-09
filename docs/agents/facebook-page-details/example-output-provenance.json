@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/facebook-page-details",
+  "observedAt": "2026-11-09T13:14:32.490891+00:00",
+  "runId": "klms8rteXcb3q3ml9",
+  "buildId": "v5eTZT7psz1ec7xcw",
+  "input": {
+    "pageUrls": [
+      "https://www.facebook.com/Google/",
+      "https://www.facebook.com/Starbucks/"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "page": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Description, biography and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Public business Pages only. Use a named Page URL or slug; numeric Page IDs, profile.php, posts, groups and personal profiles are not supported inputs. No Page discovery by category or city, no posts, reviews, emails, phone numbers or follower lists. Website means the link published by the Page. Source-rounded follower counts are labeled with followers_approximate."
+}

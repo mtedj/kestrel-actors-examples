@@ -1,4 +1,4 @@
-// kestrel/aliexpress-reviews-scraper | input checked against build 1.1.9 on 2026-11-08.
+// kestrel/aliexpress-reviews-scraper | input checked against build 1.1.9 on 2026-11-09.
 // Install: npm install 'apify-client@^2'
 // Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 // Change the sample targets before use. APIFY_TOKEN comes from your environment.

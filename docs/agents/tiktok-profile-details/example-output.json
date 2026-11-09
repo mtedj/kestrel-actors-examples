@@ -1,0 +1,42 @@
+[
+  {
+    "id": "107955",
+    "type": "profile",
+    "platform": "tiktok",
+    "username": "tiktok",
+    "name": "TikTok",
+    "url": "https://www.tiktok.com/@tiktok",
+    "followers": 96676339,
+    "following": 2,
+    "likes": 467484090,
+    "videos": 1515,
+    "counts_approximate": false,
+    "verified": true,
+    "website": "https://tiktok.com/discovermore",
+    "business_category": "Others",
+    "language": "en",
+    "source_url": "https://www.tiktok.com/@tiktok",
+    "content_hash": "3e0e6a5c283f9ec182cc490ed3894766ffe78fa4175d49aa55de47e9b5a38f8d",
+    "fetched_at": "2026-11-09T13:11:45.183065+00:00"
+  },
+  {
+    "id": "6917704832925746181",
+    "type": "profile",
+    "platform": "tiktok",
+    "username": "duolingo",
+    "name": "Duolingo",
+    "url": "https://www.tiktok.com/@duolingo",
+    "followers": 18466707,
+    "following": 315,
+    "likes": 512058292,
+    "videos": 1116,
+    "counts_approximate": false,
+    "verified": true,
+    "website": "https://Duolingo.com",
+    "business_category": "Shopping & Retail",
+    "language": "en",
+    "source_url": "https://www.tiktok.com/@duolingo",
+    "content_hash": "5cf5edc32b4a2137e473dec385509517e14f8626c10ba543cdeb206d174f1e6b",
+    "fetched_at": "2026-11-09T13:11:46.507104+00:00"
+  }
+]

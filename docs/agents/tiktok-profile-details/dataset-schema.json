@@ -1,0 +1,258 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "platform": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "username": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "biography": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "followers": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "following": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "likes": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "videos": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "counts_approximate": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "verified": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "business_category": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "language": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "platform",
+          "username",
+          "name",
+          "url",
+          "biography",
+          "followers",
+          "following",
+          "likes",
+          "videos",
+          "counts_approximate",
+          "verified",
+          "website",
+          "business_category",
+          "language",
+          "image_url",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "platform": {
+            "label": "Platform"
+          },
+          "username": {
+            "label": "Username"
+          },
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "biography": {
+            "label": "Biography"
+          },
+          "followers": {
+            "label": "Followers"
+          },
+          "following": {
+            "label": "Following"
+          },
+          "likes": {
+            "label": "Likes"
+          },
+          "videos": {
+            "label": "Videos"
+          },
+          "counts_approximate": {
+            "label": "Counts approximate"
+          },
+          "verified": {
+            "label": "Verified"
+          },
+          "website": {
+            "label": "Website"
+          },
+          "business_category": {
+            "label": "Business category"
+          },
+          "language": {
+            "label": "Language"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

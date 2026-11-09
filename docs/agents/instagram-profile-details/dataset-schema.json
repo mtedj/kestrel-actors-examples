@@ -1,0 +1,261 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "platform": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "username": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "biography": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "followers": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "following": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "followers_approximate": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "posts": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "posts_approximate": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "post_count_label": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "verified": {
+        "type": [
+          "boolean",
+          "null"
+        ]
+      },
+      "website": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "bio_links": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": "string"
+        }
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "content_hash": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "fetched_at": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "type",
+      "url",
+      "source_url",
+      "content_hash",
+      "fetched_at"
+    ]
+  },
+  "views": {
+    "overview": {
+      "title": "Results",
+      "transformation": {
+        "fields": [
+          "id",
+          "type",
+          "platform",
+          "username",
+          "name",
+          "url",
+          "biography",
+          "followers",
+          "following",
+          "followers_approximate",
+          "posts",
+          "posts_approximate",
+          "post_count_label",
+          "verified",
+          "website",
+          "bio_links",
+          "image_url",
+          "source_url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "platform": {
+            "label": "Platform"
+          },
+          "username": {
+            "label": "Username"
+          },
+          "name": {
+            "label": "Name"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "biography": {
+            "label": "Biography"
+          },
+          "followers": {
+            "label": "Followers"
+          },
+          "following": {
+            "label": "Following"
+          },
+          "followers_approximate": {
+            "label": "Followers approximate"
+          },
+          "posts": {
+            "label": "Posts"
+          },
+          "posts_approximate": {
+            "label": "Posts approximate"
+          },
+          "post_count_label": {
+            "label": "Post count label"
+          },
+          "verified": {
+            "label": "Verified"
+          },
+          "website": {
+            "label": "Website"
+          },
+          "bio_links": {
+            "label": "Bio links"
+          },
+          "image_url": {
+            "label": "Image url"
+          },
+          "source_url": {
+            "label": "Source url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    },
+    "identity": {
+      "title": "IDs and changes",
+      "transformation": {
+        "fields": [
+          "id",
+          "url",
+          "content_hash",
+          "fetched_at"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "id": {
+            "label": "Id"
+          },
+          "url": {
+            "label": "Url"
+          },
+          "content_hash": {
+            "label": "Content hash"
+          },
+          "fetched_at": {
+            "label": "Fetched at"
+          }
+        }
+      }
+    }
+  }
+}

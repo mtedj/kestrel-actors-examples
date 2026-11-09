@@ -1,0 +1,21 @@
+{
+  "actor": "kestrel/app-store-app-discovery",
+  "observedAt": "2026-11-09T13:12:02.113105+00:00",
+  "runId": "qIbMS32oTfq1Ycvz1",
+  "buildId": "VhIngD3RdYrMjRMfZ",
+  "input": {
+    "queries": [
+      "budget planner"
+    ],
+    "countries": [
+      "US"
+    ],
+    "maxResults": 3,
+    "maxSources": 1
+  },
+  "rows": {
+    "app": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Description, biography and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Apple public software search and app lookup metadata, with no account login. Search has one response per query/country, up to searchLimit requested records; Apple may return fewer or cap coverage. There is no pagination, complete market inventory, keyword search-volume metric, download count, revenue estimate, review text or historical version archive. App price is the upfront storefront price, not subscription or in-app purchase pricing. Countries select storefronts, not developer locations. Ratings and availability vary by country."
+}
