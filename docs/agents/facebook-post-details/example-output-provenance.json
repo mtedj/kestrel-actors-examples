@@ -1,8 +1,8 @@
 {
   "actor": "kestrel/facebook-post-details",
-  "observedAt": "2026-11-11T06:09:47.217247+00:00",
-  "runId": "QeYqSdQrhnnke7vP2",
-  "buildId": "i0aA2ky1ZLeYLqvmm",
+  "observedAt": "2026-11-11T06:20:58.972276+00:00",
+  "runId": "Jaf8KlGL4bM4hCDkB",
+  "buildId": "6DjF3Ey7dq6fJhGQx",
   "input": {
     "postUrls": [
       "https://www.facebook.com/Google/posts/1709477497200344",

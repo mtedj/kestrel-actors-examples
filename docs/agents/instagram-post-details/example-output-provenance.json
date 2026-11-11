@@ -1,8 +1,8 @@
 {
   "actor": "kestrel/instagram-post-details",
-  "observedAt": "2026-11-11T06:09:46.334571+00:00",
-  "runId": "UfeSDUZ4I6zHITBro",
-  "buildId": "Axd5EMMHGs4dI3AEv",
+  "observedAt": "2026-11-11T06:22:54.302915+00:00",
+  "runId": "n8eKCGfbKHFcBwaKr",
+  "buildId": "ksOLga28hpbvV5sri",
   "input": {
     "postUrls": [
       "https://www.instagram.com/p/Dfc1mYxFevS/",

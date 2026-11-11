@@ -40,6 +40,14 @@
       "minimum": 0,
       "maximum": 1000000000000
     },
+    "minShares": {
+      "title": "Min shares",
+      "description": "Minimum Facebook share count, e.g. 10; 0 disables. Missing counts fail a positive threshold. Filters supplied public Page post URLs before maxResults; does not find posts or sharer identities. No extra filter fee; valid source checks remain paid.",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
     "publishedAfter": {
       "title": "Published after",
       "description": "Optional ISO date/time, e.g. \"2026-11-01T00:00:00Z\"; \"\" disables. Keeps social posts/videos published at or after it. Date-only values use midnight UTC. Filters supplied URLs only, without discovering posts or reducing the source fee. Applied before maxResults.",

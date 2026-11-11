@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-11T06:15:02.181017+00:00",
+  "generatedAt": "2026-11-11T06:25:30.062207+00:00",
   "actors": [
     {
       "actor": "kestrel/agoda-prices-scraper",
@@ -276,8 +276,8 @@
     },
     {
       "actor": "kestrel/facebook-post-details",
-      "buildId": "i0aA2ky1ZLeYLqvmm",
-      "buildNumber": "1.0.3",
+      "buildId": "6DjF3Ey7dq6fJhGQx",
+      "buildNumber": "1.0.4",
       "notice": "NONE",
       "pricingModel": "PAY_PER_EVENT",
       "maxTotalChargeUsd": 0.25,
@@ -575,8 +575,8 @@
     },
     {
       "actor": "kestrel/instagram-post-details",
-      "buildId": "Axd5EMMHGs4dI3AEv",
-      "buildNumber": "1.0.3",
+      "buildId": "ksOLga28hpbvV5sri",
+      "buildNumber": "1.0.4",
       "notice": "NONE",
       "pricingModel": "PAY_PER_EVENT",
       "maxTotalChargeUsd": 0.25,

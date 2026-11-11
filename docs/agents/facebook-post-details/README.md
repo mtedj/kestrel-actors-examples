@@ -1,6 +1,6 @@
 # Facebook Post Details - Text, Reactions & Shares
 
-Facebook Post Details helps agents collect reactions and shares. Read public Facebook Page posts by named Page post URL. One row per post: text, date, Page name, reactions, shares, comment count and permalink. Filter text, dates or reactions; skip saved IDs or hashes for monitoring. No Page feeds, personal profiles, groups or commenter lists.
+Facebook Post Details helps agents collect reactions and shares. Read public Facebook Page posts by named Page post URL. One row per post: text, date, Page name, reactions, shares, comment count and permalink. Filter text, dates, reactions or shares; skip saved IDs or hashes for monitoring. No Page feeds, personal profiles, groups or commenter lists.
 
 Brand and business-content monitoring agents checking known Facebook Page post URLs and comparing text or engagement changes. This Actor reads public web data into structured JSON, CSV or Excel. It runs on Apify and can be called through its API, an MCP client, n8n, Make or a saved Task. It is an independent tool, not an official product of the source platform, and it does not require source-account login credentials.
 
@@ -11,7 +11,7 @@ Use this Actor when the requested data and input mode match the contract below. 
 | Request | Input JSON |
 | --- | --- |
 | Get a small useful sample | `{"postUrls": ["https://www.facebook.com/Google/posts/1709477497200344", "https://www.facebook.com/Starbucks/posts/1620755873417308"], "maxResults": 3, "maxSources": 2}` |
-| Apply the supported filters | `{"postUrls": ["https://www.facebook.com/Google/posts/1709477497200344", "https://www.facebook.com/Starbucks/posts/1620755873417308"], "maxResults": 3, "maxSources": 2, "minReactions": 1}` |
+| Apply the supported filters | `{"postUrls": ["https://www.facebook.com/Google/posts/1709477497200344", "https://www.facebook.com/Starbucks/posts/1620755873417308"], "maxResults": 3, "maxSources": 2, "minReactions": 1, "minShares": 1}` |
 | Keep only previously unseen records | Add `excludeIds` with actual prior dataset `id` values |
 | Keep changed snapshots for repeat monitoring | Add `excludeContentHashes` with actual prior hashes, without excluding their IDs |
 | Bound cost | Set the Apify run option `maxTotalChargeUsd`; it is not Actor input |
@@ -45,6 +45,7 @@ Inputs are processed in their listed order. Duplicate inputs collapse before sou
 | `postUrls` | Required full public post URLs, e.g. an Instagram /p/CODE/ or Facebook /Page/posts/ID URL as shown in the example. Up to 100 unique URLs. No profiles, feeds, groups or private posts. Each valid post check costs a source fee plus a delivered-row fee; blocked or unavailable targets have no event fee. |
 | `maxResults` | Maximum paid rows across the ENTIRE run after filters, exclusions and deduplication; default 20, range 1–1000. Earlier targets can fill it. Set maxTotalChargeUsd in Apify run options for a dollar cap, not inside input JSON. A result cap does not expand source coverage. |
 | `minReactions` | Minimum Facebook reaction count, e.g. 10; 0 disables. Reactions include all reaction types, not only likes. Missing values fail an active threshold. Filters supplied Page post URLs before maxResults. No filter fee; valid source checks remain paid. |
+| `minShares` | Minimum Facebook share count, e.g. 10; 0 disables. Missing counts fail a positive threshold. Filters supplied public Page post URLs before maxResults; does not find posts or sharer identities. No extra filter fee; valid source checks remain paid. |
 | `publishedAfter` | Optional ISO date/time, e.g. "2026-11-01T00:00:00Z"; "" disables. Keeps social posts/videos published at or after it. Date-only values use midnight UTC. Filters supplied URLs only, without discovering posts or reducing the source fee. Applied before maxResults. |
 | `textContains` | Optional case-insensitive OR phrases, e.g. ["python", "developer"]. Matches title, caption/snippet/description, author, company or developer fields when present. [] disables. Filters before maxResults. Skipped rows have no row fee; valid source checks are paid. |
 | `maxSources` | Maximum attempted source targets across the run; default 20, range 1–100. One post/video URL, Indeed query/location/country, or Play query-or-ID/country counts as one. Failed targets count toward this limit but have no event fee. Valid filtered sources are paid; retries add no source fee. |
@@ -55,7 +56,7 @@ Unknown input properties fail validation instead of being silently ignored. No a
 
 ## What does each output row contain?
 
-Declared row fields: `id, type, platform, title, text, url, author_name, page_id, page_url, published_at, reactions, shares, comments, links, source_url, content_hash, fetched_at`.
+Declared row fields: `id, type, platform, title, text, url, author_name, page_id, page_url, published_at, reactions, shares, comments, links, source_url, content_hash, fetched_at, image_url`.
 
 One dataset row represents one delivered post. Its `id` identifies the source entity; `source_url` records the fetched public document; `fetched_at` is the UTC observation time. `content_hash` represents the normalized record for caller-managed comparison. The following example projects factual fields from an observed public source response. Text, captions and image URLs are omitted from this documentation example; the runtime returns the declared fields when available. The hash belongs to the original full observation.
 

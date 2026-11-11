@@ -110,6 +110,12 @@
           "string",
           "null"
         ]
+      },
+      "image_url": {
+        "type": [
+          "string",
+          "null"
+        ]
       }
     },
     "required": [
@@ -142,7 +148,8 @@
           "links",
           "source_url",
           "content_hash",
-          "fetched_at"
+          "fetched_at",
+          "image_url"
         ]
       },
       "display": {
@@ -198,6 +205,9 @@
           },
           "fetched_at": {
             "label": "Fetched at"
+          },
+          "image_url": {
+            "label": "Image url"
           }
         }
       }

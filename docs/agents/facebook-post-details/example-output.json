@@ -8,13 +8,13 @@
     "page_id": "104958162837",
     "page_url": "https://www.facebook.com/Google",
     "published_at": "2026-11-10T23:42:37+00:00",
-    "reactions": 238,
+    "reactions": 247,
     "shares": 28,
-    "comments": 18,
+    "comments": 20,
     "links": [],
     "source_url": "https://www.facebook.com/Google/posts/1709477497200344",
-    "content_hash": "ae19110e9d1aec5201c806c885cab579936cecbeb2f2fe43ade606928915e402",
-    "fetched_at": "2026-11-11T06:09:47.217247+00:00"
+    "content_hash": "2ce8eef3d29088ea5bb466bd15277d8382588fc8d5afde8ad6ad0b8b20cfeeca",
+    "fetched_at": "2026-11-11T06:20:58.972276+00:00"
   },
   {
     "id": "1620755873417308",
@@ -25,12 +25,12 @@
     "page_id": "22092443056",
     "page_url": "https://www.facebook.com/Starbucks",
     "published_at": "2026-11-05T14:31:32+00:00",
-    "reactions": 13664,
+    "reactions": 13665,
     "shares": 657,
     "comments": 1227,
     "links": [],
     "source_url": "https://www.facebook.com/Starbucks/posts/1620755873417308",
-    "content_hash": "67c347b4bb4d3e9e8fda33e0fceebbeb6a8d76e84c3977971563a20bd0102117",
-    "fetched_at": "2026-11-11T06:09:48.730357+00:00"
+    "content_hash": "1717fe2f2772d8fa0d3c50271a8ee43cf342de5d70a0819f81edff2dcff05c41",
+    "fetched_at": "2026-11-11T06:21:00.425556+00:00"
   }
 ]
