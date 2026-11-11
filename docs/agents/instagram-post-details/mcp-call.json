@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/instagram-post-details",
+  "input": {
+    "postUrls": [
+      "https://www.instagram.com/p/Dfc1mYxFevS/"
+    ],
+    "maxResults": 3,
+    "maxSources": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

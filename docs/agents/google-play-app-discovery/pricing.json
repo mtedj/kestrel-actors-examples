@@ -1,0 +1,17 @@
+{
+  "model": "PAY_PER_EVENT",
+  "events": {
+    "source-checked": {
+      "eventTitle": "Source checked",
+      "eventDescription": "One valid public source check (one query or app ID in one country), $2 per 1,000 checks. Paid when filters, exclusions or a recognized empty response leave no rows. Failed, blocked and unavailable sources or invalid input are not charged. No start fee; proxy and compute are included. maxSources limits attempted targets. maxTotalChargeUsd is the Apify run option for a dollar cap, not an input.",
+      "eventPriceUsd": 0.002
+    },
+    "app": {
+      "eventTitle": "App",
+      "eventDescription": "One delivered app; row keys app_id, country, language, title, developer, rating, installs, price, currency, version. $0.8 per 1,000 rows plus checked-source fees. Filtered, duplicate and excluded rows have no row fee. No start fee; proxy and compute are included. One valid source with one row costs $0.0028. Missing values remain null; no separate fee for filters or output fields.",
+      "eventPriceUsd": 0.0008,
+      "isPrimaryEvent": true
+    }
+  },
+  "effectiveAt": "2026-11-11T05:47:39.594Z"
+}

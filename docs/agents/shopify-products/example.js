@@ -1,4 +1,4 @@
-// kestrel/shopify-products | input checked against build 1.0.13 on 2026-11-09.
+// kestrel/shopify-products | input checked against build 1.0.13 on 2026-11-11.
 // Install: npm install 'apify-client@^2'
 // Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 // Change the sample targets before use. APIFY_TOKEN comes from your environment.

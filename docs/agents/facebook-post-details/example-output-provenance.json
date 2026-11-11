@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/facebook-post-details",
+  "observedAt": "2026-11-11T06:09:47.217247+00:00",
+  "runId": "QeYqSdQrhnnke7vP2",
+  "buildId": "i0aA2ky1ZLeYLqvmm",
+  "input": {
+    "postUrls": [
+      "https://www.facebook.com/Google/posts/1709477497200344",
+      "https://www.facebook.com/Starbucks/posts/1620755873417308"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "post": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Captions, descriptions, social titles and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Named public Facebook Page /Page/posts/ID or /Page/posts/pfbid URLs only. No Page-feed discovery, personal profiles, groups, search, share links, /reel/ URLs, comments, commenters, media downloads or account login. The source must identify the post author as a public Page; otherwise the target fails without a source fee. Reactions include all reaction types, not only likes. Missing counters remain null. A post may resolve to a canonical permalink; its numeric dataset ID is stable when the public source exposes it."
+}

@@ -1,0 +1,13 @@
+{
+  "queries": [
+    "python"
+  ],
+  "locations": [
+    "New York"
+  ],
+  "countries": [
+    "US"
+  ],
+  "maxResults": 3,
+  "maxSources": 3
+}

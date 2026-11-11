@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# kestrel/google-play-reviews-scraper | input checked against build 1.0.6 on 2026-11-09.
+# kestrel/google-play-reviews-scraper | input checked against build 1.0.6 on 2026-11-11.
 # Requires bash, curl and jq. Paid sample: $0.25 event-charge ceiling; may stop before completing the input.
 # Change the sample targets before use. APIFY_TOKEN comes from your environment.
 set -euo pipefail

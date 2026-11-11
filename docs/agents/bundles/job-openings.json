@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "kestrel-job-openings": {
-      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/greenhouse-jobs-scraper,kestrel/ashby-jobs-scraper,kestrel/workday-company-jobs,kestrel/linkedin-job-search"
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/indeed-job-search,kestrel/linkedin-job-search,kestrel/greenhouse-jobs-scraper,kestrel/ashby-jobs-scraper,kestrel/workday-company-jobs"
     }
   }
 }

@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kestrel-instagram-post-details": {
+      "url": "https://mcp.apify.com?tools=call-actor,fetch-actor-details,kestrel/instagram-post-details"
+    }
+  }
+}

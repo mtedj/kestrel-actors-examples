@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T13:16:46.910416+00:00",
+  "generatedAt": "2026-11-11T06:15:02.181017+00:00",
   "actors": [
     {
       "actor": "kestrel/agoda-prices-scraper",
@@ -275,6 +275,19 @@
       ]
     },
     {
+      "actor": "kestrel/facebook-post-details",
+      "buildId": "i0aA2ky1ZLeYLqvmm",
+      "buildNumber": "1.0.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "facebook-post-details.py",
+        "facebook-post-details.js",
+        "facebook-post-details.sh"
+      ]
+    },
+    {
       "actor": "kestrel/flight-price-tracker",
       "buildId": "Vkd9OIWa6fpgzBYFW",
       "buildNumber": "1.1.3",
@@ -389,6 +402,19 @@
         "google-patents-search.py",
         "google-patents-search.js",
         "google-patents-search.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/google-play-app-discovery",
+      "buildId": "sEBbApb3lrWZalExN",
+      "buildNumber": "1.0.2",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "google-play-app-discovery.py",
+        "google-play-app-discovery.js",
+        "google-play-app-discovery.sh"
       ]
     },
     {
@@ -532,6 +558,32 @@
         "indeed-company-reviews.py",
         "indeed-company-reviews.js",
         "indeed-company-reviews.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/indeed-job-search",
+      "buildId": "5Dz3Z0PsGacGwqQp4",
+      "buildNumber": "1.0.5",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "indeed-job-search.py",
+        "indeed-job-search.js",
+        "indeed-job-search.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/instagram-post-details",
+      "buildId": "Axd5EMMHGs4dI3AEv",
+      "buildNumber": "1.0.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "instagram-post-details.py",
+        "instagram-post-details.js",
+        "instagram-post-details.sh"
       ]
     },
     {
@@ -701,6 +753,19 @@
         "tiktok-profile-details.py",
         "tiktok-profile-details.js",
         "tiktok-profile-details.sh"
+      ]
+    },
+    {
+      "actor": "kestrel/tiktok-video-details",
+      "buildId": "Zw7F2a85A0geKecbI",
+      "buildNumber": "1.0.3",
+      "notice": "NONE",
+      "pricingModel": "PAY_PER_EVENT",
+      "maxTotalChargeUsd": 0.25,
+      "files": [
+        "tiktok-video-details.py",
+        "tiktok-video-details.js",
+        "tiktok-video-details.sh"
       ]
     },
     {

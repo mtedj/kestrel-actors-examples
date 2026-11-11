@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/instagram-post-details",
+  "observedAt": "2026-11-11T06:09:46.334571+00:00",
+  "runId": "UfeSDUZ4I6zHITBro",
+  "buildId": "Axd5EMMHGs4dI3AEv",
+  "input": {
+    "postUrls": [
+      "https://www.instagram.com/p/Dfc1mYxFevS/",
+      "https://www.instagram.com/p/DfahZrMjAqq/"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "post": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Captions, descriptions, social titles and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Exact public post/reel URLs only. No usernames, profile feeds, keyword or hashtag discovery, private accounts, comments, follower lists or media downloads. A carousel is one row; slide_count may be null when not exposed. Likes hidden by the source are null. View counts are often absent and remain null; do not interpret missing views as zero. Caption text is the post caption, not speech transcription. Hashtags and mentions come from the caption. Location labels are source annotations, not inferred personal locations."
+}

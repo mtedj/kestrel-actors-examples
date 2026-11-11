@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/google-play-app-discovery",
+  "input": {
+    "queries": [
+      "budget planner"
+    ],
+    "countries": [
+      "US"
+    ],
+    "language": "en",
+    "maxResults": 3,
+    "maxSources": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

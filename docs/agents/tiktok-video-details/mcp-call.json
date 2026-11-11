@@ -1,0 +1,15 @@
+{
+  "actor": "kestrel/tiktok-video-details",
+  "input": {
+    "videoUrls": [
+      "https://www.tiktok.com/@apifytech/video/7398101551744552225"
+    ],
+    "maxResults": 3,
+    "maxSources": 3
+  },
+  "callOptions": {
+    "maxTotalChargeUsd": 0.25,
+    "timeout": 300
+  },
+  "waitSecs": 30
+}

@@ -1,0 +1,22 @@
+{
+  "actor": "kestrel/google-play-app-discovery",
+  "observedAt": "2026-11-11T06:09:53.582395+00:00",
+  "runId": "l1JbUZ9d2LhWAvqPX",
+  "buildId": "sEBbApb3lrWZalExN",
+  "input": {
+    "queries": [
+      "budget planner"
+    ],
+    "countries": [
+      "US"
+    ],
+    "language": "en",
+    "maxResults": 3,
+    "maxSources": 1
+  },
+  "rows": {
+    "app": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Captions, descriptions, social titles and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Search returns only the first public keyword response, usually up to 30 cards; searchLimit is an upper bound, not guaranteed depth. No pagination, top charts, complete publisher catalogues, download/revenue estimates, reviews or private data. ID lookup adds version, update date, rating count and developer website when exposed; these may be null in search rows. Installs is the public rounded label, not an exact download total. Price is the upfront storefront price, not subscription or in-app purchase cost. Countries select storefronts, language selects listing text. No currency conversion."
+}

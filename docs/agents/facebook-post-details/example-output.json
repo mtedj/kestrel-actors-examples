@@ -1,0 +1,36 @@
+[
+  {
+    "id": "1709477497200344",
+    "type": "post",
+    "platform": "facebook",
+    "url": "https://www.facebook.com/Google/posts/pfbid02viYJ7ttAc8LCzQjuZrSKUYicxN2TSwk2R6R1wJq5MLk4mNKwWqbNYHgsvnM2vuaVl",
+    "author_name": "Google",
+    "page_id": "104958162837",
+    "page_url": "https://www.facebook.com/Google",
+    "published_at": "2026-11-10T23:42:37+00:00",
+    "reactions": 238,
+    "shares": 28,
+    "comments": 18,
+    "links": [],
+    "source_url": "https://www.facebook.com/Google/posts/1709477497200344",
+    "content_hash": "ae19110e9d1aec5201c806c885cab579936cecbeb2f2fe43ade606928915e402",
+    "fetched_at": "2026-11-11T06:09:47.217247+00:00"
+  },
+  {
+    "id": "1620755873417308",
+    "type": "post",
+    "platform": "facebook",
+    "url": "https://www.facebook.com/Starbucks/posts/pfbid02GVbZoe6JbpsWqXefjmmbfD3cKwhwzgJxMoaBZirfNES2159TdKus4dqGeffJJovl",
+    "author_name": "Starbucks",
+    "page_id": "22092443056",
+    "page_url": "https://www.facebook.com/Starbucks",
+    "published_at": "2026-11-05T14:31:32+00:00",
+    "reactions": 13664,
+    "shares": 657,
+    "comments": 1227,
+    "links": [],
+    "source_url": "https://www.facebook.com/Starbucks/posts/1620755873417308",
+    "content_hash": "67c347b4bb4d3e9e8fda33e0fceebbeb6a8d76e84c3977971563a20bd0102117",
+    "fetched_at": "2026-11-11T06:09:48.730357+00:00"
+  }
+]

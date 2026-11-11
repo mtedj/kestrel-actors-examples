@@ -1,0 +1,24 @@
+{
+  "actor": "kestrel/indeed-job-search",
+  "observedAt": "2026-11-11T06:14:05.949712+00:00",
+  "runId": "cAx8bZBtLPhlnQAfJ",
+  "buildId": "5Dz3Z0PsGacGwqQp4",
+  "input": {
+    "queries": [
+      "python"
+    ],
+    "locations": [
+      "New York"
+    ],
+    "countries": [
+      "US"
+    ],
+    "maxResults": 3,
+    "maxSources": 1
+  },
+  "rows": {
+    "job": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Captions, descriptions, social titles and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Returns the first public results page per keyword/location/country combination, without pagination or exhaustive coverage. Related and sponsored jobs may appear. The remote flag is the source boolean, not an independent employer policy check. Salary text keeps its original currency and pay period; it may be an Indeed extraction or estimate, as salary_source records. No currency conversion or salary normalization. Source timestamps and relative labels may describe older or reposted listings. Full job descriptions, applications and contact enrichment are not provided."
+}

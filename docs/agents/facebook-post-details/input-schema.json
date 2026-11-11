@@ -1,0 +1,90 @@
+{
+  "title": "Facebook Post Details - Text, Reactions & Shares",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "Minimal input {\"postUrls\": [\"https://www.facebook.com/Google/posts/1709477497200344\", \"https://www.facebook.com/Starbucks/posts/1620755873417308\"], \"maxResults\": 3, \"maxSources\": 2}. $0.002 per valid source check plus $0.002 per delivered post. Filtered sources are paid. No start fee. maxTotalChargeUsd is a run option.",
+  "required": [
+    "postUrls"
+  ],
+  "properties": {
+    "postUrls": {
+      "title": "Post urls",
+      "description": "Required full public post URLs, e.g. an Instagram /p/CODE/ or Facebook /Page/posts/ID URL as shown in the example. Up to 100 unique URLs. No profiles, feeds, groups or private posts. Each valid post check costs a source fee plus a delivered-row fee; blocked or unavailable targets have no event fee.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      },
+      "prefill": [
+        "https://www.facebook.com/Google/posts/1709477497200344",
+        "https://www.facebook.com/Starbucks/posts/1620755873417308"
+      ],
+      "sectionCaption": "Sources"
+    },
+    "maxResults": {
+      "title": "Max results",
+      "description": "Maximum paid rows across the ENTIRE run after filters, exclusions and deduplication; default 20, range 1–1000. Earlier targets can fill it. Set maxTotalChargeUsd in Apify run options for a dollar cap, not inside input JSON. A result cap does not expand source coverage.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 1000,
+      "prefill": 3,
+      "sectionCaption": "Results and filters"
+    },
+    "minReactions": {
+      "title": "Min reactions",
+      "description": "Minimum Facebook reaction count, e.g. 10; 0 disables. Reactions include all reaction types, not only likes. Missing values fail an active threshold. Filters supplied Page post URLs before maxResults. No filter fee; valid source checks remain paid.",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1000000000000
+    },
+    "publishedAfter": {
+      "title": "Published after",
+      "description": "Optional ISO date/time, e.g. \"2026-11-01T00:00:00Z\"; \"\" disables. Keeps social posts/videos published at or after it. Date-only values use midnight UTC. Filters supplied URLs only, without discovering posts or reducing the source fee. Applied before maxResults.",
+      "type": "string",
+      "default": "",
+      "editor": "textfield"
+    },
+    "textContains": {
+      "title": "Text contains",
+      "description": "Optional case-insensitive OR phrases, e.g. [\"python\", \"developer\"]. Matches title, caption/snippet/description, author, company or developer fields when present. [] disables. Filters before maxResults. Skipped rows have no row fee; valid source checks are paid.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "maxSources": {
+      "title": "Max sources",
+      "description": "Maximum attempted source targets across the run; default 20, range 1–100. One post/video URL, Indeed query/location/country, or Play query-or-ID/country counts as one. Failed targets count toward this limit but have no event fee. Valid filtered sources are paid; retries add no source fee.",
+      "type": "integer",
+      "default": 20,
+      "minimum": 1,
+      "maximum": 100,
+      "sectionCaption": "Source budget and history"
+    },
+    "excludeIds": {
+      "title": "Exclude ids",
+      "description": "Prior dataset id values, e.g. [] on a first run; up to 5,000. Skips identities even when changed. For Google Play use the full app:country:language id. Excluded rows are free but valid checks are paid. Keep history in your workflow; no automatic persistence.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    },
+    "excludeContentHashes": {
+      "title": "Exclude content hashes",
+      "description": "Prior content_hash values, e.g. [] initially; up to 5,000 SHA-256 hashes. Skips unchanged observations while allowing updates. Do not also exclude IDs when changes matter. Time, search position, image URLs and relative-date labels do not affect hashes. Valid source checks remain paid; no stored history.",
+      "type": "array",
+      "default": [],
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "actor": "kestrel/tiktok-video-details",
+  "observedAt": "2026-11-11T06:09:46.885840+00:00",
+  "runId": "hfCgXL2dXwkEjU5V9",
+  "buildId": "Zw7F2a85A0geKecbI",
+  "input": {
+    "videoUrls": [
+      "https://www.tiktok.com/@apifytech/video/7398101551744552225",
+      "https://www.tiktok.com/@scout2015/video/6718335390845095173"
+    ],
+    "maxResults": 3,
+    "maxSources": 2
+  },
+  "rows": {
+    "video": 2
+  },
+  "note": "Observed cloud dataset projected to factual fields. Captions, descriptions, social titles and image URLs are omitted; content_hash belongs to the original full row. Source observations are historical, not current promises.",
+  "limits": "Full https://www.tiktok.com/@username/video/ID URLs only. No short links, numeric IDs alone, photo posts, profile feeds, keyword/hashtag discovery, comments, private videos or downloads. Views and engagement are public source counters at collection time, not independently audited measurements. Caption languages indicate advertised subtitle tracks; the Actor does not fetch caption files, transcribe speech or deliver transcript text. Music metadata is descriptive and confers no licence to use the audio."
+}

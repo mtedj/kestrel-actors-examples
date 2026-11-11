@@ -1,0 +1,11 @@
+{
+  "queries": [
+    "budget planner"
+  ],
+  "countries": [
+    "US"
+  ],
+  "language": "en",
+  "maxResults": 3,
+  "maxSources": 3
+}
